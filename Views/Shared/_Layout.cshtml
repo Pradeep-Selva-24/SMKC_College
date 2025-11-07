@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="zxx" class="theme-light">
-<!-- Mirrored from templates.hibootstrap.com/sanu/default/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Oct 2025 14:37:44 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,8 +30,11 @@
     <!--Responsive css-->
     <link rel="stylesheet" href="~/css/responsive.css">
 
+    <!--Custom css-->
+    <link href="~/css/college.css" rel="stylesheet" />
+
     <!--=== Title ===-->
-    <title>SMKC</title>
+    <title>SMKC - @ViewData["Title"]</title>
     <link rel="icon" type="image/png" href="~/images/favicon.png">
 </head>
 <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
@@ -60,11 +62,9 @@
                     <div class="header-right-content">
                         <div class="list">
                             <ul>
-                                <li><a href="graduate-admission.html">Students</a></li>
-                                <li><a href="campus-life.html">Faculty &amp; Staff</a></li>
-                                <li><a href="admission.html">Visitors</a></li>
-                                <li><a href="academics.html">Academics</a></li>
-                                <li><a href="alumni.html">Alumni</a></li>
+                                <li><a href="#">Student</a></li>
+                                <li><a href="#">Faculty &amp; Staff</a></li>
+                                <li><a href="#">Admin</a></li>
                             </ul>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
             <div class="container">
                 <div class="mobile-responsive-menu">
                     <div class="logo">
-                        <a href="index-3.html">
+                        <a href="#">
                             <img src="~/images/logo.png" class="main-logo" lt="logo">
                             <img src="~/images/white-logo.png" class="white-logo" alt="logo">
                         </a>
@@ -90,173 +90,66 @@
         <div class="desktop-nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md navbar-light">
-                    <a class="navbar-brand" href="index-3.html">
+                    <a class="navbar-brand" href="#">
                         <img src="~/images/logo.png" class="main-logo" alt="logo">
                         <img src="~/images/white-logo.png" class="white-logo" alt="logo">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent" style="display: block;">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle active">
-                                    Home
-                                </a>
+                                <a href="~/" class="nav-link dropdown-toggle">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link dropdown-toggle active">About</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="index.html" class="nav-link">Home One</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-2.html" class="nav-link">Home Two</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-3.html" class="nav-link">Home Three</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-4.html" class="nav-link active">Home Four</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-5.html" class="nav-link">Home Five</a>
-                                    </li>
+                                    <li class="nav-item"><a href="~/VisionMission/VisionMission" class="nav-link active">Vision & Mission</a></li>
+                                    <li class="nav-item"><a href="~/ManagementMessage/ManagementMessage" class="nav-link">Management Message</a></li>
+                                    <li class="nav-item"><a href="~/History/History" class="nav-link">History & Profile</a></li>
+                                    <li class="nav-item"><a href="~/Accreditation/Accreditation" class="nav-link">Accreditation / Affiliation</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                    Pages
-                                </a>
-
+                                <a href="#" class="nav-link dropdown-toggle">Academics</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="graduate-admission.html" class="nav-link">Graduate Admission</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="campus-life.html" class="nav-link">Campus Life</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="alumni.html" class="nav-link">Alumni</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">
-                                            Academics
-                                        </a>
-
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="academics.html" class="nav-link">Academics</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="academics-details.html" class="nav-link">Academics Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">
-                                            Latest News
-                                        </a>
-
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="latest-news.html" class="nav-link">Our Latest News</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="news-details.html" class="nav-link">News Details</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">FAQ</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">
-                                            Users
-                                        </a>
-
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="login.html" class="nav-link">Login</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="register.html" class="nav-link">Register</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="recover-password.html" class="nav-link">Recover Password</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="terms-conditions.html" class="nav-link">Terms And Conditions</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="coming-soon.html" class="nav-link">Coming Soon</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="404.html" class="nav-link">404 Page</a>
-                                    </li>
+                                    <li class="nav-item"><a href="~/Departments/Departments" class="nav-link">Departments</a></li>
+                                    <li class="nav-item"><a href="~/ProgrammesOffered/ProgrammesOffered" class="nav-link">Programmes Offered</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Syllabus</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Academic Calendar</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                    Courses
-                                </a>
-
+                                <a href="#" class="nav-link dropdown-toggle">Admissions</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="courses.html" class="nav-link">Courses</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="courses-details.html" class="nav-link">Courses Details</a>
-                                    </li>
+                                    <li class="nav-item"><a href="~/AdmissionProcedure/AdmissionProcedure" class="nav-link">Admission Procedure</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Courses & Eligibility</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Fee Structure</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Apply Online / Prospectus</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                    Health Care
-                                </a>
-
+                                <a href="#" class="nav-link dropdown-toggle">Campus Life</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="health-care.html" class="nav-link">Health Care</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="health-care-details.html" class="nav-link">Health Care Details</a>
-                                    </li>
+                                    <li class="nav-item"><a href="~/Clubs/Clubs" class="nav-link">Clubs & Activities</a></li>
+                                    <li class="nav-item"><a href="~/EventsGallery/EventsGallery" class="nav-link">Events & Gallery</a></li>
+                                    <li class="nav-item"><a href="~/StudentSupport/StudentSupport" class="nav-link">Student Support</a></li>
+                                    <li class="nav-item"><a href="~/Alumni/Alumni" class="nav-link">Alumni</a></li>
                                 </ul>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">
-                                    Events
-                                </a>
-
+                                <a href="#" class="nav-link dropdown-toggle">Quality Assurance</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="events.html" class="nav-link">Events</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="events-details.html" class="nav-link">Events Details</a>
-                                    </li>
+                                    <li class="nav-item"><a href="~/QualityAssurance/IQAC" class="nav-link">IQAC Committee</a></li>
+                                    <li class="nav-item"><a href="~/QualityAssurance/AQAR" class="nav-link">AQAR Reports</a></li>
+                                    <li class="nav-item"><a href="~/QualityAssurance/NAAC" class="nav-link">NAAC</a></li>
+                                    <li class="nav-item"><a href="~/QualityAssurance/NIRF" class="nav-link">NIRF</a></li>
                                 </ul>
                             </li>
-
-                            <li class="nav-item">
-                                <a href="contact-us.html" class="nav-link">Contact Us</a>
-                            </li>
+                           
                         </ul>
 
                         <div class="others-options">
@@ -283,7 +176,211 @@
     </div>
     <!-- End Navbar Area -->
 
+    <!-- Sidebar Modal -->
+    <div class="sidebarModal modal right fade" id="sidebarModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-bs-dismiss="modal"><i class="ri-close-line"></i></button>
+
+                <div class="modal-body">
+                    <a href="#">
+                        <img src="~/images/logo.png" class="main-logo" alt="logo">
+                        <img src="~/images/white-logo.png" class="white-logo" alt="logo">
+                    </a>
+                    <div class="sidebar-content">
+                        <h3>About Us</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                        <div class="sidebar-btn">
+                            <a href="contact.html" class="default-btn">Let’s Talk</a>
+                        </div>
+                    </div>
+                    <div class="sidebar-contact-info">
+                        <h3>Contact Information</h3>
+
+                        <ul class="info-list">
+                            <li><i class="ri-phone-fill"></i> <a href="tel:9901234567">+990-123-4567</a></li>
+
+                            <li><i class="ri-mail-line"></i><a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#e58d8089898aa596848b90cb868a88"><span class="__cf_email__" data-cfemail="6109040d0d0e2112000f144f020e0c">[email&nbsp;protected]</span></a></li>
+
+                            <li><i class="ri-map-pin-line"></i> 413 North Las Vegas, NV 89032</li>
+                        </ul>
+                    </div>
+                    <ul class="sidebar-social-list">
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/?lang=en" target="_blank"><i class="flaticon-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/?lang=en" target="_blank"><i class="flaticon-instagram"></i></a>
+                        </li>
+                    </ul>
+                    <div class="contact-form">
+                        <h3>Ready to Get Started?</h3>
+
+                        <form id="contactForm" novalidate="true">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" required="" data-error="Please enter your name" placeholder="Your name">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" name="email" class="form-control" required="" data-error="Please enter your email" placeholder="Your email address">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="phone_number" class="form-control" required="" data-error="Please enter your phone number" placeholder="Your phone number">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <textarea name="message" class="form-control" cols="30" rows="6" required="" data-error="Please enter your message" placeholder="Write your message..."></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12">
+                                    <button type="submit" class="default-btn disabled">Send Message<span></span></button>
+                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Sidebar Modal -->
+
     @RenderBody()
+
+    <!--Start Footer Area-->
+    <div class="footer-area pt-100 pb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="footer-logo-area">
+                        <a href="#"><img src="~/images/white-logo.png" alt="Image"></a>
+                        <p>Sanu University was established by J.H Merthon in 1810 for the public benefit. Afterwards, it is recognized globally</p>
+                        <div class="contact-list">
+                            <ul>
+                                <li>
+                                    <a href="tel:+01987655567685">
+                                        +01-9876-5556-7685
+                                    </a>
+                                </li>
+                                <li><a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#49282d242027093a28273c672c2d3c"><span class="__cf_email__" data-cfemail="87e6e3eaeee9c7f4e6e9f2a9e2e3f2">[email&nbsp;protected]</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widjet">
+                        <h3>Campus Life</h3>
+                        <div class="list">
+                            <ul>
+                                <li><a href="campus-life.html">Accessibility</a></li>
+                                <li><a href="campus-life.html">Financial Aid</a></li>
+                                <li><a href="campus-life.html">Food Services</a></li>
+                                <li><a href="campus-life.html">Housing</a></li>
+                                <li><a href="campus-life.html">Information Technologies</a></li>
+                                <li><a href="campus-life.html">Student Life</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widjet">
+                        <h3>Our Campus</h3>
+                        <div class="list">
+                            <ul>
+                                <li><a href="campus-life.html">Acedemic</a></li>
+                                <li><a href="campus-life.html">Planning &amp; AdminiStartion</a></li>
+                                <li><a href="campus-life.html">Campus Safety</a></li>
+                                <li><a href="campus-life.html">Office of the Chancellor</a></li>
+                                <li><a href="campus-life.html">Facility Services</a></li>
+                                <li><a href="campus-life.html">Human Resources</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="footer-widjet">
+                        <h3>Academics</h3>
+                        <div class="list">
+                            <ul>
+                                <li><a href="academics.html">Canvas</a></li>
+                                <li><a href="academics.html">Catalyst</a></li>
+                                <li><a href="academics.html">Library</a></li>
+                                <li><a href="academics.html">Time Schedule</a></li>
+                                <li><a href="academics.html">Apply For Admissions</a></li>
+                                <li><a href="academics.html">Pay My Tuition</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shape">
+                <img src="~/images/shape-1.png" alt="Image">
+            </div>
+        </div>
+    </div>
+    <!--End Footer Area-->
+    <!--Start Copyright Area-->
+    <div class="copyright-area">
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-lg-6 col-md-4">
+                        <div class="social-content">
+                            <ul>
+                                <li><span>Follow Us On</span></li>
+                                <li>
+                                    <a href="https://www.facebook.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://instagram.com/?lang=en" target="_blank"><i class="ri-instagram-line"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://linkedin.com/?lang=en" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8">
+                        <div class="copy">
+                            <p>© SMKC @DateTime.Now.Year | Sree Muthukumaraswamy College</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Copyright Area-->
+    <!-- Start Go Top Area -->
+    <div class="go-top">
+        <i class="ri-arrow-up-s-line"></i>
+        <i class="ri-arrow-up-s-line"></i>
+    </div>
+    <!-- End Go Top Area -->
     
     <!--=== Jquery Min js ===-->
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -312,6 +409,7 @@
     <script src="~/js/ajaxchimp.min.js"></script>
     <!--=== Custom js ===-->
     <script src="~/js/custom.js"></script>
+    
     <div class="switch-box"><label id="switch" class="switch"><input type="checkbox" onchange="toggleTheme()" id="slider"><span class="slider round"></span></label></div>
 
 
