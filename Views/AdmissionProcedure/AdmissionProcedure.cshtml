@@ -1,3 +1,38 @@
 ﻿@{
     ViewData["Title"] = "Admission Procedure";
 }
+<!--Start Page Banner-->
+<div class="page-banner-area bg-2">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Admission Procedure</h1>
+            <ul>
+                <li><a href="~/">Home</a></li>
+                <li>Admission Procedure</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--End Page Banner-->
+<!--Start Vision & Mission Area-->
+<div class="faq-area ptb-100">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-12">
+                <div class="faq-image pr-20">
+                    <img src="~/images/admissionprocedure.png" alt="Vision and Mission">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Vision & Mission Area-->
+
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-Admissions").addClass("active");
+        $("#navbarSupportedContent .clsMenu-AdmissionProcedure").addClass("active");
+    });
+</script>

@@ -1,3 +1,111 @@
 ﻿@{
     ViewData["Title"] = "Student Support";
 }
+<!--Start Page Banner-->
+<div class="page-banner-area bg-2">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Student Support</h1>
+            <ul>
+                <li><a href="~/">Home</a></li>
+                <li>Student Support</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--End Page Banner-->
+<!--Start Student Support Area-->
+<div class="faq-area ptb-100">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+                <div class="faq-image pr-20">
+                    <img src="~/images/vision-mission-img.jpg" alt="Student Support">
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="faq-left-content pl-20">
+                    <div class="faq-title">
+                        <h2>Student Support Services</h2>
+                        <p>Our college provides comprehensive support to ensure the well-being and career success of every student. Through Counselling and Career Guidance initiatives, we help students build confidence, emotional balance, and employability skills for a successful future.</p>
+                    </div>
+
+                    <div class="accordion" id="studentSupportAccordion">
+
+                        <!-- Counselling Cell -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingCounselling">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCounselling" aria-expanded="true" aria-controls="collapseCounselling">
+                                    Counselling Cell
+                                </button>
+                            </h2>
+                            <div id="collapseCounselling" class="accordion-collapse collapse show" aria-labelledby="headingCounselling" data-bs-parent="#studentSupportAccordion">
+                                <div class="accordion-body">
+                                    <p>The Counselling Cell aims to promote students’ mental health and emotional well-being. It provides guidance to help students overcome academic, personal, and social challenges through confidential and supportive counselling sessions.</p>
+                                    <ul>
+                                        <li>Encourages positive mental health and self-awareness.</li>
+                                        <li>Offers personal, academic, and career-related counselling.</li>
+                                        <li>Organizes stress management and motivation workshops.</li>
+                                        <li>Supports students in adapting to campus life and academics.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Career Cell -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingCareer">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCareer" aria-expanded="false" aria-controls="collapseCareer">
+                                    Career Cell
+                                </button>
+                            </h2>
+                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer" data-bs-parent="#studentSupportAccordion">
+                                <div class="accordion-body">
+                                    <p>The Career Cell is dedicated to guiding students toward promising career paths. It bridges the gap between academic learning and professional requirements by providing training, placement assistance, and industry exposure.</p>
+                                    <ul>
+                                        <li>Organizes career guidance sessions, workshops, and seminars.</li>
+                                        <li>Coordinates campus placement drives and internship opportunities.</li>
+                                        <li>Conducts resume-building, interview skills, and aptitude training programs.</li>
+                                        <li>Collaborates with industry partners for student development and recruitment.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Objectives -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingObjectives">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObjectives" aria-expanded="false" aria-controls="collapseObjectives">
+                                    Objectives
+                                </button>
+                            </h2>
+                            <div id="collapseObjectives" class="accordion-collapse collapse" aria-labelledby="headingObjectives" data-bs-parent="#studentSupportAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>To provide psychological and career guidance to students in need.</li>
+                                        <li>To prepare students for both higher studies and employment opportunities.</li>
+                                        <li>To develop leadership qualities, communication, and interpersonal skills.</li>
+                                        <li>To empower students to make informed career decisions with confidence.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End Accordion -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--End Student Support Area-->
+
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-CampusLife").addClass("active");
+        $("#navbarSupportedContent .clsMenu-StudentSupport").addClass("active");
+    });
+</script>

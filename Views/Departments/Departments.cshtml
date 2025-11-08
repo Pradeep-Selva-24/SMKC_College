@@ -1,3 +1,256 @@
 ﻿@{
     ViewData["Title"] = "Departments";
 }
+
+<!--Start Page Banner-->
+<div class="page-banner-area bg-2">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Departments</h1>
+            <ul>
+                <li><a href="~/">Home</a></li>
+                <li>Departments</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--End Page Banner-->
+
+<!--Start Departments Section-->
+<div class="departments-area pt-100 pb-70">
+    <div class="container">
+
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs justify-content-center mb-4" id="deptTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="commerce-tab" data-bs-toggle="tab" data-bs-target="#commerce" type="button" role="tab">
+                    Commerce
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cs-tab" data-bs-toggle="tab" data-bs-target="#cs" type="button" role="tab">
+                    Computer Science
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="english-tab" data-bs-toggle="tab" data-bs-target="#english" type="button" role="tab">
+                    English
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="bba-tab" data-bs-toggle="tab" data-bs-target="#bba" type="button" role="tab">
+                    Business Administration
+                </button>
+            </li>
+        </ul>
+
+
+
+        <!-- Tabs Content -->
+        <div class="tab-content" id="deptTabsContent">
+
+            <!-- Department of Commerce -->
+            <div class="tab-pane fade show active" id="commerce" role="tabpanel" aria-labelledby="commerce-tab">
+                <div class="container">
+
+                    <!-- About Section -->
+                    <div class="section-title">
+                        <h2>About the Department</h2>
+                    </div>
+                    <p>
+                        The <strong>Department of Commerce</strong> at <strong>Sree Muthukumaraswamy College</strong> aims to provide students with an in-depth understanding of business principles and real-world practices. The department emphasizes professional excellence, ethical leadership, and entrepreneurial skills through innovative teaching methods and practical exposure.
+                    </p>
+
+                    <!-- Faculty -->
+                    <div class="section-title mt-5">
+                        <h2>Faculty Members</h2>
+                    </div>
+
+                    <div id="facultyCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+
+                            <!-- Slide 1 -->
+                            <div class="carousel-item active">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                                        <div class="faculty-card p-3 shadow-sm rounded">
+                                            <img src="~/images/departments/commerce/faculty/faculty1.jpg" class="img-fluid rounded-circle mb-3" alt="Dr. R. Mahalakshmi">
+                                            <h6 class="mb-1">Dr. R. Mahalakshmi</h6>
+                                            <p class="text-muted small mb-0">Head of the Department</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                                        <div class="faculty-card p-3 shadow-sm rounded">
+                                            <img src="~/images/departments/commerce/faculty/faculty2.jpeg" class="img-fluid rounded-circle mb-3" alt="Mr. K. Vignesh">
+                                            <h6 class="mb-1">Mr. K. Vignesh</h6>
+                                            <p class="text-muted small mb-0">Assistant Professor</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                                        <div class="faculty-card p-3 shadow-sm rounded">
+                                            <img src="~/images/departments/commerce/faculty/faculty1.jpg" class="img-fluid rounded-circle mb-3" alt="Ms. S. Priya">
+                                            <h6 class="mb-1">Ms. S. Priya</h6>
+                                            <p class="text-muted small mb-0">Assistant Professor</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                                        <div class="faculty-card p-3 shadow-sm rounded">
+                                            <img src="~/images/departments/commerce/faculty/faculty2.jpeg" class="img-fluid rounded-circle mb-3" alt="Mr. B. Senthil">
+                                            <h6 class="mb-1">Mr. B. Senthil</h6>
+                                            <p class="text-muted small mb-0">Assistant Professor</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 (optional - add more members if needed) -->
+                            <div class="carousel-item">
+                                <div class="row g-4">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+                                        <div class="faculty-card p-3 shadow-sm rounded">
+                                            <img src="~/images/departments/commerce/faculty/faculty1.jpg" class="img-fluid rounded-circle mb-3" alt="Mr. R. Kumar">
+                                            <h6 class="mb-1">Mr. R. Kumar</h6>
+                                            <p class="text-muted small mb-0">Assistant Professor</p>
+                                        </div>
+                                    </div>
+                                    <!-- Add more if needed -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Carousel Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#facultyCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#facultyCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+
+                    <!-- Department Events -->
+                    <div class="section-title mt-5">
+                        <h2>Department Events</h2>
+                    </div>
+                    <div id="eventsCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active text-center">
+                                <img src="~/images/departments/commerce/events/events1.jpg" class="d-block w-100 rounded mb-3" alt="Commerce Fest">
+                                <h5>Commerce Fest – “Commercia 2025”</h5>
+                                <p class="px-5">An inter-collegiate fest showcasing business ideas, marketing strategies, and management games that bring out students’ leadership and creativity.</p>
+                            </div>
+                            <div class="carousel-item text-center">
+                                <img src="~/images/departments/commerce/events/events1.jpg" class="d-block w-100 rounded mb-3" alt="Guest Lecture">
+                                <h5>Guest Lecture on Entrepreneurship</h5>
+                                <p class="px-5">Industry experts shared insights on starting and scaling new ventures, motivating students to pursue entrepreneurship as a career path.</p>
+                            </div>
+                            <div class="carousel-item text-center">
+                                <img src="~/images/departments/commerce/events/events1.jpg" class="d-block w-100 rounded mb-3" alt="Workshop">
+                                <h5>Workshop on GST & Taxation</h5>
+                                <p class="px-5">A practical workshop aimed at understanding the latest GST reforms and their implications for small and medium enterprises.</p>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#eventsCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#eventsCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <!-- Department Activities -->
+                    <div class="section-title mt-5">
+                        <h2>Department Activities</h2>
+                    </div>
+                    <div id="activitiesCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active text-center">
+                                <img src="~/images/departments/commerce/activities/activities1.jpeg" class="d-block w-100 rounded mb-3" alt="Industrial Visit">
+                                <h5>Industrial Visit</h5>
+                                <p class="px-5">Students visited leading business firms to gain practical exposure to operations, marketing, and accounting systems.</p>
+                            </div>
+                            <div class="carousel-item text-center">
+                                <img src="~/images/departments/commerce/activities/activities1.jpeg" class="d-block w-100 rounded mb-3" alt="Social Drive">
+                                <h5>Social Responsibility Drive</h5>
+                                <p class="px-5">Commerce students took part in a social awareness campaign, reinforcing the college’s commitment to community welfare.</p>
+                            </div>
+                            <div class="carousel-item text-center">
+                                <img src="~/images/departments/commerce/activities/activities1.jpeg" class="d-block w-100 rounded mb-3" alt="Paper Presentation">
+                                <h5>Paper Presentation Competition</h5>
+                                <p class="px-5">Students presented research papers on emerging business trends, encouraging analytical and critical thinking skills.</p>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#activitiesCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#activitiesCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    <div class="section-title mt-5">
+                        <h2>Gallery</h2>
+                    </div>
+                    <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner text-center">
+                            <div class="carousel-item active">
+                                <img src="~/images/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/images/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/images/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/images/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Computer Science Department -->
+            <div class="tab-pane fade" id="cs" role="tabpanel" aria-labelledby="cs-tab">
+                <h2 class="section-title">Department of Computer Science</h2>
+                <p>
+                    The Department of Computer Science focuses on equipping students with skills in programming, data analysis, and emerging technologies through hands-on learning.
+                </p>
+                <!-- You can replicate the same structure for Faculty, Events, Gallery -->
+            </div>
+
+            <!-- English Department -->
+            <div class="tab-pane fade" id="english" role="tabpanel" aria-labelledby="english-tab">
+                <h2 class="section-title">Department of English</h2>
+                <p>
+                    The Department of English nurtures creativity and communication skills while promoting literature appreciation and linguistic competence.
+                </p>
+            </div>
+
+            <!-- BBA Department -->
+            <div class="tab-pane fade" id="bba" role="tabpanel" aria-labelledby="bba-tab">
+                <h2 class="section-title">Department of Business Administration</h2>
+                <p>
+                    The Department of Business Administration focuses on developing managerial skills and business acumen through case studies, seminars, and industry exposure.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Departments Section-->
+
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-Academics").addClass("active");
+        $("#navbarSupportedContent .clsMenu-Departments").addClass("active");
+    });
+</script>

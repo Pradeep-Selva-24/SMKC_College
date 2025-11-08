@@ -68,7 +68,7 @@ Default CSS
   color: #f1f1f1;
 }
 .theme-dark p {
-  color: #f1f1f1;
+  color: #f1f1f1 !important;
 }
 .theme-dark p a {
   color: #f1f1f1 !important;
@@ -456,6 +456,12 @@ Default CSS
   color: #ffffff;
 }
 .theme-dark .accordion .accordion-item .accordion-button::after {
+  color: #ffffff;
+}
+.theme-dark .accordion .accordion-item .accordion-body {
+  color: #ffffff;
+}
+.theme-dark .accordion .accordion-item .accordion-body::after {
   color: #ffffff;
 }
 .theme-dark .login {

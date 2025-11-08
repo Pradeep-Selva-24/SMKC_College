@@ -1,36 +1,34 @@
 ﻿.header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
 .header-left-content p {display: inline-block;padding-left: 100%;animation: marquee 10s linear infinite;}
 
-.footer-widjet .list ul {
-padding-left: 0;
-margin-bottom: 0;
+.footer-widjet .list ul li {color: #ffffff;transition: all ease 0.5s;}
+
+.faculty-card img {width: 120px;height: 120px;object-fit: cover;border: 3px solid #f0f0f0;}
+.faculty-card:hover {transform: translateY(-5px);transition: 0.3s ease;box-shadow: 0 4px 10px rgba(0,0,0,0.15);}
+
+.nav-tabs {border-bottom: none;gap: 10px;flex-wrap: wrap;}
+.nav-tabs .nav-link {color: #111d5e;border: 1px solid #ddd;border-radius: 50px;padding: 10px 25px;font-weight: 600;transition: all 0.3s ease;box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
+.nav-tabs .nav-link:hover {background: linear-gradient(90deg, #e32845, #111d5e);color: #fff;transform: translateY(-2px);box-shadow: 0 3px 6px rgba(0,0,0,0.1);border-color: transparent;}
+.nav-tabs .nav-link.active {background: linear-gradient(90deg, #e32845, #111d5e);color: #fff !important;border-color: transparent;box-shadow: 0 3px 10px rgba(0,0,0,0.15);}
+
+.departments-area .section-title h2 {color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.departments-area .section-title {margin: 0px;max-width: max-content;}
+
+.clubs-area .tab-content {padding: 30px;animation: fadeIn 0.4s ease-in-out;}
+.clubs-area .section-title h2 {color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.clubs-area .section-title {margin: 0px;max-width: max-content;}
+.clubs-area .carousel-item img {max-height: 400px;object-fit: cover;}
+
+
+/* Subtle entry animation */
+@keyframes fadeIn {
+    from {opacity: 0;transform: translateY(10px);}
+    to {opacity: 1;transform: translateY(0);}
 }
 
-.footer-widjet .list ul li {
-list-style-type: none;
-margin-bottom: 10px;
-}
-
-.footer-widjet .list ul li:last-child {
-margin-bottom: 0;
-}
-
-.footer-widjet .list ul li a {
-color: #ffffff;
-transition: all ease 0.5s;
-}
-
-.footer-widjet .list ul li a:hover {
-color: #e32845;
-}
-
-.footer-widjet h3 {
-    font-size: 20px;
-    margin-bottom: 18px;
-}
-
-.footer-widjet .list ul li a {
-    font-size: 14px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #deptTabs .nav-link {padding: 8px 18px;font-size: 15px;}
 }
 
 @keyframes marquee {

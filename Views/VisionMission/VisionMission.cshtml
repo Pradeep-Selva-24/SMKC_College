@@ -1,3 +1,104 @@
 ﻿@{
     ViewData["Title"] = "Vision & Mission";
 }
+<!--Start Page Banner-->
+<div class="page-banner-area bg-2">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Vision & Mission</h1>
+            <ul>
+                <li><a href="~/">Home</a></li>
+                <li>Vision & Mission</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--End Page Banner-->
+<!--Start Vision & Mission Area-->
+<div class="faq-area ptb-100">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+                <div class="faq-image pr-20">
+                    <img src="~/images/vision-mission-img.jpg" alt="Vision and Mission">
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="faq-left-content pl-20">
+                    <div class="faq-title">
+                        <h2>Our Vision & Mission</h2>
+                        <p>Sree Muthukumaraswamy College is committed to academic excellence, character formation, and holistic education that empowers students to serve society with knowledge, skill, and integrity.</p>
+                    </div>
+
+                    <div class="accordion" id="accordionExample">
+                        <!-- Vision -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Vision
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    To be a centre of academic excellence that nurtures intellectual growth, innovation, and ethical values, empowering students to become responsible global citizens.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mission -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Mission
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>Provide quality higher education that combines academic rigor with practical learning.</li>
+                                        <li>Foster an environment of innovation, leadership, and lifelong learning.</li>
+                                        <li>Promote inclusivity and equal opportunity for all students.</li>
+                                        <li>Encourage ethical values, social responsibility, and respect for cultural diversity.</li>
+                                        <li>Strengthen industry-academia collaboration for employability and entrepreneurship.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Core Values -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Core Values
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li><strong>Integrity:</strong> Upholding honesty and transparency in all activities.</li>
+                                        <li><strong>Excellence:</strong> Striving for the highest standards in teaching and learning.</li>
+                                        <li><strong>Innovation:</strong> Encouraging creativity and critical thinking.</li>
+                                        <li><strong>Respect:</strong> Valuing diversity, equality, and human dignity.</li>
+                                        <li><strong>Service:</strong> Committing to community engagement and sustainable development.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End Accordion -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--End Vision & Mission Area-->
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-About").addClass("active");
+        $("#navbarSupportedContent .clsMenu-VisionMission").addClass("active");
+    });
+</script>
