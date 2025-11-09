@@ -2,6 +2,160 @@
     ViewData["Title"] = "Alumni";
 }
 
+@{
+    ViewData["Title"] = "Alumni";
+}
+
+<div class="alumni-area">
+    <!--Start Page Banner-->
+    <div class="page-banner-area bg-2">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1>Alumni</h1>
+                <ul>
+                    <li><a href="~/">Home</a></li>
+                    <li>Alumni</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--End Page Banner-->
+    <!--Start Alumni Content Area-->
+    <div class="alumni-area ptb-100">
+        <div class="container">
+            <div class="section-title mb-4">
+                <h2>Our Proud Alumni</h2>
+                <p>Sree Muthukumaraswamy College takes immense pride in its vibrant alumni community. Our graduates have excelled in diverse fields — contributing to business, education, technology, and public service. The Alumni Association serves as a bridge connecting the past and present, fostering lifelong learning and collaboration.</p>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p>
+                        The Alumni Association regularly organizes reunions, seminars, and mentorship programs to strengthen bonds between alumni and current students. Our alumni play a vital role in career guidance, guest lectures, and social outreach initiatives.
+                    </p>
+                    <ul>
+                        <li>Annual Alumni Meet & Networking Events</li>
+                        <li>Career Guidance & Mentorship Sessions</li>
+                        <li>Guest Lectures by Distinguished Alumni</li>
+                        <li>Scholarship & Support Initiatives</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow" alt="Alumni Meet">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Alumni Content Area-->
+    <!--Start Alumni Gallery-->
+
+    <div class="gallery-area pb-100">
+        <div class="container">
+            <div class="section-title mb-4">
+                <h2>Alumni Gallery</h2>
+                <p>Glimpses from our Alumni Meet, Events, and Celebrations.</p>
+            </div>
+            <div id="facultyCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 1">
+                                    <div class="gallery-caption">
+                                        <p>Annual Alumni Meet 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 2">
+                                    <div class="gallery-caption">
+                                        <p>Guest Lecture by Alumni</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 3">
+                                    <div class="gallery-caption">
+                                        <p>Career Mentorship Session</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 4">
+                                    <div class="gallery-caption">
+                                        <p>Alumni Reunion Celebration</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 (optional - add more members if needed) -->
+                    <div class="carousel-item">
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 1">
+                                    <div class="gallery-caption">
+                                        <p>Annual Alumni Meet 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 2">
+                                    <div class="gallery-caption">
+                                        <p>Guest Lecture by Alumni</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 3">
+                                    <div class="gallery-caption">
+                                        <p>Career Mentorship Session</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="gallery-item">
+                                    <img src="~/images/stundent-life/student-life-1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 4">
+                                    <div class="gallery-caption">
+                                        <p>Alumni Reunion Celebration</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#facultyCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#facultyCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!--End Alumni Gallery-->
+</div>
+
 <script>
     $(document).ready(function(){
         $("#navbarSupportedContent .nav-link").removeClass("active");

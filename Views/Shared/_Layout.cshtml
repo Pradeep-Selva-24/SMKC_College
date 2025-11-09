@@ -46,28 +46,7 @@
     <script src="~/js/jquery.min.js"></script>
     <!--=== Bootstrap bundle Min js ===-->
     <script src="~/js/bootstrap.bundle.min.js"></script>
-    <!--=== MeanMenu js ===-->
-    <script src="~/js/jquery.meanmenu.js"></script>
-    <!--=== Owl Carousel Min js ===-->
-    <script src="~/js/owl.carousel.min.js"></script>
-    <!--=== Owl Carousel Thumbs Min js ===-->
-    <script src="~/js/carousel-thumbs.min.js"></script>
-    <!--=== Magnific popup Min js ===-->
-    <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <!-- Aos js -->
-    <script src="~/js/aos.js"></script>
-    <!-- Odometer js -->
-    <script src="~/js/odometer.min.js"></script>
-    <!-- Appear js -->
-    <script src="~/js/appear.min.js"></script>
-    <!-- Form Validator js -->
-    <script src="~/js/form-validator.min.js"></script>
-    <!-- Contact Form Script js -->
-    <script src="~/js/contact-form-script.js"></script>
-    <!--=== AjaxChimp js ===-->
-    <script src="~/js/ajaxchimp.min.js"></script>
-    <!--=== Custom js ===-->
-    <script src="~/js/custom.js"></script>
+    
 
     <!-- Start Preloader Area -->
     <div class="preloader-area" style="display: none;">
@@ -184,7 +163,7 @@
                         </ul>
 
                         <div class="others-options">
-                            <div class="icon">
+                            <div class="icon" style="display: none;">
                                 <i class="ri-menu-3-fill" data-bs-toggle="modal" data-bs-target="#sidebarModal"></i>
                             </div>
                         </div>
@@ -197,7 +176,7 @@
             <div class="container">
                 <div class="dot-menu">
                     <div class="inner">
-                        <div class="icon">
+                        <div class="icon" style="display: none;">
                             <i class="ri-menu-3-fill" data-bs-toggle="modal" data-bs-target="#sidebarModal"></i>
                         </div>
                     </div>
@@ -206,7 +185,6 @@
         </div>
     </div>
     <!-- End Navbar Area -->
-
     <!-- Sidebar Modal -->
     <div class="sidebarModal modal right fade" id="sidebarModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -214,84 +192,83 @@
                 <button type="button" class="close" data-bs-dismiss="modal"><i class="ri-close-line"></i></button>
 
                 <div class="modal-body">
-                    <a href="#">
+                    <a href="~/">
                         <img src="~/images/logo.png" class="main-logo" alt="logo">
                         <img src="~/images/white-logo.png" class="white-logo" alt="logo">
                     </a>
-                    <div class="sidebar-content">
-                        <h3>About Us</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-                        <div class="sidebar-btn">
-                            <a href="contact.html" class="default-btn">Let’s Talk</a>
+                    <div class="sidebar-content">
+                        <h3>Get in Touch</h3>
+                        <p>
+                            We’re here to assist you with admissions, academic queries, and general information. Please feel free to contact us or visit our campus.
+                        </p>
+                    </div>
+
+                    <hr>
+
+                    <div class="sidebar-map">
+                        <h3>Our Location</h3>
+                        <div class="map-container" style="border-radius:10px; overflow:hidden;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3895.12345!2d80.2526043!3d13.1330875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52650c9a92bc2d%3A0x4ddf882acacd17ee!2sSree%20Muthukumaraswamy%20College!5e0!3m2!1sen!2sin!4v1700000000000"
+                                    width="100%" height="240" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy">
+                            </iframe>
+
+
                         </div>
                     </div>
-                    <div class="sidebar-contact-info">
-                        <h3>Contact Information</h3>
 
-                        <ul class="info-list">
-                            <li><i class="ri-phone-fill"></i> <a href="tel:9901234567">+990-123-4567</a></li>
+                    <hr>
 
-                            <li><i class="ri-mail-line"></i><a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#e58d8089898aa596848b90cb868a88"><span class="__cf_email__" data-cfemail="6109040d0d0e2112000f144f020e0c">[email&nbsp;protected]</span></a></li>
-
-                            <li><i class="ri-map-pin-line"></i> 413 North Las Vegas, NV 89032</li>
-                        </ul>
-                    </div>
-                    <ul class="sidebar-social-list">
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="flaticon-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.twitter.com/" target="_blank"><i class="flaticon-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://linkedin.com/?lang=en" target="_blank"><i class="flaticon-linkedin"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://instagram.com/?lang=en" target="_blank"><i class="flaticon-instagram"></i></a>
-                        </li>
-                    </ul>
                     <div class="contact-form">
-                        <h3>Ready to Get Started?</h3>
+                        <h3>Feedback / Enquiry Form</h3>
 
-                        <form id="contactForm" novalidate="true">
+                        <form id="contactForm">
                             <div class="row">
                                 <div class="col-lg-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="name" class="form-control" required="" data-error="Please enter your name" placeholder="Your name">
+                                        <input type="text" name="name" class="form-control" required data-error="Please enter your name" placeholder="Your name">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control" required="" data-error="Please enter your email" placeholder="Your email address">
+                                        <input type="email" name="email" class="form-control" required data-error="Please enter your email" placeholder="Your email address">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
-                                        <input type="text" name="phone_number" class="form-control" required="" data-error="Please enter your phone number" placeholder="Your phone number">
+                                        <input type="text" name="phone_number" class="form-control" required data-error="Please enter your phone number" placeholder="Your phone number">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12">
                                     <div class="form-group">
-                                        <textarea name="message" class="form-control" cols="30" rows="6" required="" data-error="Please enter your message" placeholder="Write your message..."></textarea>
+                                        <textarea name="message" class="form-control" cols="30" rows="6" required data-error="Please enter your message" placeholder="Write your message..."></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12">
-                                    <button type="submit" class="default-btn disabled">Send Message<span></span></button>
+                                    <button type="submit" class="default-btn">Send Message<span></span></button>
                                     <div id="msgSubmit" class="h3 text-center hidden"></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         </form>
                     </div>
+
+                    <hr>
+
+                    <ul class="sidebar-social-list mt-3">
+                        <li><a href="#" target="_blank"><i class="flaticon-facebook"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="flaticon-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="flaticon-linkedin"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="flaticon-instagram"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -328,11 +305,11 @@
                         <h3>Quick Links</h3>
                         <div class="list">
                             <ul>
-                                <li><a href="/about">About Us</a></li>
-                                <li><a href="/vision-mission">Vision & Mission</a></li>
+                                <li><a href="~/Footer/PrivacyPolicy">Privacy Policy</a></li>
+                                <li><a href="~/VisionMission/VisionMission">Vision & Mission</a></li>
                                 <li><a href="/admissions">Admissions</a></li>
-                                <li><a href="/departments">Departments</a></li>
-                                <li><a href="/contact">Contact Us</a></li>
+                                <li><a href="~/Departments/Departments">Departments</a></li>
+                                <li><a data-bs-toggle="modal" data-bs-target="#sidebarModal" style="cursor: pointer;">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -347,7 +324,6 @@
                                 <li><a href="/academic-calendar">Academic Calendar</a></li>
                                 <li><a href="/examinations">Examinations</a></li>
                                 <li><a href="/results">Results</a></li>
-                                <li><a href="/placement">Placement Cell</a></li>
                             </ul>
                         </div>
                     </div>
@@ -405,7 +381,43 @@
     
     <div class="switch-box"><label id="switch" class="switch"><input type="checkbox" onchange="toggleTheme()" id="slider"><span class="slider round"></span></label></div>
 
+    <!-- Sticky Running News -->
+    @* <div class="news-bar">
+        <div class="news-label">Latest Updates</div>
+        <div class="news-content">
+            <marquee direction="left" scrollamount="5">
+                <a href="~/2025/10/NOV.2025-UPDATED-TIME-TABLE.pdf" target="_blank">
+                    📘 Nov 2025 Semester End Examinations - Overall Time Table
+                </a>
+                <a href="~/d/1vKJvo4Er1IzvMR0DfGMwQv-K8LdsQd8e/view?usp=drive_link" target="_blank">
+                    🔐 A Handbook on Basics of Cyber Hygiene
+                </a>
+            </marquee>
+        </div>
+    </div> *@
 
+    <!--=== MeanMenu js ===-->
+    <script src="~/js/jquery.meanmenu.js"></script>
+    <!--=== Owl Carousel Min js ===-->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!--=== Owl Carousel Thumbs Min js ===-->
+    <script src="~/js/carousel-thumbs.min.js"></script>
+    <!--=== Magnific popup Min js ===-->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Aos js -->
+    <script src="~/js/aos.js"></script>
+    <!-- Odometer js -->
+    <script src="~/js/odometer.min.js"></script>
+    <!-- Appear js -->
+    <script src="~/js/appear.min.js"></script>
+    <!-- Form Validator js -->
+    <script src="~/js/form-validator.min.js"></script>
+    <!-- Contact Form Script js -->
+    <script src="~/js/contact-form-script.js"></script>
+    <!--=== AjaxChimp js ===-->
+    <script src="~/js/ajaxchimp.min.js"></script>
+    <!--=== Custom js ===-->
+    <script src="~/js/custom.js"></script>
 
 </body><!-- Mirrored from templates.hibootstrap.com/sanu/default/index-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Oct 2025 14:38:46 GMT -->
 </html>

@@ -1,4 +1,7 @@
-﻿.header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
+﻿.text-secondary h2 {color: #111d5e !important;}
+.text-primary {color: #e32845 !important;}
+
+.header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
 .header-left-content p {display: inline-block;padding-left: 100%;animation: marquee 10s linear infinite;}
 
 .footer-widjet .list ul li {color: #ffffff;transition: all ease 0.5s;}
@@ -11,14 +14,40 @@
 .nav-tabs .nav-link:hover {background: linear-gradient(90deg, #e32845, #111d5e);color: #fff;transform: translateY(-2px);box-shadow: 0 3px 6px rgba(0,0,0,0.1);border-color: transparent;}
 .nav-tabs .nav-link.active {background: linear-gradient(90deg, #e32845, #111d5e);color: #fff !important;border-color: transparent;box-shadow: 0 3px 10px rgba(0,0,0,0.15);}
 
-.departments-area .section-title h2 {color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.departments-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
 .departments-area .section-title {margin: 0px;max-width: max-content;}
 
 .clubs-area .tab-content {padding: 30px;animation: fadeIn 0.4s ease-in-out;}
-.clubs-area .section-title h2 {color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.clubs-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
 .clubs-area .section-title {margin: 0px;max-width: max-content;}
 .clubs-area .carousel-item img {max-height: 400px;object-fit: cover;}
 
+.alumni-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.alumni-area .section-title {margin: 0px;max-width: max-content;}
+
+.iqac-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.iqac-area .section-title {margin: 0px;max-width: max-content;}
+
+.aqar-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.aqar-area .section-title {margin: 0px;max-width: max-content;}
+
+.privacy-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
+.privacy-area .section-title {margin: 0px;max-width: max-content;}
+
+table th, table td {vertical-align: middle !important;}
+
+/*.news-bar {position: fixed;bottom: 0;left: 0;width: -webkit-fill-available;background: #111d5e;color: #fff;z-index: 9999;display: flex;align-items: center;height: 40px;font-family: 'Poppins', sans-serif;font-size: 14px;overflow: hidden;}
+.news-label {background: #e32845;color: #fff;font-weight: bold;padding: 0 15px;height: 100%;display: flex;align-items: center;justify-content: center;}
+.news-content {flex: 1;overflow: hidden;}
+.news-content marquee {line-height: 40px;}
+.news-content a {color: #fff;text-decoration: none;margin-right: 40px;}
+.news-content a:hover {color: #e32845;text-decoration: underline;}*/
+
+/* For mobile */
+@media (max-width: 768px) {
+    .news-bar {font-size: 12px;}
+    .news-label {padding: 0 10px;}
+}
 
 /* Subtle entry animation */
 @keyframes fadeIn {
@@ -28,7 +57,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    #deptTabs .nav-link {padding: 8px 18px;font-size: 15px;}
+    .nav-tabs .nav-link {padding: 8px 18px;font-size: 15px;}
 }
 
 @keyframes marquee {
