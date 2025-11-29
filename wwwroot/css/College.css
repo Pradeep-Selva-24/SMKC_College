@@ -1,10 +1,10 @@
 ﻿.text-secondary h2 {color: #111d5e !important;}
 .text-primary {color: #e32845 !important;}
 
-.navbar-brand .main-logo, .navbar-brand .white-logo {width: 60%;margin-top: -15px;margin-bottom: -15px;}
+.navbar-brand .main-logo, .navbar-brand .white-logo {margin-top: -15px;margin-bottom: -15px;}
 
 .header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
-.header-left-content p {display: inline-block;padding-left: 100%;animation: marquee 10s linear infinite;}
+.header-left-content p {display: inline-block;padding-left: 100%;animation: marquee 18s linear infinite;}
 
 .footer-widjet .list ul li {color: #ffffff;transition: all ease 0.5s;}
 

@@ -1,0 +1,193 @@
+﻿
+<link href="~/css/managementstyle.css" rel="stylesheet" />
+
+<section class="portfolio-agileinfo Team-sec loaded" id="mapping" style="padding: 0px 0px 60px;">
+    <div class="container text-center">
+
+        <div class="sec-title text-center mb-45">
+            <div class="sub-text style4-bg">Management</div>
+            <h2 class="title title2">Advisors Board </h2>
+        </div>
+
+        <div class="ADBcards Team-sec">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="teamsec">
+                                    <div class="ADBcard">
+                                        <img src="~/images/profile/home/221a7187.jpg" onclick="PopupShow8();" class="ADBcard__image" alt="" data-nosnippet="">
+                                        <div class="ADBcard__overlay">
+                                            <div class="ADBcard__header" onclick="PopupShow8();">
+                                                <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
+
+                                                <div class="ADBcard__header-text" onclick="PopupShow8();">
+                                                    <h3 class="ADBcard__title">Dr. G. Raja Priya</h3>
+                                                    <p class="ADBcard__status">
+                                                        <span>Principal</span>
+                                                        <span class="spanright-arrow"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                                                    </p>
+                                                    <div class="www">
+                                                        <p class="ADBcard__description" onclick="PopupShow8();">A seasoned academic leader with 20+ years of experience.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade modalteam" id="mdlForMore008" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <main class="main">
+                                                        <section class="card-area loaded">
+                                                            <section class="card-section loaded">
+                                                                <div class="card">
+                                                                    <div class="flip-card">
+                                                                        <div class="flip-card__container">
+                                                                            <div class="card-front">
+                                                                                <div class="card-front__tp card-front__tp--city">
+
+                                                                                    <h2 class="card-front__heading mb-15 fs-30">
+                                                                                        Dr. G. Raja Priya
+                                                                                    </h2>
+                                                                                    <p class="card-front__text-price text-black fs-15">
+                                                                                        principa
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="card-front__bt">
+                                                                                    <p class="card-front__text-view card-front__text-view--city">
+                                                                                        <img src="~/images/s_logo.png" onclick="PopupShow8();" class="ADBcard__image" alt="" data-nosnippet="">
+
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="card-back">
+                                                                                <img src="~/images/profile/home/221a7187.jpg" onclick="PopupShow8();" class="ADBcard__image imgg" alt="" data-nosnippet="">
+                                                                                <h5 class="teamdet-name text-black pt-20">Dr. G. Raja Priya</h5>
+                                                                                <p class="teamdet-namespan text-orange text-center">principal</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="inside-page">
+                                                                        <div class="inside-page__container">
+                                                                            <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
+                                                                                <p class="teamdetails-info text-black fs-22">
+                                                                                    An accomplished academic leader with over 20 years of experience, Raja Priya has been instrumental in shaping the institution’s core academic and administrative frameworks. With deep expertise in educational management and institutional development, he leads key initiatives with high professional and academic standards.
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </section>
+                                                        </section>
+                                                    </main>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-Home").addClass("active");
+    });
+
+     function PopupShow() {
+            $('#mdlForMore').modal('show');
+
+
+        }
+        function PopupShow1() {
+            $('#mdlForMore001 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore001').modal('show');
+            setTimeout(function () { $('#mdlForMore001 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow2() {
+            $('#mdlForMore002 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore002').modal('show');
+            setTimeout(function () { $('#mdlForMore002 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow3() {
+            $('#mdlForMore003 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore003').modal('show');
+            setTimeout(function () { $('#mdlForMore003 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow4() {
+            $('#mdlForMore004 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore004').modal('show');
+            setTimeout(function () { $('#mdlForMore004 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow5() {
+            $('#mdlForMore005 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore005').modal('show');
+            setTimeout(function () { $('#mdlForMore005 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow6() {
+            $('#mdlForMore006 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore006').modal('show');
+            setTimeout(function () { $('#mdlForMore006 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow7() {
+            $('#mdlForMore007 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore007').modal('show');
+            setTimeout(function () { $('#mdlForMore007 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow8() {
+            $('#mdlForMore008  .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore008').modal('show');
+            setTimeout(function () { $('#mdlForMore008 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow9() {
+            $('#mdlForMore009 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore009').modal('show');
+            setTimeout(function () { $('#mdlForMore009 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow10() {
+            $('#mdlForMore010 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore010').modal('show');
+            setTimeout(function () { $('#mdlForMore010 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow11() {
+            $('#mdlForMore011 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore011').modal('show');
+            setTimeout(function () { $('#mdlForMore011 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+        function PopupShow12() {
+            $('#mdlForMore012 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore012').modal('show');
+            setTimeout(function () { $('#mdlForMore012 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+
+        function PopupShow13() {
+            $('#mdlForMore013 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore013').modal('show');
+            setTimeout(function () { $('#mdlForMore013 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+
+        function PopupShow14() {
+            $('#mdlForMore014 .flip-card__container').removeClass("clsopen");
+            $('#mdlForMore014').modal('show');
+            setTimeout(function () { $('#mdlForMore014 .flip-card__container').addClass("clsopen") }, 1000);
+        }
+</script>
