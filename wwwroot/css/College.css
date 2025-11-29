@@ -1,6 +1,9 @@
 ﻿.text-secondary h2 {color: #111d5e !important;}
 .text-primary {color: #e32845 !important;}
 
+.bg-f4f6f9 {background-image: url(/images/rose-petals.png);background-attachment: fixed;background-size: cover;}
+.bg-f4f6f9 .section-title h2, .bg-f4f6f9 .section-title p{color: #ffffff;}
+
 .navbar-brand .main-logo, .navbar-brand .white-logo {margin-top: -15px;margin-bottom: -15px;}
 
 .header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
@@ -38,13 +41,50 @@
 
 table th, table td {vertical-align: middle !important;}
 
+.clsManagements {padding-top: 60px;padding-bottom: 0px;background-image: url(/images/rose-petals.png);background-attachment: fixed;background-size: cover;}
+.clsManagements .section-title h2{color: #ffffff;}
+.clsManagements .owl-carousel .owl-item img {border-radius: 40px;height: 500px;}
+.clsManagements .single-courses-card .courses-content {transform: translateY(-100%);border-radius: 40px 0px 40px 40px;}
+.clsManagements .ADBcard__arc {width: 80px;height: 80px;position: absolute;bottom: 99.2%;right: 0;z-index: 1;}
+.clsManagements .ADBcard__arc path {fill: #fff;d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");}
+.clsManagements .card-front__bt img {margin-top: 0px;opacity: 0.5;}
+.clsManagements .Team-sec img {width: 200px;height: 200px;filter: grayscale(0%);}
+.clsManagements .Team-sec .modal {top: 110px;overflow: hidden;}
+.clsManagements .modalteam .modal-content {border: none;background: none;border-radius: 6px;outline: 0;-webkit-box-shadow: none;box-shadow: none;}
+.clsManagements .main {display: flex;flex-direction: column;justify-content: center;height: 400px;width: 100%;}
+.clsManagements .card-area {align-items: center;display: flex;flex-wrap: nowrap;height: 100%;justify-content: space-evenly;padding: 1rem;}
+.clsManagements .card-section {align-items: center;left: 60%;position: absolute;height: 400px;justify-content: center;width: 400px;transform: translate(-50%, 0%);top: 0;}
+.clsManagements .card-section .card {background-color: transparent;width: 40rem;}
+.clsManagements .flip-card {height: 400px;perspective: 100rem;position: absolute;right: 0;transition: all 1s ease;visibility: hidden;width: 500px;z-index: 100;}
+.clsManagements .flip-card__container {height: 100%;position: absolute;right: 0;transform-origin: left;transform-style: preserve-3d;transition: all 1s ease;width: 100%;}
+.clsManagements .flip-card > * {visibility: visible;}.card-front {background-color: #fafbfa;height: 400px;width: 500px;}
+.clsManagements .card-front, .clsManagements .card-back {backface-visibility: hidden;height: 100%;left: 0;position: absolute;top: -6px;width: 100%;}
+.clsManagements .card-front__tp--city {background-image: linear-gradient(45deg, #e32845 20%, #e32845 44%, #111d5e 85%, #111d5e 111%) !important;}
+.clsManagements .card-front__tp {align-items: center;clip-path: polygon(0 0, 100% 0, 100% 90%, 57% 90%, 50% 100%, 43% 90%, 0 90%);display: flex;flex-direction: column;height: 12rem;justify-content: center;padding: .75rem;}
+.clsManagements .card-front h2, .clsManagements .card-front__tp h4 {color: #ffffff}
+.clsManagements .card-front__bt {align-items: center;display: flex;justify-content: center;}
+.clsManagements .clsopen {transform: rotateY(-180deg);margin-left: 100px;}
+.clsManagements .card-back {background-color: #fafbfa;transform: rotateY(180deg);}
+.clsManagements .card-back:before {width: 16px;background: #111d5e;content: "";left: -15px;position: absolute;height: 300px;}
+.clsManagements .card-back:after {width: 300px;background: #111d5e;content: "";top: -16px;left: -15px;position: absolute;height: 16px;}
+.clsManagements .modalteam .imgg {width: 200px;margin-left: 150px;margin-top: 50px;margin-bottom:5px;height: 250px;border-radius: 0px 30px;box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);}
+.clsManagements .Team-sec .card-back h5 {color: #e32845;font-size: 28px;margin-bottom: 5px;padding-bottom: 0px;text-align: center;}
+.clsManagements .Team-sec .card-back p {color: #e32845;font-size: 24px;margin-bottom: 5px;padding-bottom: 0px;text-align: center;}
+.clsManagements .inside-page {background-color: #fafbfa;box-shadow: inset 3rem 0px 5rem -2.5rem rgba(0, 0, 0, 0.25);height: 400px;padding: 1rem;position: absolute;right: 0;top: -5px;transition: all 1s ease;width: 500px;z-index: 1;}
+.clsManagements .inside-page__container {align-items: center;display: flex;flex-direction: column;height: 344px;text-align: center;width: 100%;overflow: auto;}
+.clsManagements .Team-sec .teamdetails-info {color: black;font-size: 16px;line-height: 1.4;margin: 0;position: relative;font-weight: 500;text-align: justify;margin-bottom: 10px;}
+.clsManagements .Team-sec .teamdetails-info:before {content: "";position: absolute;width: 10px;height: 10px;border-radius: 50%;background: #444EA0;left: -19px;top: 6px;}
+.clsManagements .card-section:before {width: 16px;background: #e32845;content: "";bottom: -11px;right: -255px;position: absolute;height: 300px;}
+.clsManagements .card-section:after {width: 300px;background: #e32845;content: "";bottom: -11px;right: -243px;position: absolute;height: 16px;}
+
+
+
 /*.news-bar {position: fixed;bottom: 0;left: 0;width: -webkit-fill-available;background: #111d5e;color: #fff;z-index: 9999;display: flex;align-items: center;height: 40px;font-family: 'Poppins', sans-serif;font-size: 14px;overflow: hidden;}
 .news-label {background: #e32845;color: #fff;font-weight: bold;padding: 0 15px;height: 100%;display: flex;align-items: center;justify-content: center;}
 .news-content {flex: 1;overflow: hidden;}
 .news-content marquee {line-height: 40px;}
 .news-content a {color: #fff;text-decoration: none;margin-right: 40px;}
 .news-content a:hover {color: #e32845;text-decoration: underline;}*/
-
 /* For mobile */
 @media (max-width: 768px) {
     .news-bar {font-size: 12px;}
@@ -61,6 +101,9 @@ table th, table td {vertical-align: middle !important;}
 @media (max-width: 768px) {
     .nav-tabs .nav-link {padding: 8px 18px;font-size: 15px;}
 }
+
+@media only screen and (max-width: 991px) {
+    .clsowlnave{display:none !important}}
 
 @keyframes marquee {
     0% {transform: translateX(0);}100% {transform: translateX(-100%);}
