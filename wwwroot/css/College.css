@@ -4,6 +4,8 @@
 .bg-f4f6f9 {background-image: url(/images/rose-petals.png);background-attachment: fixed;background-size: cover;}
 .bg-f4f6f9 .section-title h2, .bg-f4f6f9 .section-title p{color: #ffffff;}
 
+.modal.right .modal-content button.close {right: 5px;top: 5px;}
+
 .navbar-brand .main-logo, .navbar-brand .white-logo {margin-top: -15px;margin-bottom: -15px;}
 
 .header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
