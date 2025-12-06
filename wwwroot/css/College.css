@@ -1,6 +1,8 @@
 ﻿.text-secondary h2 {color: #111d5e !important;}
 .text-primary {color: #e32845 !important;}
 
+.mt-20{margin-top: 20px !important;}
+
 .bg-f4f6f9 {background-image: url(/images/rose-petals.png);background-attachment: fixed;background-size: cover;}
 .bg-f4f6f9 .section-title h2, .bg-f4f6f9 .section-title p{color: #ffffff;}
 
@@ -79,6 +81,9 @@ table th, table td {vertical-align: middle !important;}
 .clsManagements .card-section:before {width: 16px;background: #e32845;content: "";bottom: -11px;right: -255px;position: absolute;height: 300px;}
 .clsManagements .card-section:after {width: 300px;background: #e32845;content: "";bottom: -11px;right: -243px;position: absolute;height: 16px;}
 
+.placement-area .company-slider .company-slider-card {display: flex;align-items: center;justify-content: center;padding: 15px;background: #fff;border-radius: 10px;}
+.placement-area .company-slider .company-slider-card .img {width: 140px;height: 80px;display: flex;align-items: center;justify-content: center;overflow: hidden;}
+.placement-area .company-slider .company-slider-card .img img {width: 100%;height: 100%;object-fit: contain;}
 
 
 /*.news-bar {position: fixed;bottom: 0;left: 0;width: -webkit-fill-available;background: #111d5e;color: #fff;z-index: 9999;display: flex;align-items: center;height: 40px;font-family: 'Poppins', sans-serif;font-size: 14px;overflow: hidden;}

@@ -401,12 +401,12 @@
 try {
     // function to set a given theme/color-scheme
     function setTheme(themeName) {
-        localStorage.setItem('sanu_theme', themeName);
+        localStorage.setItem('smkc_theme', themeName);
         document.documentElement.className = themeName;
     }
     // function to toggle between light and dark theme
     function toggleTheme() {
-        if (localStorage.getItem('sanu_theme') === 'theme-dark') {
+        if (localStorage.getItem('smkc_theme') === 'theme-dark') {
             setTheme('theme-light');
         } else {
             setTheme('theme-dark');
@@ -414,7 +414,7 @@ try {
     }
     // Immediately invoked function to set the theme on initial load
     (function () {
-        if (localStorage.getItem('sanu_theme') === 'theme-dark') {
+        if (localStorage.getItem('smkc_theme') === 'theme-dark') {
             setTheme('theme-dark');
             document.getElementById('slider').checked = false;
         } else {

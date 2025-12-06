@@ -1,5 +1,5 @@
 /*
-@File: Sanu Template Styles
+@File: Template Styles
 
 * This file contains the styling for the actual template, this
 is the file you need to edit to change the look of the
@@ -176,8 +176,8 @@ Top Header Area Style
 ======================================================*/
 .top-header-area {
   background-color: #e32845;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  /*padding-top: 15px;
+  padding-bottom: 15px;*/
 }
 .top-header-area .container-fluid {
   max-width: 1520px;
