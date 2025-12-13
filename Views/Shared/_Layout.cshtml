@@ -49,15 +49,12 @@
     
 
     <!-- Start Preloader Area -->
-    <div class="preloader-area" style="display: none;">
+    <div class="clsPreloaderArea">
         <div class="spinner">
-            <div class="inner">
-                <div class="disc"></div>
-                <div class="disc"></div>
-                <div class="disc"></div>
-            </div>
+            <img src="~/images/murugan.png" />
         </div>
     </div>
+
     <!-- End Preloader Area -->
     <!--Start Top Header Area-->
     <div class="top-header-area">
@@ -419,5 +416,14 @@
     <!--=== Custom js ===-->
     <script src="~/js/custom.js"></script>
 
+    <script>
+        // Preloader
+        $(window).on('load', function () {
+            setTimeout(function () {
+                $('.clsPreloaderArea').fadeOut();
+            }, 1000);
+        });
+
+    </script>
 </body>
 </html>
