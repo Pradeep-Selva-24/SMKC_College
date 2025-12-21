@@ -153,7 +153,3 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
 .flaticon-art:before {
     content: "\f12d";
 }
-
-.flaticon-case-study:before {
-    content: "\f110";
-}
