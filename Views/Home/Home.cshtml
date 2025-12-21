@@ -444,7 +444,15 @@
 <!--End News Area-->
 
 <script>
+    // Preloader
+    $(window).on('load', function () {
+        setTimeout(function () {
+            $('.clsPreloaderArea').fadeOut();
+        }, 1000);
+    });
+
     $(document).ready(function(){
+        $('.clsPreloaderArea').show();
         $("#navbarSupportedContent .nav-link").removeClass("active");
         $("#navbarSupportedContent .clsMenu-Home").addClass("active");
     });

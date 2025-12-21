@@ -49,7 +49,7 @@
     
 
     <!-- Start Preloader Area -->
-    <div class="clsPreloaderArea">
+    <div class="clsPreloaderArea" style="display:none;">
         <div class="spinner">
             <img src="~/images/murugan.png" />
         </div>
@@ -417,13 +417,11 @@
     <script src="~/js/custom.js"></script>
 
     <script>
-        // Preloader
-        $(window).on('load', function () {
-            setTimeout(function () {
-                $('.clsPreloaderArea').fadeOut();
-            }, 1000);
-        });
-
+        if ($('[data-bs-toggle="tooltip"]').length) {
+            $('[data-bs-toggle="tooltip"]').each(function () {
+                new bootstrap.Tooltip(this);
+            });
+        }
     </script>
 </body>
 </html>
