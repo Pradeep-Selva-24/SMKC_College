@@ -49,7 +49,7 @@
     
 
     <!-- Start Preloader Area -->
-    <div class="clsPreloaderArea">
+    <div class="clsPreloaderArea" style="display:none;">
         <div class="spinner">
             <img src="~/images/murugan.png" />
         </div>
@@ -121,7 +121,6 @@
                                 <a href="#" class="nav-link clsMenu-Academics dropdown-toggle">Academics</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a href="~/ProgrammesOffered/ProgrammesOffered" class="nav-link clsMenu-ProgrammesOffered">Programmes Offered</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-Syllabus">Syllabus</a></li>
                                     <li class="nav-item"><a href="#" class="nav-link clsMenu-AcademicCalendar">Academic Calendar</a></li>
                                     <li class="nav-item"><a href="~/Placement/Placement" class="nav-link clsMenu-Placement">Placement</a></li>
                                 </ul>
@@ -416,14 +415,5 @@
     <!--=== Custom js ===-->
     <script src="~/js/custom.js"></script>
 
-    <script>
-        // Preloader
-        $(window).on('load', function () {
-            setTimeout(function () {
-                $('.clsPreloaderArea').fadeOut();
-            }, 1000);
-        });
-
-    </script>
 </body>
 </html>
