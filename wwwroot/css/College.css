@@ -85,9 +85,9 @@ table th, table td {vertical-align: middle !important;}
 .placement-area .company-slider .company-slider-card .img {width: 140px;height: 80px;display: flex;align-items: center;justify-content: center;overflow: hidden;}
 .placement-area .company-slider .company-slider-card .img img {width: 100%;height: 100%;object-fit: contain;}
 
-.clsPreloaderArea {position: fixed;z-index: 999999;background-color: #e32845;width: 100%;height: 100%;text-align: center;left: 0;right: 0;top: 0;}
+.clsPreloaderArea {position: fixed;z-index: 999999;width: 100%;height: 100%;left: 0;top: 0;text-align: center;backdrop-filter: blur(8px);-webkit-backdrop-filter: blur(8px);background: rgba(17, 29, 94, 0.3);}
 .clsPreloaderArea .spinner {width: 20em;height: 20em;position: absolute;left: 0;right: 0;top: 45%;transform: translateY(-45%);margin-left: auto;margin-right: auto;}
-.clsPreloaderArea .spinner::before {content: "";position: absolute;left: 0;top: 0;right: 0;bottom: 0;margin: -15px;border-radius: 50%;border: 2px dashed #ffffff;animation: spinWheel 2.5s linear infinite;}
+.clsPreloaderArea .spinner::before {content: "";position: absolute;left: 0;top: 0;right: 0;bottom: 0;margin: -15px;border-radius: 50%;border: 2px dashed #ffffff;animation: spinWheel 0.1s linear infinite;}
 .clsPreloaderArea .spinner img{margin-top: 45px;}
 
 @keyframes spinWheel {
