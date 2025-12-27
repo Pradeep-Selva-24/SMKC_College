@@ -1,13 +1,25 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class DepartmentsMembers : BaseEntity
 {
-    public class DepartmentsMembers : BaseEntity
-    {
-        public int F_DepartmentsMasterId { get; set; }
-        public int I_Name { get; set; }
-        public string S_Designation { get; set; }
-        public string S_ImagePath { get; set; }
-        public string S_Order { get; set; }
-    }
+    [Column("F_DepartmentsMasterId")]
+    [Required]
+    public int DepartmentsMasterId { get; set; }
+
+    [Column("S_Name")]
+    [Required]
+    public string? Name { get; set; }
+
+    [Column("S_Designation")]
+    [Required]
+    public string? Designation { get; set; }
+
+    [Column("S_ImagePath")]
+    [Required]
+    public string? ImagePath { get; set; }
+
+    [Column("I_Order")]
+    [Required]
+    public int I_Order { get; set; }
 }

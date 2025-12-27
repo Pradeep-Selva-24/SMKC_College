@@ -1,13 +1,25 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class PageMedia : BaseEntity
 {
-    public class PageMedia : BaseEntity
-    {
-        public string S_Category { get; set; }
-        public string S_ImagePath { get; set; }
-        public string S_Heading { get; set; }
-        public string S_ShortContent { get; set; }
-        public int I_DisplayOrder { get; set; }
-    }
+    [Column("S_Category")]
+    [Required]
+    public string? Category { get; set; }
+
+    [Column("S_ImagePath")]
+    [Required]
+    public string? ImagePath { get; set; }
+
+    [Column("S_Heading")]
+    [Required]
+    public string? Heading { get; set; }
+
+    [Column("S_ShortContent")]
+    [Required]
+    public string? ShortContent { get; set; }
+
+    [Column("I_DisplayOrder")]
+    [Required]
+    public int DisplayOrder { get; set; }
 }

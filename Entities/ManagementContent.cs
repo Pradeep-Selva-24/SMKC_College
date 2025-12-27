@@ -1,10 +1,13 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class ManagementContent : BaseEntity
 {
-    public class ManagementContent : BaseEntity
-    {
-        public int F_ManagementId { get; set; }
-        public string S_Content { get; set; }
-    }
+    [Column("F_ManagementId")]
+    [Required]
+    public int ManagementId { get; set; }
+
+    [Column("S_Content")]
+    [Required]
+    public string? Content { get; set; }
 }

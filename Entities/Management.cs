@@ -1,11 +1,17 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class Management : BaseEntity
 {
-    public class Management : BaseEntity
-    {
-        public string S_Name { get; set; }
-        public string S_Designation { get; set; }
-        public int I_DisplayOrder { get; set; }
-    }
+    [Column("S_Name")]
+    [Required]
+    public string? Name { get; set; }
+
+    [Column("S_Designation")]
+    [Required]
+    public string? Designation { get; set; }
+
+    [Column("I_DisplayOrder")]
+    [Required]
+    public int DisplayOrder { get; set; }
 }

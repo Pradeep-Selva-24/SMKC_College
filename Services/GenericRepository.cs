@@ -1,17 +1,17 @@
 
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 using College.Services.Context;
 using College.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace College.Services
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ClgDbContext _context;
+        private readonly CLGDbContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(ClgDbContext context)
+        public GenericRepository(CLGDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

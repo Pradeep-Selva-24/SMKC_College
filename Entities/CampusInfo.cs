@@ -1,10 +1,13 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class CampusInfo : BaseEntity
 {
-    public class CampusInfo : BaseEntity
-    {
-        public string S_Category { get; set; }
-        public int I_Count { get; set; }
-    }
+    [Column("S_Category")]
+    [Required]
+    public string? Category { get; set; }
+
+    [Column("I_Count")]
+    [Required]
+    public int Count { get; set; }
 }

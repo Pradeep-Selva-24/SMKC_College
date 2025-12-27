@@ -1,13 +1,24 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class MenuMaster : BaseEntity
 {
-    public class MenuMaster : BaseEntity
-    {
-        public int? F_ParentMenuId { get; set; }
-        public string S_MenuName { get; set; }
-        public string S_MenuUrl { get; set; }
-        public string B_Display { get; set; }
-        public int I_Order { get; set; }
-    }
+    [Column("F_ParentMenuId")]
+    public int? ParentMenuId { get; set; }
+
+    [Column("S_MenuName")]
+    [Required]
+    public string? MenuName { get; set; }
+
+    [Column("S_MenuUrl")]
+    [Required]
+    public string? MenuUrl { get; set; }
+
+    [Column("B_Display")]
+    [Required]
+    public string? Display { get; set; }
+
+    [Column("I_Order")]
+    [Required]
+    public int Order { get; set; }
 }

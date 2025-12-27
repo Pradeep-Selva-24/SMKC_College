@@ -1,13 +1,25 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class LatestNews : BaseEntity
 {
-    public class LatestNews : BaseEntity
-    {
-        public string S_ImagePath { get; set; }
-        public string S_Heading { get; set; }
-        public string S_ShortContent { get; set; }
-        public DateTime D_Date { get; set; }
-        public int I_DisplayOrder { get; set; }
-    }
+    [Column("S_Heading")]
+    [Required]
+    public string? Heading { get; set; }
+
+    [Column("S_ShortContent")]
+    [Required]
+    public string? ShortContent { get; set; }
+
+    [Column("D_Date")]
+    [Required]
+    public DateTime Date { get; set; }
+
+    [Column("S_ImagePath")]
+    [Required]
+    public string? ImagePath { get; set; }
+
+    [Column("I_DisplayOrder")]
+    [Required]
+    public int DisplayOrder { get; set; }
 }

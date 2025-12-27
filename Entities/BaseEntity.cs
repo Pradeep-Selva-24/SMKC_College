@@ -1,17 +1,29 @@
 
 using System.ComponentModel.DataAnnotations;
-
-namespace College.Entities
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public abstract class BaseEntity
 {
-    public abstract class BaseEntity
-    {
-        [Key]
-        public int I_Id { get; set; }
+    [Key]
+    [Column("I_Id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
-        public string? S_CreatedBy { get; set; }
-        public DateTime? D_CreatedDate { get; set; }
-        public string? S_ModifiedBy { get; set; }
-        public DateTime? D_ModifiedDate { get; set; }
-        public bool B_Status { get; set; }
-    }
+    [Column("S_CreatedBy")]
+    [Required]
+    public string? CreatedBy { get; set; }
+
+    [Column("D_CreatedDate")]
+    [Required]
+    public DateTime? CreatedDate { get; set; }
+
+    [Column("S_ModifiedBy")]
+    public string? ModifiedBy { get; set; }
+
+    [Column("D_ModifiedDate")]
+    public DateTime? ModifiedDate { get; set; }
+
+    [Column("B_Status")]
+    [Required]
+    public bool Status { get; set; }
 }

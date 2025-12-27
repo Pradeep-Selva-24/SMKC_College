@@ -1,12 +1,21 @@
-
-using System;
-namespace College.Entities
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+namespace College.Entities;
+public class AQARReport : BaseEntity
 {
-    public class AQARReport : BaseEntity
-    {
-        public string S_AcademicYear { get; set; }
-        public string S_ReportTitle { get; set; }
-        public string S_FilePath { get; set; }
-        public int I_Order { get; set; }
-    }
+    [Column("S_AcademicYear")]
+    [Required]
+    public string? AcademicYear { get; set; }
+
+    [Column("S_ReportTitle")]
+    [Required]
+    public string? ReportTitle { get; set; }
+
+    [Column("S_FilePath")]
+    [Required]
+    public string? FilePath { get; set; }
+
+    [Column("I_Order")]
+    [Required]
+    public int I_Order { get; set; }
 }

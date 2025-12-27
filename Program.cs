@@ -1,21 +1,17 @@
-﻿using College.Services.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using College;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ClgDbContext>(options =>
-{
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("SMKC"),
-        ServerVersion.AutoDetect(
-            builder.Configuration.GetConnectionString("SMKC")
-        )
-    );
-});
+
+// Call our reusable DB config method
+builder.Services.AddConfiguredDatabase(builder.Configuration);
 
 var app = builder.Build();
+
+// Initialize database and seed default data
+await DbInitializer.InitializeAsync(app.Services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -26,7 +22,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ✅ THIS IS REQUIRED FOR wwwroot in .NET 8
 app.UseStaticFiles();
 
 app.UseRouting();

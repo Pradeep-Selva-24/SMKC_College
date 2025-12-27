@@ -5,9 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace College.Services.Context
 {
-    public class ClgDbContext : DbContext
+    public class CLGDbContext(DbContextOptions<CLGDbContext> options, IConfiguration config) : DbContext(options)
     {
-        public ClgDbContext(DbContextOptions<ClgDbContext> options) : base(options) { }
         public DbSet<Login> Login { get; set; }
         public DbSet<CampusInfo> CampusInfo { get; set; }
         public DbSet<InstitutionPages> InstitutionPages { get; set; }
@@ -28,5 +27,50 @@ namespace College.Services.Context
         public DbSet<DepartmentsMembers> DepartmentsMembers { get; set; }
         public DbSet<DepartmentsDetails> DepartmentsDetails { get; set; }
         public DbSet<MenuMaster> MenuMaster { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CLGDbContext).Assembly);
+
+            if (config["ConnectionStrings:DB_Provider"]?.ToString().ToUpperInvariant() == "MYSQL")
+            {
+                foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+                {
+                    var tableName = entityType.GetTableName();
+                    var schema = entityType.GetSchema();
+
+                    if (!string.IsNullOrEmpty(schema))
+                    {
+                        entityType.SetTableName($"{schema}.{tableName}");
+                        entityType.SetSchema(null);
+                    }
+                }
+            }
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var provider = config["ConnectionStrings:DB_Provider"]?.ToUpperInvariant() ?? throw new Exception("DB_Provider not set");
+
+            if (provider == "MYSQL")
+            {
+                optionsBuilder.UseMySql(
+                    config.GetConnectionString("MYSQL"),
+                    ServerVersion.AutoDetect(config.GetConnectionString("MYSQL"))
+                );
+            }
+            else if (provider == "MSSQL")
+            {
+                optionsBuilder.UseSqlServer(config.GetConnectionString("MSSQL"));
+            }
+            else if (provider == "POSTGRESQL")
+            {
+                optionsBuilder.UseNpgsql(config.GetConnectionString("POSTGRESQL"));
+            }
+        }
+
+
     }
 }
