@@ -3,7 +3,7 @@
 
 .mt-20{margin-top: 20px !important;}
 
-.bg-f4f6f9 {background-image: url(/Img/BG/rose-petals.png);background-attachment: fixed;background-size: cover;}
+.bg-f4f6f9 {background-image: url(../Img/BG/rose-petals.png);background-attachment: fixed;background-size: cover;}
 .bg-f4f6f9 .section-title h2, .bg-f4f6f9 .section-title p{color: #ffffff;}
 
 .modal.right .modal-content button.close {right: 5px;top: 5px;}
@@ -45,7 +45,7 @@
 
 table th, table td {vertical-align: middle !important;}
 
-.clsManagements {padding-top: 60px;padding-bottom: 0px;background-image: url(/Img/BG/rose-petals.png);background-attachment: fixed;background-size: cover;}
+.clsManagements {padding-top: 60px;padding-bottom: 0px;background-image: url(../Img/BG/rose-petals.png);background-attachment: fixed;background-size: cover;}
 .clsManagements .section-title h2{color: #ffffff;}
 .clsManagements .owl-carousel .owl-item img {border-radius: 40px;height: 500px;}
 .clsManagements .single-courses-card .courses-content {transform: translateY(-100%);border-radius: 40px 0px 40px 40px;}

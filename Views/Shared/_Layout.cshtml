@@ -41,6 +41,11 @@
 </head>
 <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
 
+    @inject IConfiguration Configuration
+    @{
+        var ERPURL = Configuration["ERP_Login_URL"];
+    }
+
      <!--=== Jquery Min js ===-->
     @* <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> *@
     <script src="~/js/jquery.min.js"></script>
@@ -69,9 +74,10 @@
                     <div class="header-right-content">
                         <div class="list">
                             <ul>
-                                <li><a href="#">Student</a></li>
-                                <li><a href="#">Faculty &amp; Staff</a></li>
-                                <li><a href="#">Admin</a></li>
+                                @if (!string.IsNullOrEmpty(ERPURL))
+                                {
+                                    <li><a href="@ERPURL" target="_blank">Login</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
