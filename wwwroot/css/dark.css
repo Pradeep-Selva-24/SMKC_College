@@ -40,7 +40,7 @@ Default CSS
   margin: auto 0;
   transition: 0.4s;
   box-shadow: 0 0px 15px rgba(32, 32, 32, 0.2392156863);
-  background: url(../images/night.png);
+  background: url(../img/icon/night.png);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -52,7 +52,7 @@ Default CSS
 }
 .switch-box input:checked + .slider:before {
   transform: translateX(24px);
-  background: url(../images/sunny.png);
+  background: url(../img/icon/sunny.png);
   background-repeat: no-repeat;
   background-position: center;
 }

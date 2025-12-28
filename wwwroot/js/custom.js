@@ -141,38 +141,6 @@
         }
     });
 
-    // Campus-slider2
-    $('.campus-slider2').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: true,
-        thumbs: false,
-        dots: false,
-        center: true,
-        autoplay: false,
-        smartSpeed: 1000,
-        autoplayHoverPause: true,
-		navText: [
-            '<i class="ri-arrow-left-line"></i>', 
-            '<i class="ri-arrow-right-line"></i>',  
-        ],
-        responsive:{
-            0:{
-                items:1, 
-            },
-            768:{
-                items:2,
-            },
-            992:{
-                items:3,
-            },
-            1200:{
-                items:3,
-            },
-                
-        }
-    });
-    
     // Events-slider
     $('.events-slider').owlCarousel({
         loop: true,

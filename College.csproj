@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\departments\**" />
+    <Content Remove="wwwroot\images\departments\**" />
+    <EmbeddedResource Remove="wwwroot\images\departments\**" />
+    <None Remove="wwwroot\images\departments\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\images\departments\commerce\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

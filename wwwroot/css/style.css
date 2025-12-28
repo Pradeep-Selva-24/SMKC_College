@@ -1058,7 +1058,7 @@ Banner Style
   background-image: url(../images/banner/banner-img6.jpg);
 }
 .slider-item.banner-bg-7 {
-  background-image: url(../images/banner/banner-img7.png);
+  background-image: url(../../img/banner/banner_1.png);
 }
 .slider-item.banner-bg-8 {
   background-image: url(../images/banner/banner-img8.jpg);
@@ -1352,13 +1352,13 @@ Academics Style
   top: 0;
 }
 .single-academics-card2.bg-1 {
-  background-image: url(../images/academics/academic-1.jpg);
+  background-image: url(../img/academics/academic-1.jpg);
 }
 .single-academics-card2.bg-2 {
-  background-image: url(../images/academics/academic-2.jpg);
+  background-image: url(../img/academics/academic-2.jpg);
 }
 .single-academics-card2.bg-3 {
-  background-image: url(../images/academics/academic-3.jpg);
+  background-image: url(../img/academics/academic-3.jpg);
 }
 .single-academics-card2 .serial {
   position: absolute;
@@ -1699,16 +1699,16 @@ Education Style
   z-index: 1;
 }
 .single-education-card.bg-1 {
-  background-image: url(../images/academics/academic-4.jpg);
+  background-image: url(../img/academics/academic-4.jpg);
 }
 .single-education-card.bg-2 {
-  background-image: url(../images/academics/academic-5.jpg);
+  background-image: url(../img/academics/academic-5.jpg);
 }
 .single-education-card.bg-3 {
-  background-image: url(../images/academics/academic-6.jpg);
+  background-image: url(../img/academics/academic-6.jpg);
 }
 .single-education-card.bg-4 {
-  background-image: url(../images/academics/academic-7.jpg);
+  background-image: url(../img/academics/academic-7.jpg);
 }
 .single-education-card .edication-content {
   text-align: center;
@@ -4223,10 +4223,10 @@ Page Banner Style
   background: rgba(17, 29, 94, 0.8);
 }
 .page-banner-area.bg-1 {
-  background-image: url(../images/page-banner/page-bnner-1.jpg);
+  background-image: url(../Img/page-banner/page-bnner-1.jpg);
 }
 .page-banner-area.bg-2 {
-  background-image: url(../images/page-banner/page-bnner-2.jpg);
+  background-image: url(../Img/page-banner/page-bnner-2.jpg);
 }
 .page-banner-area .container-fluid {
   max-width: 1520px;
