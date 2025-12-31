@@ -14,7 +14,7 @@ public class QualityAssuranceController(ILogger<HomeController> logger) : Contro
         return View();
     }
 
-    public IActionResult NAAC()
+    public IActionResult NAC()
     {
         return View();
     }

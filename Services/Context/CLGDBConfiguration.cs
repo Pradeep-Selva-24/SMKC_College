@@ -67,20 +67,20 @@ internal class IQACMembersConfig : IEntityTypeConfiguration<IQACMembers>
     }
 }
 
-internal class NAACDocumentConfig : IEntityTypeConfiguration<NAACDocument>
+internal class NACDocumentConfig : IEntityTypeConfiguration<NACDocument>
 {
-    public void Configure(EntityTypeBuilder<NAACDocument> builder)
+    public void Configure(EntityTypeBuilder<NACDocument> builder)
     {
-        builder.ToTable("NAACDocument", "CLG");
+        builder.ToTable("NACDocument", "CLG");
         builder.HasKey(e => e.Id);
     }
 }
 
-internal class NAACDetailsConfig : IEntityTypeConfiguration<NAACDetails>
+internal class NACDetailsConfig : IEntityTypeConfiguration<NACDetails>
 {
-    public void Configure(EntityTypeBuilder<NAACDetails> builder)
+    public void Configure(EntityTypeBuilder<NACDetails> builder)
     {
-        builder.ToTable("NAACDetails", "CLG");
+        builder.ToTable("NACDetails", "CLG");
         builder.HasKey(e => e.Id);
     }
 }

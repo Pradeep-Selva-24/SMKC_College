@@ -784,7 +784,7 @@ namespace College.Migrations
                     b.ToTable("CLG.MenuMaster", (string)null);
                 });
 
-            modelBuilder.Entity("College.Entities.NAACDetails", b =>
+            modelBuilder.Entity("College.Entities.NACDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -830,10 +830,10 @@ namespace College.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NAACDetails", (string)null);
+                    b.ToTable("CLG.NACDetails", (string)null);
                 });
 
-            modelBuilder.Entity("College.Entities.NAACDocument", b =>
+            modelBuilder.Entity("College.Entities.NACDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -879,7 +879,7 @@ namespace College.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NAACDocument", (string)null);
+                    b.ToTable("CLG.NACDocument", (string)null);
                 });
 
             modelBuilder.Entity("College.Entities.NIRFDetails", b =>

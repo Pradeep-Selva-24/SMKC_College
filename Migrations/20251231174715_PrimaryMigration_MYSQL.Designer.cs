@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Migrations
 {
     [DbContext(typeof(CLGDbContext))]
-    [Migration("20251227144105_PrimaryMigration_MYSQL")]
+    [Migration("20251231174715_PrimaryMigration_MYSQL")]
     partial class PrimaryMigration_MYSQL
     {
         /// <inheritdoc />
@@ -787,7 +787,7 @@ namespace College.Migrations
                     b.ToTable("CLG.MenuMaster", (string)null);
                 });
 
-            modelBuilder.Entity("College.Entities.NAACDetails", b =>
+            modelBuilder.Entity("College.Entities.NACDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -833,10 +833,10 @@ namespace College.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NAACDetails", (string)null);
+                    b.ToTable("CLG.NACDetails", (string)null);
                 });
 
-            modelBuilder.Entity("College.Entities.NAACDocument", b =>
+            modelBuilder.Entity("College.Entities.NACDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -882,7 +882,7 @@ namespace College.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NAACDocument", (string)null);
+                    b.ToTable("CLG.NACDocument", (string)null);
                 });
 
             modelBuilder.Entity("College.Entities.NIRFDetails", b =>

@@ -285,7 +285,7 @@ namespace College.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CLG.NAACDetails",
+                name: "CLG.NACDetails",
                 columns: table => new
                 {
                     I_Id = table.Column<int>(type: "int", nullable: false)
@@ -305,12 +305,12 @@ namespace College.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CLG.NAACDetails", x => x.I_Id);
+                    table.PrimaryKey("PK_CLG.NACDetails", x => x.I_Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CLG.NAACDocument",
+                name: "CLG.NACDocument",
                 columns: table => new
                 {
                     I_Id = table.Column<int>(type: "int", nullable: false)
@@ -330,7 +330,7 @@ namespace College.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CLG.NAACDocument", x => x.I_Id);
+                    table.PrimaryKey("PK_CLG.NACDocument", x => x.I_Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -638,10 +638,10 @@ namespace College.Migrations
                 name: "CLG.MenuMaster");
 
             migrationBuilder.DropTable(
-                name: "CLG.NAACDetails");
+                name: "CLG.NACDetails");
 
             migrationBuilder.DropTable(
-                name: "CLG.NAACDocument");
+                name: "CLG.NACDocument");
 
             migrationBuilder.DropTable(
                 name: "CLG.NIRFDetails");

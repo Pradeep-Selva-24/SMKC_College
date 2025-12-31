@@ -1,15 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace College.Entities;
-public class NAACDetails : BaseEntity
+public class NACDocument : BaseEntity
 {
     [Column("S_Name")]
     [Required]
-    public string? Name { get; set; }
+    public string Name { get; set; }
 
-    [Column("S_description")]
+    [Column("S_Path")]
     [Required]
-    public string? description { get; set; }
+    public string Path { get; set; }
 
     [Column("I_Order")]
     [Required]

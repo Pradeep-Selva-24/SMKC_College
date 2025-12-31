@@ -18,8 +18,8 @@ namespace College.Services.Context
         public DbSet<ClubsDetails> ClubsDetails { get; set; }
         public DbSet<IQACMembers> IQACMembers { get; set; }
         public DbSet<AQARReport> AQARReport { get; set; }
-        public DbSet<NAACDetails> NAACDetails { get; set; }
-        public DbSet<NAACDocument> NAACDocument { get; set; }
+        public DbSet<NACDetails> NACDetails { get; set; }
+        public DbSet<NACDocument> NACDocument { get; set; }
         public DbSet<NIRFDetails> NIRFDetails { get; set; }
         public DbSet<NIRFDocument> NIRFDocument { get; set; }
         public DbSet<NIRFDocumentRanking> NIRFDocumentRanking { get; set; }
