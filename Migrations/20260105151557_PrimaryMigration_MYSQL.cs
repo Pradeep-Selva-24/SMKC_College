@@ -173,34 +173,6 @@ namespace College.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CLG.LatestNews",
-                columns: table => new
-                {
-                    I_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    S_Heading = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    S_ShortContent = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    D_Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    S_ImagePath = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    I_DisplayOrder = table.Column<int>(type: "int", nullable: false),
-                    S_CreatedBy = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    D_CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    S_ModifiedBy = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    D_ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    B_Status = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CLG.LatestNews", x => x.I_Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "CLG.Login",
                 columns: table => new
                 {
@@ -421,10 +393,11 @@ namespace College.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     S_ImagePath = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    S_Heading = table.Column<string>(type: "longtext", nullable: false)
+                    S_Heading = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    S_ShortContent = table.Column<string>(type: "longtext", nullable: false)
+                    S_ShortContent = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    D_Date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     I_DisplayOrder = table.Column<int>(type: "int", nullable: false),
                     S_CreatedBy = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -624,9 +597,6 @@ namespace College.Migrations
 
             migrationBuilder.DropTable(
                 name: "CLG.IQACMembers");
-
-            migrationBuilder.DropTable(
-                name: "CLG.LatestNews");
 
             migrationBuilder.DropTable(
                 name: "CLG.Login");

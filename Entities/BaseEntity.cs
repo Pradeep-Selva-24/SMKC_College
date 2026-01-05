@@ -11,19 +11,19 @@ public abstract class BaseEntity
 
     [Column("S_CreatedBy")]
     [Required]
-    public string? CreatedBy { get; set; }
+    public string CreatedBy { get; set; } = "Admin";
 
     [Column("D_CreatedDate")]
     [Required]
-    public DateTime? CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; } = DateTime.Now;
 
     [Column("S_ModifiedBy")]
-    public string? ModifiedBy { get; set; }
+    public string? ModifiedBy { get; set; } = "Admin";
 
     [Column("D_ModifiedDate")]
-    public DateTime? ModifiedDate { get; set; }
+    public DateTime? ModifiedDate { get; set; } = DateTime.Now;
 
     [Column("B_Status")]
     [Required]
-    public bool Status { get; set; }
+    public bool Status { get; set; } = true;
 }

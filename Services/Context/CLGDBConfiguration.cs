@@ -40,15 +40,6 @@ internal class CampusInfoConfig : IEntityTypeConfiguration<CampusInfo>
     }
 }
 
-internal class LatestNewsConfig : IEntityTypeConfiguration<LatestNews>
-{
-    public void Configure(EntityTypeBuilder<LatestNews> builder)
-    {
-        builder.ToTable("LatestNews", "CLG");
-        builder.HasKey(e => e.Id);
-    }
-}
-
 internal class AQARReportConfig : IEntityTypeConfiguration<AQARReport>
 {
     public void Configure(EntityTypeBuilder<AQARReport> builder)

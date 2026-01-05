@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Migrations
 {
     [DbContext(typeof(CLGDbContext))]
-    [Migration("20251231174715_PrimaryMigration_MYSQL")]
+    [Migration("20260105151557_PrimaryMigration_MYSQL")]
     partial class PrimaryMigration_MYSQL
     {
         /// <inheritdoc />
@@ -525,64 +525,6 @@ namespace College.Migrations
                     b.ToTable("CLG.InstitutionPages", (string)null);
                 });
 
-            modelBuilder.Entity("College.Entities.LatestNews", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("I_Id");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("D_CreatedDate");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("D_Date");
-
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("int")
-                        .HasColumnName("I_DisplayOrder");
-
-                    b.Property<string>("Heading")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_Heading");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_ImagePath");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("D_ModifiedDate");
-
-                    b.Property<string>("ShortContent")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_ShortContent");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("B_Status");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CLG.LatestNews", (string)null);
-                });
-
             modelBuilder.Entity("College.Entities.Login", b =>
                 {
                     b.Property<int>("Id")
@@ -1060,12 +1002,15 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_Date");
+
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int")
                         .HasColumnName("I_DisplayOrder");
 
                     b.Property<string>("Heading")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("S_Heading");
 
@@ -1083,7 +1028,6 @@ namespace College.Migrations
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("ShortContent")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("S_ShortContent");
 

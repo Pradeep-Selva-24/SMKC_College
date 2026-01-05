@@ -12,12 +12,13 @@ public class PageMedia : BaseEntity
     public string? ImagePath { get; set; }
 
     [Column("S_Heading")]
-    [Required]
     public string? Heading { get; set; }
 
     [Column("S_ShortContent")]
-    [Required]
     public string? ShortContent { get; set; }
+
+    [Column("D_Date")]
+    public DateTime? Date { get; set; }
 
     [Column("I_DisplayOrder")]
     [Required]

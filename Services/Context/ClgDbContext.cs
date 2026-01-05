@@ -13,7 +13,6 @@ namespace College.Services.Context
         public DbSet<Management> Management { get; set; }
         public DbSet<ManagementContent> ManagementContent { get; set; }
         public DbSet<PageMedia> PageMedia { get; set; }
-        public DbSet<LatestNews> LatestNews { get; set; }
         public DbSet<ClubsMaster> ClubsMaster { get; set; }
         public DbSet<ClubsDetails> ClubsDetails { get; set; }
         public DbSet<IQACMembers> IQACMembers { get; set; }
