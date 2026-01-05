@@ -39,15 +39,13 @@ public static class DbInitializer
         await SeedIfEmptyAsync(context.PageMedia, PageMediaConstant.lstPageMedia, nameof(context.PageMedia), context);
         await SeedIfEmptyAsync(context.InstitutionPages, InstitutionPagesConstant.lstInstitutionPages, nameof(context.InstitutionPages), context);
         await SeedIfEmptyAsync(context.CampusInfo, CampusInfoConstant.lstCampusInfo, nameof(context.CampusInfo), context);
-
-        //await SeedIfEmptyAsync(context.AQARReport, AQARReportConstant.lstAQARReport, nameof(context.AQARReport), context);
-        //await SeedIfEmptyAsync(context.IQACMembers, IQACMembersConstant.lstIQACMembers, nameof(context.IQACMembers), context);
-        //await SeedIfEmptyAsync(context.NACDocument, NACDocumentConstant.lstNACDocument, nameof(context.NACDocument), context);
-        //await SeedIfEmptyAsync(context.NACDetails, NACDetailsConstant.lstNACDetails, nameof(context.NACDetails), context);
-        //await SeedIfEmptyAsync(context.NIRFDocument, NIRFDocumentConstant.lstNIRFDocument, nameof(context.NIRFDocument), context);
-        //await SeedIfEmptyAsync(context.NIRFDetails, NIRFDetailsConstant.lstNIRFDetails, nameof(context.NIRFDetails), context);
-        //await SeedIfEmptyAsync(context.NIRFDocumentRanking, NIRFDocumentRankingConstant.lstNIRFDocumentRanking, nameof(context.NIRFDocumentRanking), context);
-        //await SeedIfEmptyAsync(context.Management, ManagementConstant.lstManagement, nameof(context.Management), context);
+        await SeedIfEmptyAsync(context.AQARReport, AQARReportConstant.lstAQARReport, nameof(context.AQARReport), context);
+        await SeedIfEmptyAsync(context.IQACMembers, IQACMembersConstant.lstIQACMembers, nameof(context.IQACMembers), context);
+        await SeedIfEmptyAsync(context.NACDocument, NACDocumentConstant.lstNACDocument, nameof(context.NACDocument), context);
+        await SeedIfEmptyAsync(context.NACDetails, NACDetailsConstant.lstNACDetails, nameof(context.NACDetails), context);
+        await SeedIfEmptyAsync(context.NIRFDocument, NIRFDocumentConstant.lstNIRFDocument, nameof(context.NIRFDocument), context);
+        await SeedIfEmptyAsync(context.NIRFDetails, NIRFDetailsConstant.lstNIRFDetails, nameof(context.NIRFDetails), context);
+        await SeedIfEmptyAsync(context.NIRFDocumentRanking, NIRFDocumentRankingConstant.lstNIRFDocumentRanking, nameof(context.NIRFDocumentRanking), context);
 
     }
 

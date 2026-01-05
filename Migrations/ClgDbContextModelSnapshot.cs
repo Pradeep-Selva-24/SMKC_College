@@ -598,6 +598,11 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_DisplayOrder");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_ImagePath");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -916,6 +921,10 @@ namespace College.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int")
+                        .HasColumnName("I_Year");
 
                     b.HasKey("Id");
 

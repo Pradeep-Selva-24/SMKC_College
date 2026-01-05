@@ -7,6 +7,10 @@ public class NIRFDocument : BaseEntity
     [Required]
     public string? Name { get; set; }
 
+    [Column("I_Year")]
+    [Required]
+    public int? Year { get; set; }
+
     [Column("S_Path")]
     [Required]
     public string? Path { get; set; }

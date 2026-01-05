@@ -207,6 +207,8 @@ namespace College.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     S_Designation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    S_ImagePath = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     I_DisplayOrder = table.Column<int>(type: "int", nullable: false),
                     S_CreatedBy = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -339,6 +341,7 @@ namespace College.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     S_Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    I_Year = table.Column<int>(type: "int", nullable: false),
                     S_Path = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     I_Order = table.Column<int>(type: "int", nullable: false),

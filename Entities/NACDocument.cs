@@ -5,11 +5,11 @@ public class NACDocument : BaseEntity
 {
     [Column("S_Name")]
     [Required]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Column("S_Path")]
     [Required]
-    public string Path { get; set; }
+    public string? Path { get; set; }
 
     [Column("I_Order")]
     [Required]

@@ -11,6 +11,10 @@ public class Management : BaseEntity
     [Required]
     public string? Designation { get; set; }
 
+    [Column("S_ImagePath")]
+    [Required]
+    public string? ImagePath { get; set; }
+
     [Column("I_DisplayOrder")]
     [Required]
     public int DisplayOrder { get; set; }
