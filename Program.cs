@@ -1,17 +1,15 @@
-﻿using College;
-
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // Call our reusable DB config method
-builder.Services.AddConfiguredDatabase(builder.Configuration);
+//builder.Services.AddConfiguredDatabase(builder.Configuration);
 
 var app = builder.Build();
 
 // Initialize database and seed default data
-await DbInitializer.InitializeAsync(app.Services);
+//await DbInitializer.InitializeAsync(app.Services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
