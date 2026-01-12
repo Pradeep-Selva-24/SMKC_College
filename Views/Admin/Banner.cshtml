@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet" />
+
+<h4 class="fw-bold mb-4">Home Banner Management</h4>
+
+<div id="msg"></div>
+
+<div class="mb-3">
+    <label class="form-label">Banner Image</label>
+    <input type="file" class="form-control" id="imageInput" accept="image/*">
+</div>
+
+<div class="mb-3">
+    <img id="preview" style="max-width:100%; display:none;">
+</div>
+
+<div class="mb-3">
+    <label>Heading</label>
+    <input type="text" id="heading" class="form-control">
+</div>
+
+<div class="mb-3">
+    <label>Short Content</label>
+    <textarea id="shortContent" class="form-control"></textarea>
+</div>
+
+<div class="mb-3">
+    <label>Display Order</label>
+    <input type="number" id="displayOrder" class="form-control" value="1">
+</div>
+
+<button class="btn btn-primary" onclick="saveBanner()">Save Banner</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+<script>
+    let cropper;
+    const input = document.getElementById('imageInput');
+    const preview = document.getElementById('preview');
+
+    input.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+
+            if (cropper) cropper.destroy();
+
+            cropper = new Cropper(preview, {
+                aspectRatio: 16 / 9,
+                viewMode: 1
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    function saveBanner() {
+        if (!cropper) {
+            alert("Please select and crop an image");
+            return;
+        }
+
+        cropper.getCroppedCanvas({
+            width: 1920,
+            height: 1080
+        }).toBlob(blob => {
+
+            const formData = new FormData();
+            formData.append("bannerImage", blob, "banner.jpg");
+            formData.append("heading", document.getElementById("heading").value);
+            formData.append("shortContent", document.getElementById("shortContent").value);
+            formData.append("displayOrder", document.getElementById("displayOrder").value);
+
+            fetch("/PageMedia/Banner", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("msg").innerHTML =
+                    `<div class="alert alert-success">${data.message}</div>`;
+            })
+            .catch(() => {
+                document.getElementById("msg").innerHTML =
+                    `<div class="alert alert-danger">Upload failed</div>`;
+            });
+        }, "image/jpeg", 0.9);
+    }
+</script>

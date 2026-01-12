@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -75,37 +79,46 @@
         <!-- BODY -->
         <div class="p-4">
 
-            <div id="alertBox"></div>
+            @* SERVER SIDE ERROR *@
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
 
-            <form id="loginForm">
+            <form asp-action="Login" method="post">
+                @Html.AntiForgeryToken()
 
                 <!-- USERNAME -->
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter username">
-                    <small class="text-danger d-none" id="userError">Username is required</small>
+                    <input type="text"
+                           name="username"
+                           class="form-control"
+                           placeholder="Enter username"
+                           required />
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="mb-3">
                     <label class="form-label">Password</label>
                     <div class="input-group">
-                        <input type="password" id="password" class="form-control" placeholder="Enter password">
-                        <span class="input-group-text toggle-password" onclick="togglePassword()">
+                        <input type="password"
+                               name="password"
+                               id="password"
+                               class="form-control"
+                               placeholder="Enter password"
+                               required />
+                        <span class="input-group-text toggle-password"
+                              onclick="togglePassword()">
                             <i class="bi bi-eye" id="eyeIcon"></i>
                         </span>
                     </div>
-                    <small class="text-danger d-none" id="passError">Password is required</small>
-                </div>
-
-                <!-- REMEMBER -->
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                    <label class="form-check-label">Remember Me</label>
                 </div>
 
                 <!-- SUBMIT -->
-                <div class="d-grid">
+                <div class="d-grid mt-4">
                     <button type="submit" class="btn btn-login">
                         <i class="bi bi-box-arrow-in-right"></i> Login
                     </button>
@@ -115,22 +128,13 @@
 
         </div>
 
+        <!-- FOOTER -->
         <div class="text-center p-3 text-muted">
             © 2026 SMC Admin Panel
         </div>
     </div>
 
     <script>
-        // PREFILL SAVED USERNAME
-        window.onload = () => {
-            const savedUser = localStorage.getItem("smcUser");
-            if (savedUser) {
-                document.getElementById("username").value = savedUser;
-                document.getElementById("rememberMe").checked = true;
-            }
-        };
-
-        // TOGGLE PASSWORD
         function togglePassword() {
             const pwd = document.getElementById("password");
             const icon = document.getElementById("eyeIcon");
@@ -142,61 +146,6 @@
                 pwd.type = "password";
                 icon.classList.replace("bi-eye-slash", "bi-eye");
             }
-        }
-
-        // LOGIN SUBMIT
-        document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const remember = document.getElementById("rememberMe").checked;
-
-            let valid = true;
-
-            document.getElementById("userError").classList.add("d-none");
-            document.getElementById("passError").classList.add("d-none");
-
-            if (!username) {
-                document.getElementById("userError").classList.remove("d-none");
-                valid = false;
-            }
-
-            if (!password) {
-                document.getElementById("passError").classList.remove("d-none");
-                valid = false;
-            }
-
-            if (!valid) return;
-
-            // DEMO CREDENTIALS
-            if (username === "admin" && password === "admin123") {
-
-                if (remember) {
-                    localStorage.setItem("smcUser", username);
-                } else {
-                    localStorage.removeItem("smcUser");
-                }
-
-                showAlert("Login successful! Redirecting...", "success");
-
-                setTimeout(() => {
-                    window.location.href = "admin-dashboard.html"; // change later for MVC
-                }, 1200);
-
-            } else {
-                showAlert("Invalid username or password", "danger");
-            }
-        });
-
-        // ALERT
-        function showAlert(msg, type) {
-            document.getElementById("alertBox").innerHTML = `
-                <div class="alert alert-${type} alert-dismissible fade show">
-                    ${msg}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            `;
         }
     </script>
 

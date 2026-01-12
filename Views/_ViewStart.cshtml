@@ -1,3 +1,9 @@
-﻿@{
-    Layout = "_Layout";
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var isAdminLoggedIn =
+        HttpContextAccessor.HttpContext?.Session.GetString("AdminUser") != null;
+
+    Layout = isAdminLoggedIn ? "_AdminLayout" : "_Layout";
 }

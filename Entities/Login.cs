@@ -14,4 +14,10 @@ public class Login : BaseEntity
     [Column("D_LastLogin")]
     [Required]
     public DateTime LastLogin { get; set; }
+    [Column("D_IsActive")]
+    [Required]
+    public bool IsActive { get; set; }
+    [Column("D_CreatedOn")]
+
+    public DateTime CreatedOn { get; set; }
 }
