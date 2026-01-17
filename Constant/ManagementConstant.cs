@@ -14,7 +14,7 @@ public static class ManagementConstant
                          {
                              Name = "A.P.Ashok Kumar",
                              Designation = "S.M.D.Educational Society Chairman",
-                             ImagePath = "~/img/management/EducationalChairman.jpeg",
+                             ImagePath = "/img/management/EducationalChairman.jpeg",
                              DisplayOrder = 1,
                          },
             lstManagementContent =
@@ -40,7 +40,7 @@ public static class ManagementConstant
                          {
                              Name = "R. Lakshmanaswamy",
                              Designation = "S.M.D.Educational Society Secretary",
-                             ImagePath = "~/img/management/EducationalSecretary.jpeg",
+                             ImagePath = "/img/management/EducationalSecretary.jpeg",
                              DisplayOrder = 2,
                          },
             lstManagementContent =
@@ -66,7 +66,7 @@ public static class ManagementConstant
                          {
                              Name = "A. N. Suresh Kumar",
                              Designation = "College Secretary",
-                             ImagePath = "~/img/management/CollegeSecretary.jpeg",
+                             ImagePath = "/img/management/CollegeSecretary.jpeg",
                              DisplayOrder = 3,
                          },
             lstManagementContent =
@@ -92,7 +92,7 @@ public static class ManagementConstant
                          {
                              Name = "Dr. G. Raja Priya",
                              Designation = "Principal",
-                             ImagePath = "~/img/management/Principal.jpeg",
+                             ImagePath = "/img/management/Principal.jpeg",
                              DisplayOrder = 4,
                          },
             lstManagementContent =
@@ -118,7 +118,7 @@ public static class ManagementConstant
                          {
                              Name = "Dr. R. Anandhy",
                              Designation = "Vice Principal",
-                             ImagePath = "~/img/management/VicePrincipal.jpeg",
+                             ImagePath = "/img/management/VicePrincipal.jpeg",
                              DisplayOrder = 5,
                          },
             lstManagementContent =
@@ -140,18 +140,26 @@ public static class ManagementConstant
                          {
                              Name = "Dr. V. Selvanathan",
                              Designation = "Academic Advisor",
-                             ImagePath = "~/img/management/AcademicAdvisor.jpeg",
+                             ImagePath = "/img/management/AcademicAdvisor.jpeg",
                              DisplayOrder = 6,
                          },
             lstManagementContent =
             [
                 new ManagementContent
                 {
-                    Content = "As the Academic Advisor, my foremost responsibility is to support and guide students in achieving their academic and personal goals. Our institution is committed to providing a learner-centric environment where students are encouraged to explore their interests, build strong academic foundations and develop essential skills for their future careers. Through proper guidance, structured academic planning and continuous mentoring, we aim to help every student realize their true potential.",
+                    Content = "Founder P. Balasubrahmaniam’s legacy and vision have been carefully nurtured, and his dream of transforming Sree Muthukumaraswamy College into a high-quality educational institution has been successfully realized",
                 },
                 new ManagementContent
                 {
-                    Content = "I encourage students to actively engage in their learning process, seek guidance whenever required and make the best use of the academic and co-curricular opportunities provided by the college. With dedication, discipline and the right support system, success becomes a shared journey. I wish all our students a meaningful, enriching and successful academic experience.",
+                    Content = "North Chennai has long faced challenges such as a low standard of living and a high proportion of underprivileged children. Recognizing this reality, our Founder sowed the seeds of this institution with the noble aim of providing quality education to this region. Today, the institution has grown into one of the finest educational establishments in North Chennai, offering 15 academic programmes, including research degrees, and catering to over 1,800 students.",
+                },
+                new ManagementContent
+                {
+                    Content = "I firmly believe that, in line with the Founder’s vision, the institution continues to provide quality education and empowers students to achieve their goals and stand tall in society. Self-reliance is essential for every student, and it can be attained only through education. With this conviction, our dedicated teaching fraternity strives tirelessly to impart knowledge, skills, and values to our students.",
+                },
+                new ManagementContent
+                {
+                    Content = "Over the past 27 years, we have built a strong team of committed and competent faculty members who work diligently to turn students’ dreams into reality. The emphasis we place on education, career guidance, and placement support, along with the care we extend to every student, will have a profound impact on future generations. Dear students, both boys and girls, you are the greatest treasure before us. Explore your potential and find your rightful place in the world.",
                 },
             ]
         }

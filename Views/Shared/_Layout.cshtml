@@ -67,7 +67,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="header-left-content">
-                        <p>The institution offers a wide range of Undergraduate (UG), Postgraduate (PG) and Ph.D. programmes, comprising about 15 courses across diverse streams such as Business Administration, Commerce, Computer Science, Computer Applications and Criminology & Criminal Justice Science.</p>
+                        <p class="clsRunningText">The institution offers a wide range of Undergraduate (UG), Postgraduate (PG) and Ph.D. programmes, comprising about 15 courses across diverse streams such as Business Administration, Commerce, Computer Science, Computer Applications and Criminology & Criminal Justice Science.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -327,9 +327,9 @@
                         <h3>Student Resources</h3>
                         <div class="list">
                             <ul>
-                                <li><a href="/academic-calendar">Academic Calendar</a></li>
-                                <li><a href="/examinations">Examinations</a></li>
-                                <li><a href="/results">Results</a></li>
+                                <li><a href="~/" class="clsAcademicCalendar">Academic Calendar</a></li>
+                                <li><a href="~/" class="clsExaminations">Examinations</a></li>
+                                <li><a href="~/" class="clsResults">Results</a></li>
                             </ul>
                         </div>
                     </div>
@@ -424,13 +424,21 @@
     <script src="~/js/ajaxchimp.min.js"></script>
     <!--=== Custom js ===-->
     <script src="~/js/custom.js"></script>
+    <!--=== Layout js ===-->
+    <script src="~/js/Layout.js"></script>
 
     <script>
+        var defaultDataUrl = '@Url.Action("GetDefaultData", "Home")';
+        $(document).ready(function () {
+            GetDefaultData()
+        });
+
         if ($('[data-bs-toggle="tooltip"]').length) {
             $('[data-bs-toggle="tooltip"]').each(function () {
                 new bootstrap.Tooltip(this);
             });
         }
     </script>
+
 </body>
 </html>

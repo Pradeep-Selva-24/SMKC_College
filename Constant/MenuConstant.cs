@@ -13,7 +13,7 @@ public static class MenuConstant
             Menu = new MenuMaster
             {
                 MenuName = "Home",
-                MenuUrl = "~/",
+                MenuUrl = "/",
                 Display = "Y",
                 Order = 1
             }
@@ -36,7 +36,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Vision & Mission",
-                        MenuUrl = "~/VisionMission/VisionMission",
+                        MenuUrl = "/VisionMission/VisionMission",
                         Display = "Y",
                         Order = 1
                     }
@@ -46,7 +46,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Management Message",
-                        MenuUrl = "~/ManagementMessage/ManagementMessage",
+                        MenuUrl = "/ManagementMessage/ManagementMessage",
                         Display = "Y",
                         Order = 2
                     }
@@ -56,7 +56,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "History & Profile",
-                        MenuUrl = "~/History/History",
+                        MenuUrl = "/History/History",
                         Display = "Y",
                         Order = 3
                     }
@@ -66,7 +66,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Accreditation / Affiliation",
-                        MenuUrl = "~/Accreditation/Accreditation",
+                        MenuUrl = "/Accreditation/Accreditation",
                         Display = "Y",
                         Order = 4
                     }
@@ -91,7 +91,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Programmes Offered",
-                        MenuUrl = "~/ProgrammesOffered/ProgrammesOffered",
+                        MenuUrl = "/ProgrammesOffered/ProgrammesOffered",
                         Display = "Y",
                         Order = 1
                     }
@@ -111,7 +111,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Placement",
-                        MenuUrl = "~/Placement/Placement",
+                        MenuUrl = "/Placement/Placement",
                         Display = "Y",
                         Order = 3
                     }
@@ -136,7 +136,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Admission Procedure",
-                        MenuUrl = "~/AdmissionProcedure/AdmissionProcedure",
+                        MenuUrl = "/AdmissionProcedure/AdmissionProcedure",
                         Display = "Y",
                         Order = 1
                     }
@@ -191,7 +191,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Clubs & Activities",
-                        MenuUrl = "~/Clubs/Clubs",
+                        MenuUrl = "/Clubs/Clubs",
                         Display = "Y",
                         Order = 1
                     }
@@ -201,7 +201,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Events & Gallery",
-                        MenuUrl = "~/EventsGallery/EventsGallery",
+                        MenuUrl = "/EventsGallery/EventsGallery",
                         Display = "Y",
                         Order = 2
                     }
@@ -211,7 +211,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Student Support",
-                        MenuUrl = "~/StudentSupport/StudentSupport",
+                        MenuUrl = "/StudentSupport/StudentSupport",
                         Display = "Y",
                         Order = 3
                     }
@@ -221,7 +221,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "Alumni",
-                        MenuUrl = "~/Alumni/Alumni",
+                        MenuUrl = "/Alumni/Alumni",
                         Display = "Y",
                         Order = 4
                     }
@@ -246,7 +246,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "IQAC Committee",
-                        MenuUrl = "~/QualityAssurance/IQAC",
+                        MenuUrl = "/QualityAssurance/IQAC",
                         Display = "Y",
                         Order = 1
                     }
@@ -256,7 +256,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "AQAR Reports",
-                        MenuUrl = "~/QualityAssurance/AQAR",
+                        MenuUrl = "/QualityAssurance/AQAR",
                         Display = "Y",
                         Order = 2
                     }
@@ -266,7 +266,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "NAC",
-                        MenuUrl = "~/QualityAssurance/NAC",
+                        MenuUrl = "/QualityAssurance/NAC",
                         Display = "Y",
                         Order = 3
                     }
@@ -276,7 +276,7 @@ public static class MenuConstant
                     Menu = new MenuMaster
                     {
                         MenuName = "NIRF",
-                        MenuUrl = "~/QualityAssurance/NIRF",
+                        MenuUrl = "/QualityAssurance/NIRF",
                         Display = "Y",
                         Order = 4
                     }

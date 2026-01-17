@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Models
+@model HomeModel
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -38,40 +41,48 @@
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" data-aos-once="true">
                 <div class="single-education-card bg-1">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-college"></i>
-                        </div>
-                        <a href="#div-news"><h3>Latest News</h3></a>
+                        <a href="#div-news">
+                            <div class="icon">
+                                <i class="flaticon-college"></i>
+                            </div>
+                            <h3>Latest News</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400" data-aos-once="true">
                 <div class="single-education-card bg-2">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-student-with-graduation-cap"></i>
-                        </div>
-                        <a href="~/ProgrammesOffered/ProgrammesOffered"><h3>Courses</h3></a>
+                        <a href="~/ProgrammesOffered/ProgrammesOffered">
+                            <div class="icon">
+                                <i class="flaticon-student-with-graduation-cap"></i>
+                            </div>
+                            <h3>Courses</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600" data-aos-once="true">
                 <div class="single-education-card bg-3">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-college-graduation"></i>
-                        </div>
-                        <a href="~/Placement/Placement"><h3>Placement</h3></a>
+                        <a href="~/Placement/Placement">
+                            <div class="icon">
+                                <i class="flaticon-college-graduation"></i>
+                            </div>
+                            <h3>Placement</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="800" data-aos-once="true">
                 <div class="single-education-card bg-4">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-athletics"></i>
-                        </div>
-                        <a href="#div-campus-information"><h3>Campus Information</h3></a>
+                        <a href="#div-campus-information">
+                            <div class="icon">
+                                <i class="flaticon-athletics"></i>
+                            </div>
+                            <h3>Campus Information</h3>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -135,7 +146,7 @@
                             <div class="col-lg-4 col-4">
                                 <div class="counter-card">
                                     <h1>
-                                        <span class="odometer odometer-auto-theme" data-count="25">
+                                        <span class="odometer odometer-auto-theme" data-count="@Model.YearsOfExperience">
                                             <div class="odometer-inside">
                                                 <span class="odometer-digit">
                                                     <span class="odometer-digit-spacer">8</span>
@@ -158,7 +169,7 @@
                             <div class="col-lg-4 col-4">
                                 <div class="counter-card">
                                     <h1>
-                                        <span class="odometer odometer-auto-theme" data-count="20">
+                                        <span class="odometer odometer-auto-theme" data-count="@Model.Students">
                                             <div class="odometer-inside">
                                                 <span class="odometer-digit">
                                                     <span class="odometer-digit-spacer">8</span>
@@ -180,7 +191,7 @@
                             <div class="col-lg-4 col-4">
                                 <div class="counter-card">
                                     <h1>
-                                        <span class="odometer odometer-auto-theme" data-count="99">
+                                        <span class="odometer odometer-auto-theme" data-count="@Model.StaffMembers">
                                             <div class="odometer-inside">
                                                 <span class="odometer-digit">
                                                     <span class="odometer-digit-spacer">8</span>
@@ -201,7 +212,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="default-btn btn">Start your application<i class="flaticon-next"></i></a>
+                    <a href="#" class="default-btn btn clsApplication">Start your application<i class="flaticon-next"></i></a>
                 </div>
             </div>
         </div>
@@ -211,7 +222,7 @@
 
 <!--Management Area-->
 @{
-    Html.RenderPartial("Management");
+    @await Html.PartialAsync("Management", Model.LstManagementDTO);
 }
 <!--Management Area-->
 
@@ -502,15 +513,7 @@
 <!--End News Area-->
 
 <script>
-    // Preloader
-    $(window).on('load', function () {
-        setTimeout(function () {
-            $('.clsPreloaderArea').fadeOut();
-        }, 1000);
-    });
-
     $(document).ready(function(){
-        $('.clsPreloaderArea').show();
         $("#navbarSupportedContent .nav-link").removeClass("active");
         $("#navbarSupportedContent .clsMenu-Home").addClass("active");
     });

@@ -8,23 +8,28 @@ public class SettingMasterConstant
     [
         new SettingMaster
         {
-            Key = "Start your application",
-            Value = "~/",
+            Key = "Application",
+            Value = "/",
         },
         new SettingMaster
         {
             Key = "Academic Calendar",
-            Value = "~/",
+            Value = "/",
         },
         new SettingMaster
         {
             Key = "Examinations",
-            Value = "~/",
+            Value = "/",
         },
         new SettingMaster
         {
             Key = "Results",
-            Value = "~/",
+            Value = "/",
+        },
+        new SettingMaster
+        {
+            Key = "Running Text",
+            Value = "The institution offers a wide range of Undergraduate (UG), Postgraduate (PG) and Ph.D. programmes, comprising about 15 courses across diverse streams such as Business Administration, Commerce, Computer Science, Computer Applications and Criminology & Criminal Justice Science.",
         },
     ];
 }

@@ -4,15 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace College.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController(IGenericRepository<Login> loginRepo) : Controller
     {
-        private readonly IGenericRepository<Login> _loginRepo;
-
-        public LoginController(IGenericRepository<Login> loginRepo)
-        {
-            _loginRepo = loginRepo;
-        }
-        public IActionResult login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -27,7 +21,7 @@ namespace College.Controllers
                 return View();
             }
 
-            var user = (await _loginRepo.FindAsync(x =>
+            var user = (await loginRepo.FindAsync(x =>
                         x.UserId == username &&
                         x.Password == password &&     // (hash later)
                         x.IsActive))
@@ -41,8 +35,8 @@ namespace College.Controllers
 
             // Update last login
             user.LastLogin = DateTime.Now;
-            _loginRepo.Update(user);
-            await _loginRepo.SaveAsync();
+            loginRepo.Update(user);
+            await loginRepo.SaveAsync();
 
             // SESSION
             HttpContext.Session.SetString("AdminUser", user.UserId!);
