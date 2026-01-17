@@ -40,6 +40,9 @@ public static class DbInitializer
         await InsertIfNotExistsAsync<Login, string>
             (context.Login, LoginConstant.lstLogin, x => x.UserId!, nameof(context.Login), context);
 
+        await InsertIfNotExistsAsync<SettingMaster, string>
+            (context.SettingMaster, SettingMasterConstant.lstSettingMaster, x => x.Key!, nameof(context.SettingMaster), context);
+
         await InsertIfNotExistsAsync<PageMedia, string>
             (context.PageMedia, PageMediaConstant.lstPageMedia, x => $"{x.Category}|{x.ImagePath}", nameof(context.PageMedia), context);
 

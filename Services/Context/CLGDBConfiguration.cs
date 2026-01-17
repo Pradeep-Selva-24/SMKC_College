@@ -13,6 +13,15 @@ internal class LoginConfig : IEntityTypeConfiguration<Login>
     }
 }
 
+internal class SettingMasterConfig : IEntityTypeConfiguration<SettingMaster>
+{
+    public void Configure(EntityTypeBuilder<SettingMaster> builder)
+    {
+        builder.ToTable("SettingMaster", "CLG");
+        builder.HasKey(e => e.Id);
+    }
+}
+
 internal class PageMediaConfig : IEntityTypeConfiguration<PageMedia>
 {
     public void Configure(EntityTypeBuilder<PageMedia> builder)

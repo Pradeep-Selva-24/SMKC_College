@@ -419,6 +419,30 @@ namespace College.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "CLG.SettingMaster",
+                columns: table => new
+                {
+                    I_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    S_Key = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    S_Value = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    S_CreatedBy = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    D_CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    S_ModifiedBy = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    D_ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    B_Status = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CLG.SettingMaster", x => x.I_Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "CLG.ClubsDetails",
                 columns: table => new
                 {
@@ -629,6 +653,9 @@ namespace College.Migrations
 
             migrationBuilder.DropTable(
                 name: "CLG.PageMedia");
+
+            migrationBuilder.DropTable(
+                name: "CLG.SettingMaster");
 
             migrationBuilder.DropTable(
                 name: "CLG.ClubsMaster");

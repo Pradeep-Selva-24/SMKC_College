@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Migrations
 {
     [DbContext(typeof(CLGDbContext))]
-    [Migration("20260117051106_PrimaryMigration_MYSQL")]
+    [Migration("20260117072236_PrimaryMigration_MYSQL")]
     partial class PrimaryMigration_MYSQL
     {
         /// <inheritdoc />
@@ -1055,6 +1055,51 @@ namespace College.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CLG.PageMedia", (string)null);
+                });
+
+            modelBuilder.Entity("College.Entities.SettingMaster", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("I_Id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_CreatedDate");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Key");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_ModifiedDate");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("B_Status");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CLG.SettingMaster", (string)null);
                 });
 
             modelBuilder.Entity("College.Entities.ClubsDetails", b =>
