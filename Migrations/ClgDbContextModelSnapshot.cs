@@ -540,6 +540,14 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_CreatedOn");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("D_IsActive");
+
                     b.Property<DateTime>("LastLogin")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_LastLogin");

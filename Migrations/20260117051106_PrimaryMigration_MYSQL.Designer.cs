@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Migrations
 {
     [DbContext(typeof(CLGDbContext))]
-    [Migration("20260105172122_PrimaryMigration_MYSQL")]
+    [Migration("20260117051106_PrimaryMigration_MYSQL")]
     partial class PrimaryMigration_MYSQL
     {
         /// <inheritdoc />
@@ -542,6 +542,14 @@ namespace College.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_CreatedOn");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("D_IsActive");
 
                     b.Property<DateTime>("LastLogin")
                         .HasColumnType("datetime(6)")

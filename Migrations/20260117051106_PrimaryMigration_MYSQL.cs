@@ -183,6 +183,8 @@ namespace College.Migrations
                     S_Password = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     D_LastLogin = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    D_IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    D_CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     S_CreatedBy = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     D_CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
