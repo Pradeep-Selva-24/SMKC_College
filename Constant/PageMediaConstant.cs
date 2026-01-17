@@ -222,7 +222,7 @@ public static class PageMediaConstant
         new PageMedia
         {
             Category = "Latest_News",
-            ImagePath = "/img/latestnews/latestnews-2.png",
+            ImagePath = "/img/latestnews/latestnews-2.jpg",
             Heading = "Free Eye & General Health Camp",
             ShortContent = @"On behalf of our beloved late Founder, Thiru. P. Balasubramaniyam,<br>
                              Sree Muthukumaraswamy College organized a Free Eye &amp; General Health Camp<br>
@@ -233,7 +233,7 @@ public static class PageMediaConstant
         new PageMedia
         {
             Category = "Latest_News",
-            ImagePath = "/img/latestnews/latestnews-3.png",
+            ImagePath = "/img/latestnews/latestnews-3.jpg",
             Heading = "Cancer Awareness Rally",
             ShortContent = @"On 8th November 2025, we conducted a Cancer Awareness Rally<br>
                              to educate and empower our community towards a cancer-free future.",
@@ -243,7 +243,7 @@ public static class PageMediaConstant
         new PageMedia
         {
             Category = "Latest_News",
-            ImagePath = "/img/latestnews/latestnews-4.png",
+            ImagePath = "/img/latestnews/latestnews-4.jpg",
             Heading = "The Installation Ceremony of the Rotaract Club",
             ShortContent = @"The Installation Ceremony of the Rotaract Club of Sree Muthukumaraswamy College
                              for the academic year 2025–2026 was held on 7th November 2025 with great enthusiasm

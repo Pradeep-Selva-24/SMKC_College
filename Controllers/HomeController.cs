@@ -24,6 +24,7 @@ public class HomeController(ILogger<HomeController> logger, CLGDbContext db) : C
 
             HomeModel = new()
             {
+                LstBanner = lstPageMedia.Where(x => x.Category == "Banner_Image").ToList(),
                 YearsOfExperience = YearsOfExperience,
                 Students = Students,
                 StaffMembers = StaffMembers,
@@ -38,11 +39,6 @@ public class HomeController(ILogger<HomeController> logger, CLGDbContext db) : C
             logger.LogError(ex, "Error occurred while loading Home page");
         }
         return View(HomeModel);
-    }
-
-    public IActionResult Management()
-    {
-        return View();
     }
 
     public IActionResult AccessDenied()

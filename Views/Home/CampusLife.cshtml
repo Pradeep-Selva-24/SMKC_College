@@ -1,0 +1,74 @@
+﻿@using College.Entities
+@model List<PageMedia>
+
+<div class="campus-life-area ptb-100">
+    <div class="container">
+        <div class="section-title mb-4">
+            <h2>Campus Life</h2>
+            <p>Experience a vibrant campus life that blends academics, culture, activities and personal growth.</p>
+        </div>
+        <div id="Campus-slider" class="campus-slider2 owl-carousel owl-theme owl-loaded owl-drag">
+
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transition: all; width: 4421px; transform: translate3d(-884px, 0px, 0px);">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
+                            <div class="single-campus-card style-3">
+                                <div class="img">
+                                    <img class="clsImgStyle" src="@Url.Content(item.ImagePath)" alt="Image">
+                                </div>
+                                @* <div class="campus-content">
+                                    <span>@item.Heading</span>
+                                    <h3>
+                                        @item.ShortContent
+                                    </h3>
+                                </div> *@
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="clsowlnave owl-nav">
+                <button type="button" role="presentation" class="owl-prev"><i class="ri-arrow-left-line"></i></button>
+                <button type="button" role="presentation" class="owl-next"><i class="ri-arrow-right-line"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#Campus-slider').owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: true,
+        thumbs: false,
+        dots: false,
+        center: true,
+        autoplay: false,
+        smartSpeed: 1000,
+        autoplayHoverPause: true,
+        autoplayTimeout: 2500,
+        navText: [
+            '<i class="ri-arrow-left-line"></i>',
+            '<i class="ri-arrow-right-line"></i>',
+        ],
+        responsive:{
+            0:{
+                items:1,
+            },
+            768:{
+                items:2,
+            },
+            992:{
+                items:3,
+            },
+            1200:{
+                items:3,
+            },
+
+        }
+    });
+</script>
