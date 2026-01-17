@@ -11,6 +11,7 @@ public static class LoginConstant
             UserId = "Admin",
             Password = "Admin@SMKC@2025",
             LastLogin = DateTime.Now,
+            IsActive = true,
         },
     ];
 }
