@@ -10,13 +10,13 @@ namespace College.Controllers;
 
 public class HomeController(ILogger<HomeController> logger, CLGDbContext db) : Controller
 {
-    public async Task<IActionResult> HomeAsync()
+    public async Task<IActionResult> Home()
     {
         HomeModel HomeModel = new();
         try
         {
             List<CampusInfo> lstCampusInfo = await db.CampusInfo.Where(x => x.Status).ToListAsync();
-            List<PageMedia> lstPageMedia = await db.PageMedia.Where(x => x.Status).ToListAsync();
+            List<PageMedia> lstPageMedia = await db.PageMedia.Where(x => x.Status).OrderBy(x => x.DisplayOrder).ToListAsync();
 
             string YearsOfExperience = FormatToK(lstCampusInfo.Where(x => x.Category == "Years Of Experience").Select(x => x.Count).FirstOrDefault());
             string Students = FormatToK(lstCampusInfo.Where(x => x.Category == "Students").Select(x => x.Count).FirstOrDefault());
@@ -24,14 +24,14 @@ public class HomeController(ILogger<HomeController> logger, CLGDbContext db) : C
 
             HomeModel = new()
             {
-                LstBanner = lstPageMedia.Where(x => x.Category == "Banner_Image").ToList(),
+                LstBanner = lstPageMedia.Where(x => x.Category == "Banner_Image").OrderBy(x => x.DisplayOrder).ToList(),
                 YearsOfExperience = YearsOfExperience,
                 Students = Students,
                 StaffMembers = StaffMembers,
                 LstManagementDTO = await GetManagementDTOList(),
-                LstCampusLife = lstPageMedia.Where(x => x.Category == "Campus_Life").ToList(),
-                LstSports = lstPageMedia.Where(x => x.Category == "Sports").ToList(),
-                LstLatestNews = lstPageMedia.Where(x => x.Category == "Latest_News").ToList()
+                LstCampusLife = lstPageMedia.Where(x => x.Category == "Campus_Life").OrderBy(x => x.DisplayOrder).ToList(),
+                LstSports = lstPageMedia.Where(x => x.Category == "Sports").OrderBy(x => x.DisplayOrder).ToList(),
+                LstLatestNews = lstPageMedia.Where(x => x.Category == "Latest_News").OrderBy(x => x.DisplayOrder).ToList()
             };
         }
         catch (Exception ex)
@@ -59,7 +59,7 @@ public class HomeController(ILogger<HomeController> logger, CLGDbContext db) : C
         List<SettingMaster> Setting = [];
         try
         {
-            Menu = await db.MenuMaster.Where(x => x.Status).ToListAsync();
+            Menu = await db.MenuMaster.Where(x => x.Status && x.Display == "Y").ToListAsync();
             Setting = await db.SettingMaster.Where(x => x.Status).ToListAsync();
         }
         catch (Exception ex)

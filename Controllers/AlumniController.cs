@@ -1,11 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using College.Entities;
+using College.Services.Context;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace College.Controllers;
 
-public class AlumniController(ILogger<HomeController> logger) : Controller
+public class AlumniController(ILogger<HomeController> logger, CLGDbContext db) : Controller
 {
-    public IActionResult Alumni()
+    public async Task<IActionResult> Alumni()
     {
-        return View();
+        List<PageMedia> model = [];
+        try
+        {
+            model = await db.PageMedia.Where(x => x.Status && x.Category == "Alumni").OrderBy(x => x.DisplayOrder).ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error occurred while loading Alumni");
+        }
+        return View(model);
     }
 }

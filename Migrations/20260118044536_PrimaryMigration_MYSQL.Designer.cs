@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Migrations
 {
     [DbContext(typeof(CLGDbContext))]
-    [Migration("20260117072236_PrimaryMigration_MYSQL")]
+    [Migration("20260118044536_PrimaryMigration_MYSQL")]
     partial class PrimaryMigration_MYSQL
     {
         /// <inheritdoc />
@@ -351,6 +351,10 @@ namespace College.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
 
+                    b.Property<int>("StudentCount")
+                        .HasColumnType("int")
+                        .HasColumnName("S_StudentCount");
+
                     b.Property<string>("SyllabusPath")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -388,10 +392,6 @@ namespace College.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("S_Designation");
 
-                    b.Property<int>("I_Order")
-                        .HasColumnType("int")
-                        .HasColumnName("I_Order");
-
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -409,6 +409,10 @@ namespace College.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("S_Name");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int")
+                        .HasColumnName("I_Order");
 
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")

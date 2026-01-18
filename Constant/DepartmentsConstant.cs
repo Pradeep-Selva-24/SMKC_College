@@ -15,6 +15,7 @@ public static class DepartmentsConstant
                 Category = "UG",
                 ImagePath = "/img/departments/cs/banner.jpg",
                 Description = "The Computer Science Department focuses on modern computing technologies, software development, and research-driven learning.",
+                StudentCount = 120,
                 SyllabusPath = "/syllabus/cs.pdf",
                 Order = 1
             },
@@ -26,14 +27,14 @@ public static class DepartmentsConstant
                     Name = "Dr. A. Kumar",
                     Designation = "Head of Department",
                     ImagePath = "/img/departments/cs/hod.jpg",
-                    I_Order = 1
+                    Order = 1
                 },
                 new DepartmentsMembers
                 {
                     Name = "Ms. R. Priya",
                     Designation = "Assistant Professor",
                     ImagePath = "/img/departments/cs/faculty1.jpg",
-                    I_Order = 2
+                    Order = 2
                 }
             ],
 

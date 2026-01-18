@@ -19,6 +19,10 @@ public class DepartmentsMaster : BaseEntity
     [Required]
     public string? Description { get; set; }
 
+    [Column("S_StudentCount")]
+    [Required]
+    public int StudentCount { get; set; }
+
     [Column("S_SyllabusPath")]
     [Required]
     public string? SyllabusPath { get; set; }

@@ -253,6 +253,133 @@ public static class PageMediaConstant
         },
 
         #endregion
+
+        #region Placement Company
+
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/accenture.png",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 1,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/amazon.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 2,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/capgemini.png",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 3,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/cts.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 4,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/google.png",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 5,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/hcltech.webp",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 6,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/infosys.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 7,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/microsoft.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 8,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/tcs.jpeg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 9,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Company",
+            ImagePath = "/img/placement/companylogo/wipro.png",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 10,
+        },
+
+        #endregion
+
+        #region Placement Banner
+
+        new PageMedia
+        {
+            Category = "Placement_Banner",
+            ImagePath = "/img/placement/placement-1.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 1,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Banner",
+            ImagePath = "/img/placement/placement-2.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 2,
+        },
+        new PageMedia
+        {
+            Category = "Placement_Banner",
+            ImagePath = "/img/placement/placement-3.jpg",
+            Heading = null,
+            ShortContent = null,
+            Date = null,
+            DisplayOrder = 3,
+        },
+
+        #endregion
     ];
 }
 

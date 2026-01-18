@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Entities
+@model List<InstitutionPages>
+
+@{
     ViewData["Title"] = "Student Support";
 }
 <!--Start Page Banner-->
@@ -34,66 +37,41 @@
 
                     <div class="accordion" id="studentSupportAccordion">
 
-                        <!-- Counselling Cell -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingCounselling">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCounselling" aria-expanded="true" aria-controls="collapseCounselling">
-                                    Counselling Cell
-                                </button>
-                            </h2>
-                            <div id="collapseCounselling" class="accordion-collapse collapse show" aria-labelledby="headingCounselling" data-bs-parent="#studentSupportAccordion">
-                                <div class="accordion-body">
-                                    <p>The Counselling Cell aims to promote students’ mental health and emotional well-being. It provides guidance to help students overcome academic, personal and social challenges through confidential and supportive counselling sessions.</p>
-                                    <ul>
-                                        <li>Encourages positive mental health and self-awareness.</li>
-                                        <li>Offers personal, academic and career-related counselling.</li>
-                                        <li>Organizes stress management and motivation workshops.</li>
-                                        <li>Supports students in adapting to campus life and academics.</li>
-                                    </ul>
+                        @{
+                            bool expanded = true;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            var headingId = $"heading_{item.Id}";
+                            var collapseId = $"collapse_{item.Id}";
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="@headingId">
+                                    <button class="accordion-button @(expanded ? "" : "collapsed")"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#@collapseId"
+                                            aria-expanded="@(expanded.ToString().ToLower())"
+                                            aria-controls="@collapseId">
+                                        @item.Heading
+                                    </button>
+                                </h2>
+
+                                <div id="@collapseId"
+                                     class="accordion-collapse collapse @(expanded ? "show" : "")"
+                                     aria-labelledby="@headingId"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @Html.Raw(item.Content)
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Career Cell -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingCareer">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCareer" aria-expanded="false" aria-controls="collapseCareer">
-                                    Career Cell
-                                </button>
-                            </h2>
-                            <div id="collapseCareer" class="accordion-collapse collapse" aria-labelledby="headingCareer" data-bs-parent="#studentSupportAccordion">
-                                <div class="accordion-body">
-                                    <p>The Career Cell is dedicated to guiding students toward promising career paths. It bridges the gap between academic learning and professional requirements by providing training, placement assistance and industry exposure.</p>
-                                    <ul>
-                                        <li>Organizes career guidance sessions, workshops and seminars.</li>
-                                        <li>Coordinates campus placement drives and internship opportunities.</li>
-                                        <li>Conducts resume-building, interview skills and aptitude training programs.</li>
-                                        <li>Collaborates with industry partners for student development and recruitment.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                            expanded = false;
+                        }
 
-                        <!-- Objectives -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingObjectives">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObjectives" aria-expanded="false" aria-controls="collapseObjectives">
-                                    Objectives
-                                </button>
-                            </h2>
-                            <div id="collapseObjectives" class="accordion-collapse collapse" aria-labelledby="headingObjectives" data-bs-parent="#studentSupportAccordion">
-                                <div class="accordion-body">
-                                    <ul>
-                                        <li>To provide psychological and career guidance to students in need.</li>
-                                        <li>To prepare students for both higher studies and employment opportunities.</li>
-                                        <li>To develop leadership qualities, communication and interpersonal skills.</li>
-                                        <li>To empower students to make informed career decisions with confidence.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> <!-- End Accordion -->
+                    </div>
                 </div>
             </div>
 

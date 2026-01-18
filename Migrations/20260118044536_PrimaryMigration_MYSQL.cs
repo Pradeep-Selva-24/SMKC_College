@@ -102,6 +102,7 @@ namespace College.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     S_Description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    S_StudentCount = table.Column<int>(type: "int", nullable: false),
                     S_SyllabusPath = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     I_Order = table.Column<int>(type: "int", nullable: false),

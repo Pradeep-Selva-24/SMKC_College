@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Entities
+@model List<PageMedia>
+
+@{
     ViewData["Title"] = "Alumni";
 }
 
@@ -54,41 +57,17 @@
 
             <div class="alumni-slider courses-slider style-2 owl-carousel owl-theme">
 
-                <div class="single-courses-card style3">
-                    <div class="gallery-item">
-                        <img src="~/img/alumni/alumni_1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 1">
-                        <div class="gallery-caption">
-                            <p>Annual Alumni Meet 2023</p>
+                @foreach (var item in Model)
+                {
+                    <div class="single-courses-card style3">
+                        <div class="gallery-item">
+                            <img src="@Url.Content(item.ImagePath)" class="img-fluid rounded shadow-sm" alt="@item.Heading">
+                            <div class="gallery-caption">
+                                <p>@item.Heading</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="single-courses-card style3">
-                    <div class="gallery-item">
-                        <img src="~/img/alumni/alumni_1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 2">
-                        <div class="gallery-caption">
-                            <p>Guest Lecture by Alumni</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-courses-card style3">
-                    <div class="gallery-item">
-                        <img src="~/img/alumni/alumni_1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 3">
-                        <div class="gallery-caption">
-                            <p>Career Mentorship Session</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-courses-card style3">
-                    <div class="gallery-item">
-                        <img src="~/img/alumni/alumni_1.jpg" class="img-fluid rounded shadow-sm" alt="Alumni Event 4">
-                        <div class="gallery-caption">
-                            <p>Alumni Reunion Celebration</p>
-                        </div>
-                    </div>
-                </div>
+                }
 
             </div>
 

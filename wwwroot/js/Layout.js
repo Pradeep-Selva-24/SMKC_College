@@ -47,6 +47,12 @@ function BuildMenu(data) {
         else if (y["menuName"] == "Programmes Offered") {
             $(".clsMenu-ProgrammesOffered").show()
         }
+        else if (y["menuName"] == "Academic Calendar") {
+            $(".clsMenu-AcademicCalendar").show()
+        }
+        else if (y["menuName"] == "Placement") {
+            $(".clsMenu-Placement").show()
+        }
         else if (y["menuName"] == "Admissions") {
             $(".clsMenu-Admissions").show()
         }
@@ -96,11 +102,11 @@ function BuildMenu(data) {
 }
 
 function BuildSetting(data) {
-    $(".clsApplication, .clsRunningText, .clsAcademicCalendar, .clsExaminations, .clsResults").hide()
+    $(".clsApplication, .clsRunningText, .clsAcademicCalendar, .clsExaminations, .clsResults, .clsCoursesEligibility, .Fee Structure").hide()
     $.each(data, function (i, y) {
         if (y["key"] == "Application") {
             $(".clsApplication").show()
-            $(".clsApplication").val(y["value"])
+            $(".clsApplication").attr("href", y["value"])
         }
         else if (y["key"] == "Running Text") {
             $(".clsRunningText").show()
@@ -117,6 +123,14 @@ function BuildSetting(data) {
         else if (y["key"] == "Results") {
             $(".clsResults").show()
             $(".clsResults").attr("href", y["value"])
+        }
+        else if (y["key"] == "Courses Eligibility") {
+            $(".clsCoursesEligibility").show()
+            $(".clsCoursesEligibility").attr("href", y["value"])
+        }
+        else if (y["key"] == "Fee Structure") {
+            $(".clsFeeStructure").show()
+            $(".clsFeeStructure").attr("href", y["value"])
         }
     });
 }
