@@ -17,5 +17,5 @@ public class AQARReport : BaseEntity
 
     [Column("I_Order")]
     [Required]
-    public int I_Order { get; set; }
+    public int Order { get; set; }
 }

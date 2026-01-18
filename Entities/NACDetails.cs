@@ -7,9 +7,9 @@ public class NACDetails : BaseEntity
     [Required]
     public string? Name { get; set; }
 
-    [Column("S_description")]
+    [Column("S_Description")]
     [Required]
-    public string? description { get; set; }
+    public string? Description { get; set; }
 
     [Column("I_Order")]
     [Required]

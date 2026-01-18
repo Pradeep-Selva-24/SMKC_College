@@ -62,13 +62,13 @@ public static class DbInitializer
             (context.NACDocument, NACDocumentConstant.lstNACDocument, x => $"{x.Name}|{x.Path}", nameof(context.NACDocument), context);
 
         await InsertIfNotExistsAsync<NACDetails, string>
-            (context.NACDetails, NACDetailsConstant.lstNACDetails, x => $"{x.Name}|{x.description}", nameof(context.NACDetails), context);
+            (context.NACDetails, NACDetailsConstant.lstNACDetails, x => $"{x.Name}|{x.Description}", nameof(context.NACDetails), context);
 
         await InsertIfNotExistsAsync<NIRFDocument, string>
             (context.NIRFDocument, NIRFDocumentConstant.lstNIRFDocument, x => $"{x.Name}|{x.Path}", nameof(context.NIRFDocument), context);
 
         await InsertIfNotExistsAsync<NIRFDetails, string>
-            (context.NIRFDetails, NIRFDetailsConstant.lstNIRFDetails, x => $"{x.Name}|{x.description}", nameof(context.NIRFDetails), context);
+            (context.NIRFDetails, NIRFDetailsConstant.lstNIRFDetails, x => $"{x.Name}|{x.Description}", nameof(context.NIRFDetails), context);
 
         await InsertIfNotExistsAsync<NIRFDocumentRanking, string>
             (context.NIRFDocumentRanking, NIRFDocumentRankingConstant.lstNIRFDocumentRanking, x => $"{x.Category}|{x.ParticipationStatus}", nameof(context.NIRFDocumentRanking), context);

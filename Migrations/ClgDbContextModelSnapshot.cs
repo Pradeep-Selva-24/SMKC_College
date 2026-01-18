@@ -50,10 +50,6 @@ namespace College.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("S_FilePath");
 
-                    b.Property<int>("I_Order")
-                        .HasColumnType("int")
-                        .HasColumnName("I_Order");
-
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -61,6 +57,10 @@ namespace College.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_ModifiedDate");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int")
+                        .HasColumnName("I_Order");
 
                     b.Property<string>("ReportTitle")
                         .IsRequired()
@@ -208,9 +208,19 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Description");
+
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int")
                         .HasColumnName("I_DisplayOrder");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_FullName");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
@@ -761,6 +771,11 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Description");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -781,11 +796,6 @@ namespace College.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_description");
 
                     b.HasKey("Id");
 
@@ -859,6 +869,11 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Description");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -879,11 +894,6 @@ namespace College.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_description");
 
                     b.HasKey("Id");
 
@@ -920,10 +930,6 @@ namespace College.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("S_Name");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int")
-                        .HasColumnName("I_Order");
 
                     b.Property<string>("Path")
                         .IsRequired()

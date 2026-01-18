@@ -23,7 +23,7 @@ function GetDefaultData() {
 }
 
 function BuildMenu(data) {
-    $(".nav-item .nav-link").hide();
+    $("#navbarSupportedContent .nav-item .nav-link").hide();
     $(".clsMenu-Home").show();
     $.each(data, function (i, y) {
         if (y["menuName"] == "About") {

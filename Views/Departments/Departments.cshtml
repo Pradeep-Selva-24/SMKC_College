@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Models
+@model DepartmentsModel
+
+@{
     ViewData["Title"] = "Departments";
 }
 
@@ -10,7 +13,7 @@
             <ul>
                 <li><a href="~/">Home</a></li>
                 <li><a href="~/ProgrammesOffered/ProgrammesOffered">Programmes Offered</a></li>
-                <li>@ViewBag.DepartmentName</li>
+                <li>@Model.DepartmentsMaster?.Department</li>
             </ul>
         </div>
     </div>
@@ -26,164 +29,165 @@
             <h2>About the Department</h2>
         </div>
         <p>
-            The <strong>Department of Commerce</strong> at <strong>Sree Muthukumaraswamy College</strong> aims to provide students with an in-depth understanding of business principles and real-world practices. The department emphasizes professional excellence, ethical leadership and entrepreneurial skills through innovative teaching methods and practical exposure.
+            @Html.Raw(Model.DepartmentsMaster?.Description)
         </p>
 
         <!-- Faculty -->
-        <div class="section-title mt-5">
-            <h2>Faculty Members</h2>
+        <div class="clsDepContent">
+            <div class="section-title mt-5">
+                <h2>Faculty Members</h2>
+            </div>
+
+            <div class="faculty-area">
+                <div id="facultyCarousel" class="campus-slider2 owl-carousel owl-theme">
+
+                    @foreach (var item in Model.LstDepartmentsMembers)
+                    {
+                        <div class="item text-center">
+                            <div class="faculty-card p-3 shadow-sm rounded">
+                                <img src="@Url.Content(item.ImagePath)"
+                                     class="img-fluid rounded-circle mb-3"
+                                     alt="@item.Name">
+                                <h6 class="mb-1">@item.Name</h6>
+                                <p class="text-muted small mb-0">@item.Designation</p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
         </div>
 
-        <div id="facultyCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+        <!-- Events -->
+        @if (Model.LstDepartmentsDetails.Where(x => x.Category == "Events").Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mb-4 mt-5">
+                    <h2>Events</h2>
+                </div>
+                <div class="text-center">
+                    <div class="department-slider owl-carousel owl-theme">
 
-                <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
-                            <div class="faculty-card p-3 shadow-sm rounded">
-                                <img src="~/img/departments/commerce/faculty/faculty1.jpg" class="img-fluid rounded-circle mb-3" alt="Dr. R. Mahalakshmi">
-                                <h6 class="mb-1">Dr. R. Mahalakshmi</h6>
-                                <p class="text-muted small mb-0">Head of the Department</p>
+                        @foreach (var content in Model.LstDepartmentsDetails.Where(x => x.Category == "Events").ToList())
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                <h5>@content.Heading</h5>
+                                <p class="px-5">
+                                    @Html.Raw(content.ShortContent)
+                                </p>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
-                            <div class="faculty-card p-3 shadow-sm rounded">
-                                <img src="~/img/departments/commerce/faculty/faculty2.jpeg" class="img-fluid rounded-circle mb-3" alt="Mr. K. Vignesh">
-                                <h6 class="mb-1">Mr. K. Vignesh</h6>
-                                <p class="text-muted small mb-0">Assistant Professor</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
-                            <div class="faculty-card p-3 shadow-sm rounded">
-                                <img src="~/img/departments/commerce/faculty/faculty1.jpg" class="img-fluid rounded-circle mb-3" alt="Ms. S. Priya">
-                                <h6 class="mb-1">Ms. S. Priya</h6>
-                                <p class="text-muted small mb-0">Assistant Professor</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
-                            <div class="faculty-card p-3 shadow-sm rounded">
-                                <img src="~/img/departments/commerce/faculty/faculty2.jpeg" class="img-fluid rounded-circle mb-3" alt="Mr. B. Senthil">
-                                <h6 class="mb-1">Mr. B. Senthil</h6>
-                                <p class="text-muted small mb-0">Assistant Professor</p>
-                            </div>
-                        </div>
+                        }
+
                     </div>
                 </div>
+            </div>
+        }
 
-                <!-- Slide 2 (optional - add more members if needed) -->
-                <div class="carousel-item">
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-4 col-sm-6 text-center">
-                            <div class="faculty-card p-3 shadow-sm rounded">
-                                <img src="~/img/departments/commerce/faculty/faculty1.jpg" class="img-fluid rounded-circle mb-3" alt="Mr. R. Kumar">
-                                <h6 class="mb-1">Mr. R. Kumar</h6>
-                                <p class="text-muted small mb-0">Assistant Professor</p>
+
+        <!-- Activities -->
+        @if (Model.LstDepartmentsDetails.Where(x => x.Category == "Activities").Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mb-4 mt-5">
+                    <h2>Activities</h2>
+                </div>
+                <div class="text-center">
+                    <div class="department-slider owl-carousel owl-theme">
+
+                        @foreach (var content in Model.LstDepartmentsDetails.Where(x => x.Category == "Activities").ToList())
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                <h5>@content.Heading</h5>
+                                <p class="px-5">
+                                    @Html.Raw(content.ShortContent)
+                                </p>
                             </div>
-                        </div>
-                        <!-- Add more if needed -->
+                        }
+
                     </div>
                 </div>
-
             </div>
+        }
 
-            <!-- Carousel Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#facultyCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#facultyCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
+        <!-- Gallery -->
+        @if (Model.LstDepartmentsDetails.Where(x => x.Category == "Gallery").Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mb-4 mt-5">
+                    <h2>Gallery</h2>
+                </div>
+                <div class="text-center">
+                    <div class="department-slider owl-carousel owl-theme">
 
-        <!-- Department Events -->
-        <div class="section-title mt-5">
-            <h2>Department Events</h2>
-        </div>
-        <div id="eventsCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active text-center">
-                    <img src="~/img/departments/commerce/events/events1.jpg" class="d-block w-100 rounded mb-3" alt="Commerce Fest">
-                    <h5>Commerce Fest – “Commercia 2025”</h5>
-                    <p class="px-5">An inter-collegiate fest showcasing business ideas, marketing strategies and management games that bring out students’ leadership and creativity.</p>
-                </div>
-                <div class="carousel-item text-center">
-                    <img src="~/img/departments/commerce/events/events1.jpg" class="d-block w-100 rounded mb-3" alt="Guest Lecture">
-                    <h5>Guest Lecture on Entrepreneurship</h5>
-                    <p class="px-5">Industry experts shared insights on starting and scaling new ventures, motivating students to pursue entrepreneurship as a career path.</p>
-                </div>
-                <div class="carousel-item text-center">
-                    <img src="~/img/departments/commerce/events/events1.jpg" class="d-block w-100 rounded mb-3" alt="Workshop">
-                    <h5>Workshop on GST & Taxation</h5>
-                    <p class="px-5">A practical workshop aimed at understanding the latest GST reforms and their implications for small and medium enterprises.</p>
+                        @foreach (var content in Model.LstDepartmentsDetails.Where(x => x.Category == "Gallery").ToList())
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                <h5>@content.Heading</h5>
+                                <p class="px-5">
+                                    @Html.Raw(content.ShortContent)
+                                </p>
+                            </div>
+                        }
+
+                    </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#eventsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#eventsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
-        </div>
-
-        <!-- Department Activities -->
-        <div class="section-title mt-5">
-            <h2>Department Activities</h2>
-        </div>
-        <div id="activitiesCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active text-center">
-                    <img src="~/img/departments/commerce/activities/activities1.jpeg" class="d-block w-100 rounded mb-3" alt="Industrial Visit">
-                    <h5>Industrial Visit</h5>
-                    <p class="px-5">Students visited leading business firms to gain practical exposure to operations, marketing and accounting systems.</p>
-                </div>
-                <div class="carousel-item text-center">
-                    <img src="~/img/departments/commerce/activities/activities1.jpeg" class="d-block w-100 rounded mb-3" alt="Social Drive">
-                    <h5>Social Responsibility Drive</h5>
-                    <p class="px-5">Commerce students took part in a social awareness campaign, reinforcing the college’s commitment to community welfare.</p>
-                </div>
-                <div class="carousel-item text-center">
-                    <img src="~/img/departments/commerce/activities/activities1.jpeg" class="d-block w-100 rounded mb-3" alt="Paper Presentation">
-                    <h5>Paper Presentation Competition</h5>
-                    <p class="px-5">Students presented research papers on emerging business trends, encouraging analytical and critical thinking skills.</p>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#activitiesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#activitiesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
-        </div>
-
-        <!-- Gallery Section -->
-        <div class="section-title mt-5">
-            <h2>Gallery</h2>
-        </div>
-        <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner text-center">
-                <div class="carousel-item active">
-                    <img src="~/img/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/img/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/img/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/img/departments/commerce/gallery/gallery1.png" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
-        </div>
+        }
 
     </div>
 
 </div>
 <!--End Departments Section-->
+
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-Academics").addClass("active");
+        $("#navbarSupportedContent .clsMenu-ProgrammesOffered").addClass("active");
+    });
+
+
+    $(document).ready(function () {
+        $('.department-slider').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: false,
+            items: 1,
+            navText: [
+                '<i class="ri-arrow-left-line"></i>',
+                '<i class="ri-arrow-right-line"></i>',
+            ]
+        });
+    });
+
+    $(document).ready(function () {
+        $("#facultyCarousel").owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+
+            responsive: {
+                0: { items: 1 },
+                576: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 }
+            },
+
+            navText: [
+                "<i class='ri-arrow-left-line'></i>",
+                "<i class='ri-arrow-right-line'></i>"
+            ]
+        });
+    });
+</script>
