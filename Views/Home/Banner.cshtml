@@ -1,0 +1,49 @@
+﻿@using College.Entities
+@model List<PageMedia>
+
+<!--Start Banner Area-->
+<style>
+.slider-content.style2 h2 {color: white !important;}
+.slider-content.style2 {background-color: rgba(0, 0, 0, 0.5);}
+.slider-content.style2 p {color: white !important;}
+</style>
+
+<div class="banner-area">
+    <div id="Banner-slider" class="hero-slider owl-carousel owl-theme">
+
+        @foreach (var item in Model)
+        {
+            <div class="slider-item" style="background-image: url(@Url.Content(item.ImagePath))">
+                <div class="container-fluid">
+
+                    <div class="slider-content style2">
+                        @Html.Raw(item.Heading)
+                        @Html.Raw(item.ShortContent)
+                        <a href="~/AdmissionProcedure/AdmissionProcedure" class="default-btn btn">Start a Journey <i class="flaticon-next"></i></a>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+        
+    </div>
+</div>
+
+<script>
+    $('#Banner-slider').owlCarousel({
+        loop:true,
+        margin:0,
+        nav:true,
+        dots:true,
+        items:1,
+        thumbs: true,
+        thumbsPrerendered: true,
+        autoplay: true,
+        smartSpeed: 1000,
+        autoplayHoverPause:true,
+        navText: [
+            '<i class="ri-arrow-left-line"></i>',
+            '<i class="ri-arrow-right-line"></i>',
+        ],
+    });
+</script>

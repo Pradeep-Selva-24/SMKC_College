@@ -14,8 +14,4 @@ public class NIRFDocument : BaseEntity
     [Column("S_Path")]
     [Required]
     public string? Path { get; set; }
-
-    [Column("I_Order")]
-    [Required]
-    public int Order { get; set; }
 }

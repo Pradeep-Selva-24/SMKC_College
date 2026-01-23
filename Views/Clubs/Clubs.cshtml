@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Models
+@model ClubsModel
+
+@{
     ViewData["Title"] = "Clubs & Activities";
 }
 
@@ -21,146 +24,123 @@
 
         <!-- Tabs Navigation -->
         <ul class="nav nav-tabs justify-content-center mb-4" id="clubsTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="nss-tab" data-bs-toggle="tab" data-bs-target="#nss" type="button" role="tab">
-                    NSS
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="ncc-tab" data-bs-toggle="tab" data-bs-target="#ncc" type="button" role="tab">
-                    NCC
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="yrc-tab" data-bs-toggle="tab" data-bs-target="#yrc" type="button" role="tab">
-                    YRC
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="rrc-tab" data-bs-toggle="tab" data-bs-target="#rrc" type="button" role="tab">
-                    RRC
-                </button>
-            </li>
+
+            @{
+                bool active = true;
+            }
+
+            @foreach (var item in Model.LstClubsMaster)
+            {
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @(active ? "active" : "")" id="@(item.Clubs)-tab" data-bs-toggle="tab" data-bs-target="#@(item.Clubs)" type="button" role="tab">
+                        @item.Clubs
+                    </button>
+                </li>
+                active = false;
+            }
+
         </ul>
 
         <!-- Tabs Content -->
         <div class="tab-content" id="clubsTabsContent">
-
-            <!-- NSS -->
-            <div class="tab-pane fade show active" id="nss" role="tabpanel" aria-labelledby="nss-tab">
-                <div class="container">
-                    <div class="section-title mb-4">
-                        <h2>National Service Scheme (NSS)</h2>
-                    </div>
-                    <p>
-                        The <strong>NSS Unit</strong> of <strong>Sree Muthukumaraswamy College</strong> promotes social responsibility and community service among students through various outreach programs and awareness drives.
-                    </p>
-
-                    <!-- Events -->
-                    <div class="section-title mb-4 mt-5">
-                        <h2>Events</h2>
-                    </div>
-                    <div id="nssEventsCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner text-center">
-                            <div class="carousel-item active">
-                                <img src="~/img/clubs/nss/events/nss1.jpg" class="d-block w-100 rounded mb-3" alt="Blood Donation Camp">
-                                <h5>Blood Donation Camp</h5>
-                                <p class="px-5">Students actively participated in a blood donation camp organized in collaboration with the local health department.</p>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="~/img/clubs/nss/events/nss2.jpg" class="d-block w-100 rounded mb-3" alt="Tree Plantation Drive">
-                                <h5>Tree Plantation Drive</h5>
-                                <p class="px-5">An eco-initiative to plant 200+ saplings around the campus to promote a greener environment.</p>
-                            </div>
+            @{
+                active = true;
+            }
+            @foreach (var item in Model.LstClubsMaster)
+            {
+                <div class="tab-pane fade show @(active ? "active" : "")" id="@(item.Clubs)" role="tabpanel" aria-labelledby="@(item.Clubs)-tab">
+                    <div class="container">
+                        <div class="section-title mb-4">
+                            <h2>@item.FullName</h2>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#nssEventsCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#nssEventsCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
-                    </div>
+                        <p>
+                            @Html.Raw(item.Description)
+                        </p>
 
-                    <!-- Activities -->
-                    <div class="section-title mb-4 mt-5">
-                        <h2>Activities</h2>
-                    </div>
-                    <div id="nssActivitiesCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner text-center">
-                            <div class="carousel-item active">
-                                <img src="~/img/clubs/nss/activities/nss1.jpg" class="d-block w-100 rounded mb-3" alt="Swachh Bharat Mission">
-                                <h5>Swachh Bharat Mission</h5>
-                                <p class="px-5">NSS volunteers participated in a cleanliness drive under the national “Swachh Bharat” initiative.</p>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="~/img/clubs/nss/activities/nss2.jpg" class="d-block w-100 rounded mb-3" alt="Health Awareness Rally">
-                                <h5>Health Awareness Rally</h5>
-                                <p class="px-5">Students conducted a rally to spread awareness about personal hygiene and disease prevention.</p>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#nssActivitiesCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#nssActivitiesCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
-                    </div>
+                        <!-- Events -->
+                        @if (Model.LstClubsDetails.Where(x => x.ClubsMasterId == item.Id && x.Category == "Events").Count() > 0)
+                        {
+                            <div class="">
+                                <div class="section-title mb-4 mt-5">
+                                    <h2>Events</h2>
+                                </div>
+                                <div class="text-center">
+                                    <div class="club-slider owl-carousel owl-theme">
 
-                    <!-- Gallery -->
-                    <div class="section-title mb-4 mt-5">
-                        <h2>Gallery</h2>
-                    </div>
-                    <div id="nssGalleryCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner text-center">
-                            <div class="carousel-item active">
-                                <img src="~/img/clubs/nss/gallery/nss1.jpg" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                                        @foreach (var content in Model.LstClubsDetails.Where(x => x.ClubsMasterId == item.Id && x.Category == "Events").ToList())
+                                        {
+                                            <div class="item">
+                                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                                <h5>@content.Heading</h5>
+                                                <p class="px-5">
+                                                    @Html.Raw(content.ShortContent)
+                                                </p>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="carousel-item">
-                                <img src="~/img/clubs/nss/gallery/nss2.jpg" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                        }
+                        
+
+                        <!-- Activities -->
+                        @if (Model.LstClubsDetails.Where(x => x.ClubsMasterId == item.Id && x.Category == "Activities").Count() > 0)
+                        {
+                            <div class="clsClubsContent">
+                                <div class="section-title mb-4 mt-5">
+                                    <h2>Activities</h2>
+                                </div>
+                                <div class="text-center">
+                                    <div class="club-slider owl-carousel owl-theme">
+
+                                        @foreach (var content in Model.LstClubsDetails.Where(x => x.ClubsMasterId == item.Id && x.Category == "Activities").ToList())
+                                        {
+                                            <div class="item">
+                                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                                <h5>@content.Heading</h5>
+                                                <p class="px-5">
+                                                    @Html.Raw(content.ShortContent)
+                                                </p>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="carousel-item">
-                                <img src="~/img/clubs/nss/gallery/nss3.jpg" class="d-block w-100 rounded shadow-sm" alt="Gallery Image">
+                        }
+
+                        <!-- Gallery -->
+                        @if (Model.LstClubsDetails.Where(x => x.ClubsMasterId == item.Id && x.Category == "Gallery").Count() > 0)
+                        {
+                            <div class="clsClubsContent">
+                                <div class="section-title mb-4 mt-5">
+                                    <h2>Gallery</h2>
+                                </div>
+                                <div class="text-center">
+                                    <div class="club-slider owl-carousel owl-theme">
+
+                                        @foreach (var content in Model.LstClubsDetails.Where(x => x.ClubsMasterId == item.Id && x.Category == "Gallery").ToList())
+                                        {
+                                            <div class="item">
+                                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                                <h5>@content.Heading</h5>
+                                                <p class="px-5">
+                                                    @Html.Raw(content.ShortContent)
+                                                </p>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#nssGalleryCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#nssGalleryCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
+                        }
+
                     </div>
                 </div>
-            </div>
 
-            <!-- NCC -->
-            <div class="tab-pane fade" id="ncc" role="tabpanel" aria-labelledby="ncc-tab">
-                <div class="section-title mb-4">
-                    <h2>National Cadet Corps (NCC)</h2>
-                </div>
-                <p>The NCC Unit instills discipline, leadership and patriotism among students through military-style training and community service.</p>
-
-                <!-- You can replicate Events, Activities, Gallery here like NSS -->
-            </div>
-
-            <!-- YRC -->
-            <div class="tab-pane fade" id="yrc" role="tabpanel" aria-labelledby="yrc-tab">
-                <div class="section-title mb-4">
-                    <h2>Youth Red Cross (YRC)</h2>
-                </div>
-                <p>The YRC encourages students to participate in humanitarian services, promoting health, safety and social welfare.</p>
-
-                <!-- Add Events, Activities, Gallery here -->
-            </div>
-
-            <!-- RRC -->
-            <div class="tab-pane fade" id="rrc" role="tabpanel" aria-labelledby="rrc-tab">
-                <div class="section-title mb-4">
-                    <h2>Red Ribbon Club (RRC)</h2>
-                </div>
-                <p>The RRC focuses on HIV/AIDS awareness, promoting safe and responsible behavior through seminars and outreach activities.</p>
-
-                <!-- Add Events, Activities, Gallery here -->
-            </div>
+                active = false;
+            }
 
         </div>
     </div>
@@ -172,5 +152,23 @@
         $("#navbarSupportedContent .nav-link").removeClass("active");
         $("#navbarSupportedContent .clsMenu-CampusLife").addClass("active");
         $("#navbarSupportedContent .clsMenu-Clubs").addClass("active");
+    });
+
+
+    $(document).ready(function () {
+        $('.club-slider').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: false,
+            items: 1,
+            navText: [
+                '<i class="ri-arrow-left-line"></i>',
+                '<i class="ri-arrow-right-line"></i>',
+            ]
+        });
     });
 </script>

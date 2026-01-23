@@ -50,10 +50,6 @@ namespace College.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("S_FilePath");
 
-                    b.Property<int>("I_Order")
-                        .HasColumnType("int")
-                        .HasColumnName("I_Order");
-
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -61,6 +57,10 @@ namespace College.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_ModifiedDate");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int")
+                        .HasColumnName("I_Order");
 
                     b.Property<string>("ReportTitle")
                         .IsRequired()
@@ -208,9 +208,19 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Description");
+
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int")
                         .HasColumnName("I_DisplayOrder");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_FullName");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
@@ -348,6 +358,10 @@ namespace College.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
 
+                    b.Property<int>("StudentCount")
+                        .HasColumnType("int")
+                        .HasColumnName("S_StudentCount");
+
                     b.Property<string>("SyllabusPath")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -385,10 +399,6 @@ namespace College.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("S_Designation");
 
-                    b.Property<int>("I_Order")
-                        .HasColumnType("int")
-                        .HasColumnName("I_Order");
-
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -406,6 +416,10 @@ namespace College.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("S_Name");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int")
+                        .HasColumnName("I_Order");
 
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")
@@ -539,6 +553,14 @@ namespace College.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_CreatedOn");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("D_IsActive");
 
                     b.Property<DateTime>("LastLogin")
                         .HasColumnType("datetime(6)")
@@ -749,6 +771,11 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Description");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -769,11 +796,6 @@ namespace College.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_description");
 
                     b.HasKey("Id");
 
@@ -847,6 +869,11 @@ namespace College.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("D_CreatedDate");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Description");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("longtext")
                         .HasColumnName("S_ModifiedBy");
@@ -867,11 +894,6 @@ namespace College.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("B_Status");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("S_description");
 
                     b.HasKey("Id");
 
@@ -908,10 +930,6 @@ namespace College.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("S_Name");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int")
-                        .HasColumnName("I_Order");
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -1044,6 +1062,51 @@ namespace College.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CLG.PageMedia", (string)null);
+                });
+
+            modelBuilder.Entity("College.Entities.SettingMaster", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("I_Id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_CreatedDate");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Key");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("D_ModifiedDate");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("B_Status");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("S_Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CLG.SettingMaster", (string)null);
                 });
 
             modelBuilder.Entity("College.Entities.ClubsDetails", b =>

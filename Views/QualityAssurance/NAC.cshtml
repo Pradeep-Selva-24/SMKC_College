@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Models
+@model NACModel
+
+@{
     ViewData["Title"] = "NAC";
 }
 
@@ -38,7 +41,9 @@
                             process encourages educational institutions to self-evaluate, improve their internal
                             quality systems and demonstrate accountability and transparency.
                         </p>
+                    </div>
 
+                    <div class="nac-content pe-lg-4 mt-50">
                         <h4>Objectives of NAC Accreditation</h4>
                         <ul>
                             <li>Promote quality in teaching, learning and research.</li>
@@ -69,34 +74,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Name of the Institution</td>
-                                <td><strong>Sree Muthukumaraswamy College</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Accrediting Agency</td>
-                                <td>National Assessment and Accreditation Council (NAC)</td>
-                            </tr>
-                            <tr>
-                                <td>Affiliated To</td>
-                                <td>University of Madras</td>
-                            </tr>
-                            <tr>
-                                <td>Accreditation Status</td>
-                                <td>Accredited (Cycle 1)</td>
-                            </tr>
-                            <tr>
-                                <td>Grade Awarded</td>
-                                <td><strong>B+</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Year of Accreditation</td>
-                                <td>2023</td>
-                            </tr>
-                            <tr>
-                                <td>Validity Period</td>
-                                <td>2023 – 2028</td>
-                            </tr>
+                            @foreach (var item in Model.LstNACDetails)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Description</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -115,22 +99,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>SSR (Self Study Report)</td>
-                                <td><a href="~/pdf/nac/ssr.pdf" class="default-btn btn">Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>DVV Clarifications</td>
-                                <td><a href="~/pdf/nac/dvv-clarifications.pdf" class="default-btn btn">Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Peer Team Report</td>
-                                <td><a href="~/pdf/nac/peer-team-report.pdf" class="default-btn btn">Download</a></td>
-                            </tr>
-                            <tr>
-                                <td>Accreditation Certificate</td>
-                                <td><a href="~/pdf/nac/accreditation-certificate.pdf" class="default-btn btn">Download</a></td>
-                            </tr>
+                            @foreach (var item in Model.LstNACDocument)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td><a href="@Url.Content(item.Path)" class="default-btn btn">Download</a></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Entities
+@model List<IQACMembers>
+
+@{
     ViewData["Title"] = "IQAC Committee";
 }
 
@@ -52,54 +55,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><strong>Dr. R. Mahalakshmi</strong></td>
-                            <td>Principal</td>
-                            <td>Chairperson</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><strong>Mr. K. Vignesh</strong></td>
-                            <td>Assistant Professor, Department of Commerce</td>
-                            <td>IQAC Coordinator</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><strong>Ms. S. Priya</strong></td>
-                            <td>Assistant Professor, Department of English</td>
-                            <td>Member</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td><strong>Mr. B. Senthil</strong></td>
-                            <td>Assistant Professor, Department of Computer Science</td>
-                            <td>Member</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><strong>Mr. R. Kumar</strong></td>
-                            <td>Office Superintendent</td>
-                            <td>Administrative Staff Member</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td><strong>Mrs. S. Devi</strong></td>
-                            <td>Alumni Representative</td>
-                            <td>External Member</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td><strong>Mr. P. Rajesh</strong></td>
-                            <td>Parent Representative</td>
-                            <td>External Member</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td><strong>Student Representative</strong></td>
-                            <td>Final Year UG Student</td>
-                            <td>Member</td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Order</td>
+                                <td><strong>@item.Name</strong></td>
+                                <td>@item.Designation</td>
+                                <td>@item.Role</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

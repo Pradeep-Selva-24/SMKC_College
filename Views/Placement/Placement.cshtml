@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Models
+@model PlacementModel
+
+@{
     ViewData["Title"] = "Placement & Career Development";
 }
 
@@ -71,65 +74,14 @@
 
                     <div class="company-slider owl-carousel owl-theme owl-loaded owl-drag">
 
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//accenture.png" />
+                        @foreach (var item in Model.LstCompany)
+                        {
+                            <div class="company-slider-card style-3">
+                                <div class="img">
+                                    <img src="@Url.Content(item.ImagePath)" />
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//amazon.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//capgemini.png" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//cts.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//google.png" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//hcltech.webp" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//infosys.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//microsoft.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//tcs.jpeg" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/companylogo//wipro.png" />
-                            </div>
-                        </div>
+                        }
 
                     </div>
 
@@ -162,28 +114,28 @@
 
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="single-achievement-box p-4 shadow-sm" style="border-radius: 12px; background: #ffffff;">
-                                <h2 class="mb-2">85%</h2>
+                                <h2 class="mb-2">@Model.OverallPlacementRate</h2>
                                 <p style="margin: 0;">Overall Placement Rate</p>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="single-achievement-box p-4 shadow-sm" style="border-radius: 12px; background: #ffffff;">
-                                <h2 class="mb-2">40+</h2>
+                                <h2 class="mb-2">@Model.CompaniesVisited</h2>
                                 <p style="margin: 0;">Companies Visited</p>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="single-achievement-box p-4 shadow-sm" style="border-radius: 12px; background: #ffffff;">
-                                <h2 class="mb-2">150+</h2>
+                                <h2 class="mb-2">@Model.StudentsPlaced</h2>
                                 <p style="margin: 0;">Students Placed</p>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="single-achievement-box p-4 shadow-sm" style="border-radius: 12px; background: #ffffff;">
-                                <h2 class="mb-2">20+</h2>
+                                <h2 class="mb-2">@Model.MoUsSigned</h2>
                                 <p style="margin: 0;">MoUs Signed</p>
                             </div>
                         </div>
@@ -197,23 +149,15 @@
                     <h2 class="mb-4">Placement Highlights</h2>
                     <div class="placement-slider owl-carousel owl-theme owl-loaded owl-drag">
 
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/placement-1.jpg" />
+                        @foreach (var item in Model.LstBanner)
+                        {
+                            <div class="company-slider-card style-3">
+                                <div class="img">
+                                    <img src="@Url.Content(item.ImagePath)" />
+                                </div>
                             </div>
-                        </div>
+                        }
 
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/placement-2.jpg" />
-                            </div>
-                        </div>
-
-                        <div class="company-slider-card style-3">
-                            <div class="img">
-                                <img src="~/img/placement/placement-3.jpg" />
-                            </div>
-                        </div>
                     </div>
 
                     <div class="mt-3">

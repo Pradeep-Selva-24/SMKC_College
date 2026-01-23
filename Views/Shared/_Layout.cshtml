@@ -67,7 +67,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="header-left-content">
-                        <p>The institution offers a wide range of Undergraduate (UG), Postgraduate (PG) and Ph.D. programmes, comprising about 15 courses across diverse streams such as Business Administration, Commerce, Computer Science, Computer Applications and Criminology & Criminal Justice Science.</p>
+                        <p class="clsRunningText">The institution offers a wide range of Undergraduate (UG), Postgraduate (PG) and Ph.D. programmes, comprising about 15 courses across diverse streams such as Business Administration, Commerce, Computer Science, Computer Applications and Criminology & Criminal Justice Science.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -128,7 +128,7 @@
                                 <a href="#" class="nav-link clsMenu-Academics dropdown-toggle">Academics</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a href="~/ProgrammesOffered/ProgrammesOffered" class="nav-link clsMenu-ProgrammesOffered">Programmes Offered</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-AcademicCalendar">Academic Calendar</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-AcademicCalendar clsAcademicCalendar">Academic Calendar</a></li>
                                     <li class="nav-item"><a href="~/Placement/Placement" class="nav-link clsMenu-Placement">Placement</a></li>
                                 </ul>
                             </li>
@@ -137,9 +137,9 @@
                                 <a href="#" class="nav-link clsMenu-Admissions dropdown-toggle">Admissions</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a href="~/AdmissionProcedure/AdmissionProcedure" class="nav-link clsMenu-Admission">Admission Procedure</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-Courses">Courses & Eligibility</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-FeeStructure">Fee Structure</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-Prospectus">Apply Online / Prospectus</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-Courses clsCoursesEligibility">Courses & Eligibility</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-FeeStructure clsFeeStructure">Fee Structure</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link clsMenu-Prospectus clsApplication">Apply Online / Prospectus</a></li>
                                 </ul>
                             </li>
 
@@ -327,9 +327,9 @@
                         <h3>Student Resources</h3>
                         <div class="list">
                             <ul>
-                                <li><a href="/academic-calendar">Academic Calendar</a></li>
-                                <li><a href="/examinations">Examinations</a></li>
-                                <li><a href="/results">Results</a></li>
+                                <li><a href="~/" class="clsAcademicCalendar">Academic Calendar</a></li>
+                                <li><a href="~/" class="clsExaminations">Examinations</a></li>
+                                <li><a href="~/" class="clsResults">Results</a></li>
                             </ul>
                         </div>
                     </div>
@@ -424,13 +424,21 @@
     <script src="~/js/ajaxchimp.min.js"></script>
     <!--=== Custom js ===-->
     <script src="~/js/custom.js"></script>
+    <!--=== Layout js ===-->
+    <script src="~/js/Layout.js"></script>
 
     <script>
+        var defaultDataUrl = '@Url.Action("GetDefaultData", "Home")';
+        $(document).ready(function () {
+            GetDefaultData()
+        });
+
         if ($('[data-bs-toggle="tooltip"]').length) {
             $('[data-bs-toggle="tooltip"]').each(function () {
                 new bootstrap.Tooltip(this);
             });
         }
     </script>
+
 </body>
 </html>

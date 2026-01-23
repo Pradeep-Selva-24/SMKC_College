@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Entities
+@model List<InstitutionPages>
+
+@{
     ViewData["Title"] = "Vision & Mission";
 }
 <!--Start Page Banner-->
@@ -33,61 +36,42 @@
                     </div>
 
                     <div class="accordion" id="accordionExample">
-                        <!-- Vision -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Vision
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    To be a centre of academic excellence that nurtures intellectual growth, innovation and ethical values, empowering students to become responsible global citizens.
+
+                        @{
+                            bool expanded = true;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            var headingId = $"heading_{item.Id}";
+                            var collapseId = $"collapse_{item.Id}";
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="@headingId">
+                                    <button class="accordion-button @(expanded ? "" : "collapsed")"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#@collapseId"
+                                            aria-expanded="@(expanded.ToString().ToLower())"
+                                            aria-controls="@collapseId">
+                                        @item.Heading
+                                    </button>
+                                </h2>
+
+                                <div id="@collapseId"
+                                     class="accordion-collapse collapse @(expanded ? "show" : "")"
+                                     aria-labelledby="@headingId"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @Html.Raw(item.Content)
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Mission -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Mission
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <ul>
-                                        <li>Provide quality higher education that combines academic rigor with practical learning.</li>
-                                        <li>Foster an environment of innovation, leadership and lifelong learning.</li>
-                                        <li>Promote inclusivity and equal opportunity for all students.</li>
-                                        <li>Encourage ethical values, social responsibility and respect for cultural diversity.</li>
-                                        <li>Strengthen industry-academia collaboration for employability and entrepreneurship.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                            expanded = false;
+                        }
 
-                        <!-- Core Values -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Core Values
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <ul>
-                                        <li><strong>Integrity:</strong> Upholding honesty and transparency in all activities.</li>
-                                        <li><strong>Excellence:</strong> Striving for the highest standards in teaching and learning.</li>
-                                        <li><strong>Innovation:</strong> Encouraging creativity and critical thinking.</li>
-                                        <li><strong>Respect:</strong> Valuing diversity, equality and human dignity.</li>
-                                        <li><strong>Service:</strong> Committing to community engagement and sustainable development.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div> <!-- End Accordion -->
+                    </div> 
                 </div>
             </div>
 

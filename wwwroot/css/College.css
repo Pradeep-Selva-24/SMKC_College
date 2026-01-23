@@ -2,6 +2,7 @@
 .text-primary {color: #e32845 !important;}
 
 .mt-20{margin-top: 20px !important;}
+.mt-50{margin-top: 50px !important;}
 
 .bg-f4f6f9 {background-image: url(../Img/BG/rose-petals.png);background-attachment: fixed;background-size: cover;}
 .bg-f4f6f9 .section-title h2, .bg-f4f6f9 .section-title p{color: #ffffff;}
@@ -15,7 +16,7 @@
 
 .footer-widjet .list ul li {color: #ffffff;transition: all ease 0.5s;}
 
-.faculty-card img {width: 120px;height: 120px;object-fit: cover;border: 3px solid #f0f0f0;}
+.faculty-card img {object-fit: cover;border: 3px solid #f0f0f0;}
 .faculty-card:hover {transform: translateY(-5px);transition: 0.3s ease;box-shadow: 0 4px 10px rgba(0,0,0,0.15);}
 
 .nav-tabs {border-bottom: none;gap: 10px;flex-wrap: wrap;}
@@ -25,11 +26,12 @@
 
 .departments-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
 .departments-area .section-title {margin: 0px;max-width: max-content;}
+.departments-area .clsDepContent {margin-top: 100px !important;margin-bottom: 50px !important;}
 
 .clubs-area .tab-content {padding: 30px;animation: fadeIn 0.4s ease-in-out;}
 .clubs-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
 .clubs-area .section-title {margin: 0px;max-width: max-content;}
-.clubs-area .carousel-item img {max-height: 400px;object-fit: cover;}
+.clubs-area .clsClubsContent {margin-top: 100px !important;margin-bottom: 50px !important;}
 
 .alumni-area .section-title h2 {text-align:left; color: #111d5e;font-weight: 700;margin-bottom: 20px;border-left: 5px solid #e32845;padding-left: 15px;}
 .alumni-area .section-title {margin: 0px;max-width: max-content;}
@@ -93,6 +95,8 @@ table th, table td {vertical-align: middle !important;}
 .clsImgStyle {height: 350px;width: 100%;object-fit: cover;border-radius: 12px;}
 
 .clsLatestNews .events-content p {display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;text-overflow: ellipsis;white-space: normal;cursor: pointer;}
+
+.nac-area .section-title, .nirf-area .section-title {margin: 0px;max-width: max-content;}
 
 @keyframes spinWheel {
     from {transform: rotate(0deg);}

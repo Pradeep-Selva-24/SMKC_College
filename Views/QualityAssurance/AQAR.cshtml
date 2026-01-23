@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Entities
+@model List<AQARReport>
+
+@{
     ViewData["Title"] = "AQAR Reports";
 }
 
@@ -37,31 +40,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2023 – 2024</td>
-                            <td>AQAR Report 2023-2024</td>
-                            <td><a href="~/pdf/aqar/aqar-2023-24.pdf" class="default-btn btn">Download</a></td>
-                        </tr>
-                        <tr>
-                            <td>2022 – 2023</td>
-                            <td>AQAR Report 2022-2023</td>
-                            <td><a href="~/pdf/aqar/aqar-2022-23.pdf" class="default-btn btn">Download</a></td>
-                        </tr>
-                        <tr>
-                            <td>2021 – 2022</td>
-                            <td>AQAR Report 2021-2022</td>
-                            <td><a href="~/pdf/aqar/aqar-2021-22.pdf" class="default-btn btn">Download</a></td>
-                        </tr>
-                        <tr>
-                            <td>2020 – 2021</td>
-                            <td>AQAR Report 2020-2021</td>
-                            <td><a href="~/pdf/aqar/aqar-2020-21.pdf" class="default-btn btn">Download</a></td>
-                        </tr>
-                        <tr>
-                            <td>2019 – 2020</td>
-                            <td>AQAR Report 2019-2020</td>
-                            <td><a href="~/pdf/aqar/aqar-2019-20.pdf" class="default-btn btn">Download</a></td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.AcademicYear</td>
+                                <td>@item.ReportTitle</td>
+                                <td><a href="@Url.Content(item.FilePath)" class="default-btn btn">Download</a></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

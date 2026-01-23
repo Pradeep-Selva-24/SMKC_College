@@ -9,49 +9,49 @@ public static class NACDetailsConstant
         new NACDetails
         {
             Name = "Name of the Institution",
-            description = "Sree Muthukumaraswamy College",
+            Description = "Sree Muthukumaraswamy College",
             Order = 1,
         },
 
         new NACDetails
         {
             Name = "Accrediting Agency",
-            description = "National Assessment and Accreditation Council (NAC)",
+            Description = "National Assessment and Accreditation Council (NAC)",
             Order = 2,
         },
 
         new NACDetails
         {
             Name = "Affiliated To",
-            description = "University of Madras",
+            Description = "University of Madras",
             Order = 3,
         },
 
         new NACDetails
         {
             Name = "Accreditation Status",
-            description = "Accredited (Cycle 1)",
+            Description = "Accredited (Cycle 1)",
             Order = 4,
         },
 
         new NACDetails
         {
             Name = "Grade Awarded",
-            description = "B+",
+            Description = "B+",
             Order = 5,
         },
 
         new NACDetails
         {
             Name = "Year of Accreditation",
-            description = "2023",
+            Description = "2023",
             Order = 6,
         },
 
         new NACDetails
         {
             Name = "Validity Period",
-            description = "2023 – 2028",
+            Description = "2023 – 2028",
             Order = 7,
         }
     ];

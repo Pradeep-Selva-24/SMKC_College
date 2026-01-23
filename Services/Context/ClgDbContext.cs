@@ -8,6 +8,7 @@ namespace College.Services.Context
     public class CLGDbContext(DbContextOptions<CLGDbContext> options, IConfiguration config) : DbContext(options)
     {
         public DbSet<Login> Login { get; set; }
+        public DbSet<SettingMaster> SettingMaster { get; set; }
         public DbSet<CampusInfo> CampusInfo { get; set; }
         public DbSet<InstitutionPages> InstitutionPages { get; set; }
         public DbSet<Management> Management { get; set; }

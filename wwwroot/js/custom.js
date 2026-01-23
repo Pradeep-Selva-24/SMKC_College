@@ -44,24 +44,6 @@
 		$(".others-option-for-responsive .container .container").toggleClass("active");
 	});
 
-	// Hero-slider
-    $('.hero-slider').owlCarousel({
-        loop:true,
-        margin:0,
-        nav:true,
-        dots:true,
-        items:1,
-        thumbs: true,
-        thumbsPrerendered: true,
-        autoplay: true,
-        smartSpeed: 1000,
-        autoplayHoverPause:true,
-		navText: [
-            '<i class="ri-arrow-left-line"></i>', 
-            '<i class="ri-arrow-right-line"></i>',  
-        ],
-    });
-
     // Hero-slider2
     $('.hero-slider2').owlCarousel({
         loop:true,
@@ -142,37 +124,6 @@
     });
 
     // Events-slider
-    $('.events-slider').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: true,
-        dots: false,
-        thumbs: false,
-        autoplay: false,
-        smartSpeed: 1000,
-        autoplayHoverPause: true,
-		navText: [
-            '<i class="ri-arrow-left-line"></i>', 
-            '<i class="ri-arrow-right-line"></i>',  
-        ],
-        responsive:{
-            0:{
-                items:1, 
-            },
-            768:{
-                items:2,
-            },
-            992:{
-                items:3,
-            },
-            1200:{
-                items:3,
-            },
-                
-        }
-    });
-    
-    // Events-slider
     $('.news-slider').owlCarousel({
         loop: true,
         margin: 30,
@@ -203,37 +154,6 @@
         }
     });
 
-    // Care-slider
-    $('.health-care-slider').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: true,
-        dots: false,
-        thumbs: false,
-        autoplay: false,
-        smartSpeed: 1000,
-        autoplayHoverPause: true,
-		navText: [
-            '<i class="ri-arrow-left-line"></i>', 
-            '<i class="ri-arrow-right-line"></i>',  
-        ],
-        responsive:{
-            0:{
-                items:1, 
-            },
-            768:{
-                items:2,
-            },
-            992:{
-                items:3,
-            },
-            1200:{
-                items:3,
-            },
-                
-        }
-    });
-    
 	// Magnific popup
 	$(document).ready(function() {
         $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({

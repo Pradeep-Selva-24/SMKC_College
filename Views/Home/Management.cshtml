@@ -1,4 +1,5 @@
-﻿
+﻿@using College.DTO
+@model List<ManagementDTO>
 
 <div class="courses-area pt-100 pb-70 clsManagements">
     <div class="container">
@@ -8,408 +9,81 @@
         </div>
         <div class="courses-slider style-2 owl-carousel owl-theme">
 
-            <div class="single-courses-card style3">
-                <div class="courses-img">
-                    <img src="~/img/management/EducationalChairman.jpeg" alt="Image" onclick="PopupShow4();">
+            @foreach (var item in Model)
+            {
+                <div class="single-courses-card style3">
+                    <div class="courses-img">
+                        <img src="@Url.Content(item.Management.ImagePath)" alt="Image" onclick="PopupShow(@(item.Management.Id.ToString()));">
+                    </div>
+                    <div class="courses-content">
+                        <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
+                        <h4>@item.Management.Name</h4>
+                        <h6>@item.Management.Designation</h6>
+                    </div>
                 </div>
-                <div class="courses-content">
-                    <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
-                    <h4>A. P. Ashok Kumar</h4>
-                    <h6>S.M.D.Educational Society Chairman</h6>
-                </div>
-            </div>
-
-            <div class="single-courses-card style3">
-                <div class="courses-img">
-                    <img src="~/img/management/EducationalSecretary.jpeg" alt="Image" onclick="PopupShow3();">
-                </div>
-                <div class="courses-content">
-                    <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
-                    <h4>R. Lakshmanaswamy</h4>
-                    <h6>S.M.D.Educational Society Secretary</h6>
-                </div>
-            </div>
-
-            <div class="single-courses-card style3">
-                <div class="courses-img">
-                    <img src="~/img/management/CollegeSecretary.jpeg" alt="Image" onclick="PopupShow2();">
-                </div>
-                <div class="courses-content">
-                    <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
-                    <h4>A. N. Suresh Kumar</h4>
-                    <h6>College Secretary</h6>
-                </div>
-            </div>
-
-            <div class="single-courses-card style3">
-                <div class="courses-img">
-                    <img src="~/img/management/Principal.jpeg" alt="Image" onclick="PopupShow1();">
-                </div>
-                <div class="courses-content" onclick="PopupShow1();">
-                    <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
-                    <h4>Dr. G. Raja Priya</h4>
-                    <h6>Principal</h6>
-                </div>
-            </div>
-
-            <div class="single-courses-card style3">
-                <div class="courses-img">
-                    <img src="~/img/management/VicePrincipal.jpeg" alt="Image" onclick="PopupShow5();">
-                </div>
-                <div class="courses-content" onclick="PopupShow5();">
-                    <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
-                    <h4>Dr. R. Anandhy</h4>
-                    <h6>Vice Principal</h6>
-                </div>
-            </div>
-
-            <div class="single-courses-card style3">
-                <div class="courses-img">
-                    <img src="~/img/management/AcademicAdvisor.jpeg" alt="Image" onclick="PopupShow6();">
-                </div>
-                <div class="courses-content" onclick="PopupShow6();">
-                    <svg class="ADBcard__arc" xmlns="http://www.w3.org/2000/svg"><path></path></svg>
-                    <h4>Dr. V. Selvanathan</h4>
-                    <h6>Academic Advisor</h6>
-                </div>
-            </div>
-
+            }
         </div>
 
 
         <div class="Team-sec">
             <div class="teamsec">
-                <div class="modal fade modalteam" id="DivPopupShow1" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <main class="main">
-                                    <section class="card-area loaded">
-                                        <section class="card-section loaded">
-                                            <div class="card">
-                                                <div class="flip-card">
-                                                    <div class="flip-card__container">
-                                                        <div class="card-front">
-                                                            <div class="card-front__tp card-front__tp--city">
-                                                                <h2>Dr. G. Raja Priya</h2>
-                                                                <h4>Principal</h4>
+
+                @foreach (var item in Model)
+                {
+                    <div class="modal fade modalteam" id="DivPopupShow_@((item.Management.Id.ToString()).ToString())" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <main class="main">
+                                        <section class="card-area loaded">
+                                            <section class="card-section loaded">
+                                                <div class="card">
+                                                    <div class="flip-card">
+                                                        <div class="flip-card__container">
+                                                            <div class="card-front">
+                                                                <div class="card-front__tp card-front__tp--city">
+                                                                    <h2>@item.Management.Name</h2>
+                                                                    <h4>@item.Management.Designation</h4>
+                                                                </div>
+                                                                <div class="card-front__bt">
+                                                                    <p class="card-front__text-view card-front__text-view--city">
+                                                                        <img src="~/img/logo/s_logo.png" onclick="PopupShow(@(item.Management.Id.ToString()));" class="ADBcard__image" alt="" data-nosnippet="">
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div class="card-front__bt">
-                                                                <p class="card-front__text-view card-front__text-view--city">
-                                                                    <img src="~/img/logo/s_logo.png" onclick="PopupShow1();" class="ADBcard__image" alt="" data-nosnippet="">
-                                                                </p>
+                                                            <div class="card-back">
+                                                                <img src="@Url.Content(item.Management.ImagePath)" onclick="PopupShow(@(item.Management.Id.ToString()));" class="ADBcard__image imgg" alt="" data-nosnippet="">
+                                                                <h5>@item.Management.Name</h5>
+                                                                <p>@item.Management.Designation</p>
                                                             </div>
                                                         </div>
-                                                        <div class="card-back">
-                                                            <img src="~/img/management/Principal.jpeg" onclick="PopupShow1();" class="ADBcard__image imgg" alt="" data-nosnippet="">
-                                                            <h5>Dr. G. Raja Priya</h5>
-                                                            <p>Principal</p>
+                                                    </div>
+
+                                                    <div class="inside-page">
+                                                        <div class="inside-page__container">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
+
+                                                                @foreach (var content in item.lstManagementContent)
+                                                                {
+                                                                    <p class="teamdetails-info text-black fs-22">
+                                                                        @content.Content
+                                                                    </p>
+                                                                }
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="inside-page">
-                                                    <div class="inside-page__container">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Welcome to Sree Muthukumaraswamy College, an institution committed to academic excellence and holistic development.
-                                                                Our college strives to empower students with knowledge, skills and values that prepare them for a dynamic world.
-                                                            </p>
-
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                We foster an environment that encourages innovation, discipline and continuous learning.
-                                                                Our dedicated faculty and supportive staff work together to nurture the potential of every student.
-                                                            </p>
-
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                We remain focused on creating opportunities that enhance both academic and personal growth.
-                                                                I warmly invite you to explore our vibrant campus community and engage in our journey toward excellence.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </section>
                                         </section>
-                                    </section>
-                                </main>
+                                    </main>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="modal fade modalteam" id="DivPopupShow2" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <main class="main">
-                                    <section class="card-area loaded">
-                                        <section class="card-section loaded">
-                                            <div class="card">
-                                                <div class="flip-card">
-                                                    <div class="flip-card__container">
-                                                        <div class="card-front">
-                                                            <div class="card-front__tp card-front__tp--city">
-                                                                <h2>Thiru.A.N.Suresh Kumar</h2>
-                                                                <h4>College Secretary</h4>
-                                                            </div>
-                                                            <div class="card-front__bt">
-                                                                <p class="card-front__text-view card-front__text-view--city">
-                                                                    <img src="~/img/logo/s_logo.png" onclick="PopupShow2();" class="ADBcard__image" alt="" data-nosnippet="">
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-back">
-                                                            <img src="~/img/management/CollegeSecretary.jpeg" onclick="PopupShow2();" class="ADBcard__image imgg" alt="" data-nosnippet="">
-                                                            <h5>Thiru.A.N.Suresh Kumar</h5>
-                                                            <p>College Secretary</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="inside-page">
-                                                    <div class="inside-page__container">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Sree Muthukumaraswamy College remains committed to delivering quality education that shapes responsible and capable individuals.
-                                                                As College Secretary, I strive to ensure smooth administration and effective support for all academic and developmental activities.
-                                                            </p>
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Our focus is on providing opportunities that encourage learning, leadership and holistic growth.
-                                                                With the cooperation of our dedicated faculty and staff, the college continues to progress towards greater excellence.
-                                                            </p>
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                I encourage every student to make the best use of the resources and pursue their goals with confidence and determination
-                                                            </p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </main>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade modalteam" id="DivPopupShow3" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <main class="main">
-                                    <section class="card-area loaded">
-                                        <section class="card-section loaded">
-                                            <div class="card">
-                                                <div class="flip-card">
-                                                    <div class="flip-card__container">
-                                                        <div class="card-front">
-                                                            <div class="card-front__tp card-front__tp--city">
-                                                                <h2>Thiru. R. Lakshmanaswamy</h2>
-                                                                <h4>S.M.D.Educational Society Secretary</h4>
-                                                            </div>
-                                                            <div class="card-front__bt">
-                                                                <p class="card-front__text-view card-front__text-view--city">
-                                                                    <img src="~/img/logo/s_logo.png" onclick="PopupShow3();" class="ADBcard__image" alt="" data-nosnippet="">
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-back">
-                                                            <img src="~/img/management/EducationalSecretary.jpeg" onclick="PopupShow3();" class="ADBcard__image imgg" alt="" data-nosnippet="">
-                                                            <h5>Thiru. R. Lakshmanaswamy</h5>
-                                                            <p>S.M.D.Educational Society Secretary</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="inside-page">
-                                                    <div class="inside-page__container">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Sree Muthukumaraswamy College remains committed to quality, value-driven education, fostering an ecosystem of learning, integrity and growth.
-                                                            </p>
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                We uplift academic rigour, cultural vibrance and ethical leadership, empowering you to excel. With dedicated faculty, we drive progress.
-                                                            </p>
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Wishing you a fruitful, inspiring academic journey.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </main>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade modalteam" id="DivPopupShow4" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <main class="main">
-                                    <section class="card-area loaded">
-                                        <section class="card-section loaded">
-                                            <div class="card">
-                                                <div class="flip-card">
-                                                    <div class="flip-card__container">
-                                                        <div class="card-front">
-                                                            <div class="card-front__tp card-front__tp--city">
-                                                                <h2>Thiru. A.P.Ashok Kumar</h2>
-                                                                <h4>S.M.D.Educational Society Chairman</h4>
-                                                            </div>
-                                                            <div class="card-front__bt">
-                                                                <p class="card-front__text-view card-front__text-view--city">
-                                                                    <img src="~/img/logo/s_logo.png" onclick="PopupShow4();" class="ADBcard__image" alt="" data-nosnippet="">
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-back">
-                                                            <img src="~/img/management/EducationalChairman.jpeg" onclick="PopupShow4();" class="ADBcard__image imgg" alt="" data-nosnippet="">
-                                                            <h5>Thiru. A.P.Ashok Kumar</h5>
-                                                            <p>S.M.D.Educational Society Chairman</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="inside-page">
-                                                    <div class="inside-page__container">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Welcome to Sree Muthukumaraswamy College, an institution dedicated to quality education and character building.
-                                                                Our goal is to provide a nurturing environment where students grow academically and personally.
-                                                            </p>
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                We are committed to offering innovative programs that meet the evolving needs of society.
-                                                                With the support of our experienced faculty and staff, we strive to shape responsible and confident individuals.
-                                                            </p>
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                The college continues to uphold its legacy of excellence through continuous improvement and student-centric initiatives.
-                                                                I encourage all students to make full use of the opportunities provided and pursue their goals with determination.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </main>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade modalteam" id="DivPopupShow5" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <main class="main">
-                                    <section class="card-area loaded">
-                                        <section class="card-section loaded">
-                                            <div class="card">
-                                                <div class="flip-card">
-                                                    <div class="flip-card__container">
-                                                        <div class="card-front">
-                                                            <div class="card-front__tp card-front__tp--city">
-                                                                <h2>Dr. R. Anandhy</h2>
-                                                                <h4>Vice Principal</h4>
-                                                            </div>
-                                                            <div class="card-front__bt">
-                                                                <p class="card-front__text-view card-front__text-view--city">
-                                                                    <img src="~/img/logo/s_logo.png" onclick="PopupShow5();" class="ADBcard__image" alt="" data-nosnippet="">
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-back">
-                                                            <img src="~/img/management/VicePrincipal.jpeg" onclick="PopupShow5();" class="ADBcard__image imgg" alt="" data-nosnippet="">
-                                                            <h5>Dr. R. Anandhy</h5>
-                                                            <p>Vice Principal</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="inside-page">
-                                                    <div class="inside-page__container">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                Is my pleasure to welcome you to our college, an institution dedicated to quality education and the overall development of students. We aim to create a positive learning environment that encourages knowledge, discipline, creativity and ethical values. Our focus is not only on academic excellence but also on shaping responsible and confident individuals.
-                                                            </p>
-
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                With the support of dedicated faculty and a student-friendly campus, we strive to provide opportunities for skill development, research and co-curricular activities. We are committed to guiding our students to face future challenges successfully and to contribute meaningfully to society. Together, let us work towards continuous growth and excellence.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </main>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade modalteam" id="DivPopupShow6" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <main class="main">
-                                    <section class="card-area loaded">
-                                        <section class="card-section loaded">
-                                            <div class="card">
-                                                <div class="flip-card">
-                                                    <div class="flip-card__container">
-                                                        <div class="card-front">
-                                                            <div class="card-front__tp card-front__tp--city">
-                                                                <h2>Dr. V. Selvanathan</h2>
-                                                                <h4>Academic Advisor</h4>
-                                                            </div>
-                                                            <div class="card-front__bt">
-                                                                <p class="card-front__text-view card-front__text-view--city">
-                                                                    <img src="~/img/logo/s_logo.png" onclick="PopupShow6();" class="ADBcard__image" alt="" data-nosnippet="">
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-back">
-                                                            <img src="~/img/management/AcademicAdvisor.jpeg" onclick="PopupShow6();" class="ADBcard__image imgg" alt="" data-nosnippet="">
-                                                            <h5>Dr. V. Selvanathan</h5>
-                                                            <p>Academic Advisor</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="inside-page">
-                                                    <div class="inside-page__container">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 w-75 pt-20">
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                As the Academic Advisor, my foremost responsibility is to support and guide students in achieving their academic and personal goals. Our institution is committed to providing a learner-centric environment where students are encouraged to explore their interests, build strong academic foundations and develop essential skills for their future careers. Through proper guidance, structured academic planning and continuous mentoring, we aim to help every student realize their true potential.
-                                                            </p>
-
-                                                            <p class="teamdetails-info text-black fs-22">
-                                                                I encourage students to actively engage in their learning process, seek guidance whenever required and make the best use of the academic and co-curricular opportunities provided by the college. With dedication, discipline and the right support system, success becomes a shared journey. I wish all our students a meaningful, enriching and successful academic experience.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </main>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                }
             </div>
         </div>
     </div>
@@ -449,45 +123,10 @@
 
     });
 
-    function PopupShow1()
+    function PopupShow(Id)
     {
-        $('#DivPopupShow1  .flip-card__container').removeClass("clsopen");
-        $('#DivPopupShow1').modal('show');
-        setTimeout(function () { $('#DivPopupShow1 .flip-card__container').addClass("clsopen") }, 1000);
-    }
-    
-    function PopupShow2()
-    {
-        $('#DivPopupShow2  .flip-card__container').removeClass("clsopen");
-        $('#DivPopupShow2').modal('show');
-        setTimeout(function () { $('#DivPopupShow2 .flip-card__container').addClass("clsopen") }, 1000);
-    }
-
-    function PopupShow3()
-    {
-        $('#DivPopupShow3  .flip-card__container').removeClass("clsopen");
-        $('#DivPopupShow3').modal('show');
-        setTimeout(function () { $('#DivPopupShow3 .flip-card__container').addClass("clsopen") }, 1000);
-    }
-
-    function PopupShow4()
-    {
-        $('#DivPopupShow4  .flip-card__container').removeClass("clsopen");
-        $('#DivPopupShow4').modal('show');
-        setTimeout(function () { $('#DivPopupShow4 .flip-card__container').addClass("clsopen") }, 1000);
-    }
-
-    function PopupShow5()
-    {
-        $('#DivPopupShow5  .flip-card__container').removeClass("clsopen");
-        $('#DivPopupShow5').modal('show');
-        setTimeout(function () { $('#DivPopupShow5 .flip-card__container').addClass("clsopen") }, 1000);
-    }
-
-    function PopupShow6()
-    {
-        $('#DivPopupShow6  .flip-card__container').removeClass("clsopen");
-        $('#DivPopupShow6').modal('show');
-        setTimeout(function () { $('#DivPopupShow6 .flip-card__container').addClass("clsopen") }, 1000);
+        $('#DivPopupShow_'+Id+'  .flip-card__container').removeClass("clsopen");
+        $('#DivPopupShow_'+Id+'').modal('show');
+        setTimeout(function () { $('#DivPopupShow_'+Id+' .flip-card__container').addClass("clsopen") }, 1000);
     }
 </script>

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Models
+@model NIRFModel
+
+@{
     ViewData["Title"] = "NIRF";
 }
 
@@ -66,30 +69,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Institution Name</td>
-                            <td><strong>Sree Muthukumaraswamy College</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Participating Year</td>
-                            <td>2024</td>
-                        </tr>
-                        <tr>
-                            <td>Category</td>
-                            <td>College</td>
-                        </tr>
-                        <tr>
-                            <td>Application Status</td>
-                            <td>Submitted to NIRF Portal</td>
-                        </tr>
-                        <tr>
-                            <td>Coordinator Name</td>
-                            <td>Dr. R. Priya – NIRF Coordinator</td>
-                        </tr>
-                        <tr>
-                            <td>Email ID</td>
-                            <td>nirf@sreemuthukumaraswamycollege.edu.in</td>
-                        </tr>
+                        @foreach (var item in Model.LstNIRFDetails)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -109,24 +95,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2024</td>
-                            <td>College</td>
-                            <td>Participated</td>
-                            <td>Under Evaluation</td>
-                        </tr>
-                        <tr>
-                            <td>2023</td>
-                            <td>College</td>
-                            <td>Submitted</td>
-                            <td>Awaiting Results</td>
-                        </tr>
-                        <tr>
-                            <td>2022</td>
-                            <td>College</td>
-                            <td>Participated</td>
-                            <td>Not Ranked</td>
-                        </tr>
+                        @foreach (var item in Model.LstNIRFDocumentRanking)
+                        {
+                            <tr>
+                                <td>@item.Year</td>
+                                <td>@item.Category</td>
+                                <td>@item.ParticipationStatus</td>
+                                <td>@item.Score</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -146,33 +123,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>NIRF Data Submission</td>
-                            <td>2024</td>
-                            <td>
-                                <a href="~/pdf/nirf/nirf-data-2024.pdf" class="default-btn btn">
-                                    <i class="bi bi-file-earmark-pdf"></i> Download
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>NIRF Report Summary</td>
-                            <td>2023</td>
-                            <td>
-                                <a href="~/pdf/nirf/nirf-summary-2023.pdf" class="default-btn btn">
-                                    <i class="bi bi-file-earmark-pdf"></i> Download
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Participation Certificate</td>
-                            <td>2022</td>
-                            <td>
-                                <a href="~/pdf/nirf/nirf-certificate-2022.pdf" class="default-btn btn">
-                                    <i class="bi bi-file-earmark-pdf"></i> Download
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach (var item in Model.LstNIRFDocument)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Year</td>
+                                <td>
+                                    <a href="@Url.Content(item.Path)" class="default-btn btn">
+                                        <i class="bi bi-file-earmark-pdf"></i> Download
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

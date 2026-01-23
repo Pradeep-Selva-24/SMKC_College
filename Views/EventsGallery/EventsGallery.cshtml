@@ -1,4 +1,7 @@
-﻿@{
+﻿@using College.Entities
+@model List<PageMedia>
+
+@{
     ViewData["Title"] = "Events & Gallery";
 }
 
@@ -19,102 +22,34 @@
 <div class="events-area pt-100 pb-70">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-events-card style-4">
-                    <div class="events-image">
-                        <img src="~/img/events/events-1.jpg" alt="Image">
-                        <div class="date">
-                            <span>28</span>
-                            <p>Mar</p>
+
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-events-card style-4">
+                        <div class="events-image">
+                            <img src="@Url.Content(item.ImagePath)" alt="Image">
+                            <div class="date">
+
+                                @{
+                                    var date = item.Date ?? DateTime.Now;
+                                    var day = date.Day;
+                                    var month = date.ToString("MMM");
+                                }
+
+                                <span>@day</span>
+                                <p>@month</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="events-content">
-                        <div class="mt-20">
-                            <h3>Planning And Facilitating Effective Meetings</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-events-card style-4">
-                    <div class="events-image">
-                        <img src="~/img/events/events-2.jpg" alt="Image">
-                        <div class="date">
-                            <span>29</span>
-                            <p>Mar</p>
-                        </div>
-                    </div>
-                    <div class="events-content">
-                        <div class="mt-20">
-                            <h3>Regular WordPress Meetup In New Jersey, USA</h3>
+                        <div class="events-content">
+                            <div class="mt-20">
+                                <h3>@item.Heading</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-events-card style-4">
-                    <div class="events-image">
-                        <img src="~/img/events/events-3.jpg" alt="Image">
-                        <div class="date">
-                            <span>30</span>
-                            <p>Mar</p>
-                        </div>
-                    </div>
-                    <div class="events-content">
-                        <div class="mt-20">
-                            <h3>Monday Night Concert In Lake View,Mountain City</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-events-card style-4">
-                    <div class="events-image">
-                        <img src="~/img/events/events-4.jpg" alt="Image">
-                        <div class="date">
-                            <span>30</span>
-                            <p>Mar</p>
-                        </div>
-                    </div>
-                    <div class="events-content">
-                        <div class="mt-20">
-                            <h3>University Admissions Could Face Emergency Controls</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-events-card style-4">
-                    <div class="events-image">
-                        <img src="~/img/events/events-5.jpg" alt="Image">
-                        <div class="date">
-                            <span>30</span>
-                            <p>Mar</p>
-                        </div>
-                    </div>
-                    <div class="events-content">
-                        <div class="mt-20">
-                            <h3>The Complete Digital Marketing Course - 12 Courses In 1</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-events-card style-4">
-                    <div class="events-image">
-                        <img src="~/img/events/events-6.jpg" alt="Image">
-                        <div class="date">
-                            <span>30</span>
-                            <p>Mar</p>
-                        </div>
-                    </div>
-                    <div class="events-content">
-                        <div class="mt-20">
-                            <h3>The Python Mega Course: Build 10 Real World Applications</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
+            
         </div>
     </div>
 </div>

@@ -1,36 +1,18 @@
-﻿@{
+﻿@using College.Models
+@model HomeModel
+
+@{
     ViewData["Title"] = "Home";
 }
 
 <script src="~/js/owl.carousel.min.js"></script>
 <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
 <!--Start Banner Area-->
-<style>
-    .slider-content.style2 h2{
-        color :white !important;
-    }
-    .slider-content.style2{
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .slider-content.style2 p{
-            color: white !important;
-    }
-</style>
-<div class="banner-area">
-    <div class="hero-slider owl-carousel owl-theme">
-        <div class="slider-item banner-bg-7">
-            <div class="container-fluid">
-                <div class="slider-content style2">
-                    <h2>Welcome to</h2>
-                    <h2>Sree Muthukumaraswamy College</h2>
-                    <a href="~/AdmissionProcedure/AdmissionProcedure" class="default-btn btn">Start a Journey <i class="flaticon-next"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@{
+    @await Html.PartialAsync("Banner", Model.LstBanner);
+}
 <!--End Banner Area-->
+
 <!--Start Education Area-->
 <div class="eduction-area pb-70">
     <div class="container-fluid p-0">
@@ -38,40 +20,48 @@
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" data-aos-once="true">
                 <div class="single-education-card bg-1">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-college"></i>
-                        </div>
-                        <a href="#div-news"><h3>Latest News</h3></a>
+                        <a href="#div-news">
+                            <div class="icon">
+                                <i class="flaticon-college"></i>
+                            </div>
+                            <h3>Latest News</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400" data-aos-once="true">
                 <div class="single-education-card bg-2">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-student-with-graduation-cap"></i>
-                        </div>
-                        <a href="~/ProgrammesOffered/ProgrammesOffered"><h3>Courses</h3></a>
+                        <a href="~/ProgrammesOffered/ProgrammesOffered">
+                            <div class="icon">
+                                <i class="flaticon-student-with-graduation-cap"></i>
+                            </div>
+                            <h3>Courses</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="600" data-aos-once="true">
                 <div class="single-education-card bg-3">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-college-graduation"></i>
-                        </div>
-                        <a href="~/Placement/Placement"><h3>Placement</h3></a>
+                        <a href="~/Placement/Placement">
+                            <div class="icon">
+                                <i class="flaticon-college-graduation"></i>
+                            </div>
+                            <h3>Placement</h3>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 aos-init" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="800" data-aos-once="true">
                 <div class="single-education-card bg-4">
                     <div class="edication-content">
-                        <div class="icon">
-                            <i class="flaticon-athletics"></i>
-                        </div>
-                        <a href="#div-campus-information"><h3>Campus Information</h3></a>
+                        <a href="#div-campus-information">
+                            <div class="icon">
+                                <i class="flaticon-athletics"></i>
+                            </div>
+                            <h3>Campus Information</h3>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -135,7 +125,7 @@
                             <div class="col-lg-4 col-4">
                                 <div class="counter-card">
                                     <h1>
-                                        <span class="odometer odometer-auto-theme" data-count="25">
+                                        <span class="odometer odometer-auto-theme" data-count="@Model.YearsOfExperience">
                                             <div class="odometer-inside">
                                                 <span class="odometer-digit">
                                                     <span class="odometer-digit-spacer">8</span>
@@ -158,7 +148,7 @@
                             <div class="col-lg-4 col-4">
                                 <div class="counter-card">
                                     <h1>
-                                        <span class="odometer odometer-auto-theme" data-count="20">
+                                        <span class="odometer odometer-auto-theme" data-count="@Model.Students">
                                             <div class="odometer-inside">
                                                 <span class="odometer-digit">
                                                     <span class="odometer-digit-spacer">8</span>
@@ -180,7 +170,7 @@
                             <div class="col-lg-4 col-4">
                                 <div class="counter-card">
                                     <h1>
-                                        <span class="odometer odometer-auto-theme" data-count="99">
+                                        <span class="odometer odometer-auto-theme" data-count="@Model.StaffMembers">
                                             <div class="odometer-inside">
                                                 <span class="odometer-digit">
                                                     <span class="odometer-digit-spacer">8</span>
@@ -201,7 +191,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="default-btn btn">Start your application<i class="flaticon-next"></i></a>
+                    <a href="#" class="default-btn btn clsApplication">Start your application<i class="flaticon-next"></i></a>
                 </div>
             </div>
         </div>
@@ -211,340 +201,33 @@
 
 <!--Management Area-->
 @{
-    Html.RenderPartial("Management");
+    @await Html.PartialAsync("Management", Model.LstManagementDTO);
 }
 <!--Management Area-->
 
 <!--Start Campus Life Area-->
-<div class="campus-life-area ptb-100">
-    <div class="container">
-        <div class="section-title mb-4">
-            <h2>Campus Life</h2>
-            <p>Experience a vibrant campus life that blends academics, culture, activities and personal growth.</p>
-        </div>
-        <div class="campus-slider2 owl-carousel owl-theme owl-loaded owl-drag">
-
-            <div class="owl-stage-outer">
-                <div class="owl-stage" style="transition: all; width: 4421px; transform: translate3d(-884px, 0px, 0px);">
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-campus-card style-3">
-                            <div class="img">
-                                <img class="clsImgStyle" src="~/img/campuslife/campuslife_1.jpeg" alt="Image">
-                            </div>
-                            @* <div class="campus-content">
-                                <span>Campus Life</span>
-                                <h3>
-                                    Student Activities & Events<br>
-                                    Experience SMKC Culture
-                                </h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-campus-card style-3">
-                            <div class="img">
-                                <img class="clsImgStyle" src="~/img/campuslife/campuslife_2.jpeg" alt="Image">
-                            </div>
-                            @* <div class="campus-content">
-                                <span>Campus Life</span>
-                                <h3>
-                                    Clubs, Societies & Communities<br>
-                                    Connect • Collaborate • Grow
-                                </h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-campus-card style-3">
-                            <div class="img">
-                                <img class="clsImgStyle" src="~/img/campuslife/campuslife_3.jpeg" alt="Image">
-                            </div>
-                            @* <div class="campus-content">
-                                <span>Campus Life</span>
-                                <h3>
-                                    Modern Campus Facilities<br>
-                                    A Space Built For Learning
-                                </h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-campus-card style-3">
-                            <div class="img">
-                                <img class="clsImgStyle" src="~/img/campuslife/campuslife_4.jpeg" alt="Image">
-                            </div>
-                            @* <div class="campus-content">
-                                <span>Campus Life</span>
-                                <h3>
-                                    Hostel & Residential Life<br>
-                                    A Home Away From Home
-                                </h3>
-                            </div> *@
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clsowlnave owl-nav">
-                <button type="button" role="presentation" class="owl-prev"><i class="ri-arrow-left-line"></i></button>
-                <button type="button" role="presentation" class="owl-next"><i class="ri-arrow-right-line"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
+@{
+    @await Html.PartialAsync("CampusLife", Model.LstCampusLife);
+}
 <!--End Campus Life Area-->
+
 <!--Start Sports Area-->
-<div class="health-care-area pt-100 pb-70 bg-f4f6f9">
-    <div class="container">
-        <div class="section-title mb-4">
-            <h2>Sports</h2>
-            <p>Our sports programs build teamwork, discipline, confidence and a strong competitive spirit among students.</p>
-        </div>
-        <div class="health-care-slider owl-carousel owl-theme owl-loaded owl-drag">
-
-            <div class="owl-stage-outer">
-                <div class="owl-stage" style="transform: translate3d(-1326px, 0px, 0px); transition: all; width: 4421px;">
-
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-1.jpg" alt="Image" />
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>Making a meaningful difference in patients’ lives.</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-2.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>When Life Depends on Medical Technology</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-3.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>Happiness begins with good health</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-4.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>When Life Depends on Medical Technology</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-5.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>When Life Depends on Medical Technology</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-6.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>When Life Depends on Medical Technology</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-7.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>When Life Depends on Medical Technology</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-health-care-card style-3">
-                            <div class="img">
-                                <img src="~/img/sports/sports-8.jpg" alt="Image">
-                            </div>
-                            @* <div class="health-care-content">
-                                <h3>When Life Depends on Medical Technology</h3>
-                            </div> *@
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clsowlnave owl-nav">
-                <button type="button" role="presentation" class="owl-prev"><i class="ri-arrow-left-line"></i></button>
-                <button type="button" role="presentation" class="owl-next"><i class="ri-arrow-right-line"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
+@{
+    @await Html.PartialAsync("Sports", Model.LstSports);
+}
 <!--End Sports Area-->
+
 <!--Start News Area-->
-<div class="events-area pt-100 pb-70 clsLatestNews" id="div-news">
-    <div class="container">
-        <div class="section-title mb-4">
-            <h2>Latest News</h2>
-            <p>Stay updated with the latest announcements, events, achievements and important notifications from our institution.</p>
-        </div>
-        <div class="events-slider owl-carousel owl-theme owl-loaded owl-drag">
-
-            <div class="owl-stage-outer">
-                <div class="owl-stage" style="transform: translate3d(-1326px, 0px, 0px); transition: all; width: 4421px;">
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-events-card style-3 mlr-5">
-                            <div class="events-image">
-                                <img src="~/img/latestnews/latestnews-1.png" alt="Image">
-                            </div>
-                            <div class="events-content">
-                                <h3>OVIYA SARADHA S</h3>
-                                <p>
-                                    <strong>Register Number:</strong> 212204161<br>
-                                    <strong>Overall Percentage:</strong> 91.39%<br>
-                                    <strong>Result:</strong> First Class — Exemplary
-                                </p>
-
-                                <div class="date-and-read-more">
-                                    <ul class="d-flex justify-content-between">
-                                        <li>
-                                            <p><i class="ri-calendar-2-line"></i>April 11, 2024</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-events-card style-3 mlr-5">
-                            <div class="events-image">
-                                <img src="~/img/latestnews/latestnews-2.jpg" alt="Image">
-                            </div>
-                            <div class="events-content">
-                                <h3>Free Eye & General Health Camp</h3>
-                                <p>
-                                    On behalf of our beloved late Founder, Thiru. P. Balasubramaniyam,<br>
-                                    Sree Muthukumaraswamy College organized a Free Eye &amp; General Health Camp<br>
-                                    to serve our community with care and compassion.
-                                </p>
-                                <div class="date-and-read-more">
-                                    <ul class="d-flex justify-content-between">
-                                        <li>
-                                            <p><i class="ri-calendar-2-line"></i>April 11, 2024</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-events-card style-3 mlr-5">
-                            <div class="events-image">
-                                <img src="~/img/latestnews/latestnews-3.jpg" alt="Image">
-                            </div>
-                            <div class="events-content">
-                                <h3>Cancer Awareness Rally</h3>
-                                <p title="On 8th November 2025, we conducted a Cancer Awareness Rally to educate and empower our community towards a cancer-free future.">
-                                    On 8th November 2025, we conducted a Cancer Awareness Rally<br>
-                                    to educate and empower our community towards a cancer-free future.
-                                </p>
-                                <div class="date-and-read-more">
-                                    <ul class="d-flex justify-content-between">
-                                        <li>
-                                            <p><i class="ri-calendar-2-line"></i>November 8, 2025</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 412.007px; margin-right: 30px;">
-                        <div class="single-events-card style-3 mlr-5">
-                            <div class="events-image">
-                                <img src="~/img/latestnews/latestnews-4.jpg" alt="Image">
-                            </div>
-                            <div class="events-content">
-                                <h3>The Installation Ceremony of the Rotaract Club</h3>
-                                <p>
-                                    The Installation Ceremony of the Rotaract Club of Sree Muthukumaraswamy College
-                                    for the academic year 2025–2026 was held on 7th November 2025 with great enthusiasm
-                                    and pride.
-                                </p>
-                                <div class="date-and-read-more">
-                                    <ul class="d-flex justify-content-between">
-                                        <li>
-                                            <p><i class="ri-calendar-2-line"></i>April 11, 2024</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+@{
+    @await Html.PartialAsync("LatestNews", Model.LstLatestNews);
+}
 <!--End News Area-->
 
 <script>
-    // Preloader
-    $(window).on('load', function () {
-        setTimeout(function () {
-            $('.clsPreloaderArea').fadeOut();
-        }, 1000);
-    });
-
     $(document).ready(function(){
-        $('.clsPreloaderArea').show();
         $("#navbarSupportedContent .nav-link").removeClass("active");
         $("#navbarSupportedContent .clsMenu-Home").addClass("active");
     });
 
-    // Campus-slider2
-    $('.campus-slider2').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: true,
-        thumbs: false,
-        dots: false,
-        center: true,
-        autoplay: false,
-        smartSpeed: 1000,
-        autoplayHoverPause: true,
-        autoplayTimeout: 2500,
-        navText: [
-            '<i class="ri-arrow-left-line"></i>',
-            '<i class="ri-arrow-right-line"></i>',
-        ],
-        responsive:{
-            0:{
-                items:1,
-            },
-            768:{
-                items:2,
-            },
-            992:{
-                items:3,
-            },
-            1200:{
-                items:3,
-            },
-
-        }
-    });
+    
 </script>
