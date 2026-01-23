@@ -27,43 +27,53 @@ namespace College.Controllers
             return View();
         }
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Banner(
-    IFormFile bannerImage,
-    string heading,
-    string shortContent,
-    int displayOrder)
+        IFormFile bannerImage,
+        string category,
+        string heading,
+        string shortContent,
+        int displayOrder)
         {
-            if (bannerImage == null || bannerImage.Length == 0)
+            try
             {
-                return Json(new { message = "Image upload failed" });
+                if (string.IsNullOrEmpty(category))
+                    return Json(new { message = "Category is required" });
+
+                if (bannerImage == null || bannerImage.Length == 0)
+                    return Json(new { message = "Image upload failed" });
+
+                // ✅ Category Folder Upload
+                var uploadPath = Path.Combine(_env.WebRootPath, "uploads", "banners", category);
+                Directory.CreateDirectory(uploadPath);
+
+                var fileName = $"{Guid.NewGuid()}.jpg";
+                var filePath = Path.Combine(uploadPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await bannerImage.CopyToAsync(stream);
+                }
+
+                var banner = new PageMedia
+                {
+                    Category = category,
+                    ImagePath = $"/uploads/banners/{category}/{fileName}",
+                    Heading = heading,
+                    ShortContent = shortContent,
+                    DisplayOrder = displayOrder,
+                    Date = DateTime.Now
+                };
+
+                await _repo.AddAsync(banner);
+                await _repo.SaveAsync();
+
+                return Json(new { message = "Banner uploaded successfully" });
             }
-
-            var uploadPath = Path.Combine(_env.WebRootPath, "uploads", "banners");
-            Directory.CreateDirectory(uploadPath);
-
-            var fileName = $"{Guid.NewGuid()}.jpg";
-            var filePath = Path.Combine(uploadPath, fileName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            catch
             {
-                await bannerImage.CopyToAsync(stream);
+                return Json(new { message = "Something went wrong while uploading" });
             }
-
-            var banner = new PageMedia
-            {
-                Category = "HOME_BANNER",
-                ImagePath = "/uploads/banners/" + fileName,
-                Heading = heading,
-                ShortContent = shortContent,
-                DisplayOrder = displayOrder,
-                Date = DateTime.Now
-                //IsActive = true
-            };
-
-            await _repo.AddAsync(banner);
-            await _repo.SaveAsync();
-
-            return Json(new { message = "Banner uploaded successfully" });
         }
 
     }

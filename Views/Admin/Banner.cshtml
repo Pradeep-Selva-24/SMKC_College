@@ -8,6 +8,18 @@
 
 <div id="msg"></div>
 
+<!-- ✅ Category Dropdown -->
+<div class="mb-3">
+    <label class="form-label">Category</label>
+    <select class="form-control" id="category">
+        <option value="">-- Select Category --</option>
+        <option value="HOME_BANNER">Home Banner (1920x1080)</option>
+        <option value="EVENT_BANNER">Event Banner (1200x600)</option>
+        <option value="NOTICE_BANNER">Notice Banner (800x800)</option>
+        <option value="GALLERY_BANNER">Gallery Banner (1024x768)</option>
+    </select>
+</div>
+
 <div class="mb-3">
     <label class="form-label">Banner Image</label>
     <input type="file" class="form-control" id="imageInput" accept="image/*">
@@ -41,9 +53,31 @@
     const input = document.getElementById('imageInput');
     const preview = document.getElementById('preview');
 
+    // ✅ Category-wise crop size settings
+    const categorySettings = {
+        "HOME_BANNER": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
+        "EVENT_BANNER": { width: 1200, height: 600, aspectRatio: 2 / 1 },
+        "NOTICE_BANNER": { width: 800, height: 800, aspectRatio: 1 / 1 },
+        "GALLERY_BANNER": { width: 1024, height: 768, aspectRatio: 4 / 3 }
+    };
+
+    function getSelectedSetting() {
+        const category = document.getElementById("category").value;
+        return categorySettings[category];
+    }
+
+    // ✅ On Image Select
     input.addEventListener('change', e => {
         const file = e.target.files[0];
         if (!file) return;
+
+        const setting = getSelectedSetting();
+
+        if (!setting) {
+            alert("Please select Category first!");
+            input.value = "";
+            return;
+        }
 
         const reader = new FileReader();
         reader.onload = () => {
@@ -53,31 +87,59 @@
             if (cropper) cropper.destroy();
 
             cropper = new Cropper(preview, {
-                aspectRatio: 16 / 9,
+                aspectRatio: setting.aspectRatio,
                 viewMode: 1
             });
         };
         reader.readAsDataURL(file);
     });
 
+    // ✅ Reset Form After Upload
+    function resetForm() {
+        document.getElementById("category").value = "";
+        document.getElementById("heading").value = "";
+        document.getElementById("shortContent").value = "";
+        document.getElementById("displayOrder").value = 1;
+        document.getElementById("imageInput").value = "";
+
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+
+        preview.src = "";
+        preview.style.display = "none";
+    }
+
+    // ✅ Save Banner
     function saveBanner() {
+        const category = document.getElementById("category").value;
+
+        if (!category) {
+            alert("Please select Category");
+            return;
+        }
+
         if (!cropper) {
             alert("Please select and crop an image");
             return;
         }
 
+        const setting = getSelectedSetting();
+
         cropper.getCroppedCanvas({
-            width: 1920,
-            height: 1080
+            width: setting.width,
+            height: setting.height
         }).toBlob(blob => {
 
             const formData = new FormData();
             formData.append("bannerImage", blob, "banner.jpg");
+            formData.append("category", category);
             formData.append("heading", document.getElementById("heading").value);
             formData.append("shortContent", document.getElementById("shortContent").value);
             formData.append("displayOrder", document.getElementById("displayOrder").value);
 
-            fetch("/PageMedia/Banner", {
+            fetch("/Admin/Banner", {
                 method: "POST",
                 body: formData
             })
@@ -85,11 +147,15 @@
             .then(data => {
                 document.getElementById("msg").innerHTML =
                     `<div class="alert alert-success">${data.message}</div>`;
+
+                // ✅ Auto reset after success
+                resetForm();
             })
             .catch(() => {
                 document.getElementById("msg").innerHTML =
                     `<div class="alert alert-danger">Upload failed</div>`;
             });
+
         }, "image/jpeg", 0.9);
     }
 </script>
