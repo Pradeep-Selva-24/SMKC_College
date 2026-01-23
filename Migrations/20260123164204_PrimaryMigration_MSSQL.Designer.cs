@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Migrations
 {
     [DbContext(typeof(CLGDbContext))]
-    [Migration("20260118100233_PrimaryMigration_MYSQL")]
-    partial class PrimaryMigration_MYSQL
+    [Migration("20260123164204_PrimaryMigration_MSSQL")]
+    partial class PrimaryMigration_MSSQL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,9 +21,9 @@ namespace College.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("College.Entities.AQARReport", b =>
                 {
@@ -32,33 +32,33 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AcademicYear")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_AcademicYear");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("FilePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_FilePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<int>("Order")
@@ -67,16 +67,16 @@ namespace College.Migrations
 
                     b.Property<string>("ReportTitle")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ReportTitle");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.AQARReport", (string)null);
+                    b.ToTable("AQARReport", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.CampusInfo", b =>
@@ -86,11 +86,11 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Category");
 
                     b.Property<int>("Count")
@@ -99,28 +99,28 @@ namespace College.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.CampusInfo", (string)null);
+                    b.ToTable("CampusInfo", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.ClubsDetails", b =>
@@ -130,11 +130,11 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Category");
 
                     b.Property<int>("ClubsMasterId")
@@ -143,11 +143,11 @@ namespace College.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<int>("DisplayOrder")
@@ -156,36 +156,36 @@ namespace College.Migrations
 
                     b.Property<string>("Heading")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Heading");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ImagePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("ShortContent")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ShortContent");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClubsMasterId");
 
-                    b.ToTable("CLG.ClubsDetails", (string)null);
+                    b.ToTable("ClubsDetails", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.ClubsMaster", b =>
@@ -195,25 +195,25 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Clubs")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Clubs");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Description");
 
                     b.Property<int>("DisplayOrder")
@@ -222,24 +222,24 @@ namespace College.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_FullName");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.ClubsMaster", (string)null);
+                    b.ToTable("ClubsMaster", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.DepartmentsDetails", b =>
@@ -249,20 +249,20 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Category");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<int>("DepartmentsMasterId")
@@ -275,36 +275,36 @@ namespace College.Migrations
 
                     b.Property<string>("Heading")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Heading");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ImagePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("ShortContent")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ShortContent");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentsMasterId");
 
-                    b.ToTable("CLG.DepartmentsDetails", (string)null);
+                    b.ToTable("DepartmentsDetails", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.DepartmentsMaster", b =>
@@ -314,43 +314,43 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Category");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Department")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Department");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Description");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ImagePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<int>("Order")
@@ -358,7 +358,7 @@ namespace College.Migrations
                         .HasColumnName("I_Order");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.Property<int>("StudentCount")
@@ -367,12 +367,12 @@ namespace College.Migrations
 
                     b.Property<string>("SyllabusPath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_SyllabusPath");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.DepartmentsMaster", (string)null);
+                    b.ToTable("DepartmentsMaster", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.DepartmentsMembers", b =>
@@ -382,15 +382,15 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<int>("DepartmentsMasterId")
@@ -399,25 +399,25 @@ namespace College.Migrations
 
                     b.Property<string>("Designation")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Designation");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ImagePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<int>("Order")
@@ -425,14 +425,14 @@ namespace College.Migrations
                         .HasColumnName("I_Order");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentsMasterId");
 
-                    b.ToTable("CLG.DepartmentsMembers", (string)null);
+                    b.ToTable("DepartmentsMembers", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.IQACMembers", b =>
@@ -442,33 +442,33 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Designation")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Designation");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<int>("Order")
@@ -477,16 +477,16 @@ namespace College.Migrations
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Role");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.IQACMembers", (string)null);
+                    b.ToTable("IQACMembers", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.InstitutionPages", b =>
@@ -496,47 +496,47 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Content");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Heading")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Heading");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("PageType")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_PageType");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.InstitutionPages", (string)null);
+                    b.ToTable("InstitutionPages", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.Login", b =>
@@ -546,54 +546,54 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedOn");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("D_IsActive");
 
                     b.Property<DateTime>("LastLogin")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_LastLogin");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Password");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_UserId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.Login", (string)null);
+                    b.ToTable("Login", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.Management", b =>
@@ -603,20 +603,20 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Designation")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Designation");
 
                     b.Property<int>("DisplayOrder")
@@ -625,29 +625,29 @@ namespace College.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ImagePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.Management", (string)null);
+                    b.ToTable("Management", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.ManagementContent", b =>
@@ -657,20 +657,20 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Content");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<int>("ManagementId")
@@ -678,22 +678,22 @@ namespace College.Migrations
                         .HasColumnName("F_ManagementId");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ManagementId");
 
-                    b.ToTable("CLG.ManagementContent", (string)null);
+                    b.ToTable("ManagementContent", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.MenuMaster", b =>
@@ -703,38 +703,38 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Display")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("B_Display");
 
                     b.Property<string>("MenuName")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_MenuName");
 
                     b.Property<string>("MenuUrl")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_MenuUrl");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<int>("Order")
@@ -746,14 +746,14 @@ namespace College.Migrations
                         .HasColumnName("F_ParentMenuId");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentMenuId");
 
-                    b.ToTable("CLG.MenuMaster", (string)null);
+                    b.ToTable("MenuMaster", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.NACDetails", b =>
@@ -763,33 +763,33 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Description");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<int>("Order")
@@ -797,12 +797,12 @@ namespace College.Migrations
                         .HasColumnName("I_Order");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NACDetails", (string)null);
+                    b.ToTable("NACDetails", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.NACDocument", b =>
@@ -812,28 +812,28 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<int>("Order")
@@ -842,16 +842,16 @@ namespace College.Migrations
 
                     b.Property<string>("Path")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Path");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NACDocument", (string)null);
+                    b.ToTable("NACDocument", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.NIRFDetails", b =>
@@ -861,33 +861,33 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Description");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<int>("Order")
@@ -895,12 +895,12 @@ namespace College.Migrations
                         .HasColumnName("I_Order");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NIRFDetails", (string)null);
+                    b.ToTable("NIRFDetails", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.NIRFDocument", b =>
@@ -910,37 +910,37 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Name");
 
                     b.Property<string>("Path")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Path");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.Property<int>("Year")
@@ -949,7 +949,7 @@ namespace College.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NIRFDocument", (string)null);
+                    b.ToTable("NIRFDocument", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.NIRFDocumentRanking", b =>
@@ -959,42 +959,42 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Category");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("ParticipationStatus")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ParticipationStatus");
 
                     b.Property<string>("Score")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Score");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.Property<int>("Year")
@@ -1003,7 +1003,7 @@ namespace College.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.NIRFDocumentRanking", (string)null);
+                    b.ToTable("NIRFDocumentRanking", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.PageMedia", b =>
@@ -1013,24 +1013,24 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Category");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_Date");
 
                     b.Property<int>("DisplayOrder")
@@ -1038,33 +1038,33 @@ namespace College.Migrations
                         .HasColumnName("I_DisplayOrder");
 
                     b.Property<string>("Heading")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Heading");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ImagePath");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<string>("ShortContent")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ShortContent");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.PageMedia", (string)null);
+                    b.ToTable("PageMedia", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.SettingMaster", b =>
@@ -1074,42 +1074,42 @@ namespace College.Migrations
                         .HasColumnType("int")
                         .HasColumnName("I_Id");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_CreatedBy");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_CreatedDate");
 
                     b.Property<string>("Key")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Key");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_ModifiedBy");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("datetime2")
                         .HasColumnName("D_ModifiedDate");
 
                     b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)")
+                        .HasColumnType("bit")
                         .HasColumnName("B_Status");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("S_Value");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CLG.SettingMaster", (string)null);
+                    b.ToTable("SettingMaster", "CLG");
                 });
 
             modelBuilder.Entity("College.Entities.ClubsDetails", b =>

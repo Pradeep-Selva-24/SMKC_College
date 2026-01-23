@@ -8,7 +8,6 @@
 
 <div id="msg"></div>
 
-<!-- ✅ Category Dropdown -->
 <div class="mb-3">
     <label class="form-label">Category</label>
     <select class="form-control" id="category">
@@ -53,7 +52,6 @@
     const input = document.getElementById('imageInput');
     const preview = document.getElementById('preview');
 
-    // ✅ Category-wise crop size settings
     const categorySettings = {
         "HOME_BANNER": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
         "EVENT_BANNER": { width: 1200, height: 600, aspectRatio: 2 / 1 },
@@ -66,7 +64,6 @@
         return categorySettings[category];
     }
 
-    // ✅ On Image Select
     input.addEventListener('change', e => {
         const file = e.target.files[0];
         if (!file) return;
@@ -94,7 +91,6 @@
         reader.readAsDataURL(file);
     });
 
-    // ✅ Reset Form After Upload
     function resetForm() {
         document.getElementById("category").value = "";
         document.getElementById("heading").value = "";
@@ -111,7 +107,6 @@
         preview.style.display = "none";
     }
 
-    // ✅ Save Banner
     function saveBanner() {
         const category = document.getElementById("category").value;
 
@@ -148,7 +143,6 @@
                 document.getElementById("msg").innerHTML =
                     `<div class="alert alert-success">${data.message}</div>`;
 
-                // ✅ Auto reset after success
                 resetForm();
             })
             .catch(() => {

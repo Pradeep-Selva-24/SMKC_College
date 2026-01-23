@@ -4,15 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace College.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController(IGenericRepository<PageMedia> repo, IWebHostEnvironment env) : Controller
     {
-        private readonly IGenericRepository<PageMedia> _repo;
-        private readonly IWebHostEnvironment _env;
-        public AdminController(IGenericRepository<PageMedia> repo, IWebHostEnvironment env)
-        {
-            _repo = repo;
-            _env = env;
-        }
+        private readonly IGenericRepository<PageMedia> _repo = repo;
+        private readonly IWebHostEnvironment _env = env;
+
         public IActionResult Dashboard()
         {
             if (HttpContext.Session.GetString("AdminUser") == null)
@@ -26,7 +22,7 @@ namespace College.Controllers
         {
             return View();
         }
-        [HttpPost]
+
         [HttpPost]
         public async Task<IActionResult> Banner(
         IFormFile bannerImage,
@@ -43,7 +39,6 @@ namespace College.Controllers
                 if (bannerImage == null || bannerImage.Length == 0)
                     return Json(new { message = "Image upload failed" });
 
-                // ✅ Category Folder Upload
                 var uploadPath = Path.Combine(_env.WebRootPath, "uploads", "banners", category);
                 Directory.CreateDirectory(uploadPath);
 

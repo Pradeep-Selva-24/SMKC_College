@@ -1,0 +1,131 @@
+﻿:root {
+    --primary: #e32845;
+    --secondary: #111d5e;
+    --accent: #111d5e;
+    --light: #f5f7fb;
+}
+
+.clsLogin {min-height: 100vh;background: url(../Img/BG/sun-tornado.png) no-repeat center center;background-size: cover;display: flex;align-items: center;justify-content: center;font-family: "Segoe UI", sans-serif;}
+.clsLogin .login-card {background: #fff;width: 100%;max-width: 420px;border-radius: 10px;box-shadow: 0 15px 35px rgba(0,0,0,.3);}
+.clsLogin .login-header {background: var(--primary);color: #fff;padding: 20px;text-align: center;border-radius: 10px 10px 0 0;}
+.clsLogin .btn-login {background: var(--accent);color: #fff;font-weight: 600;}
+.clsLogin .btn-login:hover {background: #b71c1c;color: #fff;}
+
+.form-control:focus {
+border-color: var(--accent);
+box-shadow: none;
+}
+
+.toggle-password {
+cursor: pointer;
+}
+
+
+
+
+/* GENERAL */
+body {
+    margin: 0;
+    background: var(--light);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* TOP BAR */
+.topbar {
+    background: var(--primary);
+    color: #fff;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+/* HAMBURGER */
+.menu-btn {
+    border: none;
+    background: #ffffff;
+    color: #000;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: linear-gradient(180deg, #0b1e5b, #102a7a);
+    min-height: 100vh;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.4);
+}
+
+    .sidebar a {
+        display: block;
+        padding: 14px 20px;
+        color: #ffffff !important;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+        .sidebar a i {
+            margin-right: 10px;
+            color: #ffffff;
+        }
+
+        .sidebar a:hover {
+            background: #1a2f7a;
+        }
+
+        .sidebar a.active {
+            background: var(--accent);
+        }
+
+/* CONTENT */
+.main-content {
+    margin-left: 240px;
+    padding: 20px;
+    margin-top: 56px;
+}
+
+/* STATS CARDS */
+.stat-card {
+    border-left: 5px solid var(--accent);
+}
+
+.stat-icon {
+    font-size: 32px;
+    color: var(--accent);
+}
+
+/* OVERLAY */
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 999;
+}
+
+/* MOBILE */
+@@media (max-width: 768px) {
+    .sidebar {
+        left: -240px;
+    }
+
+        .sidebar.show {
+            left: 0;
+        }
+
+    .overlay.show {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
