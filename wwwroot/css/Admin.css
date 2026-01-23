@@ -7,9 +7,11 @@
 
 .clsLogin {min-height: 100vh;background: url(../Img/BG/sun-tornado.png) no-repeat center center;background-size: cover;display: flex;align-items: center;justify-content: center;font-family: "Segoe UI", sans-serif;}
 .clsLogin .login-card {background: #fff;width: 100%;max-width: 420px;border-radius: 10px;box-shadow: 0 15px 35px rgba(0,0,0,.3);}
-.clsLogin .login-header {background: var(--primary);color: #fff;padding: 20px;text-align: center;border-radius: 10px 10px 0 0;}
+.clsLogin .login-header {background: linear-gradient( 359deg, var(--primary), var(--secondary));color: #fff;padding: 5px;text-align: center;border-radius: 10px 10px 0 0;}
 .clsLogin .btn-login {background: var(--accent);color: #fff;font-weight: 600;}
-.clsLogin .btn-login:hover {background: #b71c1c;color: #fff;}
+.clsLogin .btn-login:hover {background: var(--primary);color: #fff;}
+.clsLogin .college-logo {width: 80px;height: 80px;object-fit: contain;padding: 5px;background: white;border-radius: 50%;box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+
 
 .form-control:focus {
 border-color: var(--accent);
