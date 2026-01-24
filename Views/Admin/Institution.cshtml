@@ -1,0 +1,273 @@
+﻿@{
+    ViewData["Title"] = "Institution";
+    Layout = "_AdminLayout";
+}
+
+<div class="page-container">
+    <div class="form-card">
+
+        <div class="page-header-card">
+            <h4 class="page-title">Institution</h4>
+            <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
+        </div>
+
+        <div class="row g-4 clsView">
+            <div class="col-lg-12">
+                <table id="tblGrid" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Page Type</th>
+                            <th>Heading</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="clsAdd clsEdit">
+            <div class="row g-4 ">
+                <input type="hidden" id="Key" value=""/>
+                <div class="col-lg-6">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="Category">
+                        <option value="">-- Select Category --</option>
+                        <option value="Student_Support">Student Support</option>
+                        <option value="Vision_Mission">Vision Mission</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Heading</label>
+                    <input type="text" id="Heading" class="form-control">
+                </div>
+
+                <div class="col-lg-12">
+                    <label>Content</label>
+                    <textarea id="Content" class="form-control"></textarea>
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-cancel clsAdd" onclick="resetForm()">Cancel</button>
+                <button class="btn-submit clsAdd" onclick="Save()">Save</button>
+                <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#Content').summernote({
+            height: 200,
+            placeholder: 'Write content here...',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ]
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        View()
+    });
+
+     function resetForm() {
+        $('#Category').val('');
+        $('#Heading').val('');
+
+        if (typeof $('#Content').summernote === 'function') {
+            $('#Content').summernote('code', '');
+        } else {
+            $('#Content').val('');
+        }
+    }
+
+    function View(){
+        resetForm()
+        $(".clsView").show();
+        $(".clsAdd, .clsEdit").hide();
+        LoaderShow();
+        Grid();
+        LoaderHide();
+    }
+
+    function Add(){
+        resetForm()
+        $(".clsView, .clsEdit").hide();
+        $(".clsAdd").show();
+    }
+
+    function Edit(Id){
+        resetForm()
+        $(".clsView, .clsAdd").hide();
+        $(".clsEdit").show();
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetInstitutionById',
+            type: 'GET',
+            data: { Id: Id },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+                    
+                    $('#Category').val(data.PageType);
+                    $('#Heading').val(data.Heading);
+                    $('#Content').val(data.Content);
+        
+                    if (typeof $('#Content').summernote === 'function') {
+                        $('#Content').summernote('code', data.Content);
+                    }
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+     function Save() {
+        var category = $('#Category').val().trim();
+        var heading  = $('#Heading').val().trim();
+        var content  = (typeof $('#Content').summernote === 'function')
+                         ? $('#Content').summernote('code').trim()
+                         : $('#Content').val().trim();
+
+        // Validation
+        if(category === ""){
+            alert('Please enter Category.');
+            $('#Category').focus();
+            return;
+        }
+
+        if(heading === ""){
+            alert('Please enter Heading.');
+            $('#Heading').focus();
+            return;
+        }
+
+        if(content === "" || content === "<p><br></p>"){
+            alert('Please enter Content.');
+            if(typeof $('#Content').summernote === 'function'){
+                $('#Content').summernote('focus');
+            } else {
+                $('#Content').focus();
+            }
+            return;
+        }
+
+        var data = {
+            Id: ($('#Key').val() != "" ? $('#Key').val() : 0),
+            PageType: category,
+            Heading: heading,
+            Content: content
+        }
+
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/SaveInstitution',
+            type: 'POST',
+            contentType: 'application/json', 
+            data: JSON.stringify(data),
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+
+    function StatusUpdate(Id, status) {
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/StatusUpdateInstitution',
+            type: 'POST',
+            data: { Id: Id, IsStatus: status },
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Grid(){
+        if ($.fn.DataTable.isDataTable('#tblGrid')) {
+            $('#tblGrid').DataTable().destroy();
+            $('#tblGrid tbody').empty();
+        }
+
+        $('#tblGrid').DataTable({
+            ajax: {
+                url: '/Admin/GetInstitution',
+                type: 'GET',
+                dataSrc: ''
+            },
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            searching: true,
+            ordering: true,
+            responsive: true,
+        
+            columns: [
+                {
+                    data: "pageType",
+                    title: "Page Type",
+                    render: function(data, type, row) {
+                        if (!data) return '';
+                        // Replace underscores with spaces
+                        return data.replace(/_/g, ' ');
+                    }
+                },
+                { data: "heading", title: "Heading" },
+                { data: "status", title: "Status" },
+                {
+                    data: null,
+                    title: "Action",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        let actionHtml ='';
+                        
+                        if (row.status === true) {
+                            actionHtml = `<a href="javascript:void(0);"onclick="Edit(${row.id})"class="text-primary me-2" title="Edit"><i class="bi bi-pencil-square fs-5"></i></a>`;
+                            actionHtml += `<a href="javascript:void(0);"onclick="StatusUpdate(${row.id}, false)"class="text-danger" title="Delete"><i class="bi bi-trash fs-5"></i></a>`;
+                        } else {
+                            actionHtml += `<a href="javascript:void(0);"onclick="StatusUpdate(${row.id}, true)"class="text-success" title="Activate"><i class="bi bi-check-circle fs-5"></i></a>`;
+                        }
+                        return actionHtml;
+                    }
+                }
+            ]
+        });
+    }
+
+</script>

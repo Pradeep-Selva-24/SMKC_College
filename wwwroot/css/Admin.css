@@ -18,12 +18,12 @@
 body {background: var(--light);min-height: 100vh;overflow-x: hidden;}
 
 /* Header */
-.top-header {background: linear-gradient(84deg, #ffffff, #ff5f6d);color: var(--secondary);padding: 0px 20px 0px 10px;font-weight: 600;display: flex;align-items: center;justify-content: space-between;position: fixed;top: 0;left: 0;width: 100%;height: 70px;}
+.top-header {background: linear-gradient(84deg, #ffffff, #ff5f6d);color: var(--secondary);padding: 0px 20px 0px 10px;font-weight: 600;display: flex;align-items: center;justify-content: space-between;position: fixed;top: 0;left: 0;width: 100%;height: 70px;z-index: 999;}
 .college-logo {height: 40px;width: auto;border-radius: 50%;background: #fff;padding: 3px;}
 .college-title {font-weight: 700;line-height: 1.1;color: #fff;font-size: 1rem;}
 .college-title small {font-weight: 500;font-size: 0.85rem;opacity: 0.9;}
 .college-logo-wide {max-height: 58px;max-width: 100%;width: auto;height: auto;object-fit: contain;}
-
+.clsLogout{color: var(--secondary);}
 .menu-toggle {display: none;font-size: 1.5rem;cursor: pointer;}
 .menu-group {border-bottom: 1px solid rgba(255, 255, 255, 0.1);}
 .menu-toggle-item {display: flex;align-items: center;gap: 10px;padding: 12px 20px;color: #fff;text-decoration: none;cursor: pointer;}
@@ -41,7 +41,7 @@ body {background: var(--light);min-height: 100vh;overflow-x: hidden;}
 .sidebar a:hover,.sidebar a.active {background: rgba(255, 255, 255, 0.1);}
 
 /* Content */
-.content {flex: 1;margin-top: 70px;margin-left: 260px;padding: 20px;min-height: calc(100vh - 70px);background: #f5f7fb;}
+.content {flex: 1;margin-top: 70px;margin-left: 240px;padding: 20px;min-height: calc(100vh - 70px);background: #f5f7fb;}
 
 /* Cards */
 .stat-card {background: #fff;border-radius: 10px;padding: 20px;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);border-left: 6px solid var(--primary);}
