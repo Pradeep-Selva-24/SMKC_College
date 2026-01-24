@@ -1,9 +1,11 @@
 ﻿using College.Entities;
+using College.Filters;
 using College.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace College.Controllers
 {
+    [AdminAuthorize]
     public class AdminController(IGenericRepository<PageMedia> repo, IWebHostEnvironment env) : Controller
     {
         private readonly IGenericRepository<PageMedia> _repo = repo;
@@ -18,7 +20,7 @@ namespace College.Controllers
 
             return View();
         }
-        public IActionResult Banner()
+        public IActionResult PageMedia()
         {
             return View();
         }

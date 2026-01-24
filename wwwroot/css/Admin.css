@@ -5,129 +5,83 @@
     --light: #f5f7fb;
 }
 
-.clsLogin {min-height: 100vh;background: url(../Img/BG/sun-tornado.png) no-repeat center center;background-size: cover;display: flex;align-items: center;justify-content: center;font-family: "Segoe UI", sans-serif;}
+.clsLogin {min-height: 100vh;background: url(../Img/BG/sun-tornado.png) no-repeat center center;background-size: cover;display: flex;align-items: center;justify-content: center;}
 .clsLogin .login-card {background: #fff;width: 100%;max-width: 420px;border-radius: 10px;box-shadow: 0 15px 35px rgba(0,0,0,.3);}
 .clsLogin .login-header {background: linear-gradient( 359deg, var(--primary), var(--secondary));color: #fff;padding: 5px;text-align: center;border-radius: 10px 10px 0 0;}
 .clsLogin .btn-login {background: var(--accent);color: #fff;font-weight: 600;}
 .clsLogin .btn-login:hover {background: var(--primary);color: #fff;}
 .clsLogin .college-logo {width: 80px;height: 80px;object-fit: contain;padding: 5px;background: white;border-radius: 50%;box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+.clsLogin .form-control:focus {border-color: var(--accent);box-shadow: none;}
+.clsLogin .toggle-password {cursor: pointer;}
 
 
-.form-control:focus {
-border-color: var(--accent);
-box-shadow: none;
+body {background: var(--light);min-height: 100vh;overflow-x: hidden;}
+
+/* Header */
+.top-header {background: linear-gradient(84deg, #ffffff, #ff5f6d);color: var(--secondary);padding: 0px 20px 0px 10px;font-weight: 600;display: flex;align-items: center;justify-content: space-between;position: fixed;top: 0;left: 0;width: 100%;height: 70px;}
+.college-logo {height: 40px;width: auto;border-radius: 50%;background: #fff;padding: 3px;}
+.college-title {font-weight: 700;line-height: 1.1;color: #fff;font-size: 1rem;}
+.college-title small {font-weight: 500;font-size: 0.85rem;opacity: 0.9;}
+.college-logo-wide {max-height: 58px;max-width: 100%;width: auto;height: auto;object-fit: contain;}
+
+.menu-toggle {display: none;font-size: 1.5rem;cursor: pointer;}
+.menu-group {border-bottom: 1px solid rgba(255, 255, 255, 0.1);}
+.menu-toggle-item {display: flex;align-items: center;gap: 10px;padding: 12px 20px;color: #fff;text-decoration: none;cursor: pointer;}
+.menu-toggle-item:hover {background: rgba(255, 255, 255, 0.1);}
+.submenu {display: none;background: rgba(0, 0, 0, 0.15);}
+.submenu a {display: block;padding: 10px 50px;color: #ddd;text-decoration: none;font-size: 0.95rem;}
+.submenu a:hover {background: rgba(255, 255, 255, 0.1);color: #fff;}
+
+/* Layout */
+.layout {display: flex;min-height: calc(100vh - 56px);}
+
+/* Sidebar */
+.sidebar {width: 240px;background: linear-gradient(180deg, #0b1f5e, #102c7a);color: #fff;padding-top: 20px;position: fixed;top: 70px;left: 0;height: calc(100vh - 70px);overflow-y: auto;transition: transform 0.3s ease;z-index: 999;}
+.sidebar a {display: flex;align-items: center;gap: 10px;padding: 12px 20px;color: #fff;text-decoration: none;border-bottom: 1px solid rgba(255, 255, 255, 0.1);}
+.sidebar a:hover,.sidebar a.active {background: rgba(255, 255, 255, 0.1);}
+
+/* Content */
+.content {flex: 1;margin-top: 70px;margin-left: 260px;padding: 20px;min-height: calc(100vh - 70px);background: #f5f7fb;}
+
+/* Cards */
+.stat-card {background: #fff;border-radius: 10px;padding: 20px;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);border-left: 6px solid var(--primary);}
+.stat-card h5 {font-weight: 600;color: var(--primary);}
+.stat-card h2 {font-weight: 700;margin-top: 10px;}
+
+
+/* Page */
+.page-container {padding: 20px 30px;}
+.form-card {background: #fff;border-radius: 12px;box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);padding: 30px;}
+.form-card h4 {font-weight: 700;margin-bottom: 20px;color: #0b1f5e;}
+label {font-weight: 600;margin-bottom: 6px;}
+.form-control,.form-select {border-radius: 8px;padding: 10px 14px;}
+.form-control:focus,.form-select:focus {box-shadow: none;border-color: var(--primary);}
+.action-buttons {display: flex;justify-content: flex-end;gap: 15px;margin-top: 25px;}
+.btn-submit {background: linear-gradient(84deg, var(--primary), #ff5f6d);color: #fff;padding: 10px 30px;border-radius: 8px;border: none;}
+.btn-cancel {background: var(--secondary);color: #fff;border: 1px solid #ddd;padding: 10px 30px;border-radius: 8px;}
+#preview {border-radius: 10px;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);max-height: 350px;}
+
+.page-header-card {display: flex;justify-content: space-between;align-items: center;margin-bottom: 25px;}
+.page-title {font-size: 26px;font-weight: 700;color: #0b1c4d;margin: 0;}
+.view-btn {background: linear-gradient(135deg, var(--secondary), #1e3ea8);border: none;padding: 10px 26px;font-weight: 600;border-radius: 10px;}
+.view-btn:hover {background: linear-gradient(84deg, var(--primary), #ff5f6d);}
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .menu-toggle {display: block;}
+    .sidebar {position: fixed;top: 56px;left: -240px;height: 100%;z-index: 1000; width: 240px;}
+    .sidebar.show {left: 0;}
+    .content {padding: 20px;margin-left: 0;}
 }
 
-.toggle-password {
-cursor: pointer;
+@media (max-width: 576px) {
+    .college-title {display: none; }
+    .college-logo-wide {max-height: 32px;max-width: 140px;}
 }
 
-
-
-
-/* GENERAL */
-body {
-    margin: 0;
-    background: var(--light);
-    font-family: "Segoe UI", sans-serif;
-}
-
-/* TOP BAR */
-.topbar {
-    background: var(--primary);
-    color: #fff;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-}
-
-/* HAMBURGER */
-.menu-btn {
-    border: none;
-    background: #ffffff;
-    color: #000;
-    border-radius: 6px;
-    padding: 5px 10px;
-}
-
-/* SIDEBAR */
-.sidebar {
-    width: 240px;
-    background: linear-gradient(180deg, #0b1e5b, #102a7a);
-    min-height: 100vh;
-    position: fixed;
-    top: 56px;
-    left: 0;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    box-shadow: 4px 0 15px rgba(0,0,0,0.4);
-}
-
-    .sidebar a {
-        display: block;
-        padding: 14px 20px;
-        color: #ffffff !important;
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: 500;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-        .sidebar a i {
-            margin-right: 10px;
-            color: #ffffff;
-        }
-
-        .sidebar a:hover {
-            background: #1a2f7a;
-        }
-
-        .sidebar a.active {
-            background: var(--accent);
-        }
-
-/* CONTENT */
-.main-content {
-    margin-left: 240px;
-    padding: 20px;
-    margin-top: 56px;
-}
-
-/* STATS CARDS */
-.stat-card {
-    border-left: 5px solid var(--accent);
-}
-
-.stat-icon {
-    font-size: 32px;
-    color: var(--accent);
-}
-
-/* OVERLAY */
-.overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 999;
-}
-
-/* MOBILE */
-@@media (max-width: 768px) {
-    .sidebar {
-        left: -240px;
-    }
-
-        .sidebar.show {
-            left: 0;
-        }
-
-    .overlay.show {
-        display: block;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
+@media (max-width: 768px) {
+    .college-logo-wide {max-height: 100%;max-width: 200px;}
+    .form-card {padding: 20px;}
+    .action-buttons {flex-direction: column;}
 }

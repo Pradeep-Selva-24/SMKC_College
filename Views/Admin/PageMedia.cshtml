@@ -1,49 +1,73 @@
 ﻿@{
+    ViewData["Title"] = "Page Media";
     Layout = "_AdminLayout";
 }
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet" />
 
-<h4 class="fw-bold mb-4">Home Banner Management</h4>
+<div class="page-container">
 
-<div id="msg"></div>
+    <div class="form-card">
 
-<div class="mb-3">
-    <label class="form-label">Category</label>
-    <select class="form-control" id="category">
-        <option value="">-- Select Category --</option>
-        <option value="HOME_BANNER">Home Banner (1920x1080)</option>
-        <option value="EVENT_BANNER">Event Banner (1200x600)</option>
-        <option value="NOTICE_BANNER">Notice Banner (800x800)</option>
-        <option value="GALLERY_BANNER">Gallery Banner (1024x768)</option>
-    </select>
+        <div class="page-header-card">
+            <h4 class="page-title">Page Media</h4>
+            <button type="button"
+                    class="btn btn-primary view-btn"
+                    onclick="window.location.href='/Admin/PageMedia/List'">
+                View
+            </button>
+        </div>
+
+        <div id="msg"></div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-6">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="category">
+                    <option value="">-- Select Category --</option>
+                    <option value="HOME_BANNER">Home Banner (1920x1080)</option>
+                    <option value="EVENT_BANNER">Event Banner (1200x600)</option>
+                    <option value="NOTICE_BANNER">Notice Banner (800x800)</option>
+                    <option value="GALLERY_BANNER">Gallery Banner (1024x768)</option>
+                </select>
+            </div>
+
+            <div class="col-lg-6">
+                <label class="form-label">Banner Image</label>
+                <input type="file" class="form-control" id="imageInput" accept="image/*">
+            </div>
+
+            <div class="col-12 text-center">
+                <img id="preview" style="display:none;">
+            </div>
+
+            <div class="col-lg-6">
+                <label>Heading</label>
+                <input type="text" id="heading" class="form-control">
+            </div>
+
+            <div class="col-lg-6">
+                <label>Display Order</label>
+                <input type="number" id="displayOrder" class="form-control" value="1">
+            </div>
+
+            <div class="col-12">
+                <label>Short Content</label>
+                <textarea id="shortContent" class="form-control" rows="4"></textarea>
+            </div>
+
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" class="btn-cancel" onclick="resetForm()">Cancel</button>
+            <button class="btn-submit" onclick="saveBanner()">Save Banner</button>
+        </div>
+
+    </div>
+
 </div>
 
-<div class="mb-3">
-    <label class="form-label">Banner Image</label>
-    <input type="file" class="form-control" id="imageInput" accept="image/*">
-</div>
-
-<div class="mb-3">
-    <img id="preview" style="max-width:100%; display:none;">
-</div>
-
-<div class="mb-3">
-    <label>Heading</label>
-    <input type="text" id="heading" class="form-control">
-</div>
-
-<div class="mb-3">
-    <label>Short Content</label>
-    <textarea id="shortContent" class="form-control"></textarea>
-</div>
-
-<div class="mb-3">
-    <label>Display Order</label>
-    <input type="number" id="displayOrder" class="form-control" value="1">
-</div>
-
-<button class="btn btn-primary" onclick="saveBanner()">Save Banner</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 
