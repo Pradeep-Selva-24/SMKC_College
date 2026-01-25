@@ -1,0 +1,277 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-container">
+    <div class="form-card">
+
+        <div class="page-header-card">
+            <h4 class="page-title">Institution</h4>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
+        </div>
+
+        <div class="row g-4 clsView">
+            <div class="col-lg-12">
+                <table id="tblGrid" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="row g-4 clsEdit">
+            <input type="hidden" id="Key" value="" />
+            <div class="col-lg-6">
+                <label>Category</label>
+                <input type="text" id="Category" class="form-control" readonly disabled>
+            </div>
+
+            <div class="col-lg-6">
+                <label class="form-label">Type</label>
+                <select class="form-select" id="Type" disabled>
+                    <option value="">-- Select Type --</option>
+                    <option value="Url">Url</option>
+                    <option value="Textarea">Textarea</option>
+                    <option value="Pdf">Pdf</option>
+                </select>
+            </div>
+
+            <div class="col-lg-6 clsValueUrl">
+                <label>Url <a id="ValueUrlView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-box-arrow-up-right"></i></a></label>
+                <input type="text" id="ValueUrl" class="form-control">
+            </div>
+
+            <div class="col-lg-6 clsValueContent">
+                <label>Content</label>
+                <textarea id="ValueContent" class="form-control"></textarea>
+            </div>
+
+            <div class="col-lg-6 clsValuePdf">
+                <label>Pdf <a id="ValuePdfView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-file-earmark-pdf"></i></a></label>
+                <input type="file" class="form-control" id="ValuePdf" accept="application/pdf">
+            </div>
+
+            <div class="col-lg-12">
+                <div class="action-buttons">
+                    <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#ValueContent').summernote({
+            height: 200,
+            placeholder: 'Write content here...',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ]
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        View()
+    });
+
+     function resetForm() {
+        $('#Key').val('')
+        $('#Category').val('');
+        $('#Type').val('');
+        $('#ValueUrl').val('')
+        $('#ValuePdf').val('');
+        if (typeof $('#ValueContent').summernote === 'function') {
+            $('#ValueContent').summernote('code', '');
+        } else {
+            $('#ValueContent').val('');
+        }
+    }
+
+    function View(){
+        resetForm()
+        $(".clsView").show();
+        $(".clsEdit").hide();
+        LoaderShow();
+        Grid();
+        LoaderHide();
+    }
+
+    function Edit(Id){
+        resetForm()
+        $(".clsView").hide();
+        $(".clsEdit").show();
+        $('#Key').val(Id)
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetSettingsById',
+            type: 'GET',
+            data: { Id: Id },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    $('#Category').val(data.Key);
+
+                    if(data.Key == "Application" || data.Key == "Examinations" || data.Key == "Results"){
+                        $('#Type').val("Url");
+                        $('.clsValueUrl').show()
+                        $('.clsValueContent, .clsValuePdf').hide()
+                    }
+                    else if(data.Key == "Academic Calendar" || data.Key == "Courses Eligibility" || data.Key == "Fee Structure"){
+                        $('#Type').val("Pdf");
+                        $('.clsValuePdf').show()
+                        $('.clsValueContent, .clsValueUrl').hide()
+                    }
+                    else if(data.Key == "Running Text"){
+                        $('#Type').val("Textarea");
+                        $('.clsValueContent').show()
+                        $('.clsValueUrl, .clsValuePdf').hide()
+                    }
+
+                    if ($('#Type').val() == "Textarea" && typeof $('#Value').summernote === 'function') {
+                        $('#ValueContent').summernote('code', data.Value);
+                    }
+                    else if($('#Type').val() == "Url"){
+                        $("#ValueUrlView").attr("href", data.Value)
+                        $('#ValueUrl').val(data.Value);
+                    }
+                    else if($('#Type').val() == "Pdf"){
+                        $("#ValuePdfView").attr("href", data.Value)
+                    }
+
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Save() {
+
+        var type = $('#Type').val().trim();
+        var category = $('#Category').val().trim();
+        var value = "";
+        var pdfFile = null;
+
+        var isPdfCategory =
+            category == "Academic Calendar" ||
+            category == "Courses Eligibility" ||
+            category == "Fee Structure";
+
+        if (category == "Application" || category == "Examinations" || category == "Results") {
+            value = $('#ValueUrl').val().trim(); // URL
+        }
+        else if (isPdfCategory) {
+            pdfFile = $('#ValuePdf')[0]?.files[0]; // PDF input
+        }
+        else if (category == "Running Text") {
+            value = $('#ValueContent').summernote('code').trim(); // HTML
+        }
+
+        if (category === "") {
+            alert('Please enter Category.');
+            $('#Category').focus();
+            return;
+        }
+
+        if (isPdfCategory) {
+            if (!pdfFile) {
+                alert('Please upload the PDF file.');
+                return;
+            }
+
+            if (pdfFile.type !== "application/pdf") {
+                alert("Only PDF files are allowed.");
+                return;
+            }
+        }
+        else {
+            if (value === "" || value === "<p><br></p>" || value === "/") {
+                alert('Please enter Content.');
+                return;
+            }
+        }
+
+        var formData = new FormData();
+        formData.append("Id", ($('#Key').val() != "" ? $('#Key').val() : 0));
+        formData.append("Category", category);
+        formData.append("Type", type);
+        formData.append("Value", value);
+
+        if (pdfFile) {
+            formData.append("PdfFile", pdfFile);
+        }
+
+        LoaderShow();
+
+        $.ajax({
+            url: '/Admin/SaveSettings',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                alert(response.message);
+                if (response.message.includes("Successfully")) {
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function (err) {
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+
+    function Grid(){
+        if ($.fn.DataTable.isDataTable('#tblGrid')) {
+            $('#tblGrid').DataTable().destroy();
+            $('#tblGrid tbody').empty();
+        }
+
+        $('#tblGrid').DataTable({
+            ajax: {
+                url: '/Admin/GetSettings',
+                type: 'GET',
+                dataSrc: ''
+            },
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            searching: true,
+            ordering: true,
+            responsive: true,
+
+            columns: [
+                { data: "key", title: "Category" },
+                {
+                    data: null,
+                    title: "Action",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        return `<a href="javascript:void(0);"onclick="Edit(${row.id})"class="text-primary me-2" title="Edit"><i class="bi bi-pencil-square fs-5"></i></a>`;
+                    }
+                }
+            ]
+        });
+    }
+</script>

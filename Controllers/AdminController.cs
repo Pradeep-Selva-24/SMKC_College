@@ -14,8 +14,104 @@ namespace College.Controllers
     {
         private readonly IGenericRepository<PageMedia> _repo = repo;
         private readonly IWebHostEnvironment _env = env;
-        private readonly string UploadImgPath = "/Uploads/Image";
-        private readonly string UploadPdfPath = "/Uploads/PDF";
+        private readonly string UploadImgPath = "Uploads/Image";
+        private readonly string UploadPdfPath = "Uploads/PDF";
+
+        #region File & Image Upload
+        private async Task<string> UploadPdfAsync(IFormFile file, string category, string existingFilePath)
+        {
+            if (file == null || file.Length == 0)
+                throw new Exception("Please upload a PDF file");
+
+            if (file.ContentType != "application/pdf")
+                throw new Exception("Only PDF files are allowed");
+
+            if (file.Length > 5 * 1024 * 1024)
+                throw new Exception("PDF must be less than 5MB");
+
+            // 🔹 Safe folder name
+            var safeCategory = category.Trim().ToLower().Replace(" ", "_");
+
+            // 🔹 Physical path
+            var uploadPath = Path.Combine(_env.WebRootPath, UploadPdfPath, "SettingMaster", safeCategory);
+
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            // 🔹 Delete old file
+            if (!string.IsNullOrWhiteSpace(existingFilePath))
+            {
+                var oldFilePath = Path.Combine(_env.WebRootPath, existingFilePath.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+
+                if (System.IO.File.Exists(oldFilePath))
+                    System.IO.File.Delete(oldFilePath);
+            }
+
+            // 🔹 Save new file
+            var fileName = $"{Guid.NewGuid()}.pdf";
+            var fullPath = Path.Combine(uploadPath, fileName);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // 🔹 Return browser-friendly URL
+            return $"/{UploadPdfPath}/SettingMaster/{safeCategory}/{fileName}";
+        }
+
+        private async Task<string> UploadImageAsync(IFormFile file, string category, string existingFilePath)
+        {
+            if (file == null || file.Length == 0)
+                throw new Exception("Please upload an image file");
+
+            // 🔹 Allowed image types
+            var allowedTypes = new[] { "image/jpeg", "image/png", "image/webp", "image/jpg" };
+
+            if (!allowedTypes.Contains(file.ContentType))
+                throw new Exception("Only JPG, PNG, or WEBP images are allowed");
+
+            if (file.Length > 5 * 1024 * 1024)
+                throw new Exception("Image must be less than 5MB");
+
+            // 🔹 Safe folder name
+            var safeCategory = category.Trim().ToLower().Replace(" ", "_");
+
+            // 🔹 Get file extension
+            var extension = Path.GetExtension(file.FileName).ToLower();
+
+            // 🔹 Physical path
+            var uploadPath = Path.Combine(_env.WebRootPath, UploadImgPath, "SettingMaster", safeCategory);
+
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            // 🔹 Delete old file
+            if (!string.IsNullOrWhiteSpace(existingFilePath))
+            {
+                var oldFilePath = Path.Combine(
+                    _env.WebRootPath,
+                    existingFilePath.TrimStart('/')
+                        .Replace("/", Path.DirectorySeparatorChar.ToString())
+                );
+
+                if (System.IO.File.Exists(oldFilePath))
+                    System.IO.File.Delete(oldFilePath);
+            }
+
+            // 🔹 Save new image
+            var fileName = $"{Guid.NewGuid()}{extension}";
+            var fullPath = Path.Combine(uploadPath, fileName);
+
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // 🔹 Return browser-friendly URL
+            return $"/{UploadImgPath}/SettingMaster/{safeCategory}/{fileName}";
+        }
+        #endregion
 
         public async Task<IActionResult> Dashboard()
         {
@@ -42,8 +138,44 @@ namespace College.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetPageMedia()
+        {
+            try
+            {
+                var lstPageMediaPages = await db.PageMedia.ToListAsync();
+                return Json(lstPageMediaPages);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetPageMedia");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPageMediaById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                PageMedia? PageMedia = await db.PageMedia.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (PageMedia != null)
+                {
+                    strResult = JsonConvert.SerializeObject(PageMedia);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetPageMediaById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Banner(
+        public async Task<IActionResult> SavePageMedia(
         IFormFile bannerImage,
         string category,
         string heading,
@@ -58,21 +190,12 @@ namespace College.Controllers
                 if (bannerImage == null || bannerImage.Length == 0)
                     return Json(new { message = "Image upload failed" });
 
-                var uploadPath = Path.Combine(_env.WebRootPath, UploadImgPath, "banners", category);
-                Directory.CreateDirectory(uploadPath);
-
-                var fileName = $"{Guid.NewGuid()}.jpg";
-                var filePath = Path.Combine(uploadPath, fileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await bannerImage.CopyToAsync(stream);
-                }
+                string ImagePath = await UploadImageAsync(bannerImage, category, "");
 
                 var banner = new PageMedia
                 {
                     Category = category,
-                    ImagePath = $"{UploadImgPath}/banners/{category}/{fileName}",
+                    ImagePath = ImagePath,
                     Heading = heading,
                     ShortContent = shortContent,
                     DisplayOrder = displayOrder,
@@ -103,7 +226,7 @@ namespace College.Controllers
             try
             {
                 var lstInstitutionPages = await db.InstitutionPages.ToListAsync();
-                return Json(lstInstitutionPages); // Return array directly
+                return Json(lstInstitutionPages);
             }
             catch (Exception ex)
             {
@@ -142,7 +265,11 @@ namespace College.Controllers
                 if (model.Id > 0) // Update
                 {
                     var existing = await db.InstitutionPages.FindAsync(model.Id);
-                    if (existing != null)
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
                     {
                         existing.PageType = model.PageType;
                         existing.Heading = model.Heading;
@@ -199,6 +326,144 @@ namespace College.Controllers
         }
         #endregion
 
+        #region Settings
 
+        public IActionResult Settings()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSettings()
+        {
+            try
+            {
+                var types = new[] { "Application", "Academic Calendar", "Examinations", "Results", "Running Text", "Courses Eligibility", "Fee Structure" };
+                var lstSettingMaster = await db.SettingMaster.Where(x => types.Contains(x.Key)).ToListAsync();
+                return Json(lstSettingMaster);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetSettings");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSettingsById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                SettingMaster? SettingMaster = await db.SettingMaster.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (SettingMaster != null)
+                {
+                    strResult = JsonConvert.SerializeObject(SettingMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetSettingsById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveSettings(int Id, string Category, string Type, string Value, IFormFile PdfFile)
+        {
+            try
+            {
+                if (Id <= 0)
+                    return Json(new { message = "Invalid request" });
+
+                var existing = await db.SettingMaster.FindAsync(Id);
+                if (existing == null)
+                    return Json(new { message = "Record not found" });
+
+                if (Type == "Pdf")
+                {
+                    existing.Value = await UploadPdfAsync(PdfFile, Category, existing.Value!);
+                }
+                else
+                {
+                    existing.Value = Value;
+                }
+
+                existing.ModifiedDate = DateTime.Now;
+
+                db.SettingMaster.Update(existing);
+                await db.SaveChangesAsync();
+
+                return Json(new { message = "Updated Successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SettingMaster");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        #endregion
+
+        #region Placement Statistics
+        public IActionResult PlacementStatistics()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPlacementStatistics()
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                var types = new[] { "Overall Placement Rate", "Companies Visited", "Students Placed", "MoUs Signed" };
+                var lstSettingMaster = await db.SettingMaster.Where(x => types.Contains(x.Key)).ToListAsync();
+                if (lstSettingMaster != null && lstSettingMaster.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstSettingMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetPlacementStatistics");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SavePlacementStatistics([FromBody] List<SettingMaster> stats)
+        {
+            try
+            {
+                if (stats == null || !stats.Any())
+                    return Json(new { message = "No data received" });
+
+                foreach (var item in stats)
+                {
+                    var existing = await db.SettingMaster.FindAsync(item.Id);
+                    if (existing == null)
+                        continue; // Skip missing records
+
+                    existing.Value = item.Value;
+                    existing.ModifiedDate = DateTime.Now;
+
+                    db.SettingMaster.Update(existing);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = "Success" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving Placement Statistics");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
     }
 }

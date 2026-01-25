@@ -153,7 +153,7 @@
             formData.append("shortContent", document.getElementById("shortContent").value);
             formData.append("displayOrder", document.getElementById("displayOrder").value);
 
-            fetch("/Admin/Banner", {
+            fetch("/Admin/SavePageMedia", {
                 method: "POST",
                 body: formData
             })

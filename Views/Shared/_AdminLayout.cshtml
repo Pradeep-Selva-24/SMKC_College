@@ -118,31 +118,42 @@
                 <i class="bi bi-speedometer2"></i> Dashboard
             </a>
 
-            <!-- Settings (Only one with submenu) -->
-            <div class="menu-group">
-                <a href="#" class="menu-toggle-item" id="settingsToggle">
-                    <i class="bi bi-gear"></i> Settings
-                    <i class="bi bi-chevron-down ms-auto" id="settingsArrow"></i>
-                </a>
+            <a href="/Admin/Settings">
+                <i class="bi bi-sliders"></i> Settings
+            </a>
 
-                <div class="submenu" id="settingsMenu">
-                    <a href="/Admin/Menu">Menu</a>
-                    <a href="/Admin/CampusInfo">Campus Info</a>
-                </div>
-            </div>
+            <a href="/Admin/Menu">
+                <i class="bi bi-gear-fill"></i> Menu
+            </a>
 
-            <!-- Flat Links -->
             <a href="/Admin/Management">
                 <i class="bi bi-building"></i> Management
             </a>
 
-            <a href="/Admin/Programmes">
-                <i class="bi bi-journal-bookmark"></i> Programmes Offered
-            </a>
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-journal-bookmark"></i> Programmes Offered
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
 
-            <a href="/Admin/Placement">
-                <i class="bi bi-briefcase"></i> Placement & Career Development
-            </a>
+                <div class="submenu">
+                    <a href="/Admin/PlacementStatistics"> Master</a>
+                    <a href="/Admin/PlacementHighlights"> Details</a>
+                </div>
+            </div>
+
+
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-briefcase"></i> Placement
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
+
+                <div class="submenu">
+                    <a href="/Admin/PlacementStatistics"> Statistics</a>
+                    <a href="/Admin/PlacementHighlights"> Highlights</a>
+                </div>
+            </div>
 
             <a href="/Admin/PageMedia">
                 <i class="bi bi-image"></i> Page Media
@@ -165,10 +176,15 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+                $(document).ready(function () {
 
             var currentPath = window.location.pathname.toLowerCase();
-            $('#sidebar a[href]').removeClass('active')
+
+            // Reset states
+            $('#sidebar a').removeClass('active');
+            $('.submenu').removeClass('show');
+            $('.arrow').removeClass('rotate');
+
             // Highlight active link
             $('#sidebar a[href]').each(function () {
                 var linkPath = $(this).attr('href').toLowerCase();
@@ -176,41 +192,38 @@
                 if (currentPath === linkPath || currentPath.startsWith(linkPath + "/")) {
                     $(this).addClass('active');
 
-                    // If inside submenu, open parent
+                    // Open parent submenu if exists
                     var submenu = $(this).closest('.submenu');
                     if (submenu.length) {
                         submenu.addClass('show');
-
-                        var toggle = submenu.prev('.menu-toggle-item');
-                        if (toggle.length) {
-                            toggle.addClass('active');
-                            $('#settingsArrow').addClass('rotate');
-                        }
+                        submenu.prev('.menu-toggle-item')
+                            .addClass('active')
+                            .find('.arrow')
+                            .addClass('rotate');
                     }
                 }
             });
+
+            // Accordion toggle
+            $('.menu-toggle-item').on('click', function (e) {
+                e.preventDefault();
+
+                var submenu = $(this).next('.submenu');
+                var arrow = $(this).find('.arrow');
+
+                // Close others
+                $('.submenu').not(submenu).removeClass('show');
+                $('.menu-toggle-item .arrow').not(arrow).removeClass('rotate');
+                $('.menu-toggle-item').not(this).removeClass('active');
+
+                // Toggle current
+                submenu.toggleClass('show');
+                arrow.toggleClass('rotate');
+                $(this).toggleClass('active');
+            });
+
         });
 
-        const toggle = document.getElementById("menuToggle");
-        const sidebar = document.getElementById("sidebar");
-
-        toggle.addEventListener("click", () => {
-          sidebar.classList.toggle("show");
-        });
-
-        document.querySelectorAll(".menu-toggle-item").forEach(item => {
-          item.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const submenu = this.nextElementSibling;
-            const icon = this.querySelector(".bi-chevron-down");
-
-            submenu.style.display =
-              submenu.style.display === "block" ? "none" : "block";
-
-            icon.classList.toggle("rotate");
-          });
-        });
     </script>
 </body>
 </html>
