@@ -3,82 +3,91 @@
 @{
     Layout = "_AdminLayout";
 }
+<style>
+    
+</style>
 
-<h4 class="fw-bold mb-4">Menu Master Configuration</h4>
+<div class="page-container">
+    <div class="form-card">
 
-<div id="msg"></div>
+        <div class="page-header-card">
+            <h4 class="page-title">Menu Master Configuration</h4>
+        </div>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th style="width:60px;">#</th>
-                        <th>Menu Name</th>
-                        @* <th>Menu Url</th> *@
-                        <th style="width:100px;">Order</th>
-                        <th style="width:150px;" class="text-center">Enable</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        int sno = 1;
-                    }
-
-                    @foreach (var parent in Model)
-                    {
-                        <tr class="table-primary fw-bold">
-                            <td>@sno</td>
-                            <td>@parent.MenuName</td>
-                            @* <td>@parent.MenuUrl</td> *@
-                            <td>@parent.Order</td>
-                            <td class="text-center">
-                                <div class="form-check form-switch d-flex justify-content-center">
-                                    <input class="form-check-input menu-toggle"
-                                           type="checkbox"
-                                           data-id="@parent.Id"
-                                           @(parent.Display == "Y" ? "checked" : "") />
-                                </div>
-                            </td>
-                        </tr>
-
-                        sno++;
-
-                        @foreach (var child in parent.Children)
-                        {
+        <div class="row g-4 clsView">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-dark">
                             <tr>
-                                <td>@sno</td>
-                                <td style="padding-left:40px;"> @child.MenuName</td>
-                                @* <td>@child.MenuUrl</td> *@
-                                <td>@child.Order</td>
-                                <td class="text-center">
-                                    <div class="form-check form-switch d-flex justify-content-center">
-                                        <input class="form-check-input menu-toggle"
-                                               type="checkbox"
-                                               data-id="@child.Id"
-                                               @(child.Display == "Y" ? "checked" : "") />
-                                    </div>
-                                </td>
+                                <th style="width:60px;">#</th>
+                                <th>Menu Name</th>
+                                @* <th>Menu Url</th> *@
+                                <th style="width:100px;">Order</th>
+                                <th style="width:150px;" class="text-center">Enable</th>
                             </tr>
-                            sno++;
-                        }
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            @{
+                                int sno = 1;
+                            }
+
+                            @foreach (var parent in Model)
+                            {
+                                <tr class="table-primary fw-bold">
+                                    <td>@sno</td>
+                                    <td>@parent.MenuName</td>
+                                    @* <td>@parent.MenuUrl</td> *@
+                                    <td>@parent.Order</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-switch d-flex justify-content-center">
+                                            <label class="switch">
+                                                <input type="checkbox" class="clsmenutoggle" data-id="@parent.Id" @(parent.Display == "Y" ? "checked" : "") />
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                sno++;
+
+                                @foreach (var child in parent.Children)
+                                {
+                                    <tr>
+                                        <td>@sno</td>
+                                        <td style="padding-left:40px;"> @child.MenuName</td>
+                                        @* <td>@child.MenuUrl</td> *@
+                                        <td>@child.Order</td>
+                                        <td class="text-center">
+                                            <div class="form-check form-switch d-flex justify-content-center">
+                                                <label class="switch">
+                                                    <input type="checkbox" class="clsmenutoggle" data-id="@child.Id" @(child.Display == "Y" ? "checked" : "") />
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    sno++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
 
     </div>
 </div>
+
+
 <script src="~/js/jquery.min.js"></script>
 <script>
-    $(document).on("change", ".menu-toggle", function () {
+    $(document).on("change", ".clsmenutoggle", function () {
 
         const id = $(this).data("id");
         const isChecked = $(this).is(":checked");
 
-        // ✅ Convert to "Y"/"N"
         const displayValue = isChecked ? "Y" : "N";
 
         $.ajax({
@@ -86,14 +95,10 @@
             type: "POST",
             data: { id: id, display: displayValue },
             success: function (res) {
-                if (res.success) {
-                    $("#msg").html(`<div class="alert alert-success">${res.message}</div>`);
-                } else {
-                    $("#msg").html(`<div class="alert alert-danger">${res.message}</div>`);
-                }
+                alert(res.message);
             },
             error: function () {
-                $("#msg").html(`<div class="alert alert-danger">Server error</div>`);
+                alert('Server error');
             }
         });
     });
