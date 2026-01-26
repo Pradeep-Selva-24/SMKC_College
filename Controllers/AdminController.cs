@@ -488,6 +488,11 @@ namespace College.Controllers
             return View();
         }
 
+        public IActionResult PlacementHighlights()
+        {
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetPlacementStatistics()
         {
@@ -539,7 +544,11 @@ namespace College.Controllers
                 return Json(new { message = "Error" });
             }
         }
-        // ✅ Menu Master Config Page
+
+        #endregion
+
+        #region Menu 
+
         public async Task<IActionResult> MenuMaster()
         {
             if (HttpContext.Session.GetString("AdminUser") == null)
@@ -571,7 +580,6 @@ namespace College.Controllers
             return View(parents);
         }
 
-        // ✅ Toggle Enable/Disable (AJAX)
         [HttpPost]
         public async Task<IActionResult> ToggleMenu(int id, string display)
         {
@@ -593,6 +601,7 @@ namespace College.Controllers
                 return Json(new { success = false, message = "Update failed" });
             }
         }
+
         #endregion
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Page Media";
+    ViewData["Title"] = "Placement Highlights";
     Layout = "_AdminLayout";
 }
 
@@ -8,9 +8,9 @@
     <div class="form-card">
 
         <div class="page-header-card">
-            <h4 class="page-title">Page Media</h4>
+            <h4 class="page-title">Placement Highlights</h4>
             <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
-            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View('Banner_Image')">View</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View('Placement_Company')">View</button>
         </div>
 
         <div class="clsView">
@@ -19,23 +19,12 @@
                     <label class="form-label">Category</label>
                     <select class="form-select" id="categoryView">
                         <option value="">-- Select Category --</option>
-
-                        <option value="Banner_Image">Banner Image</option>
-                        <option value="Campus_Life">Campus Life</option>
-
-                        <option value="Sports">Sports</option>
-                        <option value="Alumni">Alumni</option>
-
-                        <option value="Events">Events</option>
-
-                        <option value="Latest_News">Latest News</option>
+                        <option value="Placement_Company">Company Log</option>
+                        <option value="Placement_Banner">Banner</option>
                     </select>
                 </div>
             </div>
             <div class="row g-3 mt-20" id="ViewPageMedia">
-
-                
-
             </div>
 
         </div>
@@ -49,16 +38,8 @@
                     <label class="form-label">Category</label>
                     <select class="form-select" id="category">
                         <option value="">-- Select Category --</option>
-
-                        <option value="Banner_Image">Banner Image (1920x1080 - 16:9)</option>
-                        <option value="Campus_Life">Campus Life (1920x1080 - 16:9)</option>
-
-                        <option value="Sports">Sports (1000x800 - 5:4)</option>
-                        <option value="Alumni">Alumni (1000x800 - 5:4)</option>
-
-                        <option value="Events">Events (800x800 - 5:3)</option>
-
-                        <option value="Latest_News">Latest News (800x800 - 1:1)</option>
+                        <option value="Placement_Company">Company Log</option>
+                        <option value="Placement_Banner">Banner</option>
                     </select>
                 </div>
 
@@ -72,23 +53,8 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <label>Heading</label>
-                    <input type="text" id="heading" class="form-control">
-                </div>
-
-                <div class="col-lg-6">
                     <label>Display Order</label>
                     <input type="number" id="displayOrder" class="form-control" value="1">
-                </div>
-
-                <div class="col-lg-6">
-                    <label class="form-label">Select Date</label>
-                    <input type="text" id="selectedDate" class="form-control datepicker" readonly>
-                </div>
-
-                <div class="col-12">
-                    <label>Short Content</label>
-                    <textarea id="Content" class="form-control" rows="4"></textarea>
                 </div>
 
             </div>
@@ -104,31 +70,12 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('#Content').summernote({
-            height: 200,
-            placeholder: 'Write content here...',
-            toolbar: [
-                ['style', ['bold', 'italic', 'underline']],
-                ['para', ['ul', 'ol', 'paragraph']],
-            ]
-        });
-    });
-</script>
-
-<script>
 
     var cropper = null;
     var imageChanged = false;
 
     $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: 'dd-mm-yyyy',
-            autoclose: true,
-            todayHighlight: true
-        });
-
-        View('Banner_Image')
+        View('Placement_Company')
     });
 
     $('#categoryView').on('change', function () {
@@ -159,23 +106,14 @@
         $('#Key').val('');
         $('#category').val('');
         $('#category').prop('disabled', false);
-        $('#heading').val('');
         $('#displayOrder').val(1);
         $('#imageInput').val('');
-        $('#selectedDate').datepicker('update', "");
-        $('#selectedDate').val("");
 
         if (cropper) {
             cropper.destroy();
             cropper = null;
         }
         imageChanged = false;
-
-        if (typeof $('#Content').summernote === 'function') {
-            $('#Content').summernote('code', '');
-        } else {
-            $('#Content').val('');
-        }
 
         $('#preview').attr('src', '').hide();
     }
@@ -216,21 +154,21 @@
         $.each(data, function (i, y) {
             str += '<div class="col-lg-4 col-md-6">';
             str += '<div class="PageMedia-card">';
-            
+
             str += '<div class="PageMedia-img">';
             str += '<img src="' +y["ImagePath"]+ '?V' + randomNum + '" alt="Image">';
             str += '</div>';
-            
+
             str += '<div class="PageMedia-body">';
-            str += '<div class="PageMedia-title">' +y["Heading"]+ '</div>';
-            
+            str += '<div class="PageMedia-title"></div>';
+
             str += '<div class="PageMedia-actions">';
-            
+
             if(y["Status"]){
                 str += '<a href="javascript:void(0);" onclick="Edit(' +y["Id"]+ ')" class="text-primary" title="Edit">';
                 str += '<i class="bi bi-pencil-square"></i>';
                 str += '</a>';
-            
+
                 str += '<a href="javascript:void(0);" onclick="StatusUpdate(' +y["Id"]+ ', false)" class="text-danger" title="Delete">';
                 str += '<i class="bi bi-trash"></i>';
                 str += '</a>';
@@ -240,7 +178,7 @@
                 str += '<i class="bi bi-check-circle fs-5"></i>';
                 str += '</a>';
             }
-            
+
             str += '</div>';
             str += '</div>';
             str += '</div>';
@@ -287,31 +225,9 @@
                     var data = JSON.parse(response.result);
 
                     $('#category').val(data.Category);
-                    $('#heading').val(data.Heading);
                     $('#displayOrder').val(data.DisplayOrder);
-                    $('#Content').val(data.ShortContent);
-
-                    if (typeof $('#Content').summernote === 'function') {
-                        $('#Content').summernote('code', data.ShortContent);
-                    }
-
-                    if(data.Date){
-                        var isoDate = data.Date; // "2025-04-11T00:00:00"
-                        var d = new Date(isoDate);
-                    
-                        // Format as dd-mm-yyyy
-                        var day = String(d.getDate()).padStart(2, '0');
-                        var month = String(d.getMonth() + 1).padStart(2, '0');
-                        var year = d.getFullYear();
-                    
-                        var formattedDate = `${day}-${month}-${year}`; // "11-04-2025"
-                        $('#selectedDate').datepicker('update', formattedDate);
-                        $('#selectedDate').val(formattedDate);
-                    }
-
 
                     loadImageForEdit(data.ImagePath)
-
                 } 
                 else {
                     alert('Failed to load data.');
@@ -327,12 +243,8 @@
     }
 
     const categorySettings = {
-        "Banner_Image": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
-        "Campus_Life": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
-        "Sports": { width: 1000, height: 800, aspectRatio: 5 / 4 },
-        "Alumni": { width: 1000, height: 800, aspectRatio: 5 / 4 },
-        "Events": { width: 800, height: 800, aspectRatio: 5 / 3 },
-        "Latest_News": { width: 800, height: 800, aspectRatio: 1 / 1 }
+        "Placement_Company": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
+        "Placement_Banner": { width: 1920, height: 1080, aspectRatio: 16 / 9 }
     };
 
     function getSelectedSetting() {
@@ -436,10 +348,10 @@
         var formData = new FormData();
         formData.append("Id", id);
         formData.append("category", category);
-        formData.append("heading", $('#heading').val());
-        formData.append("shortContent", $('#Content').val());
+        formData.append("heading", '');
+        formData.append("shortContent", '');
         formData.append("displayOrder", $('#displayOrder').val());
-        formData.append("date",$('#selectedDate').val());
+        formData.append("date",'');
 
         LoaderShow();
 
