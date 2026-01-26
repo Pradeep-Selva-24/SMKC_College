@@ -10,9 +10,11 @@ using Newtonsoft.Json;
 namespace College.Controllers
 {
     [AdminAuthorize]
-    public class AdminController(ILogger<HomeController> logger, CLGDbContext db, IGenericRepository<PageMedia> repo, IWebHostEnvironment env) : Controller
+    public class AdminController(ILogger<HomeController> logger, CLGDbContext db, IGenericRepository<PageMedia> repo, IGenericRepository<MenuMaster> menuRepo, IWebHostEnvironment env) : Controller
     {
         private readonly IGenericRepository<PageMedia> _repo = repo;
+        private readonly IGenericRepository<MenuMaster> _menuRepo = menuRepo;
+
         private readonly IWebHostEnvironment _env = env;
         private readonly string UploadImgPath = "Uploads/Image";
         private readonly string UploadPdfPath = "Uploads/PDF";
@@ -457,6 +459,60 @@ namespace College.Controllers
             {
                 logger.LogError(ex, "Error occurred while saving Placement Statistics");
                 return Json(new { message = "Error" });
+            }
+        }
+        // ✅ Menu Master Config Page
+        public async Task<IActionResult> MenuMaster()
+        {
+            if (HttpContext.Session.GetString("AdminUser") == null)
+                return RedirectToAction("Login", "Login");
+
+            var menus = await _menuRepo.GetAllAsync();
+
+            var list = menus
+                .OrderBy(x => x.ParentMenuId)
+                .ThenBy(x => x.Order)
+                .Select(x => new MenuVM
+                {
+                    Id = x.Id,
+                    ParentMenuId = x.ParentMenuId,
+                    MenuName = x.MenuName ?? "",
+                    MenuUrl = x.MenuUrl ?? "#",
+                    Display = x.Display ?? "N",
+                    Order = x.Order
+                })
+                .ToList();
+
+            // Parent menus
+            var parents = list.Where(x => x.ParentMenuId == null).ToList();
+
+            // Attach children
+            foreach (var p in parents)
+                p.Children = list.Where(x => x.ParentMenuId == p.Id).OrderBy(x => x.Order).ToList();
+
+            return View(parents);
+        }
+
+        // ✅ Toggle Enable/Disable (AJAX)
+        [HttpPost]
+        public async Task<IActionResult> ToggleMenu(int id, string display)
+        {
+            try
+            {
+                var menu = await _menuRepo.GetByIdAsync(id);
+                if (menu == null)
+                    return Json(new { success = false, message = "Menu not found" });
+
+                menu.Display = display;
+
+                 _menuRepo.Update(menu);
+                await _menuRepo.SaveAsync();
+
+                return Json(new { success = true, message = "Menu updated successfully" });
+            }
+            catch
+            {
+                return Json(new { success = false, message = "Update failed" });
             }
         }
         #endregion
