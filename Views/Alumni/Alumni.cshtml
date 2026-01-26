@@ -61,7 +61,7 @@
                 @foreach (var item in Model)
                 {
                     <div class="single-courses-card style3">
-                        <div class="gallery-item">
+                        <div class="gallery-item" onclick="InfoPopup(@item.Id)">
                             <img src="@Url.Content(item.ImagePath)" class="img-fluid rounded shadow-sm" alt="@item.Heading">
                             <div class="gallery-caption">
                                 <p>@item.Heading</p>

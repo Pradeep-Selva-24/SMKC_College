@@ -18,7 +18,7 @@
 body {background: var(--light);min-height: 100vh;overflow-x: hidden;}
 
 /* Header */
-.top-header {background: linear-gradient(84deg, #ffffff, #ff5f6d);color: var(--secondary);padding: 0px 20px 0px 10px;font-weight: 600;display: flex;align-items: center;justify-content: space-between;position: fixed;top: 0;left: 0;width: 100%;height: 70px;z-index: 999;}
+.top-header {background: linear-gradient(84deg, var(--primary), #ff5f6d);color: var(--secondary);padding: 0px 20px 0px 10px;font-weight: 600;display: flex;align-items: center;justify-content: space-between;position: fixed;top: 0;left: 0;width: 100%;height: 70px;z-index: 999;}
 .college-logo {height: 40px;width: auto;border-radius: 50%;background: #fff;padding: 3px;}
 .college-title {font-weight: 700;line-height: 1.1;color: #fff;font-size: 1rem;}
 .college-title small {font-weight: 500;font-size: 0.85rem;opacity: 0.9;}

@@ -24,10 +24,16 @@
                 <label class="form-label">Category</label>
                 <select class="form-select" id="category">
                     <option value="">-- Select Category --</option>
-                    <option value="HOME_BANNER">Home Banner (1920x1080)</option>
-                    <option value="EVENT_BANNER">Event Banner (1200x600)</option>
-                    <option value="NOTICE_BANNER">Notice Banner (800x800)</option>
-                    <option value="GALLERY_BANNER">Gallery Banner (1024x768)</option>
+
+                    <option value="Banner_Image">Banner Image (1920x1080 - 16:9)</option>
+                    <option value="Campus_Life">Campus Life (1920x1080 - 16:9)</option>
+
+                    <option value="Sports">Sports (1000x800 - 5:4)</option>
+                    <option value="Alumni">Alumni (1000x800 - 5:4)</option>
+
+                    <option value="Events">Events (800x800 - 5:3)</option>
+
+                    <option value="Latest_News">Latest News (800x800 - 1:1)</option>
                 </select>
             </div>
 
@@ -72,10 +78,12 @@
     const preview = document.getElementById('preview');
 
     const categorySettings = {
-        "HOME_BANNER": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
-        "EVENT_BANNER": { width: 1200, height: 600, aspectRatio: 2 / 1 },
-        "NOTICE_BANNER": { width: 800, height: 800, aspectRatio: 1 / 1 },
-        "GALLERY_BANNER": { width: 1024, height: 768, aspectRatio: 4 / 3 }
+        "Banner_Image": {width: 1920,height: 1080,aspectRatio: 16 / 9},
+        "Campus_Life": {width: 1920,height: 1080,aspectRatio: 16 / 9},
+        "Sports": {width: 1000,height: 800,aspectRatio: 5 / 4},
+        "Alumni": {width: 1000,height: 800,aspectRatio: 5 / 4},
+        "Events": {width: 800,height: 800,aspectRatio: 5 / 3},
+        "Latest_News": {width: 800,height: 800,aspectRatio: 1 / 1}
     };
 
     function getSelectedSetting() {

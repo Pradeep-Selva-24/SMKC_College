@@ -4,6 +4,7 @@ using College.Models;
 using College.Services.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace College.Controllers;
@@ -106,4 +107,24 @@ public class HomeController(ILogger<HomeController> logger, CLGDbContext db) : C
         return number.ToString();
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetPageMediaById(int Id)
+    {
+        string strResult = string.Empty, strMessage = "Failed";
+        try
+        {
+            PageMedia? PageMedia = await db.PageMedia.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+            if (PageMedia != null)
+            {
+                strResult = JsonConvert.SerializeObject(PageMedia);
+                strMessage = "Success";
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error occurred while loading GetPageMediaById");
+        }
+        return Json(new { result = strResult, message = strMessage });
+    }
 }

@@ -97,11 +97,25 @@ table th, table td {vertical-align: middle !important;}
 .clsPreloaderArea .spinner::before {content: "";position: absolute;left: 0;top: 0;right: 0;bottom: 0;margin: -15px;border-radius: 50%;border: 2px dashed #ffffff;animation: spinWheel 0.1s linear infinite;}
 .clsPreloaderArea .spinner img{margin-top: 45px;}
 
-.clsImgStyle {height: 350px;width: 100%;object-fit: cover;border-radius: 12px;}
+.campus-life-area .clsImgStyle {object-fit: cover;border-radius: 12px;}
+
+.clsVisionMission .clsImgStyle {height: 350px;width: 100%;object-fit: cover;border-radius: 12px;}
 
 .clsLatestNews .events-content p {display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;text-overflow: ellipsis;white-space: normal;cursor: pointer;}
 
 .nac-area .section-title, .nirf-area .section-title {margin: 0px;max-width: max-content;}
+
+.clsInfoPopup .modal-header {background: linear-gradient(84deg, var(--primary), #ff5f6d);}
+.clsInfoPopup .modal-title {color: #ffff;}
+.clsInfoPopup button.close {right: 5px;top: 5px;}
+.clsInfoPopup button.close {position: absolute;right: 20px;top: 15px;background-color: transparent;border: none;text-shadow: unset;box-shadow: unset;z-index: 99;opacity: 1;}
+.clsInfoPopup button.close i {display: inline-block;height: 30px;width: 30px;line-height: 30px;background-color: #ffffff;color: var(--secondary);font-size: 20px;transition: all ease 0.5s;border-radius: 50%;}
+.clsInfoPopup .clsInfoPopupContent {text-align: center;padding: 20px;border-radius: 12px;}
+.clsInfoPopup .clsImgStyle {width: 100%;max-width: 450px;border-radius: 12px;box-shadow: 0 10px 25px rgba(0,0,0,0.15);margin-bottom: 12px;}
+.clsInfoPopup .clsMeta {align-items: center;font-size: 14px;color: var(--primary);margin-bottom: 10px;}
+.clsInfoPopup .clsTitle {font-weight: 700;margin-bottom: 8px;}
+.clsInfoPopup .clsDesc {font-size: 15px;line-height: 1.6;max-width: 520px;margin: 0 auto;}
+
 
 @keyframes spinWheel {
     from {transform: rotate(0deg);}

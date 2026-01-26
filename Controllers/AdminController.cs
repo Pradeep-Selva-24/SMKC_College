@@ -175,12 +175,7 @@ namespace College.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SavePageMedia(
-        IFormFile bannerImage,
-        string category,
-        string heading,
-        string shortContent,
-        int displayOrder)
+        public async Task<IActionResult> SavePageMedia(IFormFile bannerImage, string category, string heading, string shortContent, int displayOrder)
         {
             try
             {

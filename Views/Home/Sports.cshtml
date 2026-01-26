@@ -15,7 +15,7 @@
                     @foreach (var item in Model)
                     {
                         <div class="owl-item cloned" style="width: 412.007px; margin-right: 30px;">
-                            <div class="single-health-care-card style-3">
+                            <div class="single-health-care-card style-3" onclick="InfoPopup(@item.Id)">
                                 <div class="img">
                                     <img src="@Url.Content(item.ImagePath)" alt="Image" />
                                 </div>

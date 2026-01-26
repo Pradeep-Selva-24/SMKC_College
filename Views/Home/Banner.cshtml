@@ -13,7 +13,7 @@
 
         @foreach (var item in Model)
         {
-            <div class="slider-item" style="background-image: url(@Url.Content(item.ImagePath))">
+            <div class="slider-item" onclick="InfoPopup(@item.Id)" style="background-image: url(@Url.Content(item.ImagePath))">
                 <div class="container-fluid">
 
                     <div class="slider-content style2">

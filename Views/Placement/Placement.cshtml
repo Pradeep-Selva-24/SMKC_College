@@ -152,7 +152,7 @@
 
                         @foreach (var item in Model.LstBanner)
                         {
-                            <div class="company-slider-card style-3">
+                            <div class="company-slider-card style-3" onclick="InfoPopup(@item.Id)">
                                 <div class="img">
                                     <img src="@Url.Content(item.ImagePath)" />
                                 </div>

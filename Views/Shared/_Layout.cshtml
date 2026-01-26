@@ -222,7 +222,7 @@
 
                     <hr>
 
-                    <div class="contact-form">
+@*                     <div class="contact-form">
                         <h3>Feedback / Enquiry Form</h3>
 
                         <form id="contactForm">
@@ -265,7 +265,7 @@
                     </div>
 
                     <hr>
-
+ *@
                     <ul class="sidebar-social-list mt-3">
                         <li><a href="#" target="_blank"><i class="flaticon-facebook"></i></a></li>
                         <li><a href="#" target="_blank"><i class="flaticon-twitter"></i></a></li>
@@ -382,6 +382,44 @@
         <i class="ri-arrow-up-s-line"></i>
     </div>
     <!-- End Go Top Area -->
+
+    <div class="modal fade clsInfoPopup" id="infoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content custom-modal">
+
+                <!-- Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-info-circle me-2"></i> Information
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal"><i class="ri-close-line"></i></button>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body">
+                    <div class="clsInfoPopupContent">
+
+                        <!-- Image -->
+                        <img class="clsImgStyle" src="" alt="Info">
+
+                        <!-- Meta Info -->
+                        <div class="clsMeta">
+                            <i class="ri-calendar-2-line"></i>
+                            <span class="clsDate"></span>
+                        </div>
+
+                        <!-- Title -->
+                        <h3 class="clsTitle"></h3>
+
+                        <!-- Description -->
+                        <div class="clsDesc"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
     
     
@@ -438,6 +476,82 @@
                 new bootstrap.Tooltip(this);
             });
         }
+    </script>
+
+    <script>
+        function InfoPopup(Id) {
+            $(".clsInfoPopupContent .clsImgStyle").attr("src", "");
+            $(".clsInfoPopupContent .clsImgStyle").hide();
+            $(".clsInfoPopupContent .clsMeta .clsDate").html("");
+            $(".clsInfoPopupContent .clsMeta").hide();
+            $(".clsInfoPopupContent .clsTitle").html("");
+            $(".clsInfoPopupContent .clsDesc").html("");
+
+            LoaderShow();
+            $.ajax({
+                url: '/Home/GetPageMediaById',
+                type: 'GET',
+                data: { Id: Id },
+                success: function (response) {
+                    if (response.message === "Success") {
+                        var data = JSON.parse(response.result);
+
+                        if(data.ImagePath)
+                        {
+                            $(".clsInfoPopupContent .clsImgStyle").attr("src", data.ImagePath);
+                            $(".clsInfoPopupContent .clsImgStyle").show();
+                        }
+
+                        if(data.Date)
+                        {
+                            var formattedDate = formatDate(data.Date);
+                            $(".clsInfoPopupContent .clsMeta .clsDate").html(formattedDate);
+                            $(".clsInfoPopupContent .clsMeta").show();
+                        }
+
+                        if(data.Heading)
+                        {
+                            $(".clsInfoPopupContent .clsTitle").html(data.Heading);
+                        }
+
+                        if(data.ShortContent)
+                        {
+                            $(".clsInfoPopupContent .clsDesc").html(data.ShortContent);
+                        }
+
+                        $('#infoModal').modal('show');
+                    }
+                    LoaderHide();
+                },
+                error: function (err) {
+                    console.error(err);
+                    alert('Error while loading data.');
+                    LoaderHide();
+                }
+            });
+        }
+        
+        function formatDate(dateValue) {
+            if (!dateValue) return "";
+
+            // Handle .NET /Date(1712793600000)/
+            var match = /\/Date\((\d+)\)\//.exec(dateValue);
+            var date = match ? new Date(parseInt(match[1])) : new Date(dateValue);
+
+            if (isNaN(date)) return dateValue; // fallback if invalid
+
+            var months = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            var day = date.getDate();
+            var month = months[date.getMonth()];
+            var year = date.getFullYear();
+
+            return month + " " + day + ", " + year;
+        }
+
     </script>
 
 </body>
