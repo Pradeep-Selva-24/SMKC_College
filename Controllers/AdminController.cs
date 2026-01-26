@@ -278,7 +278,7 @@ namespace College.Controllers
 
                 await db.SaveChangesAsync();
 
-                return Json(new { message = Id > 0 ? "Banner updated successfully" : "Banner uploaded successfully" });
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
             }
             catch (Exception ex)
             {
@@ -867,7 +867,7 @@ namespace College.Controllers
 
                 await db.SaveChangesAsync();
 
-                return Json(new { message = Id > 0 ? "Banner updated successfully" : "Banner uploaded successfully" });
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
             }
             catch (Exception ex)
             {
@@ -884,6 +884,281 @@ namespace College.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetManagement()
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<Management> lstManagement = await db.Management.OrderBy(x => x.DisplayOrder).ToListAsync();
+
+                if (lstManagement != null && lstManagement.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstManagement);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetManagement");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetManagementById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                Management? Management = await db.Management.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (Management != null)
+                {
+                    strResult = JsonConvert.SerializeObject(Management);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetManagementById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateManagement(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.Management.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.Management.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateManagement");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveManagement(int Id, IFormFile? bannerImage, string Name, string Designation, int displayOrder)
+        {
+            try
+            {
+                Management? banner;
+                if (Id > 0)
+                {
+                    banner = await db.Management.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
+
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, "Management", banner.ImagePath!);
+                    }
+
+                    banner.Name = Name;
+                    banner.Designation = Designation;
+                    banner.DisplayOrder = displayOrder;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.Management.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, "Management", "");
+
+                    banner = new Management
+                    {
+                        ImagePath = imagePath,
+                        Name = Name,
+                        Designation = Designation,
+                        DisplayOrder = displayOrder,
+                        CreatedDate = DateTime.Now
+                    };
+                    await db.Management.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving Management");
+                return Json(new { message = "Something went wrong while saving" });
+            }
+        }
+
         #endregion
+
+        #region Management Details
+        public IActionResult ManagementDetails()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetlstManagement()
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<Management> lstManagement = await db.Management.Where(x => x.Status).ToListAsync();
+
+                if (lstManagement != null)
+                {
+                    strResult = JsonConvert.SerializeObject(lstManagement);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetlstManagement");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetManagementContent()
+        {
+            try
+            {
+                var lstManagementContentPages = await db.ManagementContent.ToListAsync();
+
+                var result = await (
+                    from a in db.ManagementContent
+                    join b in db.Management
+                    on a.ManagementId equals b.Id
+                    orderby b.DisplayOrder
+                    select new
+                    {
+                        a.Id,
+                        b.Name,          // S_Name
+                        ManagementId = b.Id,
+                        b.Designation,
+                        b.ImagePath,
+                        b.DisplayOrder,
+                        a.Status,
+                        a.Content
+                    }
+                    ).ToListAsync();
+
+
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetManagementContent");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetManagementContentById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                ManagementContent? ManagementContent = await db.ManagementContent.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (ManagementContent != null)
+                {
+                    strResult = JsonConvert.SerializeObject(ManagementContent);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetManagementContent");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveManagementContent([FromBody] ManagementContent model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.ManagementContent.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Content = model.Content;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.ManagementContent.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.ManagementContent.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving ManagementContentPages");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateManagementContent(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.ManagementContent.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.ManagementContent.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateManagementContent");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        #endregion
+
     }
 }
