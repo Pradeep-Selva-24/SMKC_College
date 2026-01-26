@@ -603,5 +603,287 @@ namespace College.Controllers
         }
 
         #endregion
+
+        #region Clubs Master
+
+        public IActionResult ClubsMaster()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetClubsMaster()
+        {
+            try
+            {
+                var lstClubsMaster = await db.ClubsMaster.OrderBy(x => x.DisplayOrder).ToListAsync();
+                return Json(lstClubsMaster);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetClubsMaster");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetClubsMasterById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                ClubsMaster? ClubsMaster = await db.ClubsMaster.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (ClubsMaster != null)
+                {
+                    strResult = JsonConvert.SerializeObject(ClubsMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetClubsMasterById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveClubsMaster([FromBody] ClubsMaster model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.ClubsMaster.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Clubs = model.Clubs;
+                        existing.FullName = model.FullName;
+                        existing.DisplayOrder = model.DisplayOrder;
+                        existing.Description = model.Description;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.ClubsMaster.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.ClubsMaster.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveClubsMaster");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateClubsMaster(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.ClubsMaster.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.ClubsMaster.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateClubsMaster");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
+        #region Clubs Details
+
+        public IActionResult ClubsDetails()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetlstClubs()
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<ClubsMaster> lstClubsMaster = await db.ClubsMaster.Where(x => x.Status).ToListAsync();
+
+                if (lstClubsMaster != null)
+                {
+                    strResult = JsonConvert.SerializeObject(lstClubsMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetlstClubs");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetClubsDetails(int ClubsId, string Category)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<ClubsDetails> lstClubsDetails = await db.ClubsDetails.Where(x => x.ClubsMasterId == ClubsId && x.Category == Category).OrderBy(x => x.DisplayOrder).ToListAsync();
+
+                if (lstClubsDetails != null && lstClubsDetails.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstClubsDetails);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetClubsDetails");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetClubsDetailsById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                ClubsDetails? ClubsDetails = await db.ClubsDetails.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (ClubsDetails != null)
+                {
+                    strResult = JsonConvert.SerializeObject(ClubsDetails);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetClubsDetailsById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateClubsDetails(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.ClubsDetails.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.ClubsDetails.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateClubsDetails");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveClubsDetails(int Id, int ClubsId, IFormFile? bannerImage, string category, string heading, string shortContent, int displayOrder, string date)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(category))
+                    return Json(new { message = "Category is required" });
+
+                ClubsDetails? banner;
+                if (Id > 0)
+                {
+                    banner = await db.ClubsDetails.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
+
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, category, banner.ImagePath!);
+                    }
+
+                    banner.Category = category;
+                    banner.Heading = heading;
+                    banner.ShortContent = shortContent;
+                    banner.DisplayOrder = displayOrder;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.ClubsDetails.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, category, "");
+
+                    banner = new ClubsDetails
+                    {
+                        ClubsMasterId = ClubsId,
+                        Category = category,
+                        ImagePath = imagePath,
+                        Heading = heading,
+                        ShortContent = shortContent,
+                        DisplayOrder = displayOrder,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    await db.ClubsDetails.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Banner updated successfully" : "Banner uploaded successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveClubsDetails");
+                return Json(new { message = "Something went wrong while saving" });
+            }
+        }
+
+        #endregion
+
+        #region Management Master
+        public IActionResult ManagementMaster()
+        {
+            return View();
+        }
+
+        #endregion
     }
 }

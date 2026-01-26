@@ -129,9 +129,17 @@
                 <i class="bi bi-gear-fill"></i> Menu
             </a>
 
-            <a href="/Admin/Management">
-                <i class="bi bi-building"></i> Management
-            </a>
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-building"></i> Management
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
+
+                <div class="submenu">
+                    <a href="/Admin/ManagementMaster"> Master</a>
+                    <a href="/Admin/ManagementDetails"> Details</a>
+                </div>
+            </div>
 
             <div class="menu-group">
                 <a href="#" class="menu-toggle-item">
@@ -158,16 +166,24 @@
                 </div>
             </div>
 
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-people"></i> Clubs & Activities
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
+
+                <div class="submenu">
+                    <a href="/Admin/ClubsMaster"> Master</a>
+                    <a href="/Admin/ClubsDetails"> Details</a>
+                </div>
+            </div>
+
             <a href="/Admin/PageMedia">
                 <i class="bi bi-image"></i> Page Media
             </a>
 
             <a href="/Admin/Institution">
                 <i class="bi bi-bank"></i> Institution
-            </a>
-
-            <a href="/Admin/Clubs">
-                <i class="bi bi-people"></i> Clubs & Activities
             </a>
 
         </div>
