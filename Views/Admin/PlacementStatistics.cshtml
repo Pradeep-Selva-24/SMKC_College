@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Placement Statistics";
+    Layout = "_AdminLayout";
+}
+
+<div class="page-container">
+    <div class="form-card">
+
+        <div class="row g-4 ">
+
+            <div class="col-lg-6">
+                <label>Overall Placement Rate</label>
+                <input type="text" id="OPR" class="form-control" data-key="" />
+            </div>
+
+            <div class="col-lg-6">
+                <label>Companies Visited</label>
+                <input type="text" id="CV" class="form-control" data-key="" />
+            </div>
+
+            <div class="col-lg-6">
+                <label>Students Placed</label>
+                <input type="text" id="SP" class="form-control" data-key="" />
+            </div>
+
+            <div class="col-lg-6">
+                <label>MoUs Signed</label>
+                <input type="text" id="MS" class="form-control" data-key="" />
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-cancel clsAdd" onclick="Get()">Reset</button>
+            <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        Get()
+    });
+
+    function resetForm() {
+        $('#OPR').val('')
+        $('#CV').val('');
+        $('#SP').val('');
+        $('#MS').val('')
+        $('#OPR').attr("data-key", '')
+        $('#CV').attr("data-key", '')
+        $('#SP').attr("data-key", '')
+        $('#MS').attr("data-key", '')
+
+    }
+
+    function Get(){
+        resetForm()
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetPlacementStatistics',
+            type: 'GET',
+            data: '',
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+                    $.each(data, function (i, y) {
+
+                        if (y["Key"] == "Overall Placement Rate") {
+                            $('#OPR').val(y["Value"])
+                            $('#OPR').attr("data-key", y["Id"] )
+                        }
+
+                        if (y["Key"] == "Companies Visited") {
+                            $('#CV').val(y["Value"])
+                            $('#CV').attr("data-key", y["Id"] )
+                        }
+
+                        if (y["Key"] == "Students Placed") {
+                            $('#SP').val(y["Value"])
+                            $('#SP').attr("data-key", y["Id"] )
+                        }
+
+                        if (y["Key"] == "MoUs Signed") {
+                            $('#MS').val(y["Value"])
+                            $('#MS').attr("data-key", y["Id"] )
+                        }
+                    })
+
+                } 
+                else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Save() {
+        LoaderShow();
+
+        var stats = [
+            { Key: "Overall Placement Rate", Value: $('#OPR').val(), Id: $('#OPR').attr("data-key") },
+            { Key: "Companies Visited", Value: $('#CV').val(), Id: $('#CV').attr("data-key") },
+            { Key: "Students Placed", Value: $('#SP').val(), Id: $('#SP').attr("data-key") },
+            { Key: "MoUs Signed", Value: $('#MS').val(), Id: $('#MS').attr("data-key") }
+        ];
+
+        // 🔹 Validation
+        for (var i = 0; i < stats.length; i++) {
+            if (!stats[i].Value || stats[i].Value.trim() === "") {
+                alert(stats[i].Key + " is required");
+                LoaderHide();
+                return;
+            }
+
+            if (!stats[i].Id) {
+                alert("Missing ID for " + stats[i].Key);
+                LoaderHide();
+                return;
+            }
+        }
+
+        $.ajax({
+            url: '/Admin/SavePlacementStatistics',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(stats),
+            success: function (response) {
+                if (response.message === "Success") {
+                    alert("Updated Successfully");
+                } else {
+                    alert(response.message || "Update failed");
+                }
+                LoaderHide();
+            },
+            error: function (err) {
+                console.error(err);
+                alert("Error while updating data.");
+                LoaderHide();
+            }
+        });
+    }
+
+</script>

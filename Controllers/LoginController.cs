@@ -4,12 +4,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace College.Controllers
 {
-    public class LoginController(IGenericRepository<Login> loginRepo) : Controller
+    public class LoginController(ILogger<HomeController> logger, IGenericRepository<Login> loginRepo) : Controller
     {
         public IActionResult Login()
         {
+            try
+            {
+                var adminUser = HttpContext.Session.GetString("AdminUser");
+                if (!string.IsNullOrEmpty(adminUser))
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading Login");
+            }
             return View();
         }
+
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]

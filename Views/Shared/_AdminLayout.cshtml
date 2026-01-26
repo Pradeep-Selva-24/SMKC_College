@@ -1,54 +1,229 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SMC Admin Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Admin Dashboard</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!--Bootstrap Css-->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!--Mean menu.css-->
+    <link rel="stylesheet" href="~/css/meanmenu.css">
+    <!--Owl carousel-->
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <!--Owl Theme-->
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <!--=== Magnific Popup Min CSS ===-->
+    <link rel="stylesheet" href="~/css/magnific-popup.min.css">
+    <!--Flat icon-->
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <!--Remix icon-->
+    <link rel="stylesheet" href="~/css/remixicon.css">
+    <!--Odometer-->
+    <link rel="stylesheet" href="~/css/odometer.min.css">
+    <!--Aos css-->
+    <link rel="stylesheet" href="~/css/aos.css">
+    <!--Style css-->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!--Dark css-->
+    <link rel="stylesheet" href="~/css/dark.css">
+    <!--Responsive css-->
+    <link rel="stylesheet" href="~/css/responsive.css">
+
+    <!--Custom css-->
+    <link href="~/css/college.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
+
+    <!--=== Title ===-->
+    <title>SMKC - @ViewData["Title"]</title>
+    <link rel="icon" type="image/png" href="~/img/logo/favicon.png">
 </head>
-
 <body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- TOP BAR -->
-    <div class="topbar">
-        <button class="menu-btn d-md-none me-2" onclick="toggleMenu()">
-            <i class="bi bi-list fs-3"></i>
-        </button>
+    <!--=== MeanMenu js ===-->
+    <script src="~/js/jquery.meanmenu.js"></script>
+    <!--=== Owl Carousel Min js ===-->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!--=== Owl Carousel Thumbs Min js ===-->
+    <script src="~/js/carousel-thumbs.min.js"></script>
+    <!--=== Magnific popup Min js ===-->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Aos js -->
+    <script src="~/js/aos.js"></script>
+    <!-- Odometer js -->
+    <script src="~/js/odometer.min.js"></script>
+    <!-- Appear js -->
+    <script src="~/js/appear.min.js"></script>
+    <!-- Form Validator js -->
+    <script src="~/js/form-validator.min.js"></script>
+    <!-- Contact Form Script js -->
+    <script src="~/js/contact-form-script.js"></script>
+    <!--=== AjaxChimp js ===-->
+    <script src="~/js/ajaxchimp.min.js"></script>
+    <!--=== Custom js ===-->
+    <script src="~/js/custom.js"></script>
+    <!--=== Layout js ===-->
+    <script src="~/js/Layout.js"></script>
 
-        <strong>Sree Muthukumaraswamy College – Admin</strong>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        <div class="ms-auto">
-            Admin
-            <button class="btn btn-sm btn-light ms-2">Logout</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+
+    <!-- Start Preloader Area -->
+    <div class="clsPreloaderArea" style="display:none;">
+        <div class="spinner">
+            <img src="~/img/loader/murugan.png" />
         </div>
     </div>
 
-    <!-- OVERLAY -->
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <!-- Header -->
+    <div class="top-header">
+        <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-list menu-toggle" id="menuToggle"></i>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
-        <a class="active"><i class="bi bi-speedometer2"></i> Dashboard</a>
-        <a><i class="bi bi-megaphone"></i> Announcements</a>
-        <a><i class="bi bi-book"></i> Departments</a>
-        <a><i class="bi bi-calendar-event"></i> Events</a>
-        <a><i class="bi bi-people"></i> Staff</a>
-        <a><i class="bi bi-gear"></i> Settings</a>
+            <!-- Logo + Title -->
+            <div class="d-flex align-items-center gap-2">
+                <img src="~/img/logo/logo.png"
+                     alt="Sree Muthukumaraswamy College"
+                     class="college-logo-wide" />
+            </div>
+        </div>
+
+        <a href="~/Login/Logout" class="clsLogout">
+            <i class="bi bi-power fs-4"></i>
+        </a>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-        @RenderBody()
-    <script>
-        function toggleMenu() {
-            document.getElementById("sidebar").classList.toggle("show");
-            document.getElementById("overlay").classList.toggle("show");
-        }
-    </script>
 
+    <!-- Layout -->
+    <div class="layout">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+
+            <a href="/Admin/Dashboard" class="active">
+                <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+
+            <a href="/Admin/Settings">
+                <i class="bi bi-sliders"></i> Settings
+            </a>
+
+            <a href="/Admin/Menu">
+                <i class="bi bi-gear-fill"></i> Menu
+            </a>
+
+            <a href="/Admin/Management">
+                <i class="bi bi-building"></i> Management
+            </a>
+
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-journal-bookmark"></i> Programmes Offered
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
+
+                <div class="submenu">
+                    <a href="/Admin/PlacementStatistics"> Master</a>
+                    <a href="/Admin/PlacementHighlights"> Details</a>
+                </div>
+            </div>
+
+
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-briefcase"></i> Placement
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
+
+                <div class="submenu">
+                    <a href="/Admin/PlacementStatistics"> Statistics</a>
+                    <a href="/Admin/PlacementHighlights"> Highlights</a>
+                </div>
+            </div>
+
+            <a href="/Admin/PageMedia">
+                <i class="bi bi-image"></i> Page Media
+            </a>
+
+            <a href="/Admin/Institution">
+                <i class="bi bi-bank"></i> Institution
+            </a>
+
+            <a href="/Admin/Clubs">
+                <i class="bi bi-people"></i> Clubs & Activities
+            </a>
+
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script>
+                $(document).ready(function () {
+
+            var currentPath = window.location.pathname.toLowerCase();
+
+            // Reset states
+            $('#sidebar a').removeClass('active');
+            $('.submenu').removeClass('show');
+            $('.arrow').removeClass('rotate');
+
+            // Highlight active link
+            $('#sidebar a[href]').each(function () {
+                var linkPath = $(this).attr('href').toLowerCase();
+
+                if (currentPath === linkPath || currentPath.startsWith(linkPath + "/")) {
+                    $(this).addClass('active');
+
+                    // Open parent submenu if exists
+                    var submenu = $(this).closest('.submenu');
+                    if (submenu.length) {
+                        submenu.addClass('show');
+                        submenu.prev('.menu-toggle-item')
+                            .addClass('active')
+                            .find('.arrow')
+                            .addClass('rotate');
+                    }
+                }
+            });
+
+            // Accordion toggle
+            $('.menu-toggle-item').on('click', function (e) {
+                e.preventDefault();
+
+                var submenu = $(this).next('.submenu');
+                var arrow = $(this).find('.arrow');
+
+                // Close others
+                $('.submenu').not(submenu).removeClass('show');
+                $('.menu-toggle-item .arrow').not(arrow).removeClass('rotate');
+                $('.menu-toggle-item').not(this).removeClass('active');
+
+                // Toggle current
+                submenu.toggleClass('show');
+                arrow.toggleClass('rotate');
+                $(this).toggleClass('active');
+            });
+
+        });
+
+    </script>
 </body>
 </html>
