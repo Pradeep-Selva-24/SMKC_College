@@ -96,6 +96,7 @@
         resetForm()
         $(".clsView").show();
         $(".clsAdd, .clsEdit").hide();
+        $('#Category').prop('disabled', false);
         LoaderShow();
         Grid();
         LoaderHide();
@@ -109,6 +110,7 @@
 
     function Edit(Id){
         resetForm()
+        $('#Category').prop('disabled', true);
         $(".clsView, .clsAdd").hide();
         $(".clsEdit").show();
         $('#Key').val(Id)

@@ -6,6 +6,7 @@ using College.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace College.Controllers
 {
@@ -141,18 +142,24 @@ namespace College.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPageMedia()
+        public async Task<IActionResult> GetPageMedia(string Category)
         {
+            string strResult = string.Empty, strMessage = "Failed";
             try
             {
-                var lstPageMediaPages = await db.PageMedia.ToListAsync();
-                return Json(lstPageMediaPages);
+                List<PageMedia> lstPageMedia = await db.PageMedia.Where(x => x.Category == Category).OrderBy(x => x.DisplayOrder).ToListAsync();
+
+                if (lstPageMedia != null && lstPageMedia.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstPageMedia);
+                    strMessage = "Success";
+                }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error occurred while loading GetPageMedia");
-                return StatusCode(500, "Error loading data");
             }
+            return Json(new { result = strResult, message = strMessage });
         }
 
         [HttpGet]
@@ -177,38 +184,109 @@ namespace College.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SavePageMedia(IFormFile bannerImage, string category, string heading, string shortContent, int displayOrder)
+        public async Task<IActionResult> StatusUpdatePageMedia(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.PageMedia.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.PageMedia.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdatePageMedia");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SavePageMedia(int Id, IFormFile? bannerImage, string category, string heading, string shortContent, int displayOrder, string date)
         {
             try
             {
-                if (string.IsNullOrEmpty(category))
+                if (string.IsNullOrWhiteSpace(category))
                     return Json(new { message = "Category is required" });
 
-                if (bannerImage == null || bannerImage.Length == 0)
-                    return Json(new { message = "Image upload failed" });
-
-                string ImagePath = await UploadImageAsync(bannerImage, category, "");
-
-                var banner = new PageMedia
+                PageMedia? banner;
+                if (Id > 0)
                 {
-                    Category = category,
-                    ImagePath = ImagePath,
-                    Heading = heading,
-                    ShortContent = shortContent,
-                    DisplayOrder = displayOrder,
-                    Date = DateTime.Now
-                };
+                    banner = await db.PageMedia.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
 
-                await _repo.AddAsync(banner);
-                await _repo.SaveAsync();
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, category, banner.ImagePath!);
+                    }
 
-                return Json(new { message = "Banner uploaded successfully" });
+                    banner.Category = category;
+                    banner.Heading = heading;
+                    banner.ShortContent = shortContent;
+                    if (DateTime.TryParseExact(date, "dd-mm-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        banner.Date = parsedDate;
+                    }
+                    else
+                    {
+                        banner.Date = null;
+                    }
+                    banner.DisplayOrder = displayOrder;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.PageMedia.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, category, "");
+
+                    banner = new PageMedia
+                    {
+                        Category = category,
+                        ImagePath = imagePath,
+                        Heading = heading,
+                        ShortContent = shortContent,
+                        DisplayOrder = displayOrder,
+                        Date = DateTime.Now,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    if (DateTime.TryParseExact(date, "dd-mm-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        banner.Date = parsedDate;
+                    }
+                    else
+                    {
+                        banner.Date = null;
+                    }
+
+                    await db.PageMedia.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Banner updated successfully" : "Banner uploaded successfully" });
             }
-            catch
+            catch (Exception ex)
             {
-                return Json(new { message = "Something went wrong while uploading" });
+                logger.LogError(ex, "Error occurred while saving PageMedia");
+                return Json(new { message = "Something went wrong while saving" });
             }
         }
+
         #endregion
 
         #region Institution
@@ -505,7 +583,7 @@ namespace College.Controllers
 
                 menu.Display = display;
 
-                 _menuRepo.Update(menu);
+                _menuRepo.Update(menu);
                 await _menuRepo.SaveAsync();
 
                 return Json(new { success = true, message = "Menu updated successfully" });

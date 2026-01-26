@@ -3,180 +3,495 @@
     Layout = "_AdminLayout";
 }
 
-<div class="page-container">
+<div class="page-container clsPageMedia">
 
     <div class="form-card">
 
         <div class="page-header-card">
             <h4 class="page-title">Page Media</h4>
-            <button type="button"
-                    class="btn btn-primary view-btn"
-                    onclick="window.location.href='/Admin/PageMedia/List'">
-                View
-            </button>
+            <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
         </div>
 
-        <div id="msg"></div>
+        <div class="clsView">
+            <div class="row g-3">
+                <div class="col-lg-3">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="categoryView">
+                        <option value="">-- Select Category --</option>
 
-        <div class="row g-4">
+                        <option value="Banner_Image">Banner Image</option>
+                        <option value="Campus_Life">Campus Life</option>
 
-            <div class="col-lg-6">
-                <label class="form-label">Category</label>
-                <select class="form-select" id="category">
-                    <option value="">-- Select Category --</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Alumni">Alumni</option>
 
-                    <option value="Banner_Image">Banner Image (1920x1080 - 16:9)</option>
-                    <option value="Campus_Life">Campus Life (1920x1080 - 16:9)</option>
+                        <option value="Events">Events</option>
 
-                    <option value="Sports">Sports (1000x800 - 5:4)</option>
-                    <option value="Alumni">Alumni (1000x800 - 5:4)</option>
-
-                    <option value="Events">Events (800x800 - 5:3)</option>
-
-                    <option value="Latest_News">Latest News (800x800 - 1:1)</option>
-                </select>
+                        <option value="Latest_News">Latest News</option>
+                    </select>
+                </div>
             </div>
+            <div class="row g-3 mt-20" id="ViewPageMedia">
 
-            <div class="col-lg-6">
-                <label class="form-label">Banner Image</label>
-                <input type="file" class="form-control" id="imageInput" accept="image/*">
-            </div>
+                
 
-            <div class="col-12 text-center">
-                <img id="preview" style="display:none;">
-            </div>
-
-            <div class="col-lg-6">
-                <label>Heading</label>
-                <input type="text" id="heading" class="form-control">
-            </div>
-
-            <div class="col-lg-6">
-                <label>Display Order</label>
-                <input type="number" id="displayOrder" class="form-control" value="1">
-            </div>
-
-            <div class="col-12">
-                <label>Short Content</label>
-                <textarea id="shortContent" class="form-control" rows="4"></textarea>
             </div>
 
         </div>
 
-        <div class="action-buttons">
-            <button type="button" class="btn-cancel" onclick="resetForm()">Cancel</button>
-            <button class="btn-submit" onclick="saveBanner()">Save Banner</button>
+        <div class="clsAdd clsEdit">
+            <div id="msg"></div>
+
+            <div class="row g-4">
+                <input type="hidden" id="Key" value="" />
+                <div class="col-lg-6">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="category">
+                        <option value="">-- Select Category --</option>
+
+                        <option value="Banner_Image">Banner Image (1920x1080 - 16:9)</option>
+                        <option value="Campus_Life">Campus Life (1920x1080 - 16:9)</option>
+
+                        <option value="Sports">Sports (1000x800 - 5:4)</option>
+                        <option value="Alumni">Alumni (1000x800 - 5:4)</option>
+
+                        <option value="Events">Events (800x800 - 5:3)</option>
+
+                        <option value="Latest_News">Latest News (800x800 - 1:1)</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6">
+                    <label class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInput" accept="image/*">
+                </div>
+
+                <div class="col-12 text-center">
+                    <img id="preview" style="display:none;">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Heading</label>
+                    <input type="text" id="heading" class="form-control">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Display Order</label>
+                    <input type="number" id="displayOrder" class="form-control" value="1">
+                </div>
+
+                <div class="col-lg-6">
+                    <label class="form-label">Select Date</label>
+                    <input type="text" id="selectedDate" class="form-control datepicker" readonly>
+                </div>
+
+                <div class="col-12">
+                    <label>Short Content</label>
+                    <textarea id="Content" class="form-control" rows="4"></textarea>
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-cancel clsAdd" onclick="resetForm()">Cancel</button>
+                <button class="btn-submit clsAdd" onclick="Save()">Save</button>
+                <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+            </div>
         </div>
 
     </div>
-
 </div>
 
 <script>
-    let cropper;
-    const input = document.getElementById('imageInput');
-    const preview = document.getElementById('preview');
+    $(document).ready(function () {
+        $('#Content').summernote({
+            height: 200,
+            placeholder: 'Write content here...',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ]
+        });
+    });
+</script>
 
-    const categorySettings = {
-        "Banner_Image": {width: 1920,height: 1080,aspectRatio: 16 / 9},
-        "Campus_Life": {width: 1920,height: 1080,aspectRatio: 16 / 9},
-        "Sports": {width: 1000,height: 800,aspectRatio: 5 / 4},
-        "Alumni": {width: 1000,height: 800,aspectRatio: 5 / 4},
-        "Events": {width: 800,height: 800,aspectRatio: 5 / 3},
-        "Latest_News": {width: 800,height: 800,aspectRatio: 1 / 1}
-    };
+<script>
 
-    function getSelectedSetting() {
-        const category = document.getElementById("category").value;
-        return categorySettings[category];
-    }
+    var cropper = null;
+    var imageChanged = false;
 
-    input.addEventListener('change', e => {
-        const file = e.target.files[0];
-        if (!file) return;
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todayHighlight: true
+        });
 
-        const setting = getSelectedSetting();
+        View('Banner_Image')
+    });
 
-        if (!setting) {
-            alert("Please select Category first!");
-            input.value = "";
+    $('#categoryView').on('change', function () {
+        var selectedCategory = $(this).val();
+
+        if (selectedCategory === "") {
+            console.log("No category selected");
             return;
         }
 
-        const reader = new FileReader();
-        reader.onload = () => {
-            preview.src = reader.result;
-            preview.style.display = 'block';
-
-            if (cropper) cropper.destroy();
-
-            cropper = new Cropper(preview, {
-                aspectRatio: setting.aspectRatio,
-                viewMode: 1
-            });
-        };
-        reader.readAsDataURL(file);
+        DataLoad(selectedCategory);
     });
 
+    function View(category){
+        resetForm()
+        $(".clsView").show();
+        $(".clsAdd, .clsEdit").hide();
+        $('#categoryView').val(category).trigger('change');
+    }
+
+    function Add(){
+        resetForm()
+        $(".clsView, .clsEdit").hide();
+        $(".clsAdd").show();
+    }
+
     function resetForm() {
-        document.getElementById("category").value = "";
-        document.getElementById("heading").value = "";
-        document.getElementById("shortContent").value = "";
-        document.getElementById("displayOrder").value = 1;
-        document.getElementById("imageInput").value = "";
+        $('#Key').val('');
+        $('#category').val('');
+        $('#category').prop('disabled', false);
+        $('#heading').val('');
+        $('#displayOrder').val(1);
+        $('#imageInput').val('');
+        $('#selectedDate').datepicker('update', "");
+        $('#selectedDate').val("");
 
         if (cropper) {
             cropper.destroy();
             cropper = null;
         }
+        imageChanged = false;
 
-        preview.src = "";
-        preview.style.display = "none";
+        if (typeof $('#Content').summernote === 'function') {
+            $('#Content').summernote('code', '');
+        } else {
+            $('#Content').val('');
+        }
+
+        $('#preview').attr('src', '').hide();
     }
 
-    function saveBanner() {
-        const category = document.getElementById("category").value;
+    function DataLoad(Category){
+        LoaderShow();
+        $("#ViewPageMedia").html('');
+        $.ajax({
+            url: '/Admin/GetPageMedia',
+            type: 'GET',
+            data: { Category: Category },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    var Content = Buind(data);
+
+                    if(Content.length > 0){
+                        $("#ViewPageMedia").html(Content);
+                    }
+
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Buind(data){
+        var str = "";
+        let randomNum = (Math.random() * 5).toFixed(2);
+        $.each(data, function (i, y) {
+            str += '<div class="col-lg-4 col-md-6">';
+            str += '<div class="PageMedia-card">';
+            
+            str += '<div class="PageMedia-img">';
+            str += '<img src="' +y["ImagePath"]+ '?V' + randomNum + '" alt="Image">';
+            str += '</div>';
+            
+            str += '<div class="PageMedia-body">';
+            str += '<div class="PageMedia-title">' +y["Heading"]+ '</div>';
+            
+            str += '<div class="PageMedia-actions">';
+            
+            if(y["Status"]){
+                str += '<a href="javascript:void(0);" onclick="Edit(' +y["Id"]+ ')" class="text-primary" title="Edit">';
+                str += '<i class="bi bi-pencil-square"></i>';
+                str += '</a>';
+            
+                str += '<a href="javascript:void(0);" onclick="StatusUpdate(' +y["Id"]+ ', false)" class="text-danger" title="Delete">';
+                str += '<i class="bi bi-trash"></i>';
+                str += '</a>';
+            }
+            else{
+                str += '<a href="javascript:void(0);" onclick="StatusUpdate(' +y["Id"]+ ', true)" class="text-success" title="Activate">';
+                str += '<i class="bi bi-check-circle fs-5"></i>';
+                str += '</a>';
+            }
+            
+            str += '</div>';
+            str += '</div>';
+            str += '</div>';
+            str += '</div>';
+        })
+
+        return str;
+    }
+
+    function StatusUpdate(Id, status) {
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/StatusUpdatePageMedia',
+            type: 'POST',
+            data: { Id: Id, IsStatus: status },
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    $('#categoryView').trigger('change');
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Edit(Id){
+        resetForm()
+        $('#category').prop('disabled', true);
+        $(".clsView, .clsAdd").hide();
+        $(".clsEdit").show();
+        $('#Key').val(Id)
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetPageMediaById',
+            type: 'GET',
+            data: { Id: Id },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    $('#category').val(data.Category);
+                    $('#heading').val(data.Heading);
+                    $('#displayOrder').val(data.DisplayOrder);
+                    $('#Content').val(data.ShortContent);
+
+                    if (typeof $('#Content').summernote === 'function') {
+                        $('#Content').summernote('code', data.ShortContent);
+                    }
+
+                    if(data.Date){
+                        var isoDate = data.Date; // "2025-04-11T00:00:00"
+                        var d = new Date(isoDate);
+                    
+                        // Format as dd-mm-yyyy
+                        var day = String(d.getDate()).padStart(2, '0');
+                        var month = String(d.getMonth() + 1).padStart(2, '0');
+                        var year = d.getFullYear();
+                    
+                        var formattedDate = `${day}-${month}-${year}`; // "11-04-2025"
+                        $('#selectedDate').datepicker('update', formattedDate);
+                        $('#selectedDate').val(formattedDate);
+                    }
+
+
+                    loadImageForEdit(data.ImagePath)
+
+                    if (typeof $('#Content').summernote === 'function') {
+                        $('#Content').summernote('code', data.Content);
+                    }
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    const categorySettings = {
+        "Banner_Image": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
+        "Campus_Life": { width: 1920, height: 1080, aspectRatio: 16 / 9 },
+        "Sports": { width: 1000, height: 800, aspectRatio: 5 / 4 },
+        "Alumni": { width: 1000, height: 800, aspectRatio: 5 / 4 },
+        "Events": { width: 800, height: 800, aspectRatio: 5 / 3 },
+        "Latest_News": { width: 800, height: 800, aspectRatio: 1 / 1 }
+    };
+
+    function getSelectedSetting() {
+        var category = $('#category').val();
+        return categorySettings[category];
+    }
+
+    // Image change
+    $('#imageInput').on('change', function (e) {
+
+        var file = e.target.files[0];
+        if (!file) return;
+
+        var setting = getSelectedSetting();
+        if (!setting) {
+            alert("Please select Category first!");
+            $('#imageInput').val('');
+            return;
+        }
+
+        LoaderShow();
+        cropperReady = false;
+
+        var reader = new FileReader();
+        reader.onload = function () {
+
+            var img = document.getElementById('preview');
+            img.onload = function () {
+
+                if (cropper) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper(img, {
+                    aspectRatio: setting.aspectRatio,
+                    viewMode: 1,
+                    ready() {
+                        cropperReady = true;
+                        LoaderHide();
+                    }
+                });
+            };
+
+            $('#preview').attr('src', reader.result).show();
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    function loadImageForEdit(imageUrl) {
+        if (!imageUrl) return;
+
+        var setting = getSelectedSetting();
+        if (!setting) return;
+
+        LoaderShow();
+        cropperReady = false;
+
+        var img = document.getElementById('preview');
+
+        img.onload = function () {
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            cropper = new Cropper(img, {
+                aspectRatio: setting.aspectRatio,
+                viewMode: 1,
+                ready() {
+                    cropperReady = true;
+                    LoaderHide();
+                }
+            });
+        };
+
+        $('#preview')
+            .attr('src', imageUrl + '?t=' + new Date().getTime())
+            .show();
+    }
+
+    function Save() {
+
+        var category = $('#category').val();
+        var id = $('#Key').val() || 0;
 
         if (!category) {
             alert("Please select Category");
             return;
         }
 
-        if (!cropper) {
+        if (!cropper && id == 0) {
             alert("Please select and crop an image");
             return;
         }
 
-        const setting = getSelectedSetting();
+        if (cropper && !cropperReady) {
+            alert("Image is still loading. Please wait and try again.");
+            return;
+        }
 
-        cropper.getCroppedCanvas({
-            width: setting.width,
-            height: setting.height
-        }).toBlob(blob => {
+        var formData = new FormData();
+        formData.append("Id", id);
+        formData.append("category", category);
+        formData.append("heading", $('#heading').val());
+        formData.append("shortContent", $('#Content').val());
+        formData.append("displayOrder", $('#displayOrder').val());
+        formData.append("date",$('#selectedDate').val());
 
-            const formData = new FormData();
-            formData.append("bannerImage", blob, "banner.jpg");
-            formData.append("category", category);
-            formData.append("heading", document.getElementById("heading").value);
-            formData.append("shortContent", document.getElementById("shortContent").value);
-            formData.append("displayOrder", document.getElementById("displayOrder").value);
+        LoaderShow();
 
-            fetch("/Admin/SavePageMedia", {
-                method: "POST",
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById("msg").innerHTML =
-                    `<div class="alert alert-success">${data.message}</div>`;
+        if (cropper) {
+            var setting = getSelectedSetting();
 
-                resetForm();
-            })
-            .catch(() => {
-                document.getElementById("msg").innerHTML =
-                    `<div class="alert alert-danger">Upload failed</div>`;
-            });
+            cropper.getCroppedCanvas({
+                width: setting.width,
+                height: setting.height
+            }).toBlob(function (blob) {
 
-        }, "image/jpeg", 0.9);
+                if (!blob) {
+                    alert("Image processing failed. Try again.");
+                    LoaderHide();
+                    return;
+                }
+
+                formData.append("bannerImage", blob, "banner.jpg");
+                sendRequest(formData);
+
+            }, "image/jpeg", 0.9);
+        }
+        else {
+            sendRequest(formData);
+        }
     }
+
+    function sendRequest(formData) {
+        $.ajax({
+            url: "/Admin/SavePageMedia",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert(data.message);
+
+                if (data.message && data.message.toLowerCase().includes("success")) {
+                    View(formData.get("category"));
+                }
+
+                LoaderHide();
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
 </script>
+
