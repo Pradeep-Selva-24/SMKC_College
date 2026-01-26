@@ -1160,5 +1160,164 @@ namespace College.Controllers
 
         #endregion
 
+        #region Departments Master
+
+        public IActionResult DepartmentsMaster()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentsMaster(string Category)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<DepartmentsMaster> lstDepartmentsMaster = await db.DepartmentsMaster.Where(x => x.Category == Category).OrderBy(x => x.Order).ToListAsync();
+
+                if (lstDepartmentsMaster != null && lstDepartmentsMaster.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstDepartmentsMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetDepartmentsMaster");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentsMasterById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                DepartmentsMaster? DepartmentsMaster = await db.DepartmentsMaster.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (DepartmentsMaster != null)
+                {
+                    strResult = JsonConvert.SerializeObject(DepartmentsMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetDepartmentsMasterById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateDepartmentsMaster(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.DepartmentsMaster.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.DepartmentsMaster.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateDepartmentsMaster");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveDepartmentsMaster(int Id, IFormFile? bannerImage, IFormFile PdfFile, string category, string Department, string Description, int Order, int StudentCount)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(category))
+                    return Json(new { message = "Category is required" });
+
+                DepartmentsMaster? banner;
+                if (Id > 0)
+                {
+                    banner = await db.DepartmentsMaster.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
+
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, category, banner.ImagePath!);
+                    }
+
+                    if (PdfFile != null && PdfFile.Length > 0)
+                    {
+                        banner.SyllabusPath = await UploadPdfAsync(PdfFile, category, banner.SyllabusPath!);
+                    }
+
+                    banner.Category = category;
+                    banner.Department = Department;
+                    banner.Description = Description;
+                    banner.StudentCount = StudentCount;
+                    banner.Order = Order;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.DepartmentsMaster.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, category, "");
+
+                    string SyllabusPath = string.Empty;
+                    if (PdfFile != null && PdfFile.Length > 0)
+                    {
+                        SyllabusPath = await UploadPdfAsync(PdfFile, category, "");
+                    }
+
+
+                    banner = new DepartmentsMaster
+                    {
+                        Category = category,
+                        ImagePath = imagePath,
+                        Department = Department,
+                        Description = Description,
+                        SyllabusPath = SyllabusPath,
+                        StudentCount = StudentCount,
+                        Order = Order,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    await db.DepartmentsMaster.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving DepartmentsMaster");
+                return Json(new { message = "Something went wrong while saving" });
+            }
+        }
+        #endregion
+
+        #region Department Details
+
+        public IActionResult DepartmentDetails()
+        {
+            return View();
+        }
+
+        #endregion
     }
 }

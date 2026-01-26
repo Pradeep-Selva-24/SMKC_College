@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Clubs Details";
+    ViewData["Title"] = "Departments Master";
     Layout = "_AdminLayout";
 }
 
@@ -8,27 +8,20 @@
     <div class="form-card">
 
         <div class="page-header-card">
-            <h4 class="page-title">Clubs Details</h4>
+            <h4 class="page-title">Departments Master</h4>
             <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
-            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View('UG')">View</button>
         </div>
 
         <div class="clsView">
             <div class="row g-3">
-                <div class="col-lg-4">
-                    <label class="form-label">Club</label>
-                    <select class="form-select clslstClubs" id="ClubsView">
-                        <option value="">-- Select Category --</option>
-                    </select>
-                </div>
-
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label class="form-label">Category</label>
                     <select class="form-select" id="categoryView">
                         <option value="">-- Select Category --</option>
-                        <option value="Events">Events</option>
-                        <option value="Activities">Activities</option>
-                        <option value="Gallery">Gallery</option>
+                        <option value="UG">Undergraduate</option>
+                        <option value="PG">Postgraduate </option>
+                        <option value="Ph.D">Research</option>
                     </select>
                 </div>
             </div>
@@ -42,22 +35,39 @@
 
             <div class="row g-4">
                 <input type="hidden" id="Key" value="" />
-
                 <div class="col-lg-6">
-                    <label class="form-label">Club</label>
-                    <select class="form-select clslstClubs" id="Clubs">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="category">
                         <option value="">-- Select Category --</option>
+                        <option value="UG">Undergraduate</option>
+                        <option value="PG">Postgraduate </option>
+                        <option value="Ph.D">Research</option>
                     </select>
                 </div>
 
                 <div class="col-lg-6">
-                    <label class="form-label">Category</label>
-                    <select class="form-select clsCategory" id="category">
-                        <option value="">-- Select Category --</option>
-                        <option value="Events">Events</option>
-                        <option value="Activities">Activities</option>
-                        <option value="Gallery">Gallery</option>
-                    </select>
+                    <label>Department</label>
+                    <input type="text" id="Department" class="form-control">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Display Order</label>
+                    <input type="number" id="Order" class="form-control" value="1">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Student Count</label>
+                    <input type="number" id="StudentCount" class="form-control" value="1">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Description</label>
+                    <textarea id="Description" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="col-lg-6 clsValuePdf">
+                    <label>Syllabus <a id="SyllabusView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-file-earmark-pdf"></i></a></label>
+                    <input type="file" class="form-control" id="Syllabus" accept="application/pdf">
                 </div>
 
                 <div class="col-lg-6">
@@ -65,24 +75,10 @@
                     <input type="file" class="form-control" id="imageInput" accept="image/*">
                 </div>
 
-                <div class="col-lg-6">
-                    <label>Heading</label>
-                    <input type="text" id="heading" class="form-control">
-                </div>
-
                 <div class="col-lg-12 text-center">
                     <img id="preview" style="display:none;">
                 </div>
 
-                <div class="col-lg-6">
-                    <label>Display Order</label>
-                    <input type="number" id="displayOrder" class="form-control" value="1">
-                </div>
-
-                <div class="col-lg-6">
-                    <label>Short Content</label>
-                    <textarea id="Content" class="form-control" rows="4"></textarea>
-                </div>
             </div>
 
             <div class="action-buttons">
@@ -101,73 +97,25 @@
     var imageChanged = false;
 
     $(document).ready(function () {
-        View()
-    });
-
-    $('#ClubsView').on('change', function () {
-        var selectedClub = $(this).val();
-        var selectedCategory = $('#categoryView').val();
-
-        if (selectedClub === "" || selectedCategory === "") {
-            return;
-        }
-
-        DataLoad(selectedClub, selectedCategory);
+        View('UG')
     });
 
     $('#categoryView').on('change', function () {
-        var selectedClub = $('#ClubsView').val();
         var selectedCategory = $(this).val();
 
-        if (selectedClub === "" || selectedCategory === "") {
+        if (selectedCategory === "") {
+            console.log("No category selected");
             return;
         }
 
-        DataLoad(selectedClub, selectedCategory);
+        DataLoad(selectedCategory);
     });
 
-    function View(){
+    function View(category){
         resetForm()
         $(".clsView").show();
         $(".clsAdd, .clsEdit").hide();
-        lstClubs();
-        $("#ViewPageMedia").html('');
-        $('#categoryView').val('').trigger('change');
-    }
-
-    function lstClubs(){
-        LoaderShow();
-        $("#clsClubs").html('');
-        $.ajax({
-            url: '/Admin/GetlstClubs',
-            type: 'GET',
-            data: '',
-            success: function(response) {
-                if(response.message === "Success") {
-                    var data = JSON.parse(response.result);
-                    if (data && data.length > 0) {
-                        var content = '<option value="">-- Select Category --</option>';
-                    
-                        $.each(data, function (i, y) {
-                            content += '<option value="' + y["Id"] + '">' + y["Clubs"] + '</option>';
-                        });
-                    
-                        $(".clslstClubs").html(content);
-                    } else {
-                        $(".clslstClubs").html('<option value="">No categories found</option>');
-                    }
-
-                } else {
-                    alert('Failed to load data.');
-                }
-                LoaderHide();
-            },
-            error: function(err) {
-                console.error(err);
-                alert('Error while loading data.');
-                LoaderHide();
-            }
-        });
+        $('#categoryView').val(category).trigger('change');
     }
 
     function Add(){
@@ -178,32 +126,30 @@
 
     function resetForm() {
         $('#Key').val('');
-        $('#Clubs').val('');
-        $('#Clubs').prop('disabled', false);
         $('#category').val('');
         $('#category').prop('disabled', false);
-        $('#heading').val('');
-        $('#displayOrder').val(1);
+        $('#Department').val('');
+        $('#Order').val(1);
+        $('#StudentCount').val(0);
         $('#imageInput').val('');
-
+        $('#Syllabus').val('');
         if (cropper) {
             cropper.destroy();
             cropper = null;
         }
         imageChanged = false;
 
-        $('#Content').val('');
-
+        $('#Description').val('');
         $('#preview').attr('src', '').hide();
     }
 
-    function DataLoad(ClubsId, Category){
+    function DataLoad(Category){
         LoaderShow();
         $("#ViewPageMedia").html('');
         $.ajax({
-            url: '/Admin/GetClubsDetails',
+            url: '/Admin/GetDepartmentsMaster',
             type: 'GET',
-            data: { ClubsId: ClubsId, Category: Category },
+            data: { Category: Category },
             success: function(response) {
                 if(response.message === "Success") {
                     var data = JSON.parse(response.result);
@@ -239,7 +185,7 @@
             str += '</div>';
 
             str += '<div class="PageMedia-body">';
-            str += '<div class="PageMedia-title">' +y["Heading"]+ '</div>';
+            str += '<div class="PageMedia-title">' +y["Department"]+ '</div>';
 
             str += '<div class="PageMedia-actions">';
 
@@ -270,7 +216,7 @@
     function StatusUpdate(Id, status) {
         LoaderShow();
         $.ajax({
-            url: '/Admin/StatusUpdateClubsDetails',
+            url: '/Admin/StatusUpdateDepartmentsMaster',
             type: 'POST',
             data: { Id: Id, IsStatus: status },
             success: function(response){
@@ -290,27 +236,31 @@
 
     function Edit(Id){
         resetForm()
-        $('#Clubs').prop('disabled', true);
         $('#category').prop('disabled', true);
         $(".clsView, .clsAdd").hide();
         $(".clsEdit").show();
         $('#Key').val(Id)
         LoaderShow();
         $.ajax({
-            url: '/Admin/GetClubsDetailsById',
+            url: '/Admin/GetDepartmentsMasterById',
             type: 'GET',
             data: { Id: Id },
             success: function(response) {
                 if(response.message === "Success") {
                     var data = JSON.parse(response.result);
 
-                    $('#Clubs').val(data.ClubsMasterId);
                     $('#category').val(data.Category);
-                    $('#heading').val(data.Heading);
-                    $('#displayOrder').val(data.DisplayOrder);
-                    $('#Content').val(data.ShortContent);
+                    $('#Department').val(data.Department);
+                    $('#Order').val(data.Order);
+                    $('#StudentCount').val(data.StudentCount);
+                    $('#Description').val(data.Description);
+
+                    if(data.SyllabusPath){
+                        $("#SyllabusView").attr("href", data.SyllabusPath)
+                    }
 
                     loadImageForEdit(data.ImagePath)
+
                 }
                 else {
                     alert('Failed to load data.');
@@ -330,18 +280,6 @@
 
         var file = e.target.files[0];
         if (!file) return;
-
-        if ($('#Clubs').val() == "") {
-            alert("Please select Clubs first!");
-            $('#imageInput').val('');
-            return;
-        }
-
-        if ($('#category').val() == "") {
-            alert("Please select Category first!");
-            $('#imageInput').val('');
-            return;
-        }
 
         LoaderShow();
         cropperReady = false;
@@ -401,27 +339,12 @@
     }
 
     function Save() {
-        var Clubs = $('#Clubs').val();
+
         var category = $('#category').val();
         var id = $('#Key').val() || 0;
 
-        if (!Clubs) {
-            alert("Please select Clubs");
-            return;
-        }
-
         if (!category) {
             alert("Please select Category");
-            return;
-        }
-
-        if ($('#heading').val() == "") {
-            alert("Please enter heading");
-            return;
-        }
-
-        if ($('#Content').val() == "") {
-            alert("Please enter short content");
             return;
         }
 
@@ -435,18 +358,28 @@
             return;
         }
 
+        var pdfFile = $('#Syllabus')[0]?.files[0];
+
+        if (pdfFile && pdfFile.type !== "application/pdf") {
+            alert("Only PDF files are allowed.");
+            return;
+        }
+
         var formData = new FormData();
         formData.append("Id", id);
-        formData.append("ClubsId", Clubs);
         formData.append("category", category);
-        formData.append("heading", $('#heading').val());
-        formData.append("shortContent", $('#Content').val());
-        formData.append("displayOrder", $('#displayOrder').val());
+        formData.append("Department", $('#Department').val());
+        formData.append("Description", $('#Description').val());
+        formData.append("Order", $('#Order').val());
+        formData.append("StudentCount", $('#StudentCount').val());
+
+        if (pdfFile) {
+            formData.append("PdfFile", pdfFile);
+        }
 
         LoaderShow();
 
         if (cropper) {
-
             cropper.getCroppedCanvas({
                 width: 1920,
                 height: 1080
@@ -470,7 +403,7 @@
 
     function sendRequest(formData) {
         $.ajax({
-            url: "/Admin/SaveClubsDetails",
+            url: "/Admin/SaveDepartmentsMaster",
             type: "POST",
             data: formData,
             processData: false,
@@ -479,7 +412,7 @@
                 alert(data.message);
 
                 if (data.message && data.message.toLowerCase().includes("success")) {
-                    View();
+                    View(formData.get("category"));
                 }
 
                 LoaderHide();
