@@ -230,6 +230,11 @@
     <script>
         $(document).ready(function () {
 
+            // Sidebar Toggle
+            $("#menuToggle").on("click", function () {
+                $("#sidebar").toggleClass("show");
+            });
+
             var currentPath = window.location.pathname.toLowerCase();
 
             // Reset states
