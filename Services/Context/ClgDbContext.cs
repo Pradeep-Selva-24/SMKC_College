@@ -21,6 +21,7 @@ namespace College.Services.Context
         public DbSet<NACDetails> NACDetails { get; set; }
         public DbSet<NACDocument> NACDocument { get; set; }
         public DbSet<NIRFDetails> NIRFDetails { get; set; }
+        public DbSet<PlacementContact> PlacementContact { get; set; }
         public DbSet<NIRFDocument> NIRFDocument { get; set; }
         public DbSet<NIRFDocumentRanking> NIRFDocumentRanking { get; set; }
         public DbSet<DepartmentsMaster> DepartmentsMaster { get; set; }

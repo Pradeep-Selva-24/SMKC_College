@@ -183,12 +183,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><strong>R. Mahalakshmi</strong></td>
-                                    <td><a href="mailto:smkc_1997@yahoo.com">placement@smkc.com</a></td>
-                                    <td><a href="tel:+919876543210">+91 9876543210</a></td>
-                                </tr>
+                                @{
+                                    int count = 1;
+                                }
+                                @foreach (var item in Model.LstPlacementContact)
+                                {
+                                    <tr>
+                                        <td>@count</td>
+                                        <td><strong>@item.Name</strong></td>
+                                        <td><a href="mailto:@(item.Email)">@item.Email</a></td>
+                                        <td><a href="tel:@(item.Phone)">@item.Phone</a></td>
+                                    </tr>
+
+                                    count++;
+                                }
                             </tbody>
                         </table>
                     </div>

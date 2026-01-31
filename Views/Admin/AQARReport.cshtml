@@ -1,0 +1,270 @@
+﻿@{
+    ViewData["Title"] = "AQAR Report";
+    Layout = "_AdminLayout";
+}
+
+<div class="page-container">
+    <div class="form-card">
+
+        <div class="page-header-card">
+            <h4 class="page-title">AQAR Report</h4>
+            <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
+        </div>
+
+        <div class="row g-4 clsView">
+            <div class="col-lg-12">
+                <table id="tblGrid" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Academic Year</th>
+                            <th>Report Title</th>
+                            <th>Document</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="clsAdd clsEdit">
+            <div class="row g-4 ">
+                <input type="hidden" id="Key" value="" />
+
+                <div class="col-lg-6">
+                    <label>Academic Year</label>
+                    <input type="text" id="AcademicYear" class="form-control">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Report Title</label>
+                    <input type="text" id="ReportTitle" class="form-control">
+                </div>
+
+                <div class="col-lg-6 clsValuePdf">
+                    <label>Document <a id="FilePathView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-file-earmark-pdf"></i></a></label>
+                    <input type="file" class="form-control" id="FilePath" accept="application/pdf">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Display Order</label>
+                    <input type="number" id="Order" class="form-control" value="1">
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-cancel clsAdd" onclick="resetForm()">Cancel</button>
+                <button class="btn-submit clsAdd" onclick="Save()">Save</button>
+                <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        View()
+    });
+
+     function resetForm() {
+        $('#Key').val('')
+        $('#AcademicYear').val('');
+        $('#ReportTitle').val('');
+        $('#FilePath').val('');
+        $('#Order').val(0);
+    }
+
+    function View(){
+        resetForm()
+        $(".clsView").show();
+        $(".clsAdd, .clsEdit").hide();
+        LoaderShow();
+        Grid();
+        LoaderHide();
+    }
+
+    function Add(){
+        resetForm()
+        $(".clsView, .clsEdit").hide();
+        $(".clsAdd").show();
+    }
+
+    function Edit(Id){
+        resetForm()
+        $(".clsView, .clsAdd").hide();
+        $(".clsEdit").show();
+        $('#Key').val(Id)
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetAQARReportById',
+            type: 'GET',
+            data: { Id: Id },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    $('#AcademicYear').val(data.AcademicYear);
+                    $('#ReportTitle').val(data.ReportTitle);
+
+                    if(data.FilePath){
+                        $("#FilePathView").attr("href", data.FilePath)
+                    }
+
+                    $('#Order').val(data.Order);
+
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+     function Save() {
+         var AcademicYear  = $('#AcademicYear').val().trim();
+        var ReportTitle  = $('#ReportTitle').val().trim();
+        var Order  = $('#Order').val().trim();
+
+
+        // Validation
+        if(AcademicYear === ""){
+            alert('Please enter Academic Year.');
+            $('#AcademicYear').focus();
+            return;
+        }
+
+        if(ReportTitle === ""){
+            alert('Please enter Report Title.');
+            $('#ReportTitle').focus();
+            return;
+        }
+
+        if(Order === 0){
+            alert('Please enter Order.');
+            $('#Order').focus();
+            return;
+        }
+
+         var pdfFile = $('#FilePath')[0]?.files[0];
+
+        if (pdfFile && pdfFile.type !== "application/pdf") {
+            alert("Only PDF files are allowed.");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("Id", ($('#Key').val() != "" ? $('#Key').val() : 0));
+        formData.append("AcademicYear", AcademicYear);
+        formData.append("ReportTitle", ReportTitle);
+        formData.append("Order", Order);
+
+        if (pdfFile) {
+            formData.append("PdfFile", pdfFile);
+        }
+
+
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/SaveAQARReport',
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+
+    function StatusUpdate(Id, status) {
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/StatusUpdateAQARReport',
+            type: 'POST',
+            data: { Id: Id, IsStatus: status },
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Grid(){
+        if ($.fn.DataTable.isDataTable('#tblGrid')) {
+            $('#tblGrid').DataTable().destroy();
+            $('#tblGrid tbody').empty();
+        }
+
+        $('#tblGrid').DataTable({
+            ajax: {
+                url: '/Admin/GetAQARReport',
+                type: 'GET',
+                dataSrc: ''
+            },
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            searching: true,
+            ordering: true,
+            responsive: true,
+
+            columns: [
+                { data: "academicYear", title: "Academic Year" },
+                { data: "reportTitle", title: "Report Title" },
+                {
+                    data: "filePath",
+                    title: "Document",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        return `<a href="${row.filePath}"class="text-danger" target="_blank" title="Activate"><i class="bi bi-file-earmark-pdf fs-5"></i></a>`;
+                    }
+                },
+                { data: "status", title: "Status" },
+                {
+                    data: null,
+                    title: "Action",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        let actionHtml ='';
+
+                        if (row.status === true) {
+                            actionHtml = `<a href="javascript:void(0);"onclick="Edit(${row.id})"class="text-primary me-2" title="Edit"><i class="bi bi-pencil-square fs-5"></i></a>`;
+                            actionHtml += `<a href="javascript:void(0);"onclick="StatusUpdate(${row.id}, false)"class="text-danger" title="Delete"><i class="bi bi-trash fs-5"></i></a>`;
+                        } else {
+                            actionHtml += `<a href="javascript:void(0);"onclick="StatusUpdate(${row.id}, true)"class="text-success" title="Activate"><i class="bi bi-check-circle fs-5"></i></a>`;
+                        }
+                        return actionHtml;
+                    }
+                }
+            ]
+        });
+    }
+
+</script>

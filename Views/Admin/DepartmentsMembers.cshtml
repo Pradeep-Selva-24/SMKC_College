@@ -1,0 +1,448 @@
+﻿@{
+    ViewData["Title"] = "Departments Members";
+    Layout = "_AdminLayout";
+}
+
+<div class="page-container clsPageMedia">
+
+    <div class="form-card">
+
+        <div class="page-header-card">
+            <h4 class="page-title">Departments Members</h4>
+            <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
+        </div>
+
+        <div class="clsView">
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <label class="form-label">Departments</label>
+                    <select class="form-select clslstDepartment" id="DepartmentView">
+                        <option value="">-- Select Department --</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="row g-3 mt-20" id="ViewPageMedia">
+            </div>
+
+        </div>
+
+        <div class="clsAdd clsEdit">
+            <div id="msg"></div>
+
+            <div class="row g-4">
+                <input type="hidden" id="Key" value="" />
+
+                <div class="col-lg-6">
+                    <label class="form-label">Department</label>
+                    <select class="form-select clslstDepartment" id="Department">
+                        <option value="">-- Select Department --</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Nmae</label>
+                    <input type="text" id="heading" class="form-control">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Designation</label>
+                    <input type="text" id="Content" class="form-control">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Display Order</label>
+                    <input type="number" id="displayOrder" class="form-control" value="1">
+                </div>
+
+                <div class="col-lg-6">
+                    <label class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInput" accept="image/*">
+                </div>
+
+                <div class="col-lg-12 text-center">
+                    <img id="preview" style="display:none;">
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-cancel clsAdd" onclick="resetForm()">Cancel</button>
+                <button class="btn-submit clsAdd" onclick="Save()">Save</button>
+                <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    var cropper = null;
+    var imageChanged = false;
+
+    $(document).ready(function () {
+        View()
+    });
+
+    $('#DepartmentView').on('change', function () {
+        var selectedClub = $(this).val();
+
+        if (selectedClub === "") {
+            return;
+        }
+
+        DataLoad(selectedClub);
+    });
+
+    function View(){
+        resetForm()
+        $(".clsView").show();
+        $(".clsAdd, .clsEdit").hide();
+        lstDepartment();
+        $("#ViewPageMedia").html('');
+    }
+
+    function lstDepartment(){
+        LoaderShow();
+        $("#clsDepartment").html('');
+        $.ajax({
+            url: '/Admin/GetlstDepartment',
+            type: 'GET',
+            data: '',
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+                    if (data && data.length > 0) {
+                        var content = '<option value="">-- Select Department --</option>';
+
+                        $.each(data, function (i, y) {
+                            content += '<option value="' + y["Id"] + '">' + y["Department"] + '</option>';
+                        });
+
+                        $(".clslstDepartment").html(content);
+                    } else {
+                        $(".clslstDepartment").html('<option value="">No categories found</option>');
+                    }
+
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Add(){
+        resetForm()
+        $(".clsView, .clsEdit").hide();
+        $(".clsAdd").show();
+    }
+
+    function resetForm() {
+        $('#Key').val('');
+        $('#Department').val('');
+        $('#Department').prop('disabled', false);
+        $('#heading').val('');
+        $('#displayOrder').val(1);
+        $('#imageInput').val('');
+
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+        imageChanged = false;
+
+        $('#Content').val('');
+
+        $('#preview').attr('src', '').hide();
+    }
+
+    function DataLoad(DepartmentId){
+        LoaderShow();
+        $("#ViewPageMedia").html('');
+        $.ajax({
+            url: '/Admin/GetDepartmentsMembers',
+            type: 'GET',
+            data: { DepartmentId: DepartmentId },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    var Content = Buind(data);
+
+                    if(Content.length > 0){
+                        $("#ViewPageMedia").html(Content);
+                    }
+
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Buind(data){
+        var str = "";
+        let randomNum = (Math.random() * 5).toFixed(2);
+        $.each(data, function (i, y) {
+            str += '<div class="col-lg-4 col-md-6">';
+            str += '<div class="PageMedia-card">';
+
+            str += '<div class="PageMedia-img">';
+            str += '<img src="' +y["ImagePath"]+ '?V' + randomNum + '" alt="Image">';
+            str += '</div>';
+
+            str += '<div class="PageMedia-body">';
+            str += '<div class="PageMedia-title">' +y["Name"]+ '</div>';
+
+            str += '<div class="PageMedia-actions">';
+
+            if(y["Status"]){
+                str += '<a href="javascript:void(0);" onclick="Edit(' +y["Id"]+ ')" class="text-primary" title="Edit">';
+                str += '<i class="bi bi-pencil-square"></i>';
+                str += '</a>';
+
+                str += '<a href="javascript:void(0);" onclick="StatusUpdate(' +y["Id"]+ ', false)" class="text-danger" title="Delete">';
+                str += '<i class="bi bi-trash"></i>';
+                str += '</a>';
+            }
+            else{
+                str += '<a href="javascript:void(0);" onclick="StatusUpdate(' +y["Id"]+ ', true)" class="text-success" title="Activate">';
+                str += '<i class="bi bi-check-circle fs-5"></i>';
+                str += '</a>';
+            }
+
+            str += '</div>';
+            str += '</div>';
+            str += '</div>';
+            str += '</div>';
+        })
+
+        return str;
+    }
+
+    function StatusUpdate(Id, status) {
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/StatusUpdateDepartmentsMembers',
+            type: 'POST',
+            data: { Id: Id, IsStatus: status },
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Edit(Id){
+        resetForm()
+        $('#Department').prop('disabled', true);
+        $(".clsView, .clsAdd").hide();
+        $(".clsEdit").show();
+        $('#Key').val(Id)
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetDepartmentsMembersById',
+            type: 'GET',
+            data: { Id: Id },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    $('#Department').val(data.DepartmentsMasterId);
+                    $('#heading').val(data.Name);
+                    $('#displayOrder').val(data.Order);
+                    $('#Content').val(data.Designation);
+
+                    loadImageForEdit(data.ImagePath)
+                }
+                else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    // Image change
+    $('#imageInput').on('change', function (e) {
+
+        var file = e.target.files[0];
+        if (!file) return;
+
+        if ($('#Department').val() == "") {
+            alert("Please select Department first!");
+            $('#imageInput').val('');
+            return;
+        }
+
+        LoaderShow();
+        cropperReady = false;
+
+        var reader = new FileReader();
+        reader.onload = function () {
+
+            var img = document.getElementById('preview');
+            img.onload = function () {
+
+                if (cropper) {
+                    cropper.destroy();
+                }
+
+                cropper = new Cropper(img, {
+                    aspectRatio: 1/1,
+                    viewMode: 1,
+                    ready() {
+                        cropperReady = true;
+                        LoaderHide();
+                    }
+                });
+            };
+
+            $('#preview').attr('src', reader.result).show();
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    function loadImageForEdit(imageUrl) {
+        if (!imageUrl) return;
+
+        LoaderShow();
+        cropperReady = false;
+
+        var img = document.getElementById('preview');
+
+        img.onload = function () {
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            cropper = new Cropper(img, {
+                aspectRatio: 1/1,
+                viewMode: 1,
+                ready() {
+                    cropperReady = true;
+                    LoaderHide();
+                }
+            });
+        };
+
+        $('#preview')
+            .attr('src', imageUrl + '?t=' + new Date().getTime())
+            .show();
+    }
+
+    function Save() {
+        var Department = $('#Department').val();
+        var id = $('#Key').val() || 0;
+
+        if (!Department) {
+            alert("Please select Department");
+            return;
+        }
+
+        if ($('#heading').val() == "") {
+            alert("Please enter Name");
+            return;
+        }
+
+        if ($('#Content').val() == "") {
+            alert("Please enter Designation");
+            return;
+        }
+
+        if (!cropper && id == 0) {
+            alert("Please select and crop an image");
+            return;
+        }
+
+        if (cropper && !cropperReady) {
+            alert("Image is still loading. Please wait and try again.");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("Id", id);
+        formData.append("DepartmentId", Department);
+        formData.append("Name", $('#heading').val());
+        formData.append("Designation", $('#Content').val());
+        formData.append("Order", $('#displayOrder').val());
+
+        LoaderShow();
+
+        if (cropper) {
+
+            cropper.getCroppedCanvas({
+                width: 750,
+                height: 750
+            }).toBlob(function (blob) {
+
+                if (!blob) {
+                    alert("Image processing failed. Try again.");
+                    LoaderHide();
+                    return;
+                }
+
+                formData.append("bannerImage", blob, "banner.jpg");
+                sendRequest(formData);
+
+            }, "image/jpeg", 0.9);
+        }
+        else {
+            sendRequest(formData);
+        }
+    }
+
+    function sendRequest(formData) {
+        $.ajax({
+            url: "/Admin/SaveDepartmentsMembers",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert(data.message);
+
+                if (data.message && data.message.toLowerCase().includes("success")) {
+                    View();
+                }
+
+                LoaderHide();
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+</script>
+

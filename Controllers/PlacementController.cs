@@ -18,6 +18,7 @@ public class PlacementController(ILogger<HomeController> logger, CLGDbContext db
             Model.MoUsSigned = await db.SettingMaster.Where(x => x.Status && x.Key == "MoUs Signed").Select(x => x.Value).FirstOrDefaultAsync();
             Model.LstCompany = await db.PageMedia.Where(x => x.Status && x.Category == "Placement_Company").OrderBy(x => x.DisplayOrder).ToListAsync();
             Model.LstBanner = await db.PageMedia.Where(x => x.Status && x.Category == "Placement_Banner").OrderBy(x => x.DisplayOrder).ToListAsync();
+            Model.LstPlacementContact = await db.PlacementContact.Where(x => x.Status).OrderBy(x => x.DisplayOrder).ToListAsync();
         }
         catch (Exception ex)
         {

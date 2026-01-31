@@ -70,6 +70,9 @@ public static class DbInitializer
         await InsertIfNotExistsAsync<NIRFDetails, string>
             (context.NIRFDetails, NIRFDetailsConstant.lstNIRFDetails, x => $"{x.Name}|{x.Description}", nameof(context.NIRFDetails), context);
 
+        await InsertIfNotExistsAsync<PlacementContact, string>
+            (context.PlacementContact, PlacementContactConstant.lstPlacementContact, x => $"{x.Name}|{x.Phone}", nameof(context.PlacementContact), context);
+
         await InsertIfNotExistsAsync<NIRFDocumentRanking, string>
             (context.NIRFDocumentRanking, NIRFDocumentRankingConstant.lstNIRFDocumentRanking, x => $"{x.Category}|{x.ParticipationStatus}", nameof(context.NIRFDocumentRanking), context);
 

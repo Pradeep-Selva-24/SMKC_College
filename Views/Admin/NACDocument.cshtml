@@ -1,0 +1,253 @@
+﻿@{
+    ViewData["Title"] = "NAC Document";
+    Layout = "_AdminLayout";
+}
+
+<div class="page-container">
+    <div class="form-card">
+
+        <div class="page-header-card">
+            <h4 class="page-title">NAC Document</h4>
+            <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
+            <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
+        </div>
+
+        <div class="row g-4 clsView">
+            <div class="col-lg-12">
+                <table id="tblGrid" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Document</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div class="clsAdd clsEdit">
+            <div class="row g-4 ">
+                <input type="hidden" id="Key" value="" />
+
+                <div class="col-lg-6">
+                    <label>Name</label>
+                    <input type="text" id="Name" class="form-control">
+                </div>
+
+                <div class="col-lg-6 clsValuePdf">
+                    <label>Document <a id="PathView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-file-earmark-pdf"></i></a></label>
+                    <input type="file" class="form-control" id="Path" accept="application/pdf">
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Display Order</label>
+                    <input type="number" id="Order" class="form-control" value="1">
+                </div>
+
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-cancel clsAdd" onclick="resetForm()">Cancel</button>
+                <button class="btn-submit clsAdd" onclick="Save()">Save</button>
+                <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        View()
+    });
+
+     function resetForm() {
+        $('#Key').val('')
+        $('#Name').val('');
+        $('#Path').val('');
+        $('#Order').val(0);
+    }
+
+    function View(){
+        resetForm()
+        $(".clsView").show();
+        $(".clsAdd, .clsEdit").hide();
+        LoaderShow();
+        Grid();
+        LoaderHide();
+    }
+
+    function Add(){
+        resetForm()
+        $(".clsView, .clsEdit").hide();
+        $(".clsAdd").show();
+    }
+
+    function Edit(Id){
+        resetForm()
+        $(".clsView, .clsAdd").hide();
+        $(".clsEdit").show();
+        $('#Key').val(Id)
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetNACDocumentById',
+            type: 'GET',
+            data: { Id: Id },
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+
+                    $('#Name').val(data.Name);
+
+                    if(data.Path){
+                        $("#PathView").attr("href", data.Path)
+                    }
+
+                    $('#Order').val(data.Order);
+
+                } else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+     function Save() {
+        var Name  = $('#Name').val().trim();
+        var Order  = $('#Order').val().trim();
+
+
+        // Validation
+        if(Name === ""){
+            alert('Please enter Name.');
+            $('#Name').focus();
+            return;
+        }
+
+        if(Order === 0){
+            alert('Please enter Order.');
+            $('#Order').focus();
+            return;
+        }
+
+         var pdfFile = $('#Path')[0]?.files[0];
+
+        if (pdfFile && pdfFile.type !== "application/pdf") {
+            alert("Only PDF files are allowed.");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("Id", ($('#Key').val() != "" ? $('#Key').val() : 0));
+        formData.append("Name", Name);
+        formData.append("Order", Order);
+
+        if (pdfFile) {
+            formData.append("PdfFile", pdfFile);
+        }
+
+
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/SaveNACDocument',
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+
+    function StatusUpdate(Id, status) {
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/StatusUpdateNACDocument',
+            type: 'POST',
+            data: { Id: Id, IsStatus: status },
+            success: function(response){
+                alert(response.message);
+                if(response.message.includes("Successfully")){
+                    View();
+                }
+                LoaderHide();
+            },
+            error: function(err){
+                console.error(err);
+                alert('Error while saving data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Grid(){
+        if ($.fn.DataTable.isDataTable('#tblGrid')) {
+            $('#tblGrid').DataTable().destroy();
+            $('#tblGrid tbody').empty();
+        }
+
+        $('#tblGrid').DataTable({
+            ajax: {
+                url: '/Admin/GetNACDocument',
+                type: 'GET',
+                dataSrc: ''
+            },
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            searching: true,
+            ordering: true,
+            responsive: true,
+
+            columns: [
+                { data: "name", title: "Name" },
+                {
+                    data: "path",
+                    title: "Document",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        return `<a href="${row.path}"class="text-danger" target="_blank" title="Activate"><i class="bi bi-file-earmark-pdf fs-5"></i></a>`;
+                    }
+                },
+                { data: "status", title: "Status" },
+                {
+                    data: null,
+                    title: "Action",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        let actionHtml ='';
+
+                        if (row.status === true) {
+                            actionHtml = `<a href="javascript:void(0);"onclick="Edit(${row.id})"class="text-primary me-2" title="Edit"><i class="bi bi-pencil-square fs-5"></i></a>`;
+                            actionHtml += `<a href="javascript:void(0);"onclick="StatusUpdate(${row.id}, false)"class="text-danger" title="Delete"><i class="bi bi-trash fs-5"></i></a>`;
+                        } else {
+                            actionHtml += `<a href="javascript:void(0);"onclick="StatusUpdate(${row.id}, true)"class="text-success" title="Activate"><i class="bi bi-check-circle fs-5"></i></a>`;
+                        }
+                        return actionHtml;
+                    }
+                }
+            ]
+        });
+    }
+
+</script>

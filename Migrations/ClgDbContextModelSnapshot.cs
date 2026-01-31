@@ -1064,6 +1064,60 @@ namespace College.Migrations
                     b.ToTable("PageMedia", "CLG");
                 });
 
+            modelBuilder.Entity("College.Entities.PlacementContact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("I_Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("D_CreatedDate");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int")
+                        .HasColumnName("I_DisplayOrder");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_Email");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("D_ModifiedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_Name");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_Phone");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
+                        .HasColumnName("B_Status");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlacementContact", "CLG");
+                });
+
             modelBuilder.Entity("College.Entities.SettingMaster", b =>
                 {
                     b.Property<int>("Id")

@@ -1313,11 +1313,1259 @@ namespace College.Controllers
 
         #region Department Details
 
-        public IActionResult DepartmentDetails()
+        public IActionResult DepartmentsDetails
+            ()
         {
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetlstDepartment()
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<DepartmentsMaster> lstDepartmentsMaster = await db.DepartmentsMaster.Where(x => x.Status).ToListAsync();
+
+                if (lstDepartmentsMaster != null)
+                {
+                    strResult = JsonConvert.SerializeObject(lstDepartmentsMaster);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetlstClubs");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentsDetails(int DepartmentId, string Category)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<DepartmentsDetails> lstDepartmentsDetails = await db.DepartmentsDetails.Where(x => x.DepartmentsMasterId == DepartmentId && x.Category == Category).OrderBy(x => x.DisplayOrder).ToListAsync();
+
+                if (lstDepartmentsDetails != null && lstDepartmentsDetails.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstDepartmentsDetails);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetDepartmentsDetails");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentsDetailsById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                DepartmentsDetails? DepartmentsDetails = await db.DepartmentsDetails.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (DepartmentsDetails != null)
+                {
+                    strResult = JsonConvert.SerializeObject(DepartmentsDetails);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetDepartmentsDetailsById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateDepartmentsDetails(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.DepartmentsDetails.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.DepartmentsDetails.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateDepartmentsDetails");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveDepartmentsDetails(int Id, int DepartmentId, IFormFile? bannerImage, string category, string heading, string shortContent, int displayOrder, string date)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(category))
+                    return Json(new { message = "Category is required" });
+
+                DepartmentsDetails? banner;
+                if (Id > 0)
+                {
+                    banner = await db.DepartmentsDetails.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
+
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, category, banner.ImagePath!);
+                    }
+
+                    banner.Category = category;
+                    banner.Heading = heading;
+                    banner.ShortContent = shortContent;
+                    banner.DisplayOrder = displayOrder;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.DepartmentsDetails.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, category, "");
+
+                    banner = new DepartmentsDetails
+                    {
+                        DepartmentsMasterId = DepartmentId,
+                        Category = category,
+                        ImagePath = imagePath,
+                        Heading = heading,
+                        ShortContent = shortContent,
+                        DisplayOrder = displayOrder,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    await db.DepartmentsDetails.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveDepartmentsDetails");
+                return Json(new { message = "Something went wrong while saving" });
+            }
+        }
+
         #endregion
+
+        #region Departments Members
+
+        public IActionResult DepartmentsMembers()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentsMembers(int DepartmentId)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<DepartmentsMembers> lstDepartmentsMembers = await db.DepartmentsMembers.Where(x => x.DepartmentsMasterId == DepartmentId).OrderBy(x => x.Order).ToListAsync();
+
+                if (lstDepartmentsMembers != null && lstDepartmentsMembers.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstDepartmentsMembers);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetDepartmentsMembers");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartmentsMembersById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                DepartmentsMembers? DepartmentsMembers = await db.DepartmentsMembers.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (DepartmentsMembers != null)
+                {
+                    strResult = JsonConvert.SerializeObject(DepartmentsMembers);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetDepartmentsMembersById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateDepartmentsMembers(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.DepartmentsMembers.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.DepartmentsMembers.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateDepartmentsMembers");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveDepartmentsMembers(int Id, int DepartmentId, IFormFile? bannerImage, string Name, string Designation, int Order)
+        {
+            try
+            {
+                DepartmentsMembers? banner;
+                if (Id > 0)
+                {
+                    banner = await db.DepartmentsMembers.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
+
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, "DepartmentsMembers", banner.ImagePath!);
+                    }
+
+                    banner.Name = Name;
+                    banner.Designation = Designation;
+                    banner.Order = Order;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.DepartmentsMembers.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, "DepartmentsMembers", "");
+
+                    banner = new DepartmentsMembers
+                    {
+                        DepartmentsMasterId = DepartmentId,
+                        ImagePath = imagePath,
+                        Name = Name,
+                        Designation = Designation,
+                        Order = Order,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    await db.DepartmentsMembers.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveDepartmentsMembers");
+                return Json(new { message = "Something went wrong while saving" });
+            }
+        }
+
+        #endregion
+
+        #region NAC Details
+
+        public IActionResult NACDetails()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetNACDetails()
+        {
+            try
+            {
+                var lstNACDetails = await db.NACDetails.ToListAsync();
+                return Json(lstNACDetails);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNACDetails");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNACDetailsById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                NACDetails? NACDetails = await db.NACDetails.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (NACDetails != null)
+                {
+                    strResult = JsonConvert.SerializeObject(NACDetails);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNACDetails");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveNACDetails([FromBody] NACDetails model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.NACDetails.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = model.Name;
+                        existing.Description = model.Description;
+                        existing.Order = model.Order;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.NACDetails.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.NACDetails.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveNACDetails");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateNACDetails(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.NACDetails.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.NACDetails.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateNACDetails");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
+        #region NAC Documents
+
+        public IActionResult NACDocument()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetNACDocument()
+        {
+            try
+            {
+                var lstNACDocument = await db.NACDocument.ToListAsync();
+                return Json(lstNACDocument);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNACDocument");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNACDocumentById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                NACDocument? NACDocument = await db.NACDocument.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (NACDocument != null)
+                {
+                    strResult = JsonConvert.SerializeObject(NACDocument);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNACDocument");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveNACDocument(int Id, string Name, int Order, IFormFile PdfFile)
+        {
+            string strMessage = "Failed";
+            try
+            {
+
+
+                if (Id > 0) // Update
+                {
+                    var existing = await db.NACDocument.FindAsync(Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = Name;
+
+                        if (PdfFile != null && PdfFile.Length > 0)
+                        {
+                            existing.Path = await UploadPdfAsync(PdfFile, "NACDocument", existing.Path!);
+                        }
+
+                        existing.Order = Order;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.NACDocument.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    if (PdfFile == null || PdfFile.Length == 0)
+                    {
+                        return Json(new { message = "Upload the pdf" });
+                    }
+
+                    NACDocument NACDocument = new()
+                    {
+                        Name = Name,
+                        Path = await UploadPdfAsync(PdfFile, "NACDocument", ""),
+                        Order = Order,
+                        ModifiedDate = DateTime.Now
+                    };
+
+                    db.NACDocument.Add(NACDocument);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveNACDocument");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateNACDocument(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.NACDocument.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.NACDocument.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateNACDocument");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
+        #region NIRF Details
+
+        public IActionResult NIRFDetails()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetNIRFDetails()
+        {
+            try
+            {
+                var lstNIRFDetails = await db.NIRFDetails.ToListAsync();
+                return Json(lstNIRFDetails);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNIRFDetails");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNIRFDetailsById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                NIRFDetails? NIRFDetails = await db.NIRFDetails.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (NIRFDetails != null)
+                {
+                    strResult = JsonConvert.SerializeObject(NIRFDetails);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNIRFDetails");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveNIRFDetails([FromBody] NIRFDetails model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.NIRFDetails.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = model.Name;
+                        existing.Description = model.Description;
+                        existing.Order = model.Order;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.NIRFDetails.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.NIRFDetails.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveNIRFDetails");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateNIRFDetails(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.NIRFDetails.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.NIRFDetails.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateNIRFDetails");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
+        #region NIRF Document
+
+        public IActionResult NIRFDocument()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetNIRFDocument()
+        {
+            try
+            {
+                var lstNIRFDocument = await db.NIRFDocument.ToListAsync();
+                return Json(lstNIRFDocument);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNIRFDocument");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNIRFDocumentById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                NIRFDocument? NIRFDocument = await db.NIRFDocument.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (NIRFDocument != null)
+                {
+                    strResult = JsonConvert.SerializeObject(NIRFDocument);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNIRFDocument");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveNIRFDocument(int Id, string Name, int Year, IFormFile PdfFile)
+        {
+            string strMessage = "Failed";
+            try
+            {
+
+
+                if (Id > 0) // Update
+                {
+                    var existing = await db.NIRFDocument.FindAsync(Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = Name;
+                        existing.Year = Year;
+
+                        if (PdfFile != null && PdfFile.Length > 0)
+                        {
+                            existing.Path = await UploadPdfAsync(PdfFile, "NIRFDocument", existing.Path!);
+                        }
+
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.NIRFDocument.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    if (PdfFile == null || PdfFile.Length == 0)
+                    {
+                        return Json(new { message = "Upload the pdf" });
+                    }
+
+                    NIRFDocument NIRFDocument = new()
+                    {
+                        Name = Name,
+                        Year = Year,
+                        Path = await UploadPdfAsync(PdfFile, "NIRFDocument", ""),
+                        ModifiedDate = DateTime.Now
+                    };
+
+                    db.NIRFDocument.Add(NIRFDocument);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveNIRFDocument");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateNIRFDocument(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.NIRFDocument.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.NIRFDocument.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateNIRFDocument");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
+        #region NIRF Ranking
+
+        public IActionResult NIRFDocumentRanking()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetNIRFDocumentRanking()
+        {
+            try
+            {
+                var lstNIRFDocumentRanking = await db.NIRFDocumentRanking.ToListAsync();
+                return Json(lstNIRFDocumentRanking);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNIRFDocumentRanking");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNIRFDocumentRankingById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                NIRFDocumentRanking? NIRFDocumentRanking = await db.NIRFDocumentRanking.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (NIRFDocumentRanking != null)
+                {
+                    strResult = JsonConvert.SerializeObject(NIRFDocumentRanking);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetNIRFDocumentRanking");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveNIRFDocumentRanking([FromBody] NIRFDocumentRanking model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.NIRFDocumentRanking.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Year = model.Year;
+                        existing.Category = model.Category;
+                        existing.ParticipationStatus = model.ParticipationStatus;
+                        existing.Score = model.Score;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.NIRFDocumentRanking.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.NIRFDocumentRanking.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveNIRFDocumentRanking");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateNIRFDocumentRanking(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.NIRFDocumentRanking.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.NIRFDocumentRanking.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateNIRFDocumentRanking");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        #endregion
+
+        #region IQACMembers
+
+        public IActionResult IQACMembers()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetIQACMembers()
+        {
+            try
+            {
+                var lstIQACMembers = await db.IQACMembers.ToListAsync();
+                return Json(lstIQACMembers);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetIQACMembers");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetIQACMembersById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                IQACMembers? IQACMembers = await db.IQACMembers.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (IQACMembers != null)
+                {
+                    strResult = JsonConvert.SerializeObject(IQACMembers);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetIQACMembers");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveIQACMembers([FromBody] IQACMembers model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.IQACMembers.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = model.Name;
+                        existing.Designation = model.Designation;
+                        existing.Role = model.Role;
+                        existing.Order = model.Order;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.IQACMembers.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.IQACMembers.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveIQACMembers");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateIQACMembers(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.IQACMembers.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.IQACMembers.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateIQACMembers");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        #endregion
+
+        #region AQARReport
+
+        public IActionResult AQARReport()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetAQARReport()
+        {
+            try
+            {
+                var lstAQARReport = await db.AQARReport.ToListAsync();
+                return Json(lstAQARReport);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetAQARReport");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAQARReportById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                AQARReport? AQARReport = await db.AQARReport.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (AQARReport != null)
+                {
+                    strResult = JsonConvert.SerializeObject(AQARReport);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetAQARReport");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveAQARReport(int Id, string AcademicYear, string ReportTitle, int Order, IFormFile PdfFile)
+        {
+            string strMessage = "Failed";
+            try
+            {
+
+
+                if (Id > 0) // Update
+                {
+                    var existing = await db.AQARReport.FindAsync(Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.AcademicYear = AcademicYear;
+                        existing.ReportTitle = ReportTitle;
+
+                        if (PdfFile != null && PdfFile.Length > 0)
+                        {
+                            existing.FilePath = await UploadPdfAsync(PdfFile, "AQARReport", existing.FilePath!);
+                        }
+
+                        existing.Order = Order;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.AQARReport.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    if (PdfFile == null || PdfFile.Length == 0)
+                    {
+                        return Json(new { message = "Upload the pdf" });
+                    }
+
+                    AQARReport AQARReport = new()
+                    {
+                        AcademicYear = AcademicYear,
+                        ReportTitle = ReportTitle,
+                        FilePath = await UploadPdfAsync(PdfFile, "AQARReport", ""),
+                        Order = Order,
+                        ModifiedDate = DateTime.Now
+                    };
+
+                    db.AQARReport.Add(AQARReport);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveAQARReport");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateAQARReport(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.AQARReport.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.AQARReport.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateAQARReport");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
+        #region PlacementContact
+
+        public IActionResult PlacementContact()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetPlacementContact()
+        {
+            try
+            {
+                var lstPlacementContact = await db.PlacementContact.ToListAsync();
+                return Json(lstPlacementContact);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetPlacementContact");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPlacementContactById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                PlacementContact? PlacementContact = await db.PlacementContact.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (PlacementContact != null)
+                {
+                    strResult = JsonConvert.SerializeObject(PlacementContact);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetPlacementContact");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SavePlacementContact([FromBody] PlacementContact model)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (model.Id > 0) // Update
+                {
+                    var existing = await db.PlacementContact.FindAsync(model.Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = model.Name;
+                        existing.Email = model.Email;
+                        existing.Phone = model.Phone;
+                        existing.DisplayOrder = model.DisplayOrder;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.PlacementContact.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    model.CreatedDate = DateTime.Now;
+                    db.PlacementContact.Add(model);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SavePlacementContact");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdatePlacementContact(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.PlacementContact.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.PlacementContact.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdatePlacementContact");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        #endregion
+
+
     }
 }

@@ -103,6 +103,15 @@ internal class NIRFDetailsConfig : IEntityTypeConfiguration<NIRFDetails>
     }
 }
 
+internal class PlacementContactConfig : IEntityTypeConfiguration<PlacementContact>
+{
+    public void Configure(EntityTypeBuilder<PlacementContact> builder)
+    {
+        builder.ToTable("PlacementContact", "CLG");
+        builder.HasKey(e => e.Id);
+    }
+}
+
 internal class NIRFDocumentRankingConfig : IEntityTypeConfiguration<NIRFDocumentRanking>
 {
     public void Configure(EntityTypeBuilder<NIRFDocumentRanking> builder)
