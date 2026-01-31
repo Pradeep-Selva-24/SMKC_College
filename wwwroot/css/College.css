@@ -14,7 +14,7 @@
 
 .modal.right .modal-content button.close {right: 5px;top: 5px;}
 
-.navbar-brand .main-logo, .navbar-brand .white-logo {margin-top: -15px;margin-bottom: -15px;}
+.navbar-brand .main-logo, .navbar-brand .white-logo {margin-top: -15px;margin-bottom: -15px;width: 275px;height: 70px;}
 
 .header-left-content {width: 100%;overflow: hidden;white-space: nowrap;box-sizing: border-box;padding: 8px 0;}
 .header-left-content p {display: inline-block;padding-left: 100%;animation: marquee 30s linear infinite;}
