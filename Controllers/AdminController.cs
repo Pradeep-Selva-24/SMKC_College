@@ -1574,10 +1574,15 @@ namespace College.Controllers
                 }
                 else
                 {
-                    if (bannerImage == null || bannerImage.Length == 0)
-                        return Json(new { message = "Image is required for new record" });
+                    //if (bannerImage == null || bannerImage.Length == 0)
+                    //    return Json(new { message = "Image is required for new record" });
 
-                    var imagePath = await UploadImageAsync(bannerImage, "DepartmentsMembers", "");
+                    string imagePath = string.Empty;
+
+                    if (bannerImage != null && bannerImage.Length == 0)
+                    {
+                        imagePath = await UploadImageAsync(bannerImage, "DepartmentsMembers", "");
+                    }
 
                     banner = new DepartmentsMembers
                     {

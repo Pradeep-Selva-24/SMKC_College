@@ -202,7 +202,16 @@
             str += '<div class="PageMedia-card">';
 
             str += '<div class="PageMedia-img">';
-            str += '<img src="' +y["ImagePath"]+ '?V' + randomNum + '" alt="Image">';
+
+            if(y["ImagePath"])
+            {
+                str += '<img src="' +y["ImagePath"]+ '?V' + randomNum + '" alt="Image">';
+            }
+            else
+            {
+                str += '<img src="/img/departments/default.png" alt="Image">';
+            }
+            
             str += '</div>';
 
             str += '<div class="PageMedia-body">';
@@ -378,15 +387,15 @@
             return;
         }
 
-        if (!cropper && id == 0) {
-            alert("Please select and crop an image");
-            return;
-        }
+        // if (!cropper && id == 0) {
+        //     alert("Please select and crop an image");
+        //     return;
+        // }
 
-        if (cropper && !cropperReady) {
-            alert("Image is still loading. Please wait and try again.");
-            return;
-        }
+        // if (cropper && !cropperReady) {
+        //     alert("Image is still loading. Please wait and try again.");
+        //     return;
+        // }
 
         var formData = new FormData();
         formData.append("Id", id);

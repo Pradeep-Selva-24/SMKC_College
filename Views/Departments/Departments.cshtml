@@ -44,9 +44,10 @@
 
                     @foreach (var item in Model.LstDepartmentsMembers)
                     {
+                        string imagePath = string.IsNullOrEmpty(item.ImagePath) ? "/img/departments/default.png" : Url.Content(item.ImagePath);
                         <div class="item text-center">
                             <div class="faculty-card p-3 shadow-sm rounded">
-                                <img src="@Url.Content(item.ImagePath)"
+                                <img src="@Url.Content(imagePath)"
                                      class="img-fluid rounded-circle mb-3"
                                      alt="@item.Name">
                                 <h6 class="mb-1">@item.Name</h6>
