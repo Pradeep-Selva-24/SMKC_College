@@ -9,10 +9,10 @@ public class ProgrammesOfferedController(ILogger<HomeController> logger, CLGDbCo
 {
     public async Task<IActionResult> ProgrammesOffered()
     {
-        List<DepartmentsMaster> model = [];
+        List<ProgrammesOffered> model = [];
         try
         {
-            model = await db.DepartmentsMaster.Where(x => x.Status).OrderBy(x => x.Order).ToListAsync();
+            model = await db.ProgrammesOffered.Where(x => x.Status).OrderBy(x => x.Order).ToListAsync();
         }
         catch (Exception ex)
         {

@@ -1,5 +1,5 @@
 ﻿@using College.Entities
-@model List<DepartmentsMaster>
+@model List<ProgrammesOffered>
 
 @{
     ViewData["Title"] = "Programmes Offered";
@@ -39,10 +39,10 @@
                                 <div class="col-lg-4 col-md-4">
                                     <div class="single-courses-card style4">
                                         <div class="courses-img">
-                                            <a href="~/Departments/@item.Id"><img src="@Url.Content(item.ImagePath)" alt="Image"></a>
+                                            <img src="@Url.Content(item.ImagePath)" alt="Image">
                                         </div>
                                         <div class="courses-content">
-                                            <a href="~/Departments/@item.Id"><h3>@item.Department</h3></a>
+                                            <h3>@item.Course</h3>
                                             <div class="bottom-content">
                                                 <ul class="d-flex justify-content-between">
                                                     <li>
@@ -87,10 +87,10 @@
                                 <div class="col-lg-4 col-md-4">
                                     <div class="single-courses-card style4">
                                         <div class="courses-img">
-                                            <a href="~/Departments/@item.Id"><img src="@Url.Content(item.ImagePath)" alt="Image"></a>
+                                            <img src="@Url.Content(item.ImagePath)" alt="Image">
                                         </div>
                                         <div class="courses-content">
-                                            <a href="~/Departments/@item.Id"><h3>@item.Department</h3></a>
+                                            <h3>@item.Course</h3>
                                             <div class="bottom-content">
                                                 <ul class="d-flex justify-content-between">
                                                     <li>
@@ -135,10 +135,10 @@
                                 <div class="col-lg-4 col-md-4">
                                     <div class="single-courses-card style4">
                                         <div class="courses-img">
-                                            <a href="~/Departments/@item.Id"><img src="@Url.Content(item.ImagePath)" alt="Image"></a>
+                                            <img src="@Url.Content(item.ImagePath)" alt="Image">
                                         </div>
                                         <div class="courses-content">
-                                            <a href="~/Departments/@item.Id"><h3>@item.Department</h3></a>
+                                            <h3>@item.Course</h3>
                                             <div class="bottom-content">
                                                 <ul class="d-flex justify-content-between">
                                                     <li>

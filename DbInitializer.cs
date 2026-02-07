@@ -76,6 +76,9 @@ public static class DbInitializer
         await InsertIfNotExistsAsync<NIRFDocumentRanking, string>
             (context.NIRFDocumentRanking, NIRFDocumentRankingConstant.lstNIRFDocumentRanking, x => $"{x.Category}|{x.ParticipationStatus}", nameof(context.NIRFDocumentRanking), context);
 
+        await InsertIfNotExistsAsync<ProgrammesOffered, string>
+            (context.ProgrammesOffered, ProgrammesOfferedConstant.lstProgrammesOffered, x => x.Course!, nameof(context.ProgrammesOffered), context);
+
         await InsertMasterSubIfNotExistsAsync<Management, ManagementContent, ManagementDTO, string, string>
             (context.Management, context.ManagementContent, ManagementConstant.lstManagementDTO, dto => dto.Management, dto => dto.lstManagementContent, m => m.Name!, s => $"{s.ManagementId}|{s.Content}", (sub, masterId) => sub.ManagementId = (int)masterId, master => master.Id, nameof(context.Management), context);
 

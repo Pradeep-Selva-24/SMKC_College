@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Departments Master";
+    ViewData["Title"] = "Programmes Offered";
     Layout = "_AdminLayout";
 }
 
@@ -8,14 +8,26 @@
     <div class="form-card">
 
         <div class="page-header-card">
-            <h4 class="page-title">Departments Master</h4>
+            <h4 class="page-title">Programmes Offered</h4>
             <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
             <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View('UG')">View</button>
         </div>
 
         <div class="clsView">
+            <div class="row g-3">
+                <div class="col-lg-3">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="categoryView">
+                        <option value="">-- Select Category --</option>
+                        <option value="UG">Undergraduate</option>
+                        <option value="PG">Postgraduate </option>
+                        <option value="Ph.D">Research</option>
+                    </select>
+                </div>
+            </div>
             <div class="row g-3 mt-20" id="ViewPageMedia">
             </div>
+
         </div>
 
         <div class="clsAdd clsEdit">
@@ -24,8 +36,18 @@
             <div class="row g-4">
                 <input type="hidden" id="Key" value="" />
                 <div class="col-lg-6">
-                    <label>Department</label>
-                    <input type="text" id="Department" class="form-control">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="category">
+                        <option value="">-- Select Category --</option>
+                        <option value="UG">Undergraduate</option>
+                        <option value="PG">Postgraduate </option>
+                        <option value="Ph.D">Research</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Course</label>
+                    <input type="text" id="Course" class="form-control">
                 </div>
 
                 <div class="col-lg-6">
@@ -34,8 +56,13 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <label>Description</label>
-                    <textarea id="Description" class="form-control" rows="2"></textarea>
+                    <label>Student Count</label>
+                    <input type="number" id="StudentCount" class="form-control" value="1">
+                </div>
+
+                <div class="col-lg-6 clsValuePdf">
+                    <label>Syllabus <a id="SyllabusView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-file-earmark-pdf"></i></a></label>
+                    <input type="file" class="form-control" id="Syllabus" accept="application/pdf">
                 </div>
 
                 <div class="col-lg-6">
@@ -65,14 +92,25 @@
     var imageChanged = false;
 
     $(document).ready(function () {
-        View()
+        View('UG')
     });
 
-    function View(){
+    $('#categoryView').on('change', function () {
+        var selectedCategory = $(this).val();
+
+        if (selectedCategory === "") {
+            console.log("No category selected");
+            return;
+        }
+
+        DataLoad(selectedCategory);
+    });
+
+    function View(category){
         resetForm()
         $(".clsView").show();
         $(".clsAdd, .clsEdit").hide();
-        DataLoad();
+        $('#categoryView').val(category).trigger('change');
     }
 
     function Add(){
@@ -83,26 +121,29 @@
 
     function resetForm() {
         $('#Key').val('');
-        $('#Department').val('');
+        $('#category').val('');
+        $('#category').prop('disabled', false);
+        $('#Course').val('');
         $('#Order').val(1);
+        $('#StudentCount').val(0);
         $('#imageInput').val('');
+        $('#Syllabus').val('');
         if (cropper) {
             cropper.destroy();
             cropper = null;
         }
         imageChanged = false;
 
-        $('#Description').val('');
         $('#preview').attr('src', '').hide();
     }
 
-    function DataLoad(){
+    function DataLoad(Category){
         LoaderShow();
         $("#ViewPageMedia").html('');
         $.ajax({
-            url: '/Admin/GetDepartmentsMaster',
+            url: '/Admin/GetProgrammesOffered',
             type: 'GET',
-            data: '',
+            data: { Category: Category },
             success: function(response) {
                 if(response.message === "Success") {
                     var data = JSON.parse(response.result);
@@ -138,7 +179,7 @@
             str += '</div>';
 
             str += '<div class="PageMedia-body">';
-            str += '<div class="PageMedia-title">' +y["Department"]+ '</div>';
+            str += '<div class="PageMedia-title">' +y["Course"]+ '</div>';
 
             str += '<div class="PageMedia-actions">';
 
@@ -169,11 +210,14 @@
     function StatusUpdate(Id, status) {
         LoaderShow();
         $.ajax({
-            url: '/Admin/StatusUpdateDepartmentsMaster',
+            url: '/Admin/StatusUpdateProgrammesOffered',
             type: 'POST',
             data: { Id: Id, IsStatus: status },
             success: function(response){
                 alert(response.message);
+                if(response.message.includes("Successfully")){
+                    $('#categoryView').trigger('change');
+                }
                 LoaderHide();
             },
             error: function(err){
@@ -186,23 +230,30 @@
 
     function Edit(Id){
         resetForm()
+        $('#category').prop('disabled', true);
         $(".clsView, .clsAdd").hide();
         $(".clsEdit").show();
         $('#Key').val(Id)
         LoaderShow();
         $.ajax({
-            url: '/Admin/GetDepartmentsMasterById',
+            url: '/Admin/GetProgrammesOfferedById',
             type: 'GET',
             data: { Id: Id },
             success: function(response) {
                 if(response.message === "Success") {
                     var data = JSON.parse(response.result);
 
-                    $('#Department').val(data.Department);
+                    $('#category').val(data.Category);
+                    $('#Course').val(data.Course);
                     $('#Order').val(data.Order);
-                    $('#Description').val(data.Description);
+                    $('#StudentCount').val(data.StudentCount);
+
+                    if(data.SyllabusPath){
+                        $("#SyllabusView").attr("href", data.SyllabusPath)
+                    }
 
                     loadImageForEdit(data.ImagePath)
+
                 }
                 else {
                     alert('Failed to load data.');
@@ -282,7 +333,13 @@
 
     function Save() {
 
+        var category = $('#category').val();
         var id = $('#Key').val() || 0;
+
+        if (!category) {
+            alert("Please select Category");
+            return;
+        }
 
         if (!cropper && id == 0) {
             alert("Please select and crop an image");
@@ -294,11 +351,23 @@
             return;
         }
 
+        var pdfFile = $('#Syllabus')[0]?.files[0];
+
+        if (pdfFile && pdfFile.type !== "application/pdf") {
+            alert("Only PDF files are allowed.");
+            return;
+        }
+
         var formData = new FormData();
         formData.append("Id", id);
-        formData.append("Department", $('#Department').val());
-        formData.append("Description", $('#Description').val());
+        formData.append("category", category);
+        formData.append("Course", $('#Course').val());
         formData.append("Order", $('#Order').val());
+        formData.append("StudentCount", $('#StudentCount').val());
+
+        if (pdfFile) {
+            formData.append("PdfFile", pdfFile);
+        }
 
         LoaderShow();
 
@@ -326,7 +395,7 @@
 
     function sendRequest(formData) {
         $.ajax({
-            url: "/Admin/SaveDepartmentsMaster",
+            url: "/Admin/SaveProgrammesOffered",
             type: "POST",
             data: formData,
             processData: false,
@@ -335,7 +404,7 @@
                 alert(data.message);
 
                 if (data.message && data.message.toLowerCase().includes("success")) {
-                    View();
+                    View(formData.get("category"));
                 }
 
                 LoaderHide();

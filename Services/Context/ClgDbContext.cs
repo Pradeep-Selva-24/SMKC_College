@@ -28,6 +28,7 @@ namespace College.Services.Context
         public DbSet<DepartmentsMembers> DepartmentsMembers { get; set; }
         public DbSet<DepartmentsDetails> DepartmentsDetails { get; set; }
         public DbSet<MenuMaster> MenuMaster { get; set; }
+        public DbSet<ProgrammesOffered> ProgrammesOffered { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

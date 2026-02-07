@@ -1,0 +1,198 @@
+﻿@using College.Models
+@model DepartmentsModel
+
+@{
+    ViewData["Title"] = "Departments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Start Page Banner-->
+<div class="page-banner-area bg-2">
+    <div class="container">
+        <div class="page-banner-content">
+            <h1>Departments</h1>
+            <ul>
+                <li><a href="~/">Home</a></li>
+                <li><a href="~/Departments/Departments">Departments</a></li>
+                <li>@Model.DepartmentsMaster?.Department</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--End Page Banner-->
+
+<!--Start Departments Section-->
+<div class="departments-area pt-100 pb-70">
+    <div class="container">
+
+        <!-- About Section -->
+        <div class="section-title mb-4">
+            <h2>About the Department</h2>
+        </div>
+        <p>
+            @Html.Raw(Model.DepartmentsMaster?.Description)
+        </p>
+
+        <!-- Faculty -->
+        @if (Model.LstDepartmentsMembers.Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mt-5">
+                    <h2>Faculty Members</h2>
+                </div>
+
+                <div class="faculty-area">
+                    <div id="facultyCarousel" class="campus-slider2 owl-carousel owl-theme">
+
+                        @foreach (var item in Model.LstDepartmentsMembers)
+                        {
+                            string imagePath = string.IsNullOrEmpty(item.ImagePath) ? "/img/departments/default.png" : Url.Content(item.ImagePath);
+                            <div class="item text-center">
+                                <div class="faculty-card p-3 shadow-sm rounded">
+                                    <img src="@Url.Content(imagePath)"
+                                         class="img-fluid rounded-circle mb-3"
+                                         alt="@item.Name">
+                                    <h6 class="mb-1">@item.Name</h6>
+                                    <p class="text-muted small mb-0">@item.Designation</p>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Events -->
+        @if (Model.LstDepartmentsDetails.Where(x => x.Category == "Events").Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mb-4 mt-5">
+                    <h2>Events</h2>
+                </div>
+                <div class="text-center">
+                    <div class="department-slider owl-carousel owl-theme">
+
+                        @foreach (var content in Model.LstDepartmentsDetails.Where(x => x.Category == "Events").ToList())
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                <h5>@content.Heading</h5>
+                                <p class="px-5">
+                                    @Html.Raw(content.ShortContent)
+                                </p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <!-- Activities -->
+        @if (Model.LstDepartmentsDetails.Where(x => x.Category == "Activities").Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mb-4 mt-5">
+                    <h2>Activities</h2>
+                </div>
+                <div class="text-center">
+                    <div class="department-slider owl-carousel owl-theme">
+
+                        @foreach (var content in Model.LstDepartmentsDetails.Where(x => x.Category == "Activities").ToList())
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                <h5>@content.Heading</h5>
+                                <p class="px-5">
+                                    @Html.Raw(content.ShortContent)
+                                </p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Gallery -->
+        @if (Model.LstDepartmentsDetails.Where(x => x.Category == "Gallery").Count() > 0)
+        {
+            <div class="clsDepContent">
+                <div class="section-title mb-4 mt-5">
+                    <h2>Gallery</h2>
+                </div>
+                <div class="text-center">
+                    <div class="department-slider owl-carousel owl-theme">
+
+                        @foreach (var content in Model.LstDepartmentsDetails.Where(x => x.Category == "Gallery").ToList())
+                        {
+                            <div class="item">
+                                <img src="@Url.Content(content.ImagePath)" class="d-block w-100 rounded mb-3" alt="@content.Heading">
+                                <h5>@content.Heading</h5>
+                                <p class="px-5">
+                                    @Html.Raw(content.ShortContent)
+                                </p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+<!--End Departments Section-->
+
+<script>
+    $(document).ready(function(){
+        $("#navbarSupportedContent .nav-link").removeClass("active");
+        $("#navbarSupportedContent .clsMenu-Academics").addClass("active");
+        $("#navbarSupportedContent .clsMenu-Departments").addClass("active");
+    });
+
+
+    $(document).ready(function () {
+        $('.department-slider').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: false,
+            items: 1,
+            navText: [
+                '<i class="ri-arrow-left-line"></i>',
+                '<i class="ri-arrow-right-line"></i>',
+            ]
+        });
+    });
+
+    $(document).ready(function () {
+        $("#facultyCarousel").owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+
+            responsive: {
+                0: { items: 1 },
+                576: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 }
+            },
+
+            navText: [
+                "<i class='ri-arrow-left-line'></i>",
+                "<i class='ri-arrow-right-line'></i>"
+            ]
+        });
+    });
+</script>

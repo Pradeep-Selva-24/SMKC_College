@@ -47,6 +47,9 @@ function BuildMenu(data) {
         else if (y["menuName"] == "Programmes Offered") {
             $(".clsMenu-ProgrammesOffered").show()
         }
+        else if (y["menuName"] == "Departments") {
+            $(".clsMenu-Departments").show()
+        }
         else if (y["menuName"] == "Academic Calendar") {
             $(".clsMenu-AcademicCalendar").show()
         }

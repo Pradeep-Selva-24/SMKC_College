@@ -1168,12 +1168,12 @@ namespace College.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDepartmentsMaster(string Category)
+        public async Task<IActionResult> GetDepartmentsMaster()
         {
             string strResult = string.Empty, strMessage = "Failed";
             try
             {
-                List<DepartmentsMaster> lstDepartmentsMaster = await db.DepartmentsMaster.Where(x => x.Category == Category).OrderBy(x => x.Order).ToListAsync();
+                List<DepartmentsMaster> lstDepartmentsMaster = await db.DepartmentsMaster.OrderBy(x => x.Order).ToListAsync();
 
                 if (lstDepartmentsMaster != null && lstDepartmentsMaster.Count > 0)
                 {
@@ -1237,13 +1237,10 @@ namespace College.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveDepartmentsMaster(int Id, IFormFile? bannerImage, IFormFile PdfFile, string category, string Department, string Description, int Order, int StudentCount)
+        public async Task<IActionResult> SaveDepartmentsMaster(int Id, IFormFile? bannerImage, string Department, string Description, int Order)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(category))
-                    return Json(new { message = "Category is required" });
-
                 DepartmentsMaster? banner;
                 if (Id > 0)
                 {
@@ -1253,18 +1250,11 @@ namespace College.Controllers
 
                     if (bannerImage != null && bannerImage.Length > 0)
                     {
-                        banner.ImagePath = await UploadImageAsync(bannerImage, category, banner.ImagePath!);
+                        banner.ImagePath = await UploadImageAsync(bannerImage, "Departments", banner.ImagePath!);
                     }
 
-                    if (PdfFile != null && PdfFile.Length > 0)
-                    {
-                        banner.SyllabusPath = await UploadPdfAsync(PdfFile, category, banner.SyllabusPath!);
-                    }
-
-                    banner.Category = category;
                     banner.Department = Department;
                     banner.Description = Description;
-                    banner.StudentCount = StudentCount;
                     banner.Order = Order;
                     banner.ModifiedDate = DateTime.Now;
 
@@ -1275,23 +1265,13 @@ namespace College.Controllers
                     if (bannerImage == null || bannerImage.Length == 0)
                         return Json(new { message = "Image is required for new record" });
 
-                    var imagePath = await UploadImageAsync(bannerImage, category, "");
-
-                    string SyllabusPath = string.Empty;
-                    if (PdfFile != null && PdfFile.Length > 0)
-                    {
-                        SyllabusPath = await UploadPdfAsync(PdfFile, category, "");
-                    }
-
+                    var imagePath = await UploadImageAsync(bannerImage, "Departments", "");
 
                     banner = new DepartmentsMaster
                     {
-                        Category = category,
                         ImagePath = imagePath,
                         Department = Department,
                         Description = Description,
-                        SyllabusPath = SyllabusPath,
-                        StudentCount = StudentCount,
                         Order = Order,
                         CreatedDate = DateTime.Now
                     };
@@ -2571,6 +2551,154 @@ namespace College.Controllers
 
         #endregion
 
+        #region ProgrammesOffered
+
+        public IActionResult ProgrammesOffered()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProgrammesOffered(string Category)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                List<ProgrammesOffered> lstProgrammesOffered = await db.ProgrammesOffered.Where(x => x.Category == Category).OrderBy(x => x.Order).ToListAsync();
+
+                if (lstProgrammesOffered != null && lstProgrammesOffered.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstProgrammesOffered);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetProgrammesOffered");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProgrammesOfferedById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                ProgrammesOffered? ProgrammesOffered = await db.ProgrammesOffered.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (ProgrammesOffered != null)
+                {
+                    strResult = JsonConvert.SerializeObject(ProgrammesOffered);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetProgrammesOfferedById");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateProgrammesOffered(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.ProgrammesOffered.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.ProgrammesOffered.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateProgrammesOffered");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveProgrammesOffered(int Id, IFormFile? bannerImage, IFormFile PdfFile, string category, string Course, int Order, int StudentCount)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(category))
+                    return Json(new { message = "Category is required" });
+
+                ProgrammesOffered? banner;
+                if (Id > 0)
+                {
+                    banner = await db.ProgrammesOffered.FindAsync(Id);
+                    if (banner == null)
+                        return Json(new { message = "Record not found" });
+
+                    if (bannerImage != null && bannerImage.Length > 0)
+                    {
+                        banner.ImagePath = await UploadImageAsync(bannerImage, category, banner.ImagePath!);
+                    }
+
+                    if (PdfFile != null && PdfFile.Length > 0)
+                    {
+                        banner.SyllabusPath = await UploadPdfAsync(PdfFile, category, banner.SyllabusPath!);
+                    }
+
+                    banner.Category = category;
+                    banner.Course = Course;
+                    banner.StudentCount = StudentCount;
+                    banner.Order = Order;
+                    banner.ModifiedDate = DateTime.Now;
+
+                    db.ProgrammesOffered.Update(banner);
+                }
+                else
+                {
+                    if (bannerImage == null || bannerImage.Length == 0)
+                        return Json(new { message = "Image is required for new record" });
+
+                    var imagePath = await UploadImageAsync(bannerImage, category, "");
+
+                    string SyllabusPath = string.Empty;
+                    if (PdfFile != null && PdfFile.Length > 0)
+                    {
+                        SyllabusPath = await UploadPdfAsync(PdfFile, category, "");
+                    }
+
+
+                    banner = new ProgrammesOffered
+                    {
+                        Category = category,
+                        ImagePath = imagePath,
+                        Course = Course,
+                        SyllabusPath = SyllabusPath,
+                        StudentCount = StudentCount,
+                        Order = Order,
+                        CreatedDate = DateTime.Now
+                    };
+
+                    await db.ProgrammesOffered.AddAsync(banner);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = Id > 0 ? "Updated successfully" : "Uploaded successfully" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving ProgrammesOffered");
+                return Json(new { message = "Something went wrong while saving" });
+            }
+        }
+        #endregion
 
     }
 }

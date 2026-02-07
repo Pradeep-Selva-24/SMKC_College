@@ -86,11 +86,8 @@ namespace College.Migrations
                     I_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     S_Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    S_Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     S_ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     S_Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    S_StudentCount = table.Column<int>(type: "int", nullable: false),
-                    S_SyllabusPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     I_Order = table.Column<int>(type: "int", nullable: false),
                     S_CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     D_CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -374,6 +371,30 @@ namespace College.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProgrammesOffered",
+                schema: "CLG",
+                columns: table => new
+                {
+                    I_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    S_Course = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_StudentCount = table.Column<int>(type: "int", nullable: false),
+                    S_SyllabusPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    I_Order = table.Column<int>(type: "int", nullable: false),
+                    S_CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    D_CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    S_ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    D_ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    B_Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgrammesOffered", x => x.I_Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SettingMaster",
                 schema: "CLG",
                 columns: table => new
@@ -612,6 +633,10 @@ namespace College.Migrations
 
             migrationBuilder.DropTable(
                 name: "PlacementContact",
+                schema: "CLG");
+
+            migrationBuilder.DropTable(
+                name: "ProgrammesOffered",
                 schema: "CLG");
 
             migrationBuilder.DropTable(

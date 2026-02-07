@@ -11,12 +11,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Sc(Computer Science)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-1.png",
-                Description = "The Department of Computer Science at Sree Muthukumaraswamy College aims to equip students with a strong foundation in computing principles and modern technological practices. The department emphasizes technical excellence, problem-solving abilities, ethical responsibility, and innovation through interactive teaching methods, hands-on programming, and real-world project exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Business Administration",
+                ImagePath = "/img/department/department1.png",
+                Description = "The Department of Business Administration focuses on developing managerial skills, leadership qualities, and business acumen through academic excellence and practical exposure.",
                 Order = 1
             },
 
@@ -24,44 +21,49 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "K. S. Uma Maheshwari",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Sarala R",
+                    Designation = "Associate Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "G. Nathiya",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
+                    Name = "R. Kalaivani",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 4
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
+                    Name = "Dr. M. Anitha Mary",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 5
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
+                    Name = "R. Shanmuga Priya",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 6
                 }
             ],
@@ -100,12 +102,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "BCA",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-2.png",
-                Description = "The Department of Computer Applications at Sree Muthukumaraswamy College aims to provide students with a strong foundation in computer applications and modern software technologies. The department emphasizes technical competence, problem-solving skills, ethical practices, and innovation through interactive learning, hands-on programming, and industry-oriented project exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Commerce (Accounting and Finance)",
+                ImagePath = "/img/department/department2.png",
+                Description = "The department provides in-depth knowledge of accounting principles, financial management, taxation, and auditing to prepare students for professional careers.",
                 Order = 2
             },
 
@@ -113,45 +112,26 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "S. Geethalakshmi",
+                    Designation = "Associate Professor & Incharge",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "M. Devi Priya",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Rithika Vinai",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -189,12 +169,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "BBA",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-3.png",
-                Description = "The Department of Business Administration at Sree Muthukumaraswamy College aims to develop students with a strong foundation in management principles and contemporary business practices. The department emphasizes leadership qualities, strategic thinking, ethical values, and entrepreneurial skills through innovative teaching methods, case-based learning, and practical industry exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Commerce (Bank Management)",
+                ImagePath = "/img/department/department3.png",
+                Description = "This department equips students with comprehensive knowledge of banking operations, financial institutions, and modern banking practices.",
                 Order = 3
             },
 
@@ -202,45 +179,34 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "S. P. Sasirani",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "B. Kavitha",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Dr. M. Sampathkumar",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
+                    Name = "K. Nathiya",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -278,12 +244,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (General)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-4.png",
-                Description = "The Department of Commerce at Sree Muthukumaraswamy College aims to provide students with a comprehensive understanding of commerce, business operations, and financial practices. The department emphasizes professional competence, ethical values, analytical thinking, and entrepreneurial skills through innovative teaching methods, practical learning, and real-world industry exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Commerce (Computer Applications)",
+                ImagePath = "/img/department/department4.png",
+                Description = "The department integrates commerce education with computer applications to enhance analytical, technical, and business-oriented skills.",
                 Order = 4
             },
 
@@ -291,45 +254,18 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. D. Bhavani",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "P. Vageshwari",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
-                    Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -367,12 +303,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (Accounting & Finance)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-5.png",
-                Description = "The Department of Commerce (Accounting & Finance) at Sree Muthukumaraswamy College aims to provide students with a strong foundation in accounting principles, financial management, and regulatory practices. The department emphasizes analytical skills, professional integrity, ethical responsibility, and financial decision-making through innovative teaching methods, practical training, and real-world industry exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Commerce (Information Systems Management)",
+                ImagePath = "/img/department/department5.png",
+                Description = "The department focuses on information systems, business analytics, and management practices supported by modern technology.",
                 Order = 5
             },
 
@@ -380,45 +313,26 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "R. Banupriya",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Jeniffer Begum J",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Rizwana Begum A. R",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -456,12 +370,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (Bank Management)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-6.png",
-                Description = "The Department of Commerce (Bank Management) at Sree Muthukumaraswamy College aims to equip students with comprehensive knowledge of banking operations, financial systems, and risk management practices. The department emphasizes professional competence, ethical standards, analytical thinking, and customer-focused services through innovative teaching methods, practical training, and real-world banking exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Commerce (Marketing Management)",
+                ImagePath = "/img/department/department6.png",
+                Description = "The department emphasizes marketing strategies, consumer behavior, digital marketing, and practical industry exposure.",
                 Order = 6
             },
 
@@ -469,45 +380,26 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. N. Selvi",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Joshva J",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "S. Anitha",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -545,12 +437,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (Corporate Secretaryship)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-7.png",
-                Description = "The Department of Commerce (Corporate Secretaryship) at Sree Muthukumaraswamy College aims to develop students with in-depth knowledge of corporate governance, company law, and secretarial practices. The department emphasizes professional ethics, legal compliance, managerial skills, and effective communication through innovative teaching methods, practical training, and real-world corporate exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Computer Applications",
+                ImagePath = "/img/department/department7.png",
+                Description = "The department provides strong foundations in software development, programming, and application-oriented computing skills.",
                 Order = 7
             },
 
@@ -558,45 +447,34 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. Suganthi",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "R. Salomiya",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Gayathri R",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
+                    Name = "Nivetha Mary C",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -634,12 +512,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (Computer Application)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-8.png",
-                Description = "The Department of Commerce (Computer Application) at Sree Muthukumaraswamy College aims to integrate core commerce knowledge with modern computing and digital business tools. The department emphasizes technical proficiency, analytical thinking, ethical practices, and innovation through interactive learning, hands-on application development, and real-world business technology exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Corporate Secretaryship",
+                ImagePath = "/img/department/department8.png",
+                Description = "The department trains students in corporate laws, governance, company secretarial practices, and compliance management.",
                 Order = 8
             },
 
@@ -647,45 +522,26 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. S. Revathi",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Dr. R. Umamaheswari",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "D. Manju",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -723,12 +579,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Sc (Software Applications)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-9.png",
-                Description = "The Department of Software Applications at Sree Muthukumaraswamy College aims to equip students with a strong foundation in software development, system design, and modern computing technologies. The department emphasizes technical excellence, problem-solving abilities, ethical responsibility, and innovation through interactive learning, hands-on programming, and real-world project and industry exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Criminology and Criminal Justice Science",
+                ImagePath = "/img/department/department9.png",
+                Description = "The department offers academic and practical insights into criminology, forensic science, and criminal justice administration.",
                 Order = 9
             },
 
@@ -736,45 +589,34 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. K. Mythili",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "C. Anandhi",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "S. Karuppasamy Pandiyan",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
+                    Name = "Ruban Kumar P",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -812,12 +654,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (Information System Management)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-10.png",
-                Description = "The Department of Commerce (Information System Management) at Sree Muthukumaraswamy College aims to integrate business knowledge with information systems and digital management practices. The department emphasizes analytical thinking, technological competence, ethical values, and strategic decision-making through innovative teaching methods, hands-on system applications, and real-world business technology exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Economics",
+                ImagePath = "/img/department/department10.png",
+                Description = "The department develops analytical and critical thinking skills through the study of economic theory, policy, and applied economics.",
                 Order = 10
             },
 
@@ -825,45 +664,18 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "G. Deepanandhini",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Dr. V. Ananthababu",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
-                    Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -901,12 +713,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Com (Marketing Management)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-11.png",
-                Description = "The Department of Commerce (Marketing Management) at Sree Muthukumaraswamy College aims to develop students with a strong foundation in marketing principles, consumer behavior, and strategic brand management. The department emphasizes creativity, analytical thinking, ethical practices, and market-driven decision-making through innovative teaching methods, case-based learning, and real-world industry exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of English",
+                ImagePath = "/img/department/department11.png",
+                Description = "The department enhances language proficiency, literary knowledge, and communication skills through diverse academic programs.",
                 Order = 11
             },
 
@@ -914,45 +723,82 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. S. Kasthuri Jyothi",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Dr. A. Yogalakshmi",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Sudarvizhi B",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
+                    Name = "Prabhavathy R",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 4
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
+                    Name = "Y. Stellamary",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 5
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
+                    Name = "Jannath Fathima M",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 6
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "E. Nivetha",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 7
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Godwin Hernandez M",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 8
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "S. K. Karthick",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 9
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Jayavenkatesh P",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 10
                 }
             ],
 
@@ -990,12 +836,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "B.Sc (Criminology & Criminal Justice Science)",
-                Category = "UG",
-                ImagePath = "/img/courses/courses-12.png",
-                Description = "The Department of Criminology and Criminal Justice Science at Sree Muthukumaraswamy College aims to provide students with a comprehensive understanding of crime, law enforcement, and the criminal justice system. The department emphasizes analytical thinking, ethical responsibility, social awareness, and professional competence through innovative teaching methods, field-based learning, and real-world exposure to criminal justice practices.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Library Science",
+                ImagePath = "/img/department/department12.png",
+                Description = "The department supports academic excellence by providing knowledge in library management, information organization, and research services.",
                 Order = 12
             },
 
@@ -1003,45 +846,10 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Raja",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 1
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
-                    Order = 2
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
-                    Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -1079,12 +887,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "M.Com (General)",
-                Category = "PG",
-                ImagePath = "/img/courses/courses-13.png",
-                Description = "The Department of Commerce at Sree Muthukumaraswamy College aims to provide postgraduate students with advanced knowledge in commerce, finance, and business research. The department emphasizes analytical thinking, professional excellence, ethical leadership, and strategic decision-making through research-oriented learning, case-based studies, and real-world industry and academic exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Mathematics",
+                ImagePath = "/img/department/department13.png",
+                Description = "The department focuses on mathematical theory, problem-solving, and logical reasoning essential for scientific and analytical studies.",
                 Order = 13
             },
 
@@ -1092,45 +897,26 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Dr. R. Anandhy",
+                    Designation = "Vice Principal, Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Kanmani N",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Arul Kumar G",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -1168,12 +954,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "M.Sc(Computer Science)",
-                Category = "PG",
-                ImagePath = "/img/courses/courses-14.png",
-                Description = "The Department of Computer Science at Sree Muthukumaraswamy College aims to provide postgraduate students with advanced knowledge in computing, software engineering, and emerging technologies. The department emphasizes research aptitude, technical excellence, ethical responsibility, and innovation through advanced coursework, project-based learning, and real-world industry and academic exposure.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Physical Education",
+                ImagePath = "/img/department/department14.png",
+                Description = "The department promotes physical fitness, sportsmanship, and overall well-being through structured physical education programs.",
                 Order = 14
             },
 
@@ -1181,45 +964,10 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "Nandhakumar S",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 1
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
-                    Order = 2
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
-                    Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -1257,12 +1005,9 @@ public static class DepartmentsConstant
         {
             DepartmentsMaster = new DepartmentsMaster
             {
-                Department = "Ph.D. (Commerce)",
-                Category = "Ph.D",
-                ImagePath = "/img/courses/courses-15.png",
-                Description = "The Department of Commerce at Sree Muthukumaraswamy College aims to foster advanced research and scholarly excellence in the field of commerce and business studies. The department emphasizes critical inquiry, ethical research practices, innovation, and knowledge creation through rigorous academic guidance, interdisciplinary collaboration, and meaningful contributions to industry and society.",
-                StudentCount = 200,
-                SyllabusPath = "",
+                Department = "Department of Software Applications",
+                ImagePath = "/img/department/department15.png",
+                Description = "The department emphasizes software development, application design, and modern computing technologies.",
                 Order = 15
             },
 
@@ -1270,45 +1015,26 @@ public static class DepartmentsConstant
             [
                 new DepartmentsMembers
                 {
-                    Name = "Dr. S. Suganthi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty1.jpg",
+                    Name = "T. Merlin Jaba",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
                     Order = 1
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Dr. G. Raja Priya",
-                    Designation = "PG & Research Department of Commerce",
-                    ImagePath = "/img/departments/commerce/faculty/faculty2.jpg",
+                    Name = "Kalaimani M",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 2
                 },
+
                 new DepartmentsMembers
                 {
-                    Name = "Mrs. S. P. Sasirani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty3.jpg",
+                    Name = "Rasiga B",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
                     Order = 3
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Mrs. K. S. Uma Maheshwari",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty4.jpg",
-                    Order = 4
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. D. Bhavani",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty5.jpg",
-                    Order = 5
-                },
-                new DepartmentsMembers
-                {
-                    Name = "Dr. N. Selvi",
-                    Designation = "Head & Associate Professor",
-                    ImagePath = "/img/departments/commerce/faculty/faculty6.jpg",
-                    Order = 6
                 }
             ],
 
@@ -1341,9 +1067,351 @@ public static class DepartmentsConstant
                     DisplayOrder = 1
                 },
             ]
-        }
+        },
+        new DepartmentsDTO
+        {
+            DepartmentsMaster = new DepartmentsMaster
+            {
+                Department = "Department of Tamil",
+                ImagePath = "/img/department/department16.png",
+                Description = "The department preserves and promotes Tamil language, literature, culture, and heritage through academic excellence.",
+                Order = 16
+            },
+
+            lstDepartmentsMembers =
+            [
+                new DepartmentsMembers
+                {
+                    Name = "Dr. R. Kalpana Devi",
+                    Designation = "Assistant Professor & Head",
+                    ImagePath = "",
+                    Order = 1
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Dr. P. Jayasudha",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 2
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Dr. K. Annalakshmi",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 3
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Dr. P. Kalavathi",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 4
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Dr. M. Manickam",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 5
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Dr. Manikandan S",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 6
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Balaji S",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 7
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sakthivel M",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 8
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sajila A J",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 9
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sudha M",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 10
+                }
+            ],
+
+            lstDepartmentsDetails =
+            [
+                new DepartmentsDetails
+                {
+                    Category = "Events",
+                    ImagePath = "/img/departments/commerce/events/events1.jpg",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+
+                new DepartmentsDetails
+                {
+                    Category = "Activities",
+                    ImagePath = "/img/departments/commerce/activities/activities1.jpeg",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+
+                new DepartmentsDetails
+                {
+                    Category = "Gallery",
+                    ImagePath = "/img/departments/commerce/gallery/gallery1.png",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+            ]
+        },
+        new DepartmentsDTO
+        {
+            DepartmentsMaster = new DepartmentsMaster
+            {
+                Department = "PG Department of Computer Science",
+                ImagePath = "/img/department/department17.png",
+                Description = "The PG Department of Computer Science provides advanced knowledge in computing, research methodologies, and emerging technologies.",
+                Order = 17
+            },
+
+            lstDepartmentsMembers =
+            [
+                new DepartmentsMembers
+                {
+                    Name = "P. Archana Devi",
+                    Designation = "Associate Professor & Head",
+                    ImagePath = "",
+                    Order = 1
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "V. Rekha",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 2
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sandhiya K",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 3
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Thangalakshmi S",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 4
+                }
+            ],
+
+            lstDepartmentsDetails =
+            [
+                new DepartmentsDetails
+                {
+                    Category = "Events",
+                    ImagePath = "/img/departments/commerce/events/events1.jpg",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+
+                new DepartmentsDetails
+                {
+                    Category = "Activities",
+                    ImagePath = "/img/departments/commerce/activities/activities1.jpeg",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+
+                new DepartmentsDetails
+                {
+                    Category = "Gallery",
+                    ImagePath = "/img/departments/commerce/gallery/gallery1.png",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+            ]
+        },
+        new DepartmentsDTO
+        {
+            DepartmentsMaster = new DepartmentsMaster
+            {
+                Department = "PG and Research Department of Commerce",
+                ImagePath = "/img/department/department18.png",
+                Description = "The department focuses on advanced commerce education and research, fostering analytical thinking and academic innovation.",
+                Order = 18
+            },
+
+            lstDepartmentsMembers =
+            [
+                new DepartmentsMembers
+                {
+                    Name = "Dr. G. Raja Priya",
+                    Designation = "Principal & Head",
+                    ImagePath = "",
+                    Order = 1
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "B. Jayarekha",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 2
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "J. B. Rosy Dyana",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 3
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Dr. C. Manivannan",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 4
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "P. Jebarani",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 5
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sangamithirai G",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 6
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sridhar B",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 7
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "R. Dhanush",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 8
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "S. Keerthana",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 9
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "L. Grace Jenifer",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 10
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "M. Renuka",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 11
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "M. Logapriya",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 12
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "E. Mahalakshmi",
+                    Designation = "Assistant Professor",
+                    ImagePath = "",
+                    Order = 13
+                }
+            ],
+
+            lstDepartmentsDetails =
+            [
+                new DepartmentsDetails
+                {
+                    Category = "Events",
+                    ImagePath = "/img/departments/commerce/events/events1.jpg",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+
+                new DepartmentsDetails
+                {
+                    Category = "Activities",
+                    ImagePath = "/img/departments/commerce/activities/activities1.jpeg",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+
+                new DepartmentsDetails
+                {
+                    Category = "Gallery",
+                    ImagePath = "/img/departments/commerce/gallery/gallery1.png",
+                    Heading = "Department Vision",
+                    ShortContent = "To produce globally competent professionals in computing and innovation-driven research.",
+                    DisplayOrder = 1
+                },
+            ]
+        },
     ];
-
-
-
 }

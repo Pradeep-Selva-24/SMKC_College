@@ -121,6 +121,15 @@ internal class NIRFDocumentRankingConfig : IEntityTypeConfiguration<NIRFDocument
     }
 }
 
+internal class ProgrammesOfferedConfig : IEntityTypeConfiguration<ProgrammesOffered>
+{
+    public void Configure(EntityTypeBuilder<ProgrammesOffered> builder)
+    {
+        builder.ToTable("ProgrammesOffered", "CLG");
+        builder.HasKey(e => e.Id);
+    }
+}
+
 internal class ManagementConfig : IEntityTypeConfiguration<Management>
 {
     public void Configure(EntityTypeBuilder<Management> builder)

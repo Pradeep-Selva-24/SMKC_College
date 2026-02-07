@@ -100,10 +100,20 @@ public static class MenuConstant
                 {
                     Menu = new MenuMaster
                     {
+                        MenuName = "Departments",
+                        MenuUrl = "/Departments/Departments",
+                        Display = "Y",
+                        Order = 2
+                    }
+                },
+                new MenuDTO
+                {
+                    Menu = new MenuMaster
+                    {
                         MenuName = "Academic Calendar",
                         MenuUrl = "#",
                         Display = "Y",
-                        Order = 2
+                        Order = 3
                     }
                 },
                 new MenuDTO
@@ -113,7 +123,7 @@ public static class MenuConstant
                         MenuName = "Placement",
                         MenuUrl = "/Placement/Placement",
                         Display = "Y",
-                        Order = 3
+                        Order = 4
                     }
                 }
             ]

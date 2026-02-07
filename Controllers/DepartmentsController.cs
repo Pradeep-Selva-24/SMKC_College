@@ -1,4 +1,5 @@
-﻿using College.Models;
+﻿using College.Entities;
+using College.Models;
 using College.Services.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +8,22 @@ namespace College.Controllers;
 
 public class DepartmentsController(ILogger<HomeController> logger, CLGDbContext db) : Controller
 {
-    [Route("Departments/{DepartmentId}")]
-    public async Task<IActionResult> Departments(int DepartmentId)
+    public async Task<IActionResult> Departments()
+    {
+        List<DepartmentsMaster> model = [];
+        try
+        {
+            model = await db.DepartmentsMaster.Where(x => x.Status).OrderBy(x => x.Order).ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error occurred while loading Departments");
+        }
+        return View(model);
+    }
+
+    [Route("DepartmentDetails/{DepartmentId}")]
+    public async Task<IActionResult> DepartmentDetails(int DepartmentId)
     {
         DepartmentsModel model = new();
         try

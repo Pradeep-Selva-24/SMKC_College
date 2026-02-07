@@ -7,10 +7,6 @@ public class DepartmentsMaster : BaseEntity
     [Required]
     public string? Department { get; set; }
 
-    [Column("S_Category")]
-    [Required]
-    public string? Category { get; set; }
-
     [Column("S_ImagePath")]
     [Required]
     public string? ImagePath { get; set; }
@@ -18,14 +14,6 @@ public class DepartmentsMaster : BaseEntity
     [Column("S_Description")]
     [Required]
     public string? Description { get; set; }
-
-    [Column("S_StudentCount")]
-    [Required]
-    public int StudentCount { get; set; }
-
-    [Column("S_SyllabusPath")]
-    [Required]
-    public string? SyllabusPath { get; set; }
 
     [Column("I_Order")]
     [Required]
