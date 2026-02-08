@@ -1413,5 +1413,69 @@ public static class DepartmentsConstant
                 },
             ]
         },
+
+        new DepartmentsDTO
+        {
+            DepartmentsMaster = new DepartmentsMaster
+            {
+                Department = "Department of Administration",
+                ImagePath = "/img/department/department19.png",
+                Description = "The department focuses on advanced administrative studies, promoting effective management, strategic thinking, and professional development.",
+                Order = 19
+            },
+
+            lstDepartmentsMembers =
+            [
+                new DepartmentsMembers
+                {
+                    Name = "S. Uma Devi",
+                    Designation = "Accountant",
+                    ImagePath = "",
+                    Order = 1
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Sangeetha",
+                    Designation = "Cashier",
+                    ImagePath = "",
+                    Order = 2
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Bala Muralidharan",
+                    Designation = "Sergeant",
+                    ImagePath = "",
+                    Order = 3
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Manonmani",
+                    Designation = "Office Assistant",
+                    ImagePath = "",
+                    Order = 4
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "G. Revathi",
+                    Designation = "Office Assistant Cum Supervisor",
+                    ImagePath = "",
+                    Order = 5
+                },
+
+                new DepartmentsMembers
+                {
+                    Name = "Mohana Priya",
+                    Designation = "Lab Assistant",
+                    ImagePath = "",
+                    Order = 6
+                }
+            ],
+
+            lstDepartmentsDetails = []
+        },
     ];
 }
