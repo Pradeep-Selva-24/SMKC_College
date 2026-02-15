@@ -1559,7 +1559,7 @@ namespace College.Controllers
 
                     string imagePath = string.Empty;
 
-                    if (bannerImage != null && bannerImage.Length != 0)
+                    if (bannerImage != null && bannerImage.Length > 0)
                     {
                         imagePath = await UploadImageAsync(bannerImage, "DepartmentsMembers", "");
                     }
