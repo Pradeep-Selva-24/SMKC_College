@@ -1,0 +1,29 @@
+﻿@model List<College.Models.MenuVM>
+
+@foreach (var parent in Model)
+{
+    if (parent.Children != null && parent.Children.Count > 0)
+    {
+        <li class="nav-item">
+            <a href="@parent.MenuUrl" class="nav-link dropdown-toggle">@parent.MenuName</a>
+
+            <ul class="dropdown-menu">
+                @foreach (var child in parent.Children)
+                {
+                    string strClass = "clsMenu-" + child.MenuName;
+                    <li class="nav-item">
+                        <a href="@child.MenuUrl" class="nav-link @strClass">@child.MenuName</a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    else
+    {
+        string strClass = "clsMenu-" + parent.MenuName;
+
+        <li class="nav-item">
+            <a href="@parent.MenuUrl" class="nav-link @strClass">@parent.MenuName</a>
+        </li>
+    }
+}
