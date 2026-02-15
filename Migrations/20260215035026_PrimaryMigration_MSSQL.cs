@@ -122,6 +122,27 @@ namespace College.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IQACDocument",
+                schema: "CLG",
+                columns: table => new
+                {
+                    I_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    S_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    S_Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    I_Order = table.Column<int>(type: "int", nullable: false),
+                    S_CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    D_CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    S_ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    D_ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    B_Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IQACDocument", x => x.I_Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IQACMembers",
                 schema: "CLG",
                 columns: table => new
@@ -589,6 +610,10 @@ namespace College.Migrations
 
             migrationBuilder.DropTable(
                 name: "InstitutionPages",
+                schema: "CLG");
+
+            migrationBuilder.DropTable(
+                name: "IQACDocument",
                 schema: "CLG");
 
             migrationBuilder.DropTable(

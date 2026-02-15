@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "CampusInfo";
+    Layout = "_AdminLayout";
+}
+
+<div class="page-container">
+    <div class="form-card">
+
+        <div class="row g-4 ">
+
+            <div class="col-lg-6">
+                <label>Years Of Experience</label>
+                <input type="text" id="YOE" class="form-control number-only" data-key="" />
+            </div>
+
+            <div class="col-lg-6">
+                <label>Students</label>
+                <input type="text" id="STD" class="form-control number-only" data-key="" />
+            </div>
+
+            <div class="col-lg-6">
+                <label>Staff Members</label>
+                <input type="text" id="SM" class="form-control number-only" data-key="" />
+            </div>
+
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-cancel clsAdd" onclick="Get()">Reset</button>
+            <button class="btn-submit clsEdit" onclick="Save()">Update</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        Get()
+    });
+
+    function resetForm() {
+        $('#YOE').val('')
+        $('#STD').val('');
+        $('#SM').val('');
+        $('#YOE').attr("data-key", '')
+        $('#STD').attr("data-key", '')
+        $('#SM').attr("data-key", '')
+
+    }
+
+    function Get(){
+        resetForm()
+        LoaderShow();
+        $.ajax({
+            url: '/Admin/GetCampusInfo',
+            type: 'GET',
+            data: '',
+            success: function(response) {
+                if(response.message === "Success") {
+                    var data = JSON.parse(response.result);
+                    $.each(data, function (i, y) {
+
+                        if (y["Category"] == "Years Of Experience") {
+                            $('#YOE').val(y["Count"])
+                            $('#YOE').attr("data-key", y["Id"] )
+                        }
+
+                        if (y["Category"] == "Students") {
+                            $('#STD').val(y["Count"])
+                            $('#STD').attr("data-key", y["Id"] )
+                        }
+
+                        if (y["Category"] == "Staff Members") {
+                            $('#SM').val(y["Count"])
+                            $('#SM').attr("data-key", y["Id"] )
+                        }
+
+                    })
+
+                }
+                else {
+                    alert('Failed to load data.');
+                }
+                LoaderHide();
+            },
+            error: function(err) {
+                console.error(err);
+                alert('Error while loading data.');
+                LoaderHide();
+            }
+        });
+    }
+
+    function Save() {
+        LoaderShow();
+
+        var stats = [
+            { Category: "Years Of Experience", Count: $('#YOE').val(), Id: $('#YOE').attr("data-key") },
+            { Category: "Students", Count: $('#STD').val(), Id: $('#STD').attr("data-key") },
+            { Category: "Staff Members", Count: $('#SM').val(), Id: $('#SM').attr("data-key") },
+        ];
+
+        for (var i = 0; i < stats.length; i++) {
+            if (!stats[i].Count || stats[i].Count.trim() === "") {
+                alert(stats[i].Category + " is required");
+                LoaderHide();
+                return;
+            }
+
+            if (!stats[i].Id) {
+                alert("Missing ID for " + stats[i].Category);
+                LoaderHide();
+                return;
+            }
+        }
+
+        $.ajax({
+            url: '/Admin/SaveCampusInfo',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(stats),
+            success: function (response) {
+                if (response.message === "Success") {
+                    alert("Updated Successfully");
+                } else {
+                    alert(response.message || "Update failed");
+                }
+                LoaderHide();
+            },
+            error: function (err) {
+                console.error(err);
+                alert("Error while updating data.");
+                LoaderHide();
+            }
+        });
+    }
+
+    $(document).on('input', '.number-only', function () {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    $(document).on('keypress', '.number-only', function (e) {
+        if (e.which < 48 || e.which > 57) {
+            e.preventDefault();
+        }
+    });
+
+</script>

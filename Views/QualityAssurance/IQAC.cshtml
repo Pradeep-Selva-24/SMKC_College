@@ -1,5 +1,5 @@
-﻿@using College.Entities
-@model List<IQACMembers>
+﻿@using College.Models
+@model IQACModel
 
 @{
     ViewData["Title"] = "IQAC Committee";
@@ -56,7 +56,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.LstIQACMembers)
                         {
                             <tr>
                                 <td>@item.Order</td>
@@ -79,6 +79,32 @@
                     <li>Organizing seminars, workshops and feedback sessions for continuous enhancement.</li>
                 </ul>
             </div>
+
+            <!-- Documents Section -->
+            <div class="mt-5">
+                <h3 class="text-primary mb-4">Feedback</h3>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Feedback</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.LstIQACDocument)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td><a href="@Url.Content(item.Path)" target="_blank" class="default-btn btn">Download</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
     <!--End IQAC Committee Area-->

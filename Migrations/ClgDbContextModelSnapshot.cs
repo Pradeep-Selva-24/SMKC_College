@@ -418,6 +418,55 @@ namespace College.Migrations
                     b.ToTable("DepartmentsMembers", "CLG");
                 });
 
+            modelBuilder.Entity("College.Entities.IQACDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("I_Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("D_CreatedDate");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("D_ModifiedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_Name");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int")
+                        .HasColumnName("I_Order");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("S_Path");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
+                        .HasColumnName("B_Status");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IQACDocument", "CLG");
+                });
+
             modelBuilder.Entity("College.Entities.IQACMembers", b =>
                 {
                     b.Property<int>("Id")

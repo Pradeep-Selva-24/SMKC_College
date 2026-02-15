@@ -58,6 +58,9 @@ public static class DbInitializer
         await InsertIfNotExistsAsync<IQACMembers, string>
             (context.IQACMembers, IQACMembersConstant.lstIQACMembers, x => $"{x.Name}|{x.Designation}", nameof(context.IQACMembers), context);
 
+        await InsertIfNotExistsAsync<IQACDocument, string>
+            (context.IQACDocument, IQACDocumentConstant.lstIQACDocument, x => $"{x.Name}|{x.Path}", nameof(context.IQACDocument), context);
+
         await InsertIfNotExistsAsync<NACDocument, string>
             (context.NACDocument, NACDocumentConstant.lstNACDocument, x => $"{x.Name}|{x.Path}", nameof(context.NACDocument), context);
 

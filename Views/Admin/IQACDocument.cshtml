@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "IQAC Members";
+    ViewData["Title"] = "IQAC Document";
     Layout = "_AdminLayout";
 }
 
@@ -7,7 +7,7 @@
     <div class="form-card">
 
         <div class="page-header-card">
-            <h4 class="page-title">IQAC Members</h4>
+            <h4 class="page-title">IQAC Document</h4>
             <button type="button" class="btn btn-primary view-btn clsView" onclick="Add()">Add</button>
             <button type="button" class="btn btn-primary view-btn clsAdd clsEdit" onclick="View()">View</button>
         </div>
@@ -18,8 +18,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Designation</th>
-                            <th>Role</th>
+                            <th>Document</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -37,14 +36,9 @@
                     <input type="text" id="Name" class="form-control">
                 </div>
 
-                <div class="col-lg-6">
-                    <label>Designation</label>
-                    <input type="text" id="Designation" class="form-control">
-                </div>
-
-                <div class="col-lg-6">
-                    <label>Role</label>
-                    <input type="text" id="Role" class="form-control">
+                <div class="col-lg-6 clsValuePdf">
+                    <label>Document <a id="PathView" href="#" target="_blank" class="clsPdfIcon"><i class="bi bi-file-earmark-pdf"></i></a></label>
+                    <input type="file" class="form-control" id="Path" accept="application/pdf">
                 </div>
 
                 <div class="col-lg-6">
@@ -72,8 +66,7 @@
      function resetForm() {
         $('#Key').val('')
         $('#Name').val('');
-        $('#Designation').val('');
-        $('#Role').val('');
+        $('#Path').val('');
         $('#Order').val(0);
     }
 
@@ -99,7 +92,7 @@
         $('#Key').val(Id)
         LoaderShow();
         $.ajax({
-            url: '/Admin/GetIQACMembersById',
+            url: '/Admin/GetIQACDocumentById',
             type: 'GET',
             data: { Id: Id },
             success: function(response) {
@@ -107,8 +100,11 @@
                     var data = JSON.parse(response.result);
 
                     $('#Name').val(data.Name);
-                    $('#Designation').val(data.Designation);
-                    $('#Role').val(data.Role);
+
+                    if(data.Path){
+                        $("#PathView").attr("href", data.Path)
+                    }
+
                     $('#Order').val(data.Order);
 
                 } else {
@@ -125,27 +121,14 @@
     }
 
      function Save() {
-         var Name  = $('#Name').val().trim();
-        var Designation  = $('#Designation').val().trim();
-        var Role  = $('#Role').val().trim();
+        var Name  = $('#Name').val().trim();
         var Order  = $('#Order').val().trim();
+
 
         // Validation
         if(Name === ""){
             alert('Please enter Name.');
             $('#Name').focus();
-            return;
-        }
-
-        if(Designation === ""){
-            alert('Please enter Designation.');
-            $('#Designation').focus();
-            return;
-        }
-
-        if(Role === ""){
-            alert('Please enter Role.');
-            $('#Role').focus();
             return;
         }
 
@@ -155,20 +138,30 @@
             return;
         }
 
-        var data = {
-            Id: ($('#Key').val() != "" ? $('#Key').val() : 0),
-            Name: Name,
-            Designation: Designation,
-            Role: Role,
-            Order: Order
+         var pdfFile = $('#Path')[0]?.files[0];
+
+        if (pdfFile && pdfFile.type !== "application/pdf") {
+            alert("Only PDF files are allowed.");
+            return;
         }
+
+        var formData = new FormData();
+        formData.append("Id", ($('#Key').val() != "" ? $('#Key').val() : 0));
+        formData.append("Name", Name);
+        formData.append("Order", Order);
+
+        if (pdfFile) {
+            formData.append("PdfFile", pdfFile);
+        }
+
 
         LoaderShow();
         $.ajax({
-            url: '/Admin/SaveIQACMembers',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
+            url: '/Admin/SaveIQACDocument',
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
             success: function(response){
                 alert(response.message);
                 if(response.message.includes("Successfully")){
@@ -188,7 +181,7 @@
     function StatusUpdate(Id, status) {
         LoaderShow();
         $.ajax({
-            url: '/Admin/StatusUpdateIQACMembers',
+            url: '/Admin/StatusUpdateIQACDocument',
             type: 'POST',
             data: { Id: Id, IsStatus: status },
             success: function(response){
@@ -214,7 +207,7 @@
 
         $('#tblGrid').DataTable({
             ajax: {
-                url: '/Admin/GetIQACMembers',
+                url: '/Admin/GetIQACDocument',
                 type: 'GET',
                 dataSrc: ''
             },
@@ -225,17 +218,16 @@
             responsive: true,
 
             columns: [
+                { data: "name", title: "Name" },
                 {
-                    data: "name",
-                    title: "Name",
-                    render: function(data, type, row) {
-                        if (!data) return '';
-                        // Replace underscores with spaces
-                        return data.replace(/_/g, ' ');
+                    data: "path",
+                    title: "Document",
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        return `<a href="${row.path}"class="text-danger" target="_blank" title="Activate"><i class="bi bi-file-earmark-pdf fs-5"></i></a>`;
                     }
                 },
-                { data: "designation", title: "Designation" },
-                { data: "role", title: "Role" },
                 { data: "status", title: "Status" },
                 {
                     data: null,

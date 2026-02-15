@@ -2700,5 +2700,195 @@ namespace College.Controllers
         }
         #endregion
 
+        #region CampusInfo
+        public IActionResult CampusInfo()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCampusInfo()
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                var lstCampusInfo = await db.CampusInfo.ToListAsync();
+                if (lstCampusInfo != null && lstCampusInfo.Count > 0)
+                {
+                    strResult = JsonConvert.SerializeObject(lstCampusInfo);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetCampusInfo");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveCampusInfo([FromBody] List<CampusInfo> stats)
+        {
+            try
+            {
+                if (stats == null || !stats.Any())
+                    return Json(new { message = "No data received" });
+
+                foreach (var item in stats)
+                {
+                    var existing = await db.CampusInfo.FindAsync(item.Id);
+                    if (existing == null)
+                        continue; // Skip missing records
+
+                    existing.Count = item.Count;
+                    existing.ModifiedDate = DateTime.Now;
+
+                    db.CampusInfo.Update(existing);
+                }
+
+                await db.SaveChangesAsync();
+
+                return Json(new { message = "Success" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving CampusInfo");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        #endregion
+
+        #region IQAC Documents
+
+        public IActionResult IQACDocument()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> GetIQACDocument()
+        {
+            try
+            {
+                var lstIQACDocument = await db.IQACDocument.ToListAsync();
+                return Json(lstIQACDocument);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetIQACDocument");
+                return StatusCode(500, "Error loading data");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetIQACDocumentById(int Id)
+        {
+            string strResult = string.Empty, strMessage = "Failed";
+            try
+            {
+                IQACDocument? IQACDocument = await db.IQACDocument.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+                if (IQACDocument != null)
+                {
+                    strResult = JsonConvert.SerializeObject(IQACDocument);
+                    strMessage = "Success";
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while loading GetIQACDocument");
+            }
+            return Json(new { result = strResult, message = strMessage });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveIQACDocument(int Id, string Name, int Order, IFormFile PdfFile)
+        {
+            string strMessage = "Failed";
+            try
+            {
+
+
+                if (Id > 0) // Update
+                {
+                    var existing = await db.IQACDocument.FindAsync(Id);
+                    if (existing == null)
+                    {
+                        return Json(new { message = "Record not found" });
+                    }
+                    else if (existing != null)
+                    {
+                        existing.Name = Name;
+
+                        if (PdfFile != null && PdfFile.Length > 0)
+                        {
+                            existing.Path = await UploadPdfAsync(PdfFile, "IQACDocument", existing.Path!);
+                        }
+
+                        existing.Order = Order;
+                        existing.ModifiedDate = DateTime.Now;
+
+                        db.IQACDocument.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                else // Insert
+                {
+                    if (PdfFile == null || PdfFile.Length == 0)
+                    {
+                        return Json(new { message = "Upload the pdf" });
+                    }
+
+                    IQACDocument IQACDocument = new()
+                    {
+                        Name = Name,
+                        Path = await UploadPdfAsync(PdfFile, "IQACDocument", ""),
+                        Order = Order,
+                        ModifiedDate = DateTime.Now
+                    };
+
+                    db.IQACDocument.Add(IQACDocument);
+                    await db.SaveChangesAsync();
+                    strMessage = "Saved Successfully";
+                }
+
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving SaveIQACDocument");
+                return Json(new { message = "Error" });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> StatusUpdateIQACDocument(int? Id, bool IsStatus)
+        {
+            string strMessage = "Failed";
+            try
+            {
+                if (Id != null && Id > 0) // Update
+                {
+                    var existing = await db.IQACDocument.FindAsync(Id);
+                    if (existing != null)
+                    {
+                        existing.Status = IsStatus;
+                        existing.ModifiedDate = DateTime.Now;
+                        db.IQACDocument.Update(existing);
+                        await db.SaveChangesAsync();
+                        strMessage = "Updated Successfully";
+                    }
+                }
+                return Json(new { message = strMessage });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error occurred while saving StatusUpdateIQACDocument");
+                return Json(new { message = "Error" });
+            }
+        }
+        #endregion
+
     }
 }

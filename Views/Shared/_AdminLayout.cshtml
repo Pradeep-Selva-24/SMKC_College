@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>College Admin Dashboard</title>
 
     <!--Bootstrap Css-->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
@@ -125,6 +124,10 @@
                 <i class="bi bi-sliders"></i> Settings
             </a>
 
+            <a href="/Admin/CampusInfo">
+                <i class="bi bi-geo-alt-fill"></i> Campus Info
+            </a>
+
             <a href="/Admin/MenuMaster">
                 <i class="bi bi-gear-fill"></i> Menu
             </a>
@@ -218,9 +221,25 @@
                 </div>
             </div>
 
-            <a href="/Admin/IQACMembers">IQAC Members</a>
+            <div class="menu-group">
+                <a href="#" class="menu-toggle-item">
+                    <i class="bi bi-clipboard-check"></i> IQAC
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
 
-            <a href="/Admin/AQARReport">AQAR Reports</a>
+                <div class="submenu">
+                    <a href="/Admin/IQACMembers">
+                        Members
+                    </a>
+                    <a href="/Admin/IQACDocument">
+                        Documents
+                    </a>
+                </div>
+            </div>
+
+            <a href="/Admin/AQARReport">
+                <i class="bi bi-file-bar-graph"></i> AQAR Reports
+            </a>
 
         </div>
 

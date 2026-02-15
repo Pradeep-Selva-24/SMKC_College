@@ -140,7 +140,14 @@
                                                 </span>
                                             </div>
                                         </span>
-
+                                        @if (@Model.YearsOfExperience.Contains("K"))
+                                        {
+                                            <span class="target heading-color">k</span>
+                                        }
+                                        else if (@Model.YearsOfExperience.Contains("M"))
+                                        {
+                                            <span class="target heading-color">M</span>
+                                        }
                                         <span class="target">+</span>
                                     </h1>
                                     <p>Years Of Experience</p>
@@ -163,7 +170,15 @@
                                                 </span>
                                             </div>
                                         </span>
-                                        <span class="target heading-color">k</span><span class="target">+</span>
+                                        @if (@Model.Students.Contains("K"))
+                                        {
+                                            <span class="target heading-color">k</span>
+                                        }
+                                        else if (@Model.Students.Contains("M"))
+                                        {
+                                            <span class="target heading-color">M</span>
+                                        }
+                                        <span class="target">+</span>
                                     </h1>
                                     <p>Students</p>
                                 </div>
@@ -185,6 +200,14 @@
                                                 </span>
                                             </div>
                                         </span>
+                                        @if (@Model.StaffMembers.Contains("K"))
+                                        {
+                                            <span class="target heading-color">k</span>
+                                        }
+                                        else if (@Model.StaffMembers.Contains("M"))
+                                        {
+                                            <span class="target heading-color">M</span>
+                                        }
                                         <span class="target">+</span>
                                     </h1>
                                     <p>Staff Members</p>

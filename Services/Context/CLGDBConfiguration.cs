@@ -67,6 +67,15 @@ internal class IQACMembersConfig : IEntityTypeConfiguration<IQACMembers>
     }
 }
 
+internal class IQACDocumentConfig : IEntityTypeConfiguration<IQACDocument>
+{
+    public void Configure(EntityTypeBuilder<IQACDocument> builder)
+    {
+        builder.ToTable("IQACDocument", "CLG");
+        builder.HasKey(e => e.Id);
+    }
+}
+
 internal class NACDocumentConfig : IEntityTypeConfiguration<NACDocument>
 {
     public void Configure(EntityTypeBuilder<NACDocument> builder)

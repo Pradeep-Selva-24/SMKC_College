@@ -17,6 +17,7 @@ namespace College.Services.Context
         public DbSet<ClubsMaster> ClubsMaster { get; set; }
         public DbSet<ClubsDetails> ClubsDetails { get; set; }
         public DbSet<IQACMembers> IQACMembers { get; set; }
+        public DbSet<IQACDocument> IQACDocument { get; set; }
         public DbSet<AQARReport> AQARReport { get; set; }
         public DbSet<NACDetails> NACDetails { get; set; }
         public DbSet<NACDocument> NACDocument { get; set; }

@@ -24,10 +24,11 @@ public class QualityAssuranceController(ILogger<HomeController> logger, CLGDbCon
 
     public async Task<IActionResult> IQAC()
     {
-        List<IQACMembers> model = [];
+        IQACModel model = new();
         try
         {
-            model = await db.IQACMembers.Where(x => x.Status).OrderBy(x => x.Order).ToListAsync();
+            model.LstIQACMembers = await db.IQACMembers.Where(x => x.Status).OrderBy(x => x.Order).ToListAsync();
+            model.LstIQACDocument = await db.IQACDocument.Where(x => x.Status).OrderBy(x => x.Order).ToListAsync();
         }
         catch (Exception ex)
         {
